@@ -79,9 +79,13 @@ include "../header.php";
                             <p class="badge bg-warning text-dark rounded-pill fs-6">Save 38%</p>
                         </span>
                         <span class="fw-bolder fs-3">
-                            $9<small class="text-muted fw-light">/mo</small> or
-                            $52<small class="text-muted fw-light">/yr</small>
+                            <span class="dollar-curr">$9</span><small class="text-muted fw-light">/mo</small> or
+                            <span class="dollar-curr">$52</span><small class="text-muted fw-light">/yr</small>
                         </span>
+                        <small class="text-muted local-curr-cmpnt" style="display: none;">
+                            <span class="local-curr" id="local-curr-9"></span><span class="text-muted fw-light">/mo</span> or
+                            <span class="local-curr" id="local-curr-52"></span><span class="text-muted fw-light">/yr</span>
+                        </small>
                     </span>
                 </strong>
 
@@ -138,9 +142,13 @@ include "../header.php";
                             <p class="badge bg-warning text-dark rounded-pill fs-6">Save 33%</p>
                         </span>
                         <span class="fw-bolder fs-3">
-                            $13<small class="text-muted fw-light">/mo</small> or
-                            $87<small class="text-muted fw-light">/yr</small>
+                            <span class="dollar-curr">$13</span><small class="text-muted fw-light">/mo</small> or
+                            <span class="dollar-curr">$87</span><small class="text-muted fw-light">/yr</small>
                         </span>
+                        <small class="text-muted local-curr-cmpnt" style="display: none;">
+                            <span class="local-curr" id="local-curr-13"></span><span class="text-muted fw-light">/mo</span> or
+                            <span class="local-curr" id="local-curr-87"></span><span class="text-muted fw-light">/yr</span>
+                        </small>
                     </span>
                 </strong>
 
@@ -299,7 +307,7 @@ include "../header.php";
                                 <div class="col-md-7">
                                     <small>Enter your M-PESA number in the field below</small>
                                     <div class="form-floating my-3">
-                                        <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border-dark rounded-0" id="m-pesa_number" placeholder="Mpesa number" autocomplete="off" maxlength="50">
+                                        <input type="number" class="form-control border-top-0 border-start-0 border-end-0 border-dark rounded-0" id="m-pesa_number" placeholder="Mpesa number" autocomplete="off" maxlength="50">
                                         <label for="m-pesa_number"><small class="m-1 text-muted"><sup>Use the format: 254712345678 / 0712345678 / 0111123456</sup></small></label>
                                         <small id="mpesa_number_err" class="text-danger fw-bold m-1"></small><br>
                                     </div>
@@ -384,9 +392,10 @@ include "../header.php";
 
 <script type="text/javascript">
     /**
-     * Control what/how to display
+     *********************************
      */
 
+    //  Disable active plan's button
     var btns = document.querySelectorAll(".sub-btn");
     Array.prototype.slice.call(btns)
         .forEach(function(button) {
@@ -396,6 +405,44 @@ include "../header.php";
             if (active_sub == code) {
                 button.disabled = true;
                 button.innerHTML = "Active plan";
+            }
+        });
+
+    // Show price in local currency
+    const api = "https://api.exchangerate-api.com/v4/latest/USD";
+    const resultFrom = "USD";
+    const resultTo = "KES";
+
+
+    var dollarCurrs = document.querySelectorAll(".dollar-curr");
+    Array.prototype.slice.call(dollarCurrs)
+        .forEach(function(dollarCurr) {
+            var str = dollarCurr.innerText;
+            var amt = str.substr(1, str.lenth);
+            var amount = +amt;
+
+            var searchValue = amount;
+            var finalLocalValue = Id("local-curr-" + amt);
+            // var convertedCurrCompnt = Id("convertedCurrCompnt");
+
+            fetch(`${api}`)
+                .then(currency => {
+                    return currency.json();
+                }).then((displayResults));
+
+            // display results after convertion
+            function displayResults(currency) {
+                let fromRate = currency.rates[resultFrom];
+                let toRate = currency.rates[resultTo];
+                resultToStr = resultTo + " ";
+                finalLocalValue.innerHTML = resultToStr + Math.round(((toRate / fromRate) * searchValue)).toLocaleString();
+                // convertedCurrCompnt.style.display = "block";
+
+                var cmpnts = document.querySelectorAll(".local-curr-cmpnt");
+                Array.prototype.slice.call(cmpnts)
+                    .forEach(function(cmpnt) {
+                        cmpnt.style.display = "block";
+                    });
             }
         });
 
@@ -427,7 +474,7 @@ include "../header.php";
     showTab(currentTab); // Display the current tab
 
     function showTab(n) {
-        // This function will display the specified tab of the form...
+        // This function will display the specified tab ...
         var x = document.getElementsByClassName("tab");
         x[n].style.display = "block";
         //... and fix the Previous/Next buttons:
@@ -731,13 +778,7 @@ include "../header.php";
                         paypal_cmpnt.style.display = "none";
 
                         // convert amount to KES
-                        const api = "https://api.exchangerate-api.com/v4/latest/USD";
-                        const resultFrom = "USD";
-                        const resultTo = "KES";
-
                         var searchValue = userSelection.price;
-                        var fromCurrency = document.querySelector(".from");
-                        var toCurrency = document.querySelector(".to");
                         var finalMpesaValue = document.querySelector(".finalMpesaValue");
                         // var convertedCurrCompnt = Id("convertedCurrCompnt");
 
@@ -750,9 +791,13 @@ include "../header.php";
                         function displayResults(currency) {
                             let fromRate = currency.rates[resultFrom];
                             let toRate = currency.rates[resultTo];
-                            finalMpesaValue.innerHTML = Math.round(((toRate / fromRate) * searchValue));
+                            finalMpesaValue.innerHTML = Math.round(((toRate / fromRate) * searchValue)).toLocaleString();
                             // convertedCurrCompnt.style.display = "block";
+
+                            userSelection.price = Math.round(((toRate / fromRate) * searchValue));
                         }
+
+
 
                         /**
                          * Initiate M-PESA payment
@@ -802,6 +847,9 @@ include "../header.php";
                 }
             }
         });
+    /**
+     ************************
+     */
 </script>
 
 
