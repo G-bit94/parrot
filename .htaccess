@@ -1,0 +1,9 @@
+# Redirects all 404s to this URL
+ErrorDocument 404 http://localhost/parrot/404/
+
+# Map the URL above to actual 404 .php script
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} ^/404/$
+RewriteRule ^(.*)$ http://localhost/parrot/404/ [L]
