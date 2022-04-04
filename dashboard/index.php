@@ -433,7 +433,7 @@ if ($signinStatus == 1) {
 
             $.ajax({
                 type: 'POST',
-                url: 'https://api.eleuther.ai/completion',
+                url: 'prompt.php',
                 data: JSON.stringify(SendInfo),
                 contentType: "application/json; charset=utf-8",
                 traditional: true,
