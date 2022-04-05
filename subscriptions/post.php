@@ -61,13 +61,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization:Bearer ' . generateAccessToken()));
                 $curl_post_data = [
                     //Fill in the request parameters with valid values
-                    'BusinessShortCode' => 5672761,
+                    'BusinessShortCode' => 174379,
                     'Password' => lipaNaMpesaPassword(),
-                    'Timestamp' => date('YmdHms'),
-                    'TransactionType' => 'CustomerPayBillOnline',
+                    'Timestamp' => date('YYYYMMDDHHmmss'),
+                    'TransactionType' => 'CustomerBuyGoodsOnline',
                     'Amount' => $amount,
                     'PartyA' => $MSISDN, // replace this with your phone number
-                    'PartyB' => 5672761,
+                    'PartyB' => 174379,
                     'PhoneNumber' => $MSISDN, // replace this with your phone number
                     'CallBackURL' => 'https://6a78-102-219-210-56.ngrok.io/parrot/subscriptions/post.php',
                     'AccountReference' => "ParrotAI",
