@@ -151,35 +151,40 @@ function signupUser() {
 
       $("#signup-spinner").show();
       $("#signup-button-text").html('');
+
+      fetch(geoLocAPI)
+      .then((response) => {
+          return response.json();
+      })
+      .then((geodata) => {
+          // user info
+          const ip = geodata.ip;
+          const useragent = geodata.user_agent.name + " " + geodata.user_agent.version;
+          const device = geodata.user_agent.device.name;
+          const platform = geodata.user_agent.os.name + " " + geodata.user_agent.os.version;
+          const country = geodata.location.country.name;
+          const city = geodata.location.city;
+          const currencyCode = geodata.currency.code;
+      
+
       var form = $(this);
+      var formData = form.serializeArray();
+      formData.push({ name: "browser", value: useragent });
+      formData.push({ name: "device", value: device });
+      formData.push({ name: "platform", value: platform });
+      formData.push({ name: "ip", value: ip });
+      formData.push({ name: "country", value: country });
+      formData.push({ name: "city", value: city });
 
     function hideSpinner() {
       $("#signup-spinner").hide();
       $("#signup-button-text").html('Sign up'); 
     }
 
-    var in_browser = document.createElement('input');
-    var in_device = document.createElement('input');
-    
-    in_browser.type = 'hidden';
-    in_device.type = 'hidden';
-
-    in_browser.name = 'browser';
-    in_device.name = 'device';
-
-    in_browser.value = user_agent;
-    in_device.value = device;
-
-    Id('signupForm').appendChild(in_browser);
-    Id('signupForm').appendChild(in_device);
-
-    console.log(in_browser.value);
-    console.log(in_device.value);
-
       $.ajax({
           type: "POST",
           url: base_url + "/signup.php",
-          data: form.serialize(), // serializes the form's elements.
+          data: formData,
           success: function(data) {
               if (data === "SIGNUP_SUCCESS") {
                 if (getCredentials()) {
@@ -247,6 +252,7 @@ function signupUser() {
           }
       });
   });
+})
 }
 
 function getCredentials() {

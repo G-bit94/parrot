@@ -5,17 +5,6 @@ error_reporting(0);
 // Include config file
 require_once "config.php";
 
-require_once('geoplugin.class.php');
-
-$geoplugin = new geoPlugin();
-
-//locate the IP
-$geoplugin->locate();
-
-$country = $geoplugin->countryName;
-$city = $geoplugin->city;
-$ip = $geoplugin->ip;
-
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = $email = "";
 
@@ -25,8 +14,13 @@ $queryStatus = "ERROR";
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    $country = $_POST["country"];
+    $city = $_POST["city"];
+    $ip = $_POST["ip"];
+
     $browser = $_POST["browser"];
     $device = $_POST["device"];
+    $platform = $_POST["platform"];
 
     // Validate username
     if ($_POST["usernamesignup"] !== "") {
@@ -115,12 +109,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     ip,
                                     browser,
                                     device,
+                                    platform,
                                     country,
-                                    city) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                                    city) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         if ($stmt = $mysqli->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("sssssssss", $param_username, $param_lname, $param_email, $param_password, $ip, $browser, $device, $country, $city);
+            $stmt->bind_param("ssssssssss", $param_username, $param_lname, $param_email, $param_password, $ip, $browser, $device, $platform, $country, $city);
 
             // Set parameters
             $param_username = $username;

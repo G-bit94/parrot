@@ -49,7 +49,7 @@ include "../header.php";
 </div>
 
 <!-- Pricing table -->
-<div class="row row-cols-1 row-cols-md-3 text-center container-fluid mt-5 mb-5 py-3">
+<div class="row row-cols-1 row-cols-md-3 text-center container-fluid mt-3 mb-5 py-2">
     <div class="col">
         <div class="mb-4 rounded-3">
             <p class="bd-callout text-start">
@@ -277,13 +277,14 @@ include "../header.php";
                             </div>
                         </div>
                     </div>
+                    <!-- Payment methods -->
                     <div class="tab">
                         <div class="mb-0 fs-6 fw-bold">Select the most convenient payment method for you below</div>
                         <div class="my-4 border rounded-3 p-3">
-                            <div class="form-check">
+                            <!-- <div class="form-check">
                                 <input id="m-pesa" name="paymentMethod" type="radio" class="form-check-input method" value="M-PESA">
                                 <label class="form-check-label" for="m-pesa">M-PESA</label>
-                            </div>
+                            </div> -->
                             <div class="form-check">
                                 <input id="paypal" name="paymentMethod" type="radio" class="form-check-input method" value="PayPal">
                                 <label class="form-check-label" for="paypal">PayPal</label>
@@ -294,6 +295,7 @@ include "../header.php";
                             </div>
                         </div>
                     </div>
+                    <!-- Payment methods -->
                     <div class="tab">
                         <!-- Paypal checkout -->
                         <div class="col-md-8" id="paypal_cmpnt">
@@ -409,41 +411,49 @@ include "../header.php";
         });
 
     // Show price in local currency
-    const api = "https://api.exchangerate-api.com/v4/latest/USD";
-    const resultFrom = "USD";
-    const resultTo = "KES";
+    // first get local currency information
+    // convert $$ to local currency   
 
+    fetch(geoLocAPI)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(geodata) {
+            var currencyCode = geodata.currency.code;
+            return currencyCode;
+        }).then(function(currencyCode) {
+            const resultTo = currencyCode;
+            var dollarCurrs = document.querySelectorAll(".dollar-curr");
+            Array.prototype.slice.call(dollarCurrs)
+                .forEach(function(dollarCurr) {
+                    var str = dollarCurr.innerText;
+                    var amt = str.substr(1, str.lenth);
+                    var amount = +amt;
 
-    var dollarCurrs = document.querySelectorAll(".dollar-curr");
-    Array.prototype.slice.call(dollarCurrs)
-        .forEach(function(dollarCurr) {
-            var str = dollarCurr.innerText;
-            var amt = str.substr(1, str.lenth);
-            var amount = +amt;
+                    var searchValue = amount;
+                    var finalLocalValue = Id("local-curr-" + amt);
+                    // var convertedCurrCompnt = Id("convertedCurrCompnt");
 
-            var searchValue = amount;
-            var finalLocalValue = Id("local-curr-" + amt);
-            // var convertedCurrCompnt = Id("convertedCurrCompnt");
+                    fetch(`${currXChangeAPI}`)
+                        .then(currency => {
+                            return currency.json();
+                        }).then((displayResults));
 
-            fetch(`${api}`)
-                .then(currency => {
-                    return currency.json();
-                }).then((displayResults));
+                    // display results after convertion
+                    function displayResults(currency) {
+                        let fromRate = currency.rates[currResultFrom];
+                        let toRate = currency.rates[resultTo];
+                        resultToStr = resultTo + " ";
+                        finalLocalValue.innerHTML = resultToStr + Math.round(((toRate / fromRate) * searchValue)).toLocaleString();
+                        // convertedCurrCompnt.style.display = "block";
 
-            // display results after convertion
-            function displayResults(currency) {
-                let fromRate = currency.rates[resultFrom];
-                let toRate = currency.rates[resultTo];
-                resultToStr = resultTo + " ";
-                finalLocalValue.innerHTML = resultToStr + Math.round(((toRate / fromRate) * searchValue)).toLocaleString();
-                // convertedCurrCompnt.style.display = "block";
-
-                var cmpnts = document.querySelectorAll(".local-curr-cmpnt");
-                Array.prototype.slice.call(cmpnts)
-                    .forEach(function(cmpnt) {
-                        cmpnt.style.display = "block";
-                    });
-            }
+                        var cmpnts = document.querySelectorAll(".local-curr-cmpnt");
+                        Array.prototype.slice.call(cmpnts)
+                            .forEach(function(cmpnt) {
+                                cmpnt.style.display = "block";
+                            });
+                    }
+                });
         });
 
     /**
@@ -789,7 +799,7 @@ include "../header.php";
 
                         // display results after convertion
                         function displayResults(currency) {
-                            let fromRate = currency.rates[resultFrom];
+                            let fromRate = currency.rates[currResultFrom];
                             let toRate = currency.rates[resultTo];
                             finalMpesaValue.innerHTML = Math.round(((toRate / fromRate) * searchValue)).toLocaleString();
                             // convertedCurrCompnt.style.display = "block";

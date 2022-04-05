@@ -240,54 +240,33 @@ $spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
         const base_url = <?php echo json_encode($base_url); ?>;
 
         // CSRF token
-        var csrf_token = <?php echo json_encode($_SESSION['csrf_token']); ?>;
+        const csrf_token = <?php echo json_encode($_SESSION['csrf_token']); ?>;
 
         // user
-        var user = <?php
-                    if ($user_id !== "" && $user_id !== null) {
-                        echo json_encode(openssl_encrypt($user_id, "AES-128-ECB", "ThisIsJustAStringOfGibberishToEncryptTheUserId"));
-                    } else {
-                        echo "null";
-                    }
-                    ?>
+        const user = <?php
+                        if ($user_id !== "" && $user_id !== null) {
+                            echo json_encode(openssl_encrypt($user_id, "AES-128-ECB", "ThisIsJustAStringOfGibberishToEncryptTheUserId"));
+                        } else {
+                            echo "null";
+                        }
+                        ?>
         // sign in status
         var sts = <?php echo json_encode($signinStatus); ?>;
         var signinStatus = +sts;
 
         // verification status
-        var vfyd = <?php echo json_encode($v_status); ?>;
-        var v_status = +vfyd;
+        const vfyd = <?php echo json_encode($v_status); ?>;
+        const v_status = +vfyd;
 
         //active subscription
-        var active_sub = <?php echo json_encode($active_sub); ?>;
+        const active_sub = <?php echo json_encode($active_sub); ?>;
 
-        // user agent
-        navigator.sayswho = (function() {
-            var ua = navigator.userAgent,
-                tem,
-                M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
-            if (/trident/i.test(M[1])) {
-                tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
-                return 'IE ' + (tem[1] || '');
-            }
-            if (M[1] === 'Chrome') {
-                tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
-                if (tem != null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
-            }
-            M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
-            if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
-            return M.join(' ');
-        })();
+        // geolocation
+        const geoLocAPI = "https://api.ipregistry.co/?key=glm9znqelitu1301";
 
-        const user_agent = navigator.sayswho;
-
-        // device type
-        let device = "";
-        if (window.innerWidth < 768) {
-            device = "mobile";
-        } else {
-            device = "desktop";
-        }
+        // show prices in local currency
+        const currXChangeAPI = "https://api.exchangerate-api.com/v4/latest/USD";
+        const currResultFrom = "USD";
     </script>
 </head>
 
@@ -313,30 +292,31 @@ $spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
                     <?php if ($v_status == 1 && $active_sub != 2) { ?>
                         <a class="nav-link fw-bold" href="<?php echo $base_url; ?>/pricing" id="upgrade_btn" style="display: none;">Upgrade</a>
                     <?php } ?>
-                    <button class="btn btn-primary rounded-pill px-3 mx-2 mb-1 mb-lg-0" onclick="handleStartBtn()" id="start_btn" style="display: none;">
+                    <a href="javascript: void(0)" class="btn btn-primary rounded-pill px-3 mx-2 mb-1 mb-lg-0" onclick="handleStartBtn()" id="start_btn" style="display: none;">
                         <span class="d-flex align-items-center">
                             <img src="<?php echo $base_url; ?>/assets/img/logo.png" alt="" width="15" height="15" class="rounded-circle " />
                             <span class="small"> Get started</span>
                         </span>
-                    </button>
-                    <button class="btn btn-primary rounded-pill px-3 mx-2 mb-1 mb-lg-0" onclick="window.location.href='<?php echo $base_url; ?>/#demo'" id="demo_btn" style="display: none;">
+                    </a>
+                    <a class="btn btn-primary rounded-pill px-3 mx-2 mb-1 mb-lg-0" href="<?php echo $base_url; ?>/#demo" id="demo_btn" style="display: none;">
                         <span class="d-flex align-items-center">
                             <span class="small">Demo</span>
                         </span>
-                    </button>
+                    </a>
+                    <?php if ($signinStatus == 1) { ?>
+                        <a href="javascript: void(0)" onclick="handleStartBtn()" class="nav-link fw-bold m-1">
+                            Playground
+                        </a>
+                    <?php } ?>
                     <div class="dropdown" id="profile_cmpnt" style="display: none;">
                         <button class="btn btn-primary btn-sm rounded-pill mx-3 mt-1 dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle"></i>
                             <?php echo $row_user["username"]; ?>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                            <button onclick="handleStartBtn()" class="btn btn-sm btn-white shadow-sm m-1">
-                                <span><img src="<?php echo $base_url; ?>/assets/img/logo.png" alt="" width="15" height="15" class="rounded-circle " /> Playground</span>
-                            </button>
-
-                            <button onclick="location.href='<?php echo $base_url; ?>/signout.php'" class="btn btn-sm btn-white shadow-sm m-1">
+                            <a href="<?php echo $base_url; ?>/signout.php" class="btn btn-sm btn-white shadow-sm m-1">
                                 <span><i class="bi bi-box-arrow-right"></i> Signout</span>
-                            </button>
+                            </a>
                         </ul>
                     </div>
                 </div>
