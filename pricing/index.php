@@ -287,11 +287,11 @@ include "../header.php";
                             </div> -->
                             <div class="form-check">
                                 <input id="paypal" name="paymentMethod" type="radio" class="form-check-input method" value="PayPal">
-                                <label class="form-check-label" for="paypal">PayPal</label>
+                                <label class="form-check-label" for="paypal" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-html="true" data-bs-content="Click here and then click on the <strong>Pay with PayPal</strong> button in the next step to pay with PayPal">PayPal</label>
                             </div>
                             <div class="form-check">
                                 <input id="card" name="paymentMethod" type="radio" class="form-check-input method" value="Card">
-                                <label class="form-check-label" for="card">Card</label>
+                                <label class="form-check-label" for="card" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="bottom" data-bs-html="true" data-bs-content="Click here and then click on the <strong>Debit or Credit Card</strong> button in the next step to pay using your card">Card</label>
                             </div>
                         </div>
                     </div>
@@ -684,7 +684,8 @@ include "../header.php";
     Array.prototype.slice.call(minputs)
         .forEach(function(input) {
             input.onclick = () => {
-                if (Id("m-pesa").checked == true || Id("paypal").checked == true || Id("card").checked == true) {
+                // if (Id("m-pesa").checked == true || Id("paypal").checked == true || Id("card").checked == true) {
+                if (Id("paypal").checked == true || Id("card").checked == true) {
                     btn.disabled = false;
                     /**
                      * If user selects PayPal or Card
