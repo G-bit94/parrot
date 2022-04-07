@@ -70,7 +70,7 @@ include "header.php";
 </div>
 
 
-<div class="px-4 py-5 my-2 text-center" id="block">
+<div class="px-4 py-5 my-3 text-center" id="block">
     <h2 class="display-5 fw-bold my-5">Struggling with writer's block?</h2>
     <div class="col-lg-6 mx-auto my-5">
         <p class="lead mb-4">We all do at some point. But you don't have to anymore</p>
@@ -81,7 +81,7 @@ include "header.php";
 </div>
 
 
-<div class="container px-2 py-5 my-2 mb-3" id="demo">
+<!-- <div class="container px-2 py-5 my-2 mb-3" id="demo">
     <div class="card-header bg-primary text-white fw-bold fs-5"><strong>AI Text Generator - Try it out</strong></div>
     <div class="row my-3">
         <div class="col-md-6">
@@ -105,11 +105,11 @@ include "header.php";
     <p class="mt-4 lead fs-4 bd-callout">
         <strong>Enjoy more perks and have more fun with the Parrot by using the full-featured version <button style="background-color: #0a58ca;" class="btn btn-sm text-white fw-bold shadow" onclick="handleStartBtn()">here</button></strong>
     </p>
-</div>
+</div> -->
 
 
 
-<div id="reviews" class="border-top pb-0">
+<div id="reviews" class="border pb-0">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-10 offset-md-1 text-center mt-5 mb-4">

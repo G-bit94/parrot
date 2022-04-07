@@ -83,15 +83,15 @@ if ($signinStatus == 1) {
                         <i class="bi bi-bezier2"></i>
                         <div class="d-flex gap-2 w-100 justify-content-between">
                             <div>
-                                <p class="mb-0">Not the response you expected? Retry to craft your masterpiece to perfection</p>
+                                <p class="mb-0">Not the response you expected? Retry to craft your masterpiece to perfection.</p>
                             </div>
                         </div>
                     </div>
                     <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-2 bg-light" aria-current="true">
                         <i class="bi bi-chat-left"></i>
                         <div class="d-flex gap-2 w-100 justify-content-between">
-                            <div>
-                                <p class="mb-0">You can always get in touch in case of any problems</p>
+                            <div type="button" onclick="startChat()">
+                                <p class="mb-0">You can always get in touch in case of anything. Just click here.</p>
                             </div>
                         </div>
                     </div>
@@ -151,10 +151,11 @@ if ($signinStatus == 1) {
                             <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1 truncated" type="button" onclick="completeUserPrompt('code');">
                                 <div class="d-flex gap-2 w-100 justify-content-between">
                                     <div>
-                                        <strong>Code</strong> <sup class="text-muted">Beta</sup><br>
-                                        <small class="mb-0" id="code_context">const unfold = (f, seed) => {
-                                            const go = (f, seed, acc) => {
-                                            const res = f(seed)</small>
+                                        <strong>Code</strong> <sup class="text-muted border">Beta</sup><br>
+                                        <small class="mb-0" id="code_context">
+                                            function loadScript(src) {
+                                            return new Promise(function(resolve, reject) {
+                                        </small>
                                     </div>
                                 </div>
                             </div>
@@ -162,10 +163,9 @@ if ($signinStatus == 1) {
                     </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <!-- <span id="clear" class="btn btn-sm btn-outline-white border border-2 border-light mx-1"><i class="bi bi-x-circle"></i> Clear</span> -->
-                    <!-- <i id="redo" type="button" class="bi bi-arrow-counterclockwise fs-5 mx-1"></i> -->
-                </div>
-                <div class="d-flex justify-content-between align-items-center">
+                    <span id="speech-wrapper">
+                        <i id="text-to-speech" class="bi bi-volume-down fs-4" onclick="TextToSpeech('speak')"></i>
+                    </span>
                     <img src="../assets/img/copy.png" alt="" onclick="copyToClipboard('outputarea')" class="mx-2" type="button" />
                     <img src="../assets/img/save.png" alt="" id="save" class="mx-2" type="button" />
                     <i class="bi bi-list-stars mx-1 fs-4" onclick="fetchSavedItems()" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Saved items"></i>
@@ -185,7 +185,7 @@ if ($signinStatus == 1) {
                         </div>
                     </div>
 
-                    <div class="col-md-6 d-flex align-items-center mt-1">
+                    <div class="col-md-8 d-flex align-items-center mt-1">
                         <div class="btn-group" role="group" aria-label="Default button group">
                             <button type="button" class="btn btn-sm btn-outline-dark" onclick='removeText("prompt");'>Remove prompt</button>
                             <button type="button" class="btn btn-sm btn-outline-dark" onclick='removeText("gen_text");'>Remove generated text</button>
@@ -215,7 +215,11 @@ if ($signinStatus == 1) {
                         <i tabindex="0" class="bi bi-question-circle" role="button" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Maximum number of characters in generated response."></i>
                     </small>
                 </label>
-                <input type="range" class="form-range" min="64" max="256" step="32" id="length" oninput="getSliderValue('length')">
+                <?php if ($active_sub == 1) { ?>
+                    <input type="range" class="form-range" min="64" max="512" step="64" id="length" oninput="getSliderValue('length')">
+                <?php } elseif ($active_sub == 2) { ?>
+                    <input type="range" class="form-range" min="64" max="1088" step="128" id="length" oninput="getSliderValue('length')">
+                <?php } ?>
                 <small class="fw-bold" id="length_show"></small>
             </div>
             <div class="form-group mb-3">
@@ -314,7 +318,7 @@ if ($signinStatus == 1) {
 <!-- Contactus -->
 
 <!-- Item details modal -->
-<div class="modal modal-signin py-5 fade" tabindex="-1" role="dialog" id="itemDetailsModal">
+<div class="modal modal-signin py-2 fade" tabindex="-1" role="dialog" id="itemDetailsModal">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content rounded-5 shadow">
             <div class="modal-header p-3 pb-2 border-bottom-0">
@@ -336,8 +340,11 @@ if ($signinStatus == 1) {
                         <button class="btn btn-sm btn-light border mx-2" id="use_prompt">
                             Use as prompt
                         </button>
-                        <button class="btn btn-sm btn-light border mx-2" onclick='deleteSavedItems("single")'>
-                            <i type="button" class="bi bi-trash mx-2 text-danger"></i> Delete
+                        <button class="btn btn-sm btn-outline-teal border mx-2" onclick="popWpModal(<?php echo $active_sub; ?>)">
+                            <img src="<?php echo $base_url; ?>/assets/img/wordpress.png" /> Post to WordPress
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger border mx-2" onclick='deleteSavedItems("single")'>
+                            <i type="button" class="bi bi-trash mx-2"></i> Delete
                         </button>
                     </span>
                 </div>
@@ -351,6 +358,133 @@ if ($signinStatus == 1) {
     </div>
 </div>
 <!-- End item details modal -->
+
+<!-- Publish to WordPress modal -->
+<div class="modal modal-signin py-2 fade" tabindex="-1" role="dialog" id="publishToWordPressModal" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content rounded-5 shadow">
+            <div class="modal-body py-5 px-3 pt-0">
+                <div class="d-flex justify-content-between align-items-center border-bottom p-2">
+                    <div class="fw-bold fs-6"><img src="<?php echo $base_url; ?>/assets/img/wordpress.png" class="m-1" />Post to WordPress</div>
+                    <div>
+                        <h6 id="item_summary" class="fw-bold mb-0 mt-1"></h6><br>
+                        <small id="wp-date"></small><br>
+                        <small id="wp-time"></small>
+                    </div>
+                    <button class="btn btn-sm btn-outline-dark" data-bs-toggle="modal" data-bs-target="#itemDetailsModal">
+                        Back
+                    </button>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <img src="../assets/img/loader-bars.png" alt="" id="wp-item-details-spinner" style="display: none;" class="loader mx-3" />
+                </div>
+                <?php if ($active_sub == 2) { ?>
+                    <form id="wp-post-form" class="needs-validation" method="POST" novalidate>
+                        <!-- Post details -->
+                        <small class="text-muted fw-bold">Post details</small>
+                        <div class="row row-cols-3">
+                            <div class="col form-floating">
+                                <input type="number" class="form-control border-top-0 border-start-0 border-end-0 border-teal rounded-0" id="wp-cat" name="wp-cat" autocomplete="off" placeholder="" maxlength="50">
+                                <label for="wp-cat">Category <sup><small>Category ID (Number)</small></sup></label>
+                                <small id="wp_cat_err" class="text-danger fw-bold m-1"></small><br>
+                            </div>
+                            <div class="col form-floating">
+                                <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border-teal rounded-0" id="wp-title" name="wp-title" autocomplete="off" placeholder="" maxlength="50">
+                                <label for="wp-title">Post title<small class="m-1 text-muted"></small></label>
+                                <small id="wp_title_err" class="text-danger fw-bold m-1"></small><br>
+                            </div>
+                            <div class="col form-floating">
+                                <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border-teal rounded-0" id="wp-tags" name="wp-tags" autocomplete="off" placeholder="" maxlength="50">
+                                <label for="wp-tags">Tags <sup><small>Comma separated</small></sup></label>
+                                <small id="wp_tags_err" class="text-danger fw-bold m-1"></small><br>
+                            </div>
+                            <div class="col form-floating">
+                                <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border-teal rounded-0" id="wp-excerpt" name="wp-excerpt" autocomplete="off" placeholder="" maxlength="50">
+                                <label for="wp-excerpt">Excerpt<small class="m-1 text-muted"></small></label>
+                                <small id="wp_excerpt_err" class="text-danger fw-bold m-1"></small><br>
+                            </div>
+                        </div>
+                    </form>
+                    <small class="text-muted fw-bold mt-3">Post body</small>
+                    <div class="my-2">
+                        <div id="wp-content"></div> <!-- content to be appended to form dynamically -->
+                    </div>
+                    <!-- WP credentials -->
+                    <small class="mt-3"><span class="text-muted fw-bold">Enter your WordPress credentials below </span><i class="bi bi-info-circle-fill" data-bs-toggle="popover" data-bs-placement="top" data-bs-trigger="hover" data-bs-html="true" data-bs-content="We do not store or share your WordPress credentials. We only use them for authentication purposes while publishing articles into your WordPress account"></i></small>
+                    <div class="row row-cols-lg-auto">
+                        <div class="col form-floating">
+                            <input type="email" class="form-control border-top-0 border-start-0 border-end-0 border-teal rounded-0" id="wp-email" name="wp-email" autocomplete="off" placeholder="" maxlength="50">
+                            <label for="wp-email">Your WordPress email</label>
+                            <small id="wp_email_err" class="text-danger fw-bold m-1"></small><br>
+                        </div>
+                        <div class="col form-floating">
+                            <input type="password" class="form-control border-top-0 border-start-0 border-end-0 border-teal rounded-0" id="wp-pass" name="wp-pass" autocomplete="off" placeholder="" maxlength="50">
+                            <label for="wp-pass">Your WordPress password<small class="m-1 text-muted"></small></label>
+                            <small id="wp_pass_err" class="text-danger fw-bold m-1"></small><br>
+                        </div>
+                    </div>
+                    <div class="py-3">
+                        <div class="col form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                            <label class="form-check-label" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Check this box to directly publish the post to WordPress, otherwise it will be saved as a draft in your account" for="flexCheckChecked">
+                                Publish to WordPress publicly
+                            </label>
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            <button type="submit" class="btn btn-dark m-1" onclick='publishToWordPress()'>Post</button>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End publish to WordPress modal -->
+
+<!-- Modal prompting user to sign up for premium account  -->
+<div class="modal modal-signin py-2 fade" id="premiumSignup" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-primary text-light">
+            <div class="modal-header">
+                <h6 class="modal-title fs-5" id="modal-title">Become a Parakeet Premium member!</h6>
+                <button class="btn btn-sm btn-outline-light" data-bs-toggle="modal" data-bs-target="#itemDetailsModal">
+                    Back
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card mb-4 border-0 rounded-3 shadow-sm ">
+                    <div class="card-body bg-primary">
+                        <div class="list-group border-0 p-1 bg-primary">
+                            <div class="list-group-item border-0 d-flex gap-3 py-3 bg-primary">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <div class="d-flex gap-2 w-100 justify-content-start">
+                                    <p class="mb-0 text-light">Save <strong>unlimited</strong> items</p>
+                                </div>
+                            </div>
+                            <div class="list-group-item border-0 d-flex gap-3 py-3 bg-primary">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <div class="d-flex gap-2 w-100 justify-content-start">
+                                    <div class="text- text-light">
+                                        <strong>More than 1000 characters of generated text in a single run</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item border-0 d-flex gap-3 py-3 bg-primary">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <div class="d-flex gap-2 w-100 justify-content-start">
+                                    <div>
+                                        <p class="mb-0 text-light">Publish directly to <strong>WordPress</strong>.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="<?php echo $base_url; ?>/pricing" style="background-color: #6610f2;" class="w-100 btn btn-lg btn-primary sub-btn">Get started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Delete confirmation toast -->
 <div class="position-fixed top-0 end-0 p-3 rounded-3" style="z-index: 9999;">
@@ -479,36 +613,73 @@ if ($signinStatus == 1) {
     // var gen_text = substr(response, gen_text_start, gen_text_end);
 
     function removeText(type) {
-        var prompt_start = 0;
-        var prompt = prompt_holder;
-
-        var prompt_end = prompt.length;
-
-        var response = resp_holder;
-
-        var gen_text_start = prompt_end + 1;
-        var gen_text_end = response.length;
-
-        // remove prompt
-        if (type === "prompt") {
-            Id("outputarea").value = response.substr(gen_text_start, gen_text_end); //generated text
-        }
-
-        // remove generated text
-        if (type === "gen_text") {
-            Id("outputarea").value = prompt;
-        }
-
-        // clear
-        if (type === "clear") {
+        // remove anyways
+        if (typeof prompt == undefined || prompt == null) {
             Id("outputarea").value = "";
-        }
+        } else {
+            var prompt_start = 0;
+            var prompt = prompt_holder;
 
-        // restore
-        if (type === "restore") {
-            Id("outputarea").value = prompt + ' ' + response.substr(gen_text_start, gen_text_end);
+            var prompt_end = prompt.length;
+
+            var response = resp_holder;
+
+            var gen_text_start = prompt_end + 1;
+            var gen_text_end = response.length;
+
+            // remove prompt
+            if (type === "prompt") {
+                Id("outputarea").value = response.substr(gen_text_start, gen_text_end); //generated text
+            }
+
+            // remove generated text
+            if (type === "gen_text") {
+                Id("outputarea").value = prompt;
+            }
+
+            // clear
+            if (type === "clear") {
+                Id("outputarea").value = "";
+            }
+
+            // restore
+            if (type === "restore") {
+                Id("outputarea").value = prompt + ' ' + response.substr(gen_text_start, gen_text_end);
+            }
         }
     }
+
+    // Text to speech    
+    function TextToSpeech(action) {
+        var text = Id('outputarea').value;
+        var speech = new SpeechSynthesisUtterance();
+
+        speech.text = text;
+        speech.rate = 1;
+        speech.volume = 1;
+        speech.pitch = 1;
+
+        speech.lang = 'en-US';
+
+        var element = Id("text-to-speech");
+        var wrapper = Id("speech-wrapper");
+
+        if (action == 'speak') {
+            element.remove();
+            // document.createElement
+            wrapper.innerHTML = '<i id="text-to-speech" class="bi bi-volume-mute fs-4 mx-2" type="button" onclick="TextToSpeech(' + "'mute'" + ')"></i>';
+            speechSynthesis.speak(speech);
+        } else if (action == 'mute') {
+            // element.remove();
+            wrapper.innerHTML = '<i id="text-to-speech" class="bi bi-volume-down fs-4 mx-2" type="button" onclick="TextToSpeech(' + "'speak'" + ')"></i>';
+            speechSynthesis.cancel(speech);
+        }
+
+    }
+
+
+
+
 
     // Save/show/delete items
     var sidebar = document.getElementById("savedItemsCmpnt");
@@ -737,6 +908,71 @@ if ($signinStatus == 1) {
             });
         } else {
             showToastMessage("Sorry. Can't save a blank item", "primary");
+        }
+    }
+
+    // Posting to WordPress
+    function popWpModal(subscription) {
+        if (subscription == 2) {
+            $('#publishToWordPressModal').modal('show');
+            var link = document.createElement('link');
+            link.href = 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            document.getElementsByTagName("head")[0].appendChild(link);
+
+            // load Quill script
+            var s = document.createElement('script');
+            s.setAttribute('src', 'https://cdn.quilljs.com/1.3.6/quill.min.js');
+            document.head.insertBefore(s, document.head.firstElementChild);
+
+            // The activated editor functions
+            var toolbarOptions = [
+                ['bold', 'italic'],
+                [{
+                    'list': 'ordered'
+                }, {
+                    'list': 'bullet'
+                }],
+                ['link', 'underline', 'blockquote', 'image'],
+                [{
+                    'header': '3'
+                }],
+                [{
+                    size: ['small', false, 'large', 'huge']
+                }]
+            ];
+
+            // Quill configuration
+            var options = {
+                modules: {
+                    toolbar: toolbarOptions
+                },
+                placeholder: 'Edit your post here',
+                readOnly: false,
+                theme: 'snow'
+            };
+
+            s.onload = () => {
+                // remove previous toolbar instances
+                var toolbars = document.querySelectorAll(".ql-toolbar");
+
+                Array.prototype.slice.call(toolbars)
+                    .forEach(function(toolbar) {
+                        toolbar.remove();
+                    });
+
+                // The quill instance
+                var editor = new Quill('#wp-content', options);
+
+                var content = Id("item_details").innerText;
+                editor.root.innerText = content;
+
+                document.getElementsByClassName("ql-header")[0].innerText = "Style";
+            }
+
+        } else {
+            $('#premiumSignup').modal('show');
         }
     }
 

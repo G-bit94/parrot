@@ -228,6 +228,7 @@ $spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
             -webkit-animation-delay: -0.0833s;
         }
     </style>
+
     <script src="<?php echo $base_url; ?>/assets/js/jquery-3.6.0.min.js"></script>
     <script src="<?php echo $base_url; ?>/assets/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
@@ -274,7 +275,7 @@ $spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
 
     <header>
         <!-- Fixed navbar -->
-        <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white border-bottom shadow-sm">
+        <nav id="navbar" class="navbar navbar-expand-md navbar-light fixed-top border-bottom bg-white">
             <div class="container-fluid py-">
                 <a class="navbar-brand plain-link text-dark fw-bold" href="<?php echo $base_url; ?>">
                     <img src="<?php echo $base_url; ?>/assets/img/logo.png" alt="" width="35" height="35" class="rounded-circle" />
@@ -298,11 +299,11 @@ $spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
                             <span class="small"> Get started</span>
                         </span>
                     </a>
-                    <a class="btn btn-primary rounded-pill px-3 mx-2 mb-1 mb-lg-0" href="<?php echo $base_url; ?>/#demo" id="demo_btn" style="display: none;">
+                    <!-- <a class="btn btn-primary rounded-pill px-3 mx-2 mb-1 mb-lg-0" href="<?php echo $base_url; ?>/#demo" id="demo_btn" style="display: none;">
                         <span class="d-flex align-items-center">
                             <span class="small">Demo</span>
                         </span>
-                    </a>
+                    </a> -->
                     <?php if ($signinStatus == 1) { ?>
                         <a href="javascript: void(0)" onclick="handleStartBtn()" class="nav-link fw-bold m-1">
                             Playground
@@ -313,10 +314,12 @@ $spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
                             <i class="bi bi-person-circle"></i>
                             <?php echo $row_user["username"]; ?>
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                            <a href="<?php echo $base_url; ?>/signout.php" class="btn btn-sm btn-white shadow-sm m-1">
-                                <span><i class="bi bi-box-arrow-right"></i> Signout</span>
-                            </a>
+                        <ul class="dropdown-menu pt-0 mx-0 rounded-3 shadow overflow-hidden" aria-labelledby="dropdownMenuButton2">
+                            <li>
+                                <a href="<?php echo $base_url; ?>/signout.php" class="btn btn-sm m-1 fw-bold">
+                                    <i class="bi bi-box-arrow-right"></i> Signout
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

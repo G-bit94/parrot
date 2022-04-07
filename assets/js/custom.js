@@ -1,6 +1,17 @@
 /**
- * Custom functions with project-wide scope
+ * Custom functions with project-wide usage/scope
  */
+
+// Show navbar shadow on scroll
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+  Id('navbar').classList.add('shadow-sm');
+  } else {
+  Id('navbar').classList.remove('shadow-sm');
+  }
+}
 
 // If signed in or not, show respective elements
 if (signinStatus === 1) {
@@ -31,7 +42,7 @@ if (signinStatus === 1) {
 
  /* Dynamic page title */
  function changePageTitle() {
-  newPageTitle = document.getElementById("title").textContent;
+  newPageTitle = Id("title").textContent;
   document.title = "ParrotAI | " + newPageTitle;
 }
 
@@ -258,8 +269,8 @@ function signupUser() {
 function getCredentials() {
 
   //signup credentials
-  var email = document.getElementById("emailsignup").value;
-  var pwd = document.getElementById("pwdsignup").value;
+  var email = Id("emailsignup").value;
+  var pwd = Id("pwdsignup").value;
 
   // move credentials to signin form
   $('#useremail').val(email);
@@ -278,7 +289,7 @@ function handleStartBtn() {
   } else {
       $('#signupModal').modal('hide');
       $('#signinModal').modal('show');
-      document.getElementById("login-title").innerHTML = "Sign in to proceed";
+      Id("login-title").innerHTML = "Sign in to proceed";
   }
 }
 
@@ -290,7 +301,7 @@ function popSignupModal() {
 function popSigninModal() {
   $('#signupModal').modal('hide');
   $('#signinModal').modal('show');
-  document.getElementById("login-title").innerHTML = "Sign in";
+  Id("login-title").innerHTML = "Sign in";
 }
 
 // clear form inputs
@@ -305,7 +316,7 @@ function clearInputs() {
 
 /* Toggle filters */
 function toggleFilters() {
-  var filterarea = document.getElementById("filtersarea");
+  var filterarea = Id("filtersarea");
 
   if (filterarea.style.display === "block") {
       filterarea.style.display = "none";
@@ -319,9 +330,9 @@ function toggleFilters() {
   // Search
   // global search
   function getGlobalSearch() {
-    var str = document.getElementById("search_term").value;
-    var sb = document.getElementById("user_cmpnt").innerText;
-    var adm = document.getElementById("adm_cmpnt").innerText;
+    var str = Id("search_term").value;
+    var sb = Id("user_cmpnt").innerText;
+    var adm = Id("adm_cmpnt").innerText;
     
     // encode
     // sb = encodeURIComponent(sb);
@@ -331,7 +342,7 @@ function toggleFilters() {
       sb: sb,
       adm: adm
     }).done(function(response) {
-      var search_component = document.getElementById("search_component");
+      var search_component = Id("search_component");
 
       if (search_component.style.display = "none") {
           search_component.style.display = "block";

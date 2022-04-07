@@ -211,12 +211,13 @@
                 "top_p": 0.9,
                 "temp": 0.75,
                 "response_length": 64,
-                "remove_input": true
+                "remove_input": true,
+                "demo": true,
             };
 
             $.ajax({
                 type: 'POST',
-                url: 'https://api.eleuther.ai/completion',
+                url: base_url + '/dashboard/prompt.php',
                 data: JSON.stringify(SendInfo),
                 contentType: "application/json; charset=utf-8",
                 traditional: true,
@@ -224,7 +225,9 @@
                     $("#gen-text-spinner").hide();
                     $("#gen-text").html("Generate text");
                     $("#prompt").html(context);
-                    outputarea.html(data[0].generated_text);
+                    // outputarea.html([results][0].generated_text);
+                    outputarea.html(data.results[0].generated_text);
+                    // outputarea.html(data.signon);
                 },
                 error: function() {
                     $("#gen-text-spinner").hide();

@@ -81,6 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Close connection
             $mysqli->close();
             $response["status"] = $queryStatus;
+            echo json_encode($response);
         }
 
         // fetch all items 
@@ -125,6 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $response["status"] = "ERROR";
                 $response["error"] = $noresults;
             }
+            echo json_encode($response);
         }
 
         // delete
@@ -142,9 +144,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $response["status"] = "ERROR";
                 $response["error"] = $generalError;
             }
+            echo json_encode($response);
         }
     }
     // $response["sess"] = $_SESSION['csrf_token'];
-    // $response["post"] = $_POST['csrf_token'];
-    echo json_encode($response);
+    // $response["post"] = $_POST['csrf_token'];    
 }

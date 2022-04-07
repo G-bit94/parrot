@@ -26,9 +26,9 @@ $rs_sub = $mysqli->query($sql_sub);
 $row_sub = $rs_sub->fetch_assoc();
 
 if ($row_sub['plan'] == 1) {
-  $active_sub = 1;
+  $active_sub = 1; //deluxe
 } elseif ($row_sub['plan'] == 2) {
-  $active_sub = 2;
+  $active_sub = 2; //parakeet
 }
 
 class AccessLevel
