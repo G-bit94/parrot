@@ -108,7 +108,7 @@ include "../header.php";
                         <i class="bi bi-star-fill"></i>
                         <div class="d-flex gap-2 w-100 justify-content-start">
                             <div class="text-start">
-                                <strong>More than 500 characters of generated text in a single run</strong>
+                                <strong>More than 500 tokens of generated text in a single run</strong>
                                 <p class="mb-0 text-muted fs-6">Generate an entire <strong>article</strong> in a few clicks</p>
                             </div>
                         </div>
@@ -171,7 +171,7 @@ include "../header.php";
                         <i class="bi bi-star-fill"></i>
                         <div class="d-flex gap-2 w-100 justify-content-start">
                             <div class="text-start">
-                                <strong>More than 1000 characters of generated text in a single run</strong>
+                                <strong>More than 1000 tokens of generated text in a single run</strong>
                                 <p class="mb-0 text-muted fs-6">Generate an entire <strong>article</strong> in just a couple of clicks</p>
                             </div>
                         </div>
