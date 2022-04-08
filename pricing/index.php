@@ -180,7 +180,7 @@ include "../header.php";
                         <i class="bi bi-star-fill"></i>
                         <div class="d-flex gap-2 w-100 justify-content-start">
                             <div>
-                                <p class="mb-0">Publish directly to <strong>WordPress</strong>.</p>
+                                <p class="mb-0">Publish directly to <strong>WordPress</strong></p>
                             </div>
                         </div>
                     </div>
@@ -188,7 +188,15 @@ include "../header.php";
                         <i class="bi bi-star-fill"></i>
                         <div class="d-flex gap-2 w-100 justify-content-start">
                             <div>
-                                <p class="mb-0"><strong>No filters</strong>.</p>
+                                <p class="mb-0"><strong>Audio playback</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item border-0 d-flex gap-3 py-3">
+                        <i class="bi bi-star-fill"></i>
+                        <div class="d-flex gap-2 w-100 justify-content-start">
+                            <div>
+                                <p class="mb-0"><strong>No filters</strong></p>
                             </div>
                         </div>
                     </div>

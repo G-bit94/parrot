@@ -13,7 +13,7 @@ include "header.php";
                 You'll be amazed how great ParrotAI speaks to the desires of your clients. At a fraction of the cost.</p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                 <button type="button" class="btn btn-primary btn-lg px-4 gap-3" onclick="handleStartBtn();">Start writing</button>
-                <button type="button" class="btn btn-outline-primary btn-lg px-4" onclick="location.href='<?php echo $base_url; ?>/#demo'">View demo</button>
+                <!-- <button type="button" class="btn btn-outline-primary btn-lg px-4" onclick="location.href='<?php echo $base_url; ?>/#demo'">View demo</button> -->
             </div>
         </div>
         <div class="col-10 col-sm-8 col-lg-6 overflow-hidden shadow-lg">

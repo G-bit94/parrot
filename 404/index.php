@@ -111,7 +111,7 @@
     </div>
     <div class="torch"></div>
     <div>
-        <a href="/frontier">Take me home</a>
+        <a href="/parrot">Take me home</a>
     </div>
     <script src="/parrot/assets/js/jquery-3.6.0.min.js"></script>
     <script>

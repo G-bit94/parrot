@@ -57,41 +57,43 @@ if ($signinStatus == 1) {
 <div class="container-fluid mt-5 mb-5 py-3">
     <div class="row">
         <div class="col-md-2 mt-4 rounded-3">
-            <div id="listingsDesktopFilter" class="col-md">
-                <small class="mt-3 mb-1 text-muted text-uppercase">Action!</small>
+            <div class="col-md">
+                <small class="mt-3 mb-1 text-muted text-uppercase">Have fun!</small>
                 <p class="mt-2 p-1">
                     ParrotAI responds with a completion that matches the context you provided.
                 </p>
 
-                <small class="mt-3 fw-bold">Tip</small>
+                <div class="p-1 rounded-3 text-light" style="background-color: #0d6efd;">
+                    <small class="mt-2 fw-bold">Tip</small>
 
-                <div class="list-group border-0">
-                    <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1" aria-current="true">
-                        <p><img src="../assets/img/tab-key.png" alt="" /></p>
-                        <div class="d-flex gap-2 w-100 justify-content-between">
-                            <div>
-                                <p class="mb-0">Press <img src="../assets/img/tab-text.png" alt="Tab" /> once to generate more text</p>
+                    <div class="list-group border-0">
+                        <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1" aria-current="true">
+                            <p><img src="../assets/img/tab-key.png" alt="" /></p>
+                            <div class="d-flex gap-2 w-100 justify-content-between">
+                                <div>
+                                    <p class="mb-0">Press <img src="../assets/img/tab-text.png" alt="Tab" /> once to generate more text</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <small class="mt-3 fw-bold">KEEP IN MIND</small>
+                    <small class="fw-bold">KEEP IN MIND</small>
 
-                <div class="list-group border-0 py-2">
-                    <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-2 bg-light" aria-current="true">
-                        <i class="bi bi-bezier2"></i>
-                        <div class="d-flex gap-2 w-100 justify-content-between">
-                            <div>
-                                <p class="mb-0">Not the response you expected? Retry to craft your masterpiece to perfection.</p>
+                    <div class="list-group border-0 py-1">
+                        <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-2 bg-light" aria-current="true">
+                            <i class="bi bi-bezier2"></i>
+                            <div class="d-flex gap-2 w-100 justify-content-between">
+                                <div>
+                                    <p class="mb-0">Not the response you expected? Retry to craft your masterpiece to perfection.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-2 bg-light" aria-current="true">
-                        <i class="bi bi-chat-left"></i>
-                        <div class="d-flex gap-2 w-100 justify-content-between">
-                            <div type="button" onclick="startChat()">
-                                <p class="mb-0">You can always get in touch in case of anything. Just click here.</p>
+                        <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-2 bg-light" aria-current="true">
+                            <i class="bi bi-chat-left"></i>
+                            <div class="d-flex gap-2 w-100 justify-content-between">
+                                <div type="button" onclick="startChat()">
+                                    <p class="mb-0">You can always get in touch in case of anything. Just click here.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -163,9 +165,11 @@ if ($signinStatus == 1) {
                     </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <span id="speech-wrapper">
-                        <i id="text-to-speech" class="bi bi-volume-down fs-4" onclick="TextToSpeech('speak')"></i>
-                    </span>
+                    <?php if ($active_sub == 2) { ?>
+                        <span id="speech-wrapper">
+                            <i id="text-to-speech" type="button" class="bi bi-volume-down fs-4" onclick="TextToSpeech('speak')"></i>
+                        </span>
+                    <?php } ?>
                     <img src="../assets/img/copy.png" alt="" onclick="copyToClipboard('outputarea')" class="mx-2" type="button" />
                     <img src="../assets/img/save.png" alt="" id="save" class="mx-2" type="button" />
                     <i class="bi bi-list-stars mx-1 fs-4" onclick="fetchSavedItems()" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Saved items"></i>
@@ -189,7 +193,7 @@ if ($signinStatus == 1) {
                         <div class="btn-group" role="group" aria-label="Default button group">
                             <button type="button" class="btn btn-sm btn-outline-dark" onclick='removeText("prompt");'>Remove prompt</button>
                             <button type="button" class="btn btn-sm btn-outline-dark" onclick='removeText("gen_text");'>Remove generated text</button>
-                            <button type="button" class="btn btn-sm btn-outline-dark" onclick='removeText("clear");'><i class="bi bi-x-circle"></i> Clear</button>
+                            <button type="button" class="btn btn-sm btn-outline-dark" onclick='removeText("clear");'>Clear</button>
                             <button type="button" class="btn btn-sm btn-outline-dark" onclick='removeText("restore");'>Restore</button>
                         </div>
                     </div>
@@ -371,7 +375,7 @@ if ($signinStatus == 1) {
                         <small id="wp-date"></small><br>
                         <small id="wp-time"></small>
                     </div>
-                    <button class="btn btn-sm btn-outline-dark" data-bs-toggle="modal" data-bs-target="#itemDetailsModal">
+                    <button class="btn btn-sm btn-outline-dark" data-bs-dismiss="modal" aria-label="Close">
                         Back
                     </button>
                 </div>
@@ -474,6 +478,14 @@ if ($signinStatus == 1) {
                                 <div class="d-flex gap-2 w-100 justify-content-start">
                                     <div>
                                         <p class="mb-0 text-light">Publish directly to <strong>WordPress</strong>.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item border-0 d-flex gap-3 py-3 bg-primary">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <div class="d-flex gap-2 w-100 justify-content-start">
+                                    <div>
+                                        <p class="mb-0 text-light">Enjoy audio playback</strong>.</p>
                                     </div>
                                 </div>
                             </div>
@@ -613,12 +625,12 @@ if ($signinStatus == 1) {
     // var gen_text = substr(response, gen_text_start, gen_text_end);
 
     function removeText(type) {
+        var prompt = prompt_holder;
         // remove anyways
         if (typeof prompt == undefined || prompt == null) {
             Id("outputarea").value = "";
         } else {
             var prompt_start = 0;
-            var prompt = prompt_holder;
 
             var prompt_end = prompt.length;
 
@@ -654,31 +666,30 @@ if ($signinStatus == 1) {
         var text = Id('outputarea').value;
         var speech = new SpeechSynthesisUtterance();
 
-        speech.text = text;
-        speech.rate = 1;
-        speech.volume = 1;
-        speech.pitch = 1;
+        if (text !== "") {
+            speech.text = text;
+            speech.rate = 1;
+            speech.volume = 1;
+            speech.pitch = 1;
 
-        speech.lang = 'en-US';
+            speech.lang = 'en-US';
 
-        var element = Id("text-to-speech");
-        var wrapper = Id("speech-wrapper");
+            var element = Id("text-to-speech");
+            var wrapper = Id("speech-wrapper");
 
-        if (action == 'speak') {
-            element.remove();
-            // document.createElement
-            wrapper.innerHTML = '<i id="text-to-speech" class="bi bi-volume-mute fs-4 mx-2" type="button" onclick="TextToSpeech(' + "'mute'" + ')"></i>';
-            speechSynthesis.speak(speech);
-        } else if (action == 'mute') {
-            // element.remove();
-            wrapper.innerHTML = '<i id="text-to-speech" class="bi bi-volume-down fs-4 mx-2" type="button" onclick="TextToSpeech(' + "'speak'" + ')"></i>';
-            speechSynthesis.cancel(speech);
+            if (action == 'speak') {
+                element.remove();
+                wrapper.innerHTML = '<i id="text-to-speech" class="bi bi-volume-mute fs-4 mx-2" type="button" onclick="TextToSpeech(' + "'mute'" + ')"></i>';
+                speechSynthesis.speak(speech);
+            } else if (action == 'mute') {
+                wrapper.innerHTML = '<i id="text-to-speech" class="bi bi-volume-down fs-4 mx-2" type="button" onclick="TextToSpeech(' + "'speak'" + ')"></i>';
+                speechSynthesis.cancel(speech);
+            }
+        } else {
+            showToastMessage("Enter text to read out below", "primary");
+            Id('outputarea').focus();
         }
-
     }
-
-
-
 
 
     // Save/show/delete items
