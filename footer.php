@@ -225,7 +225,6 @@
                     $("#gen-text-spinner").hide();
                     $("#gen-text").html("Generate text");
                     $("#prompt").html(context);
-                    // outputarea.html([results][0].generated_text);
                     outputarea.html(data.results[0].generated_text);
                     // outputarea.html(data.signon);
                 },
