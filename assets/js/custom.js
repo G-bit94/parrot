@@ -2,8 +2,8 @@
  * Custom functions with project-wide usage/scope
  */
 
-// Show navbar shadow on scroll
-window.onscroll = function() {scrollFunction()};
+// Show/hide navbar shadow on scroll
+window.onscroll = () => {scrollFunction()};
 
 function scrollFunction() {
   if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
@@ -27,6 +27,13 @@ if (signinStatus === 1) {
   $('#upgrade_btn').hide();  
   $('#start_btn').show();
 }
+
+//Empty link handling for unobtrusive JS design
+jQuery(function($) {
+  $('.empty-link').on('click', function(event) {
+      event.preventDefault();      
+  });
+});
 
   // Enable tooltips everywhere
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -104,7 +111,7 @@ function signinUser() {
 
       $.ajax({
           type: "POST",
-          url: base_url + "/signin.php",
+          url: base_url + "/signin/",
           data: form.serialize(), // serializes the form's elements.
           success: function(data) {
               if (data === "SIGNIN_SUCCESS") {
@@ -135,12 +142,16 @@ function signinUser() {
                 $("#password_err").show();
                 $("#password_err").html("Your password is incorrect");
               }
+              else if (data === "EMAIL_BLANK") {
+                $("#email_err").show();
+                $("#email_err").html("Please enter your email");
+              }
               else if (data === "EMAIL_INEXISTENT") {
                 $("#email_err").show();
                 $("#email_err").html("We couldn't find any account connected to that email");
               }
           },
-          error: function(error) {
+          error: function() {
               Swal.fire({
                   title: '<strong class="text-dark">Oops!</strong>',
                   icon: 'error',
@@ -194,10 +205,11 @@ function signupUser() {
 
       $.ajax({
           type: "POST",
-          url: base_url + "/signup.php",
+          url: base_url + "/signup/",
           data: formData,
-          success: function(data) {
-              if (data === "SIGNUP_SUCCESS") {
+          success: function(json) {
+            var data = JSON.parse(json);
+              if (data.status == "SIGNUP_SUCCESS") {
                 if (getCredentials()) {
                   clearSignupInputs();
                 }
@@ -210,35 +222,35 @@ function signupUser() {
                     html: '<p class="text-dark">Your account was created successfully</p>',
                     confirmButtonText: '<span onclick="popSigninModal();">Proceed to sign in <i class="bi bi-arrow-right"></i></span>'                    
                 });   
-              } else if (data === "USERNAME_BLANK") {
+              } else if (data.status == "USERNAME_BLANK") {
                 $("#username_err").show();
                 $("#username_err").html("Your first name is required");  
                 hideSpinner();                       
               } 
-              // else if (data === "LNAME_BLANK") {
-              //   $("#lname_err").show();
-              //   $("#lname_err").html("Last name cannot be blank");  
-              //   hideSpinner();                       
-              // } 
-              else if (data === "EMAIL_BLANK") {
+              else if (data.status == "EMAIL_BLANK") {
                 $("#emailexists_err").show();
                 $("#emailexists_err").html("Your email address is required");
                 hideSpinner();
-              } else if (data === "EMAIL_EXISTS") {
+              } else if (data.status == "EMAIL_EXISTS") {
                 $("#emailexists_err").show();
                 $("#emailexists_err").html("That email is already taken");
                 hideSpinner();
+              } else if (data.status == "TEMP_EMAIL") {
+                $("#emailexists_err").show();
+                $("#emailexists_err").html("Please use a valid email");
+                hideSpinner();
               }
-              else if (data === "EMPTY_PASS") {
+              else if (data.status == "EMPTY_PASS") {
                 $("#signup_pwd_err").show();
                 $("#signup_pwd_err").html("Password is required");
                 hideSpinner();
               }
-              else if (data === "PASSWORD_MISMATCH") {
+              else if (data.status == "PASSWORD_MISMATCH") {
+                $("#mismatch_err").show();
                 $("#mismatch_err").html("Password mismatch");
                 hideSpinner();
               }
-              else if (data === "ERROR") {
+              else if (data.status == "ERROR") {
                 Swal.fire({
                   title: '<strong class="text-dark">Oops!</strong>',
                   icon: 'error',
@@ -250,7 +262,7 @@ function signupUser() {
               hideSpinner();   
               }
           },
-          error: function(error) {
+          error: function() {
               Swal.fire({
                   title: '<strong class="text-dark">Oops!</strong>',
                   icon: 'error',
@@ -295,6 +307,7 @@ function handleStartBtn() {
 
 function popSignupModal() {
   $('#signinModal').modal('hide');
+  $('#resetPwdEmailEntryModal').modal('hide');
   $('#signupModal').modal('show');
 }
 
@@ -302,6 +315,19 @@ function popSigninModal() {
   $('#signupModal').modal('hide');
   $('#signinModal').modal('show');
   Id("login-title").innerHTML = "Sign in";
+}
+
+function popResetPwdEmailEntryModal(elem) {
+  $('#signinModal').modal('hide');
+  $('#resetPwdEmailEntryModal').modal('show');  
+  if (elem !== '') {        
+    var email = $('#' + elem).val();
+    if (typeof email !== 'undefined' && email !== null && email != "") {
+      // If user is signed in
+      Id('reset_signup_prompt').style.display = 'none';    
+      Id('reset_email').value = email;
+    }
+  }
 }
 
 // clear form inputs

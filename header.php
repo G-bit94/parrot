@@ -25,13 +25,14 @@ $sql_offset = $result = "";
 $signinStatus = 0;
 
 include 'roles.php';
+
 $access = new AccessLevel();
 
 if ($user_id !== "" && $user_id !== null) {
     $signinStatus = 1;
 }
 
-$spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
+$spinner = '<div class="spinner gap-2">
             <div class="bar1"></div>
             <div class="bar2"></div>
             <div class="bar3"></div>
@@ -51,6 +52,13 @@ $spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
 <html lang="en">
 
 <head>
+    <!-- WordPress -->
+    <?php
+    if (function_exists('wp_head')) {
+        wp_head();
+    }
+    ?>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ParrotAI</title>
@@ -70,9 +78,13 @@ $spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
     <link rel="manifest" href="/parrot/assets/img/favicons/manifest.json">
     <link rel="icon" href="/parrot/assets/img/favicons/favicon.ico"> -->
 
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
+
+    <!-- Intro.js -->
+    <link rel="stytlesheet" src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs.css">
 
     <style type="text/css">
         @font-face {
@@ -85,7 +97,15 @@ $spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
         }
 
         .bg-primary {
-            background-color: #180c3c !important;
+            background-color: #7434fc !important;
+        }
+
+        .bg-custom-primary {
+            background-color: #183454;
+        }
+
+        .bg-custom-dark {
+            background-color: #180c3c;
         }
 
         textarea {
@@ -113,14 +133,34 @@ $spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
 
         /* mobile */
         @media (max-width: 768px) {
+
+            /* Contact us page */
             #contactus {
                 background-position: left top;
                 background-size: 230%;
                 background-repeat: no-repeat;
             }
+
+            /* Rest password page */
+            #secure-header-text {
+                display: none;
+            }
+
+            .centred-bg-image {
+                padding: 60px;
+            }
         }
 
-        /* cookie consent */
+        /* Rest password page */
+        .centred-bg-image {
+            background-image: url('../assets/img/Privacy policy-rafiki.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 80%;
+            border-radius: 20px;
+            padding: 10px;
+        }
+
         .bg-custom {
             background-color: #130f40;
             border-radius: 4px;
@@ -139,7 +179,7 @@ $spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
             height: 54px;
             display: inline-block;
             /* margin-left: 50%;
-        margin-right: 50%; */
+            margin-right: 50%; */
             background: #fff;
             padding: 10px;
             border-radius: 10px;
@@ -229,8 +269,11 @@ $spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
         }
     </style>
 
+    <!-- Main JS Files -->
     <script src="<?php echo $base_url; ?>/assets/js/jquery-3.6.0.min.js"></script>
     <script src="<?php echo $base_url; ?>/assets/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Global Scripts -->
     <script type="text/javascript">
         // Common functions and variables
         Id = (id) => {
@@ -264,6 +307,15 @@ $spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
 
         // geolocation
         const geoLocAPI = "https://api.ipregistry.co/?key=glm9znqelitu1301";
+        // Serialize navigator object
+        const navigator_obj = window.navigator;
+
+        const _navigator = {};
+        for (var i in navigator_obj) {
+            _navigator[i] = navigator_obj[i];
+        }
+
+        // const geoLocAPI = base_url + "/apis/geolocation/?nav_obj=" + encodeURIComponent(JSON.stringify(_navigator));
 
         // show prices in local currency
         const currXChangeAPI = "https://api.exchangerate-api.com/v4/latest/USD";
@@ -275,13 +327,15 @@ $spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
 
     <header>
         <!-- Fixed navbar -->
-        <nav id="navbar" class="navbar navbar-expand-md navbar-light fixed-top border-bottom bg-white">
-            <div class="container-fluid py-">
-                <a class="navbar-brand plain-link text-dark fw-bold" href="<?php echo $base_url; ?>">
-                    <img src="<?php echo $base_url; ?>/assets/img/logo.png" alt="" width="35" height="35" class="rounded-circle" />
-                    ParrotAI
+        <nav id="navbar" class="navbar navbar-expand-md fixed-top bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand plain-link fw-bold mx-4 rounded-3 fs-6 d-flex justify-content-between" href="<?php echo $base_url; ?>">
+                    <span class="bg-white rounded-start p-1 d-flex justify-content-end">
+                        <img src="<?php echo $base_url; ?>/assets/img/logo-transparent.png" alt="" width="26" height="27" class="rounded-circle" />
+                    </span>
+                    <span class="bg-custom-primary rounded-end text-white px-2 pt-1">ParrotAI</span>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -289,34 +343,42 @@ $spinner = '<div class="spinner gap-2" id="gen-spinner" style="display: none;">
                         <li class="nav-item">
                         </li>
                     </ul>
-                    <a class="nav-link fw-bold" href="<?php echo $base_url; ?>/pricing" id="pricing_btn" style="display: none;">Pricing</a>
-                    <?php if ($v_status == 1 && $active_sub != 2) { ?>
-                        <a class="nav-link fw-bold" href="<?php echo $base_url; ?>/pricing" id="upgrade_btn" style="display: none;">Upgrade</a>
+                    <?php if ($signinStatus == 1) { ?>
+                        <a href="<?php echo $base_url; ?>/dashboard" onclick="handleStartBtn()" class="nav-link fw-bold m-1 text-white empty-link">
+                            Dashboard
+                        </a>
                     <?php } ?>
-                    <a href="javascript: void(0)" class="btn btn-primary rounded-pill px-3 mx-2 mb-1 mb-lg-0" onclick="handleStartBtn()" id="start_btn" style="display: none;">
+
+                    <a href="<?php echo $base_url; ?>/dashboard" class="btn btn-light px-3 mx-2 mb-1 mb-lg-0 empty-link" onclick="handleStartBtn()" id="start_btn" style="display: none;">
                         <span class="d-flex align-items-center">
-                            <img src="<?php echo $base_url; ?>/assets/img/logo.png" alt="" width="15" height="15" class="rounded-circle " />
-                            <span class="small"> Get started</span>
+                            <strong class="fw-bold">Get started</strong>
                         </span>
                     </a>
+
+                    <a class="nav-link fw-bold text-white" href="<?php echo $base_url; ?>/pricing" id="pricing_btn" style="display: none;">Pricing</a>
+                    <?php if ($v_status == 1 && $active_sub != 2) { ?>
+                        <a class="nav-link fw-bold text-white" href="<?php echo $base_url; ?>/pricing" id="upgrade_btn" style="display: none;">Upgrade</a>
+                    <?php } ?>
+
                     <!-- <a class="btn btn-primary rounded-pill px-3 mx-2 mb-1 mb-lg-0" href="<?php echo $base_url; ?>/#demo" id="demo_btn" style="display: none;">
                         <span class="d-flex align-items-center">
                             <span class="small">Demo</span>
                         </span>
                     </a> -->
-                    <?php if ($signinStatus == 1) { ?>
-                        <a href="javascript: void(0)" onclick="handleStartBtn()" class="nav-link fw-bold m-1">
-                            Playground
-                        </a>
-                    <?php } ?>
+
+                    <a class="nav-link fw-bold text-white" href="<?php echo $base_url; ?>/blog">Blog</a>
+
                     <div class="dropdown" id="profile_cmpnt" style="display: none;">
-                        <button class="btn btn-primary btn-sm rounded-pill mx-3 mt-1 dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-primary btn-sm rounded-pill mx-3 mt-1 dropdown-toggle fw-bold" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle"></i>
                             <?php echo $row_user["username"]; ?>
                         </button>
                         <ul class="dropdown-menu pt-0 mx-0 rounded-3 shadow overflow-hidden" aria-labelledby="dropdownMenuButton2">
                             <li>
-                                <a href="<?php echo $base_url; ?>/signout.php" class="btn btn-sm m-1 fw-bold">
+                                <a href="<?php echo $base_url; ?>/account" class="btn btn-sm m-1 fw-bold">
+                                    <i class="bi bi-person-circle"></i> Account
+                                </a>
+                                <a href="<?php echo $base_url; ?>/signout/" class="btn btn-sm m-1 fw-bold">
                                     <i class="bi bi-box-arrow-right"></i> Signout
                                 </a>
                             </li>

@@ -1,0 +1,6 @@
+{
+    "require": {
+        "hieu-le/wordpress-xmlrpc-client": "~2.0",
+        "phpmailer/phpmailer": "^6.6"
+    }
+}

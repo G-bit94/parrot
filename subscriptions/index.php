@@ -4,7 +4,7 @@ include '../header.php';
 
 //Column sorting on column name
 $orderBy = array('dealer_name', 'username', 'service_name', 'sales_region', 'serial_no', 'mobigo', 'created_at');
-$order = 'registrations.id';
+$order = 'subscriptions.id';
 if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
     $order = $_GET['order'];
 }
@@ -29,7 +29,7 @@ $date = $mysqli->real_escape_string($_GET['date'] ?? '');
 
 $search = $mysqli->real_escape_string(trim($_GET['search']) ?? '');
 
-$where = "WHERE registrations.date = '$today'";
+$where = "users.verified = '1'";
 
 if (isset($_GET['filter']) && $_GET['filter'] === "true") {
     $where = "WHERE registrations.id <> '0'";
@@ -92,10 +92,10 @@ if (isset($_GET['numtablerows'])) {
 
 $offset = ($pageno - 1) * $numtablerows;
 
-$sql_count_pages = "SELECT registrations.*, users.username, registrations.id AS regId, dealers.name AS dealer_name, regions.region AS sales_region FROM registrations
-LEFT OUTER JOIN dealers ON registrations.dealer = dealers.id 
-LEFT OUTER JOIN regions ON registrations.region = regions.id
-LEFT OUTER JOIN users ON registrations.reg_by = users.id $where ORDER BY $order $sort";
+$sql_count_pages = "SELECT users.id AS user_id, users.username, subscription_plans.name, subscriptions.duration, subscription_plans.id AS plan_id, subscriptions.unique_id AS ref FROM `subscriptions`
+INNER JOIN users ON subscriptions.user = users.id
+INNER JOIN subscription_plans ON subscriptions.plan = subscription_plans.id
+GROUP BY users.id $where ORDER BY $order $sort";
 
 $sql_offset .= "LIMIT $offset, $numtablerows";
 
