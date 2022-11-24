@@ -177,7 +177,7 @@ function generateText()
     function genGoose()
     {
         $api = 'Goose';
-        $key = "sk-CiBPYrqosAQcJZMrkAn6ZCckL3KCYoO509g2NeC6w3ziLvMg";
+        $key = "sk-grmlljGGqRfkR0kVJ55M2MQBcqctXdXele5onpcQ19FyMCkl";
         $url = 'https://api.goose.ai/v1/engines/gpt-j-6b/completions';
         $text = json_decode(curlRequest($url, $api, $key))->choices[0]->text;
         return $text;

@@ -296,10 +296,6 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                         <div class="tab">
                             <div class="mb-0 fs-6 fw-bold mt-2">Select the most convenient payment method for you below</div>
                             <div class="my-4 border rounded-3 p-2">
-                                <div class="form-check my-2" id="m_pesa-option" style="display: none;">
-                                    <input id="m-pesa" name="paymentMethod" type="radio" class="form-check-input method" value="M-PESA">
-                                    <label class="form-check-label" for="m-pesa">M-PESA</label>
-                                </div>
                                 <div class="form-check my-2">
                                     <input id="paypal" name="paymentMethod" type="radio" class="form-check-input method" value="PayPal">
                                     <label class="form-check-label" for="paypal" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-html="true" data-bs-content="Click here and then click on the <strong>Pay with PayPal</strong> button in the next step to pay with PayPal">PayPal</label>
@@ -316,64 +312,6 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                             <div class="col-md-8" id="paypal_cmpnt">
                                 <div class="border-top py-2">
                                     <small class="text-muted">For faster checkout, please sign-in into your <a href="https://www.paypal.com/signin" target="_blank">PayPal account</a> first and then come back here.</small>
-                                </div>
-                            </div>
-                            <!-- Mpesa checkout -->
-                            <div class="col-md mb-2" id="m-pesa_cmpnt">
-                                <div class="lead fs-6 row align-items-center">
-                                    <div class="col-md-6">
-                                        <small>Enter your M-PESA number in the field below</small>
-                                        <div class="form-floating my-3">
-                                            <input type="number" class="form-control border-top-0 border-start-0 border-end-0 border-dark rounded-0" id="m-pesa_number" placeholder="Mpesa number" autocomplete="off" maxlength="50">
-                                            <label for="m-pesa_number"><small class="m-1 text-muted"><sup>Use the format: 254712345678 / 0712345678 / 0111123456</sup></small></label>
-                                            <small id="mpesa_number_err" class="text-danger fw-bold m-1"></small><br>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 mb-1">
-                                        <button type="submit" class="btn btn-dark m-1" id="init_mpesa_btn">Pay</button>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div>
-                                            <!-- Display the converted amount -->
-                                            <div id="finalAmount" class="btn btn-light">
-                                                <span>Amount: KSH&nbsp;<span class="finalMpesaValue fw-bold"></span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <span><?php echo $spinner; ?></span>
-                                </div>
-                                <div class="accordion my-2" id="m-pesaGuideAccordion">
-                                    <div class="accordion-item border">
-                                        <h4 class="accordion-header mb-2 col-md-6" id="m-pesaGuide">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                                M-PESA payment guide
-                                            </button>
-                                        </h4>
-                                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="m-pesaGuide" data-bs-parent="#m-pesaGuideAccordion">
-                                            <div class="accordion-body">
-                                                <ol class="my-2">
-                                                    <li class="py-2">
-                                                        <p class="mb-0">Enter your <b>M-PESA registered</b> phone number above.</p>
-                                                    </li>
-                                                    <li class="py-2">
-                                                        <p class="mb-0">Click on the <b>Pay</b> button in order to initiate the M-PESA payment.</p>
-                                                    </li>
-                                                    <li class="py-2">
-                                                        <p class="mb-0">Check your mobile phone for a prompt asking to enter M-PESA pin.</p>
-                                                    </li>
-                                                    <li class="py-2">
-                                                        <p class="mb-0">Enter your <b>M-PESA PIN</b> The amount specified on the
-                                                            notification will be deducted from your M-PESA account when you press send.</p>
-                                                    </li>
-                                                    <li class="py-2">
-                                                        <p class="mb-0">After receiving the M-PESA payment confirmation message please click on the <b>Complete payment</b> button below to complete the order and confirm the payment made.</p>
-                                                    </li>
-                                                </ol>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -445,11 +383,6 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
             const resultTo = currencyCode;
             var dollarCurrs = document.querySelectorAll(".dollar-curr");
 
-            // M-PESA support
-            if (currencyCode === 'KES') {
-                Id('m_pesa-option').style.display = 'block';
-            }
-
             Array.prototype.slice.call(dollarCurrs)
                 .forEach(function(dollarCurr) {
                     var str = dollarCurr.innerText;
@@ -500,7 +433,6 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
     };
 
     var paypal_cmpnt = Id("paypal_cmpnt");
-    var mpesa_cmpnt = Id("m-pesa_cmpnt");
 
     /**
      * Multistep form
@@ -522,9 +454,6 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
             Id("nextBtn").innerHTML = "Lets go!";
             Id("nextBtn").onclick = "location.href=base_url + '/dashboard'";
         } else if (n == (x.length - 2)) {
-            if (Id("m-pesa").checked == true) {
-                Id("m-pesa_number").focus();
-            }
             Id("nextBtn").innerHTML = "Complete payment";
         } else {
             Id("nextBtn").innerHTML = "Next" + ' <i class="bi bi-chevron-right fw-bold"></i>';
@@ -672,10 +601,9 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
     Array.prototype.slice.call(minputs)
         .forEach(function(input) {
             input.onclick = () => {
-                // Reset price in case changed by M-PESA value
-                userSelection.price = userSelection.total;
 
-                if (Id("m-pesa").checked == true || Id("paypal").checked == true || Id("card").checked == true) {
+
+                if (Id("paypal").checked == true || Id("card").checked == true) {
                     // if (Id("paypal").checked == true || Id("card").checked == true) {
                     btn.disabled = false;
                     /**
@@ -692,8 +620,6 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                         if (paypal_cmpnt.style.display == "none") {
                             paypal_cmpnt.style.display = "block";
                         }
-
-                        mpesa_cmpnt.style.display = "none";
 
                         //Helper function
                         function loadAsync(url, callback) {
@@ -777,104 +703,6 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                             }).render('#paypal-button-container-' + userSelection.plan_id); // Renders the PayPal button
                         });
 
-                    }
-                    /**
-                     * If user selects Mpesa
-                     */
-                    else if (Id("m-pesa").checked == true) {
-
-                        if (mpesa_cmpnt.style.display == "none") {
-                            mpesa_cmpnt.style.display = "block";
-                        }
-
-                        userSelection.mode = input.value;
-                        userSelection.csrf_token = csrf_token;
-                        userSelection.new_sub = true;
-
-                        paypal_cmpnt.style.display = "none";
-
-                        // convert amount to KES
-                        var searchValue = userSelection.price;
-                        var finalMpesaValue = document.querySelector(".finalMpesaValue");
-                        // var convertedCurrCompnt = Id("convertedCurrCompnt");
-
-
-                        fetch(`${currXChangeAPI}`)
-                            .then(currency => {
-                                return currency.json();
-                            }).then((displayResults));
-
-                        // display results after convertion
-                        function displayResults(currency) {
-                            const resultTo = 'KES';
-                            let fromRate = currency.rates[currResultFrom];
-                            let toRate = currency.rates[resultTo];
-                            finalMpesaValue.innerHTML = Math.round(((toRate / fromRate) * searchValue)).toLocaleString();
-                            // convertedCurrCompnt.style.display = "block";
-
-                            userSelection.price = Math.round(((toRate / fromRate) * searchValue));
-                        }
-
-
-                        /**
-                         * Initiate M-PESA payment
-                         */
-
-                        Id("m-pesa_number").oninput = () => {
-                            Id("mpesa_number_err").innerHTML = "";
-                        }
-
-
-                        // Initiate M-PESA processing on Enter key press or payment button click
-                        window.addEventListener("keydown", (evt) => {
-                            if (signinStatus == 1) {
-                                if (evt.keyCode == "13") {
-                                    evt.preventDefault(); //prevent changing focus to other elements
-                                    initMpesaProcessing();
-                                }
-                            }
-                        }, false);
-
-                        Id("init_mpesa_btn").onclick = () => {
-                            initMpesaProcessing();
-                        }
-
-                        function initMpesaProcessing() {
-
-                            // validate phone number
-                            var num_input = Id('m-pesa_number').value;
-                            var number = num_input.trim();
-                            var regexp = new RegExp(/^(?:254|\+254|0)?((?:(?:7(?:(?:[01249][0-9])|(?:5[789])|(?:6[89])))|(?:1(?:[1][0-5])))[0-9]{6})$/);
-                            if (regexp.test(number)) {
-                                $("#gen-spinner").show();
-                                Id('init_mpesa_btn').disabled = true;
-
-                                userSelection.msisdn = number;
-
-                                // send request
-                                $.ajax({
-                                    type: 'POST',
-                                    url: base_url + '/subscriptions/post/',
-                                    data: JSON.stringify(userSelection),
-                                    contentType: "application/json; charset=utf-8",
-                                    success: (data) => {
-                                        $("#gen-spinner").hide();
-                                        Id("nextBtn").disabled = false;
-                                        Id("prevBtn").disabled = true;
-                                        // Id("nav-buttons").style.display = "none";
-                                        Id("pay-later").innerHTML = "The Parrot's all yours <i class='bi bi-emoji-smile'></i>";
-                                        Id("paymentDetails").innerHTML = "<i class='bi bi-check-circle fw-bold fs-1 text-success'></i>                        <span class='fw-bold fs-2 fs-3 my-3 py-3 text-success'>Congratulations!</span>";
-                                    },
-                                    error: () => {
-                                        $("#gen-spinner").hide();
-                                        showToastMessage("Oops! Couldn't fetch templates", "primary");
-                                    }
-
-                                });
-                            } else {
-                                Id("mpesa_number_err").innerHTML = 'Phone number is invalid';
-                            }
-                        }
                     }
                 }
             }
