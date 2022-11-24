@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '70d99315e3c2792ba05fa294ac41b18fb7a900f1',
+    'reference' => '6003cd7b3ea51f75e738759f4906f574cd0bf7ba',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '70d99315e3c2792ba05fa294ac41b18fb7a900f1',
+      'reference' => '6003cd7b3ea51f75e738759f4906f574cd0bf7ba',
     ),
     'hieu-le/wordpress-xmlrpc-client' => 
     array (

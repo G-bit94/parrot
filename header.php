@@ -32,7 +32,7 @@ if ($user_id !== "" && $user_id !== null) {
     $signinStatus = 1;
 }
 
-$spinner = '<div class="spinner gap-2">
+$spinner = '<div class="spinner">
             <div class="bar1"></div>
             <div class="bar2"></div>
             <div class="bar3"></div>
@@ -48,6 +48,7 @@ $spinner = '<div class="spinner gap-2">
             </div>';
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,13 +65,14 @@ $spinner = '<div class="spinner gap-2">
     <title>ParrotAI</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<?php echo $base_url; ?>/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="<?php echo $base_url; ?>/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles -->
-    <link href="<?php echo $base_url; ?>/assets/css/custom-styles.css" rel="stylesheet">
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link href="<?php echo $base_url; ?>/assets/css/custom-styles.css" rel="stylesheet" type="text/css">
 
+    <!-- Icons -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <!-- Favicons -->
     <!-- <link rel="apple-touch-icon" href="/parrot/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
     <link rel="icon" href="/parrot/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -94,6 +96,7 @@ $spinner = '<div class="spinner gap-2">
 
         body {
             font-family: 'Mulish', sans-serif;
+            color: #000;
         }
 
         .bg-primary {
@@ -112,14 +115,8 @@ $spinner = '<div class="spinner gap-2">
             resize: none;
         }
 
-        /* writers block section */
-        #block {
-            position: relative;
-            padding: 15rem 0;
-            background-image: linear-gradient(rgba(9.4, 20.4, 32.9, 0.6) 20%, rgba(0, 0, 0, 0.6) 86%), url("<?php echo $base_url; ?>/assets/img/woman-stressed.jpg");
-            background-position: center;
-            background-size: cover;
-            color: white;
+        .rounded-5 {
+            border-radius: 0.8rem;
         }
 
         /* contact us section */
@@ -141,7 +138,7 @@ $spinner = '<div class="spinner gap-2">
                 background-repeat: no-repeat;
             }
 
-            /* Rest password page */
+            /* Reset password page */
             #secure-header-text {
                 display: none;
             }
@@ -151,7 +148,7 @@ $spinner = '<div class="spinner gap-2">
             }
         }
 
-        /* Rest password page */
+        /* Reset password page */
         .centred-bg-image {
             background-image: url('../assets/img/Privacy policy-rafiki.svg');
             background-repeat: no-repeat;
@@ -168,30 +165,28 @@ $spinner = '<div class="spinner gap-2">
 
         .button-fixed {
             bottom: 0;
-            position: fixed;
+            position: absolute;
             left: 0;
             border-radius: 4px;
         }
 
         div.spinner {
             position: relative;
-            width: 54px;
-            height: 54px;
+            width: 45px;
+            height: 45px;
             display: inline-block;
             /* margin-left: 50%;
             margin-right: 50%; */
             background: #fff;
-            padding: 10px;
-            border-radius: 10px;
         }
 
         div.spinner div {
-            width: 6%;
-            height: 16%;
+            width: 5%;
+            height: 15%;
             background: #000;
             position: absolute;
-            left: 45%;
-            top: 38%;
+            left: 50%;
+            top: 50%;
             opacity: 0;
             -webkit-border-radius: 15px;
             -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
@@ -270,8 +265,8 @@ $spinner = '<div class="spinner gap-2">
     </style>
 
     <!-- Main JS Files -->
-    <script src="<?php echo $base_url; ?>/assets/js/jquery-3.6.0.min.js"></script>
-    <script src="<?php echo $base_url; ?>/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo $base_url; ?>/assets/js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="<?php echo $base_url; ?>/assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 
     <!-- Global Scripts -->
     <script type="text/javascript">
@@ -320,6 +315,40 @@ $spinner = '<div class="spinner gap-2">
         // show prices in local currency
         const currXChangeAPI = "https://api.exchangerate-api.com/v4/latest/USD";
         const currResultFrom = "USD";
+
+        // cookie functions
+        function setCookie(cname, cvalue, exdays) {
+            if (cname == "cookie_consent") {
+                if (cvalue === "true") {
+                    $('#cookie-consent').fadeOut(500);
+                }
+            }
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;SameSite=None;Secure";
+        }
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        // current page/dir        
+        var lokshen = window.location.pathname;
+        var pathera = lokshen.substring(0, lokshen.lastIndexOf('/'));
+        var director = pathera.substring(pathera.lastIndexOf('/'), pathera.length);
+        var current_page = director.replace('/', '');
     </script>
 </head>
 
@@ -327,7 +356,7 @@ $spinner = '<div class="spinner gap-2">
 
     <header>
         <!-- Fixed navbar -->
-        <nav id="navbar" class="navbar navbar-expand-md fixed-top bg-primary">
+        <nav id="navbar" class="navbar navbar-expand-md fixed-top navbar-dark bg-primary shadow">
             <div class="container-fluid">
                 <a class="navbar-brand plain-link fw-bold mx-4 rounded-3 fs-6 d-flex justify-content-between" href="<?php echo $base_url; ?>">
                     <span class="bg-white rounded-start p-1 d-flex justify-content-end">
@@ -335,7 +364,7 @@ $spinner = '<div class="spinner gap-2">
                     </span>
                     <span class="bg-custom-primary rounded-end text-white px-2 pt-1">ParrotAI</span>
                 </a>
-                <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -349,9 +378,9 @@ $spinner = '<div class="spinner gap-2">
                         </a>
                     <?php } ?>
 
-                    <a href="<?php echo $base_url; ?>/dashboard" class="btn btn-light px-3 mx-2 mb-1 mb-lg-0 empty-link" onclick="handleStartBtn()" id="start_btn" style="display: none;">
+                    <a href="<?php echo $base_url; ?>/dashboard" class="btn bg-custom-primary text-light px-3 mx-2 mb-1 mb-lg-0 empty-link" onclick="handleStartBtn()" id="start_btn" style="display: none;">
                         <span class="d-flex align-items-center">
-                            <strong class="fw-bold">Get started</strong>
+                            <strong class="fw-bold"><i class="bi bi-stars text-warning"></i>Get started</strong>
                         </span>
                     </a>
 

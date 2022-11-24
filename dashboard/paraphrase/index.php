@@ -89,10 +89,21 @@ function generateText()
         return $text;
     }
 
-    $text = genOpenAI();
+    // TextCortex API
+    function genHemingwAI()
+    {
+        $api = 'hemingwai';
+        $key = 'gAAAAABjXQytyEPV48PJ-3lTSOqFaaLSBMthrH8fQEzW6Tgq-6uwjM0PoJAHBSUGddybaJx9Kzh3KtWskLo7_HSe7QYLS1TFN1QzSD5VwQZGRWRYzPY8QTwQH1OIPDGVWHiVXTnRAPj6';
+        $url = 'https://api.textcortex.com/hemingwai/generate_text_v3/';
+        $text = json_decode(curlRequest($url, $api, $key))->choices[0]->text;
+        return $text;
+    }
+
+    $text = genHemingwAI();
 
     return $text;
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

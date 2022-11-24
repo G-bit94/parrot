@@ -6,7 +6,27 @@ include "../header.php";
 if ($signinStatus == 1) {
 ?>
 
-    <div class="bg-light border-bottom mt-5 p-5">
+    <div class="border-bottom mt-5 p-5">
+        <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-white border rounded-5 shadow-sm" id="pillNav2" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill active" id="home-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">Home</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill" id="profile-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Profile</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill" id="contact-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Contact</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill active" id="home-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">Home</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill" id="profile-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Profile</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill" id="contact-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" tabindex="-1">Contact</button>
+            </li>
+        </ul>
         <div class="row p-1">
             <div class="col-md-2 m-1">
                 <div class="py-5 bg-white rounded-3">
@@ -15,16 +35,12 @@ if ($signinStatus == 1) {
 
                         <a class="nav-link text-dark fw-bold my-1" id="subscriptions-tab" data-bs-toggle="tab" href="#subscriptions" role="tab"><i class="bi bi-credit-card-fill me-2"></i> Subscriptions</a>
 
-                        <a class="nav-link text-dark fw-bold my-1" id="templates-tab" data-bs-toggle="tab" href="#templates" role="tab" onclick="fetchTemplates('list')"><i class="bi bi-list-stars me-2"></i> My templates</a>
+                        <a class="nav-link text-dark fw-bold my-1" id="templates-tab" data-bs-toggle="tab" href="#templates" role="tab" onclick="fetchSavedTemplates(current_page, 'list')"><i class="bi bi-list-stars me-2"></i> My templates</a>
 
                         <a class="nav-link text-dark fw-bold my-1" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab"><i class="bi bi-gear me-2"></i> Settings</a>
 
                         <a class="nav-link text-dark fw-bold my-1" id="accounts-tab" data-bs-toggle="tab" href="#accounts" role="tab">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wordpress me-2" viewBox="0 0 16 16">
-                                <path d="M12.633 7.653c0-.848-.305-1.435-.566-1.892l-.08-.13c-.317-.51-.594-.958-.594-1.48 0-.63.478-1.218 1.152-1.218.02 0 .039.002.058.003l.031.003A6.838 6.838 0 0 0 8 1.137 6.855 6.855 0 0 0 2.266 4.23c.16.005.313.009.442.009.717 0 1.828-.087 1.828-.087.37-.022.414.521.044.565 0 0-.371.044-.785.065l2.5 7.434 1.5-4.506-1.07-2.929c-.369-.022-.719-.065-.719-.065-.37-.022-.326-.588.043-.566 0 0 1.134.087 1.808.087.718 0 1.83-.087 1.83-.087.37-.022.413.522.043.566 0 0-.372.043-.785.065l2.48 7.377.684-2.287.054-.173c.27-.86.469-1.495.469-2.046zM1.137 8a6.864 6.864 0 0 0 3.868 6.176L1.73 5.206A6.837 6.837 0 0 0 1.137 8z" />
-                                <path d="M6.061 14.583 8.121 8.6l2.109 5.78c.014.033.03.064.049.094a6.854 6.854 0 0 1-4.218.109zm7.96-9.876c.03.219.047.453.047.706 0 .696-.13 1.479-.522 2.458l-2.096 6.06a6.86 6.86 0 0 0 2.572-9.224z" />
-                                <path fill-rule="evenodd" d="M0 8c0-4.411 3.589-8 8-8 4.41 0 8 3.589 8 8s-3.59 8-8 8c-4.411 0-8-3.589-8-8zm.367 0c0 4.209 3.424 7.633 7.633 7.633 4.208 0 7.632-3.424 7.632-7.633C15.632 3.79 12.208.367 8 .367 3.79.367.367 3.79.367 8z" />
-                            </svg>
+                            <i class="bi bi-wordpress"></i>
                             Linked accounts
                         </a>
 
@@ -34,6 +50,7 @@ if ($signinStatus == 1) {
                     </nav>
                 </div>
             </div>
+
             <div class="col-md-8 rounded-3">
                 <h3 id="title" class="ms-4 fw-bold">My Account</h3>
                 <div class="row py-2 rounded-3">
@@ -137,12 +154,37 @@ if ($signinStatus == 1) {
                             </div>
                         </div>
                         <div class="tab-pane fade" id="templates" role="tabpanel" aria-labelledby="templates-tab">
-                            <div class="card bg-primary">
-                                <div class="col-md-5 d-flex justify-content-center p-3">
-                                    <input class="form-control rounded-pill" id="temp_search_term" oninput="fetchTemplates('search')" type="search" placeholder="Search here..." autocomplete="off">
+                            <div class="card bg-white shadow-sm">
+                                <div class="col-md-8 d-flex justify-content-center p-3">
+                                    <input class="form-control rounded-pill me-2" id="temp_search_term" oninput="fetchSavedTemplates(current_page, 'search')" type="search" placeholder="Search here..." autocomplete="off">
+
+                                    <select class="form-select form-select-sm bg-outline-white rounded-pill ms-2 w-50" name="type">
+                                        <option disabled selected>
+                                            <?php if (empty($type)) : echo "Category";
+                                            else : echo "<strong>" . $type . "</strong>";
+                                            endif ?>
+                                        </option>
+                                        <?php
+                                        $sql = "SELECT * FROM content_types ORDER BY id ASC";
+                                        $rs = $mysqli->query($sql);
+                                        foreach ($rs as $row) {
+                                        ?>
+                                            <option value="<?php echo $row['type'] ?>>"><?php echo $row['full_name']; ?></option>
+                                        <?php } ?>
+                                    </select>
+
+                                    <div class="d-flex justify-content-center align-items-center ms-3">
+                                        <input type="hidden" name="filter" value="true">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <button class="btn btn-primary btn-sm rounded-pill mt-1">Filter</button>
+                                            <?php if (isset($_GET['filter'])) : ?>
+                                                <a href="<?php echo $base_url . '/account'; ?>" class="btn btn-sm btn-white shadow-sm m-1"><i class="bi bi-arrow-return-left fw-bold"></i></a>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card border-0 mb-4 rounded-3 shadow-sm my-3 p-3" id="saved_templates_list"></div>
+                            <div class="bg-white border-0 mb-4 rounded-3 shadow-sm p-3" id="saved_templates_list"></div>
                         </div>
                         <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
                             <div class="row row-cols-3 g-2 mt-4">
@@ -224,63 +266,6 @@ if ($signinStatus == 1) {
                 });
             });
         }
-
-        function fetchTemplates(type) {
-            var str = Id('temp_search_term').value;
-
-            post_data = {
-                "user": user,
-                "csrf_token": csrf_token
-            }
-
-            if (type === 'search') {
-                if (str === '') {
-                    post_data.fetch_temps = true;
-                } else {
-                    post_data.search_term = str;
-                }
-            } else if (type === 'list') {
-                post_data.fetch_temps = true;
-            }
-
-            $.ajax({
-                type: 'POST',
-                url: '../dashboard/saved_templates/',
-                data: JSON.stringify(post_data),
-                contentType: "application/json; charset=utf-8",
-                success: (data) => {
-                    $("#saved_templates_list").html(data);
-                },
-                error: () => {
-                    showToastMessage("Oops! Couldn't fetch templates", "primary");
-                }
-
-            });
-        }
-
-
-        // Search        
-        function searchTemplates() {
-            var str = document.getElementById("temp_search_term").value;
-            $.ajax({
-                type: 'POST',
-                url: '../dashboard/saved_templates/',
-                data: JSON.stringify({
-                    "user": user,
-                    "search_term": str,
-                    "csrf_token": csrf_token
-                }),
-                contentType: "application/json; charset=utf-8",
-                success: (data) => {
-                    $("#saved_templates_list").html(data);
-                },
-                error: () => {
-                    showToastMessage("Oops! Couldn't fetch templates", "primary");
-                }
-
-            });
-        }
-        // End search
     </script>
 
 <?php

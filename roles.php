@@ -28,7 +28,7 @@ $row_sub = $rs_sub->fetch_assoc();
 if ($row_sub['plan'] == 1) {
   $active_sub = 1; //deluxe
 } elseif ($row_sub['plan'] == 2) {
-  $active_sub = 2; //parakeet
+  $active_sub = 2; //parakeet --best
 }
 
 class AccessLevel

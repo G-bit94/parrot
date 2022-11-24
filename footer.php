@@ -1,5 +1,6 @@
 <!-- Toast -->
-<div class="position-fixed bottom-0 start-50 translate-middle-x p-3 rounded-3" style="z-index: 9999;">
+<!-- General -->
+<div class="position-fixed bottom-0 start-0 p-3 rounded-3" style="z-index: 9999;">
     <div id="liveToast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body" id="toastMessageCmpnt"></div>
@@ -8,8 +9,24 @@
     </div>
 </div>
 
+<!-- Delete confirmation toast -->
+<div class="position-fixed top-0 end-0 p-3 rounded-3" style="z-index: 9999;">
+    <div id="deleteConfirm" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+        <div class="toast-header bg-white text-dark">
+            Sure to permanently delete the template(s)?
+        </div>
+        <div class="toast-body bg-white">
+            <div id="delete_error"></div>
+            <div class="pt-2">
+                <button type="button" id="cancel_deletion" class="btn btn-white border btn-sm" data-bs-dismiss="toast">No, keep</button>
+                <button type="button" id="confirm_deletion" class="btn btn-danger btn-sm mx-2">Yes, delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Cookie consent -->
-<div class="row" id="cookie-consent" style="display: none;">
+<div class="row fixed-bottom m-1" id="cookie-consent" style="display: none; z-index: 9999;">
     <div class="col-md-4 col-sm-12 button-fixed">
         <div class="p-3 pb-4 bg-custom text-white">
             <div class="row">
@@ -26,49 +43,48 @@
 </main>
 
 <!-- Footer -->
-<div class="bg-light text-dark">
+<div class="bg-custom-dark">
     <div class="container">
         <footer class="py-5">
             <div class="row">
                 <div class="col-3">
-                    <h5 class="fw-bold footer-heading">Quick actions</h5>
+                    <h5 class="fw-bold footer-heading text-light">Quick actions</h5>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="<?php echo $base_url; ?>/dashboard" onclick="handleStartBtn()" class="nav-link p-0 text-dark empty-link">Get started</a></li>
-                        <li class="nav-item mb-2"><a href="<?php echo $base_url; ?>/pricing" class="nav-link p-0 text-dark"><strong>Go premium!</strong></a></li>
-                        <li class="nav-item mb-2"><a href="#services" class="nav-link p-0 text-dark">Become an affiliate</a></li>
-                        <li class="nav-item mb-2"><a href="javascript: void(0)" onclick="startChat()" class="nav-link p-0 text-dark">Help</a></li>
+                        <li class="nav-item mb-2"><a href="<?php echo $base_url; ?>/dashboard" onclick="handleStartBtn()" class="nav-link p-0 text-light empty-link">Get started</a></li>
+                        <li class="nav-item mb-2"><a href="<?php echo $base_url; ?>/pricing" class="nav-link p-0 text-light"><strong>Go pro!</strong></a></li>
+                        <li class="nav-item mb-2"><a href="#services" class="nav-link p-0 text-light">Become an affiliate</a></li>
+                        <li class="nav-item mb-2"><a href="javascript: void(0)" onclick="startChat()" class="nav-link p-0 text-light">Help</a></li>
                     </ul>
                 </div>
 
                 <div class="col-3">
-                    <h5 class="fw-bold footer-heading">Company</h5>
+                    <h5 class="fw-bold footer-heading text-light">Company</h5>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#about-us" class="nav-link p-0 text-dark">About us</a></li>
-                        <li class="nav-item mb-2"><a href="#contact-us" class="nav-link p-0 text-dark">Contact us</a></li>
-                        <li class="nav-item mb-2"><a href="<?php echo $base_url; ?>/blog" class="nav-link p-0 text-dark">News and insights</a></li>
-                        <li class="nav-item mb-2"><a href="#!press" class="nav-link p-0 text-dark">Media & Press</a></li>
+                        <li class="nav-item mb-2"><a href="#about-us" class="nav-link p-0 text-light">About us</a></li>
+                        <li class="nav-item mb-2"><a href="#contact-us" class="nav-link p-0 text-light">Contact us</a></li>
+                        <li class="nav-item mb-2"><a href="<?php echo $base_url; ?>/blog" class="nav-link p-0 text-light">News and insights</a></li>
+                        <li class="nav-item mb-2"><a href="#!press" class="nav-link p-0 text-light">Media & Press</a></li>
                     </ul>
                 </div>
 
                 <div class="col-5 offset-1">
                     <form>
-                        <h5 class="fw-bold footer-heading">Stay in the know</h5>
-                        <p>Monthly digest of whats new and exciting from us.</p>
+                        <h5 class="fw-bold footer-heading text-light">Stay in the know</h5>
+                        <p class="text-light">Monthly digest of whats new and exciting from us.</p>
                         <div class="d-flex w-100 gap-2">
-                            <label class="text-muted" class="text-muted" for="newsletter1" class="visually-hidden">Email address</label>
                             <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                            <button class="btn btn-sm border-white btn-primary" type="button">Notify&nbsp;me</button>
+                            <button class="btn btn-sm btn-primary" type="button">Notify&nbsp;me</button>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="d-flex justify-content-between pt-4 mt-4 border-top border-secondary">
-                <p>&copy; 2022 ParrotAI. All rights reserved.</p>
+                <p class="text-light">&copy; 2022 ParrotAI. All rights reserved.</p>
                 <ul class="list-unstyled d-flex">
-                    <li class="ms-3"><a class="text-dark" href="#"><i class="bi bi-twitter"></i></a></li>
-                    <li class="ms-3"><a class="text-dark" href="#"><i class="bi bi-instagram"></i></a></li>
-                    <li class="ms-3"><a class="text-dark" href="#"><i class="bi bi-facebook"></i></a></li>
-                    <li class="ms-3"><a class="text-dark" href="#"><i class="bi bi-linkedin"></i></a></li>
+                    <li class="ms-3"><a class="text-light" href="#"><i class="bi bi-twitter"></i></a></li>
+                    <li class="ms-3"><a class="text-light" href="#"><i class="bi bi-instagram"></i></a></li>
+                    <li class="ms-3"><a class="text-light" href="#"><i class="bi bi-facebook"></i></a></li>
+                    <li class="ms-3"><a class="text-light" href="#"><i class="bi bi-linkedin"></i></a></li>
                 </ul>
             </div>
         </footer>
@@ -76,10 +92,9 @@
 </div>
 <!-- Footer -->
 
-
 <!-- Signup modal -->
-<div class="modal modal-signin py-5 fade" tabindex="-1" role="dialog" id="signupModal">
-    <div class="modal-dialog" role="document">
+<div class="modal py-5 fade" tabindex="-1" role="dialog" id="signupModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-5 shadow">
             <div class="modal-header p-5 pb-4 border-bottom-0">
                 <h2 class="fw-bold mb-0">Sign up</h2>
@@ -141,8 +156,8 @@
 
 <!-- Signin modal -->
 
-<div class="modal modal-signin py-5 fade" tabindex="-1" role="dialog" id="signinModal">
-    <div class="modal-dialog" role="document">
+<div class="modal py-5 fade" tabindex="-1" role="dialog" id="signinModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-5 shadow">
             <div class="modal-header p-5 pb-4 border-bottom-0">
                 <h2 id="login-title" class="fw-bold mb-0">Sign in</h2>
@@ -190,8 +205,8 @@
 
 <!-- Reset Password - Email Entry Modal -->
 
-<div class="modal modal-signin py-5 fade" tabindex="-1" role="dialog" id="resetPwdEmailEntryModal">
-    <div class="modal-dialog" role="document">
+<div class="modal py-5 fade" tabindex="-1" role="dialog" id="resetPwdEmailEntryModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-5 shadow">
             <div class="modal-header p-5 pb-4 border-bottom-0">
                 <h3 id="reset-email-title" class="fw-bold mb-0">Reset password</h3>
@@ -226,10 +241,236 @@
     </div>
 </div>
 
-<!-- End Modal -->
+<!-- End Password Reset Modal -->
 
+<!-- Signin Notification -->
+<div class="modal py-5 fade" tabindex="-1" role="dialog" id="signinNotifModal">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content rounded-5 shadow">
+            <div class="modal-header border-bottom-0">
+                <h1 class="modal-title fw-bold fs-5">Whoops!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body py-0">
+                <p>It looks like ParrotAI is open in another tab or you've been signed out.</p>
+            </div>
+            <div class="modal-footer flex-column border-top-0">
+                <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2" onclick="handleStartBtn()">Continue here</button>
+                <button type="button" class="btn btn-lg btn-light w-100 mx-0" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Signin Notification Modal -->
 
-<!-- scripts -->
+<!-- Template details modal -->
+<div class="modal py-2 fade" tabindex="-1" role="dialog" id="templateDetailsModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content rounded-5 shadow">
+            <div class="modal-header px-5 py-2 border-bottom-0">
+                <h6 id="template_summary" class="fw-bold mb-0 ms-2 mt-5"></h6>
+                <button id="dismiss-signin" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-5 pt-0">
+                <div class="d-flex justify-content-between border-bottom p-2">
+                    <span id="template_uid" style="display: none;"></span>
+                    <div>
+                        <span class="badge bg-primary opacity-75" id="template_category"></span><br>
+                        <small id="date"></small><br>
+                        <small id="time"></small>
+                    </div>
+                    <span class="mt-1" id="controls">
+                        <!-- <img src="../assets/img/copy.png" alt="" onclick="copyItemToClipboard()" class="mx-2 mb-2" type="button" />                 -->
+                        <button class="btn btn-sm btn-light border mx-2" id="copy_template">
+                            Copy
+                        </button>
+                        <button class="btn btn-sm btn-light border mx-2" id="use_prompt">
+                            Add to Canvas
+                        </button>
+                        <button class="btn btn-sm btn-outline-teal border mx-2" onclick="popWpModal('saved', <?php echo $active_sub; ?>)">
+                            <img src="<?php echo $base_url; ?>/assets/img/wordpress.png" /> Post to blog
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger border mx-2" onclick='deleteSavedTemplates("single")'>
+                            <i type="button" class="bi bi-trash mx-2"></i> Delete
+                        </button>
+                    </span>
+                </div>
+                <div class="d-flex justify-content-center" style="white-space: pre-line;">
+                    <div id="template-details-spinner" style="display: none;" class="loader mx-3"><?php echo $spinner; ?></div>
+                </div>
+                <div id="template_details" style="height: 350px; white-space:pre-line;" class="mt-1 overflow-auto"></div>
+                <div class="border-bottom mt-1"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End template details modal -->
+
+<!-- Publish to WordPress modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="publishToWordPressModal" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content rounded-5 shadow">
+            <div class="modal-body p-4 pt-0">
+                <div class="d-flex justify-content-between align-items-center border-bottom p-2 mb-2">
+                    <div class="fw-bold fs-6"><img src="<?php echo $base_url; ?>/assets/img/wordpress.png" class="m-1" />Post to WordPress</div>
+                    <button class="btn btn-sm btn-dark" data-bs-dismiss="modal" aria-label="Close">
+                        Back
+                    </button>
+                </div>
+                <div class="d-flex justify-content-center my-2">
+                    <span id="wp-template-details-spinner" style="display: none;" class="loader mx-3"><?php echo $spinner; ?></span>
+                </div>
+                <?php if ($active_sub == 2) { ?>
+                    <!-- Post details -->
+                    <small class="fw-bold">Post details</small>
+                    <div class="row row-cols-3 mb-3">
+                        <div class="col form-floating">
+                            <input type="number" class="form-control border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="wp-cat" name="wp-cat" autocomplete="off" placeholder="" maxlength="50">
+                            <label class="text-muted" for="wp-cat">Category <sup><small>Category ID (Number)</small></sup></label>
+                        </div>
+                        <div class="col form-floating">
+                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="wp-title" name="wp-title" autocomplete="off" placeholder="" maxlength="50">
+                            <label class="text-muted" for="wp-title">Post title *</label>
+                        </div>
+                        <div class="col form-floating">
+                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="wp-tags" name="wp-tags" autocomplete="off" placeholder="" maxlength="50">
+                            <label class="text-muted" for="wp-tags">Tags <sup><small>Comma separated</small></sup></label>
+                        </div>
+                        <div class="col form-floating">
+                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="wp-excerpt" name="wp-excerpt" autocomplete="off" placeholder="" maxlength="100">
+                            <label class="text-muted" for="wp-excerpt">Excerpt<small class="m-1 text-muted"></small></label>
+                        </div>
+                    </div>
+                    <small class="fw-bold">Post body</small>
+                    <div class="my-2">
+                        <div id="wp-content"></div> <!-- content to be appended to form dynamically -->
+                    </div>
+                    <!-- WP credentials -->
+                    <div class="col-md my-2">
+                        <span class="fw-bold mt-2">Enter your WordPress credentials below
+                            <small tabindex="0" role="button" type="button" data-bs-toggle="popover" data-bs-html="true" title="" data-bs-content="                                                                
+                                <p>Your password is used to verify your WordPress identity. We do not store your credentials (unless you want us to by checking the box below) and we only need them to authenticate requests to your
+                                    WordPress account.</p>
+
+                                <p>We use the XML-RPC API thus ensure it is enabled on your WordPress site and server. XML-RPC is usually enabled by default. Not sure? Follow
+                                    <a href='https://codex.wordpress.org/XML-RPC_Support'
+                                target='_blank' class='link-dark fw-bold'>this guide</a> to enable it.</p>" data-bs-original-title="Please note">
+                                <span class="text-muted">Please note <i class="bi bi-info-circle-fill"></i></span>
+                            </small>
+                        </span>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-floating">
+                            <input type="url" class="form-control border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="wp-url" id="wp-url" placeholder="" autocomplete="off" maxlength="100" required>
+                            <label class="text-muted" for="wp-url"><i class="bi bi-globe"></i> Site URL<sup><small>eg https://example.com</small></sup> *</label>
+                        </div>
+                        <div class="col-md-4 form-floating">
+                            <input type="number" class="form-control border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="wp-author" id="wp-author" placeholder="" autocomplete="off" maxlength="50">
+                            <label class="text-muted" for="wp-author">Post Author <sup><small>Author ID (Number)</small></sup></label>
+                        </div>
+                        <div class="col-md-4 form-floating">
+                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="wp-username" id="wp-username" placeholder="" autocomplete="off" maxlength="50" required>
+                            <label class="text-muted" for="wp-username">Username/Email *</label>
+                        </div>
+                        <div class="col-md-4 form-floating">
+                            <input type="password" class="form-control pass-input border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="wp-pass" name="wp-pass" autocomplete="off" placeholder="" maxlength="50" required>
+                            <label class="text-muted" for="wp-pass">WordPress password *</label>
+                        </div>
+                        <div class="d-flex justify-content-start my-3">
+                            <div class="form-check mx-2">
+                                <input class="form-check-input pass-toggle" type="checkbox" id="showPassSwitch">
+                                <label class="form-check-label text-dark text-sm" for="flexCheckDefault">
+                                    Show password
+                                </label>
+                            </div>
+                            <div class="form-check mx-2">
+                                <input class="form-check-input" name="rem_wp" type="checkbox" id="remWPCred">
+                                <label class="form-check-label text-dark text-sm" for="flexCheckDefault">
+                                    Remember WordPress credentials
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="py-3">
+                        <div class="col form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="wp-status">
+                            <label class="form-check-label" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Check this box to directly publish the post to WordPress, otherwise it will be saved as a draft in your account" for="flexCheckChecked">
+                                Publish to WordPress publicly
+                            </label>
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            <button id="wp-submit-btn" class="w-100 my-2 btn rounded-4 btn-dark" onclick='publishToWordPress()'>
+                                <span id="wp-spinner" style="display: none;">
+                                    <span class="spinner-border spinner-border-sm text-white" role="status"></span>
+                                </span>
+                                <span id="wp-button-text">Post</span>
+                            </button>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End publish to WordPress modal -->
+
+<!-- Modal prompting user to sign up for pro account  -->
+<div class="modal py-2 fade" id="premiumSignup" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-5 bg-custom-primary text-light">
+            <div class="modal-header">
+                <h6 class="modal-title fs-5" id="modal-title">Become an Express member!</h6>
+                <button class="btn btn-sm btn-outline-light" data-bs-toggle="modal" data-bs-target="#templateDetailsModal">
+                    Back
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card mb-4 border-0 rounded-3 shadow-sm ">
+                    <div class="card-body bg-custom-primary">
+                        <div class="list-group border-0 p-1 bg-custom-primary">
+                            <div class="list-group-item border-0 d-flex gap-3 py-3 bg-custom-primary">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <div class="d-flex gap-2 w-100 justify-content-start">
+                                    <p class="mb-0 text-light">Save <strong>unlimited</strong> templates</p>
+                                </div>
+                            </div>
+                            <div class="list-group-item border-0 d-flex gap-3 py-3 bg-custom-primary">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <div class="d-flex gap-2 w-100 justify-content-start">
+                                    <div class="text- text-light">
+                                        <strong>Up to 2000 characters of generated text in a single run</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item border-0 d-flex gap-3 py-3 bg-custom-primary">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <div class="d-flex gap-2 w-100 justify-content-start">
+                                    <div>
+                                        <p class="mb-0 text-light">Publish directly to <strong>WordPress</strong>.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item border-0 d-flex gap-3 py-3 bg-custom-primary">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <div class="d-flex gap-2 w-100 justify-content-start">
+                                    <div>
+                                        <p class="mb-0 text-light">Enjoy audio playback</strong>.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="<?php echo $base_url; ?>/pricing" style="background-color: #6610f2;" class="w-100 btn btn-lg btn-primary sub-btn">Get started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+
+<!-- Custom JS -->
 <script src="<?php
                 if ($base_url == "" || empty($base_url)) {
                     $base_url = '/parrot';
@@ -237,7 +478,9 @@
                 } else {
                     echo $base_url;
                 }
-                ?>/assets/js/custom.js"></script>
+                ?>/assets/js/custom.js" type="text/javascript"></script>
+
+<!-- SWAL -->
 <script src="<?php if ($base_url == "" || empty($base_url)) {
                     $base_url = '/parrot';
                     echo $base_url;
@@ -245,9 +488,15 @@
                     echo $base_url;
                 } ?>/assets/js/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.js"></script>
+<!-- Intro JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.js" integrity="sha512-iC2jUAfCjQVVR2eGiPYjV2lb7ZIF0Tx3xPj/PdGZSJkSJVz5y+88tRwshNmrso1twhzhSQwBPXNLdAqUYmRAPg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script type="text/javascript">
+    /**
+     * Call IntroJS
+     */
+    // introJs().start();
+
     /**
      * Cookie consent
      */
@@ -257,33 +506,6 @@
             $('#cookie-consent').fadeIn(400);
         }
     });
-
-    function setCookie(cname, cvalue, exdays) {
-        if (cname = "cookie_consent") {
-            if (cvalue === "true") {
-                $('#cookie-consent').fadeOut(500);
-            }
-        }
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        let expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-
-    function getCookie(cname) {
-        let name = cname + "=";
-        let ca = document.cookie.split(';');
-        for (let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
 
     /**
      * Password Reset
@@ -469,55 +691,10 @@
         // $(id + "_show").html(value);
         var value = document.getElementById(id).value;
         document.getElementById(id + "_show").innerHTML = value;
+
+        // set cookie
+        setCookie("dash_" + id, value, 365);
     }
-
-
-    function completeDemoPrompt() {
-
-        var context = $("#prompt_text").val();
-
-        var outputarea = $("#outputarea");
-
-        if (typeof context !== 'undefined' && context !== null && context != "") {
-
-            // $("#outputarea").html("");
-            $("#gen-text-spinner").show();
-            $("#gen-text").html("Getting the juice...");
-
-            var SendInfo = {
-                "context": context,
-                "top_p": 0.9,
-                "temp": 0.75,
-                "response_length": 256,
-                "remove_input": true,
-                "demo": true,
-            };
-
-            $.ajax({
-                type: 'POST',
-                url: base_url + '/dashboard/prompt/',
-                data: JSON.stringify(SendInfo),
-                contentType: "application/json; charset=utf-8",
-                traditional: true,
-                success: function(data) {
-                    $("#gen-text-spinner").hide();
-                    $("#gen-text").html("Generate text");
-                    $("#prompt").html(context);
-                    outputarea.html(context + ' ' + data);
-                    // outputarea.html(data.signon);
-                },
-                error: function() {
-                    $("#gen-text-spinner").hide();
-                    $("#gen-text").html("Generate text");
-                    showToastMessage("Dang! Something went wrong.", "danger");
-                }
-
-            });
-        } else {
-            showToastMessage("Please enter some text into the prompt area", "primary");
-        }
-    }
-
 
     /**
      * Undo/Redo

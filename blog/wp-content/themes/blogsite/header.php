@@ -4,12 +4,18 @@ $base_url = '/parrot';
 ?>
 
 <?php
+/**
+ *  Smartslider plugin
+ */
+echo do_shortcode('[smartslider3 slider="1"]');
+
 //wp_body_open hook from WordPress 5.2
 if (function_exists('wp_body_open')) {
 	wp_body_open();
 } else {
 	do_action('wp_body_open');
 }
+
 ?>
 
 <div id="page" class="site">

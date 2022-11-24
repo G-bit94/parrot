@@ -2,6 +2,9 @@
 
 include "../header.php";
 
+$plan_1 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 1")->fetch_assoc());
+$plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetch_assoc());
+
 ?>
 
 <style>
@@ -51,16 +54,16 @@ include "../header.php";
 <!-- Pricing table -->
 <div class="row row-cols-1 row-cols-md-3 text-center container-fluid mt-3 mb-5 py-2">
     <div class="col">
-        <div class="col-md-11 mb-4 rounded-3">
+        <div class="col-md-11 mb-4 rounded-3 shadow-sm">
             <p class="bd-callout text-start">
-                <strong>We know using other AI tools costs you shedloads of money. <br><br>We're here to change that. Just select a plan and start using AI for your content needs affordably.</strong>
+                <span class="fw-bold">We know using other AI tools costs you shedloads of money. <br><br>We're here to change that. Just select a plan and start using AI for your content needs affordably.</span>
             </p>
         </div>
     </div>
 
     <!-- Deluxe -->
     <div class="col">
-        <div class="card col-md-11 mb-4 rounded-3 shadow-sm border-primary box">
+        <div class="card col-md-11 mb-4 rounded-3 shadow-lg border-primary border-5 box">
             <div class="ribbon ribbon-top-right">
                 <span>
                     <i class="bi bi-star-fill text-warning"></i>
@@ -68,23 +71,28 @@ include "../header.php";
                     <i class="bi bi-star-fill text-warning"></i>
                 </span>
             </div>
-            <div class="card-header bg-primary text-white rounded-top py-3 border-primary">
-                <h4 class="my-0 fw-bold" id="s_plan_1">Deluxe</h4>
+            <div class="card-header bg-primary text-white py-3 border-primary">
+                <h4 class="my-0 fw-bold" id="s_plan_1"><?php echo $plan_1['name']; ?></h4>
             </div>
             <div class="card-body">
                 <strong class="card-title pricing-card-title d-flex justify-content-center">
                     <span>
                         <span class="d-flex justify-content-between">
-                            <p class="text-decoration-line-through mx-1">$15/mo or $84/yr</p>
-                            <p class="badge bg-warning text-dark rounded-pill fs-6">Save 38%</p>
+                            <p class="text-decoration-line-through mx-1">$<?php echo $plan_1['monthly_marked_up']; ?>/mo or $<?php echo $plan_1['yearly_marked_up']; ?>/yr</p>
+                            <p class="badge bg-warning text-dark rounded-pill fs-6">
+                                Save
+                                <?php
+                                echo ceil(100 - $plan_1['monthly_price'] / $plan_1['monthly_marked_up'] * 100);
+                                ?>%
+                            </p>
                         </span>
                         <span class="fw-bolder fs-3">
-                            <span class="dollar-curr">$9</span><small class="text-muted fw-light">/mo</small> or
-                            <span class="dollar-curr">$52</span><small class="text-muted fw-light">/yr</small>
+                            <span class="dollar-curr">$<?php echo $plan_1['monthly_price']; ?></span><small class="text-muted fw-light">/mo</small> or
+                            <span class="dollar-curr">$<?php echo $plan_1['yearly_price']; ?></span><small class="text-muted fw-light">/yr</small>
                         </span>
                         <small class="text-muted local-curr-cmpnt" style="display: none;">
-                            <span class="local-curr" id="local-curr-9"></span><span class="text-muted fw-light">/mo</span> or
-                            <span class="local-curr" id="local-curr-52"></span><span class="text-muted fw-light">/yr</span>
+                            <span class="local-curr" id="local-curr-<?php echo $plan_1['monthly_price']; ?>"></span><span class="text-muted fw-light">/mo</span> or
+                            <span class="local-curr" id="local-curr-<?php echo $plan_1['yearly_price']; ?>"></span><span class="text-muted fw-light">/yr</span>
                         </small>
                     </span>
                 </strong>
@@ -122,7 +130,14 @@ include "../header.php";
                         </div>
                     </div>
                 </div>
-                <button id="sub_s_plan_1" onclick="subscribeToPlan(Id('s_plan_1').innerText, 15, 84, 38)" class="w-100 btn btn-lg btn-primary sub-btn">Get started</button>
+                <button id="sub_s_plan_1" onclick="subscribeToPlan(Id('s_plan_1').innerText, 
+                <?php
+                echo $plan_1['monthly_marked_up'] .
+                    ',' . $plan_1['yearly_marked_up'] . ','
+                    . (100 - $plan_1['monthly_price'] / $plan_1['monthly_marked_up'] * 100);
+                ?>)" class="w-100 btn btn-lg btn-primary sub-btn fw-bold">
+                    <span>Get started</span>
+                </button>
             </div>
         </div>
     </div>
@@ -130,24 +145,29 @@ include "../header.php";
 
     <!-- Parakeet -->
     <div class="col">
-        <div class="card col-md-11 mb-4 rounded-3 shadow-sm">
-            <div class="card-header bg-white py-3">
-                <h4 class="my-0 fw-bold" id="s_plan_2">Parakeet</h4>
+        <div class="card col-md-11 mb-4 border-dark rounded-3 shadow">
+            <div class="card-header border-dark border-5 bg-white py-3">
+                <h4 class="my-0 fw-bold" id="s_plan_2"><?php echo $plan_2['name']; ?></h4>
             </div>
             <div class="card-body">
                 <strong class="card-title pricing-card-title d-flex justify-content-center">
                     <span>
                         <span class="d-flex justify-content-between">
-                            <p class="text-decoration-line-through mx-1">$20/mo or $130/yr</p>
-                            <p class="badge bg-warning text-dark rounded-pill fs-6">Save 33%</p>
+                            <p class="text-decoration-line-through mx-1">$<?php echo $plan_2['monthly_marked_up']; ?>/mo or $<?php echo $plan_2['yearly_marked_up']; ?>/yr</p>
+                            <p class="badge bg-warning text-dark rounded-pill fs-6">
+                                Save
+                                <?php
+                                echo ceil(100 - $plan_2['monthly_price'] / $plan_2['monthly_marked_up'] * 100);
+                                ?>%
+                            </p>
                         </span>
                         <span class="fw-bolder fs-3">
-                            <span class="dollar-curr">$13</span><small class="text-muted fw-light">/mo</small> or
-                            <span class="dollar-curr">$87</span><small class="text-muted fw-light">/yr</small>
+                            <span class="dollar-curr">$<?php echo $plan_2['monthly_price']; ?></span><small class="text-muted fw-light">/mo</small> or
+                            <span class="dollar-curr">$<?php echo $plan_2['yearly_price']; ?></span><small class="text-muted fw-light">/yr</small>
                         </span>
                         <small class="text-muted local-curr-cmpnt" style="display: none;">
-                            <span class="local-curr" id="local-curr-13"></span><span class="text-muted fw-light">/mo</span> or
-                            <span class="local-curr" id="local-curr-87"></span><span class="text-muted fw-light">/yr</span>
+                            <span class="local-curr" id="local-curr-<?php echo $plan_2['monthly_price']; ?>"></span><span class="text-muted fw-light">/mo</span> or
+                            <span class="local-curr" id="local-curr-<?php echo $plan_2['yearly_price']; ?>"></span><span class="text-muted fw-light">/yr</span>
                         </small>
                     </span>
                 </strong>
@@ -201,45 +221,31 @@ include "../header.php";
                         </div>
                     </div>
                 </div>
-                <button id="sub_s_plan_2" onclick="subscribeToPlan(Id('s_plan_2').innerText, 20, 130, 33)" class="w-100 btn btn-lg btn-primary sub-btn">Get started</button>
+                <button id="sub_s_plan_2" onclick="subscribeToPlan(Id('s_plan_2').innerText, 
+                <?php
+                echo $plan_2['monthly_marked_up'] .
+                    ',' . $plan_2['yearly_marked_up'] . ','
+                    . (100 - $plan_2['monthly_price'] / $plan_2['monthly_marked_up'] * 100);
+                ?>)" class="w-100 btn btn-lg btn-primary sub-btn fw-bold">
+                    <span>Get started</span>
+                </button>
             </div>
         </div>
     </div>
-    <!-- End parakeet -->
+    <!-- End express -->
 </div>
 <!-- End pricing table -->
 
 <!-- Contactus -->
-<div class="px-4 text-center py-2" id="contactus">
-    <p class="fs-3 mb-5 fw-bold"><strong>Facing a problem? We'd love to help. Seriously</strong></p>
-    <div class="row row-cols-1 row-cols-md-3 my-5">
-        <div class="col my-5">
-            <div class="col mr-auto text-center">
-                <p class="fs-5">Talk to one of our customer support representatives right away.</p>
-                <button class="btn btn-lg btn-dark my-5" onclick="startChat()"><i class="bi bi-chat-left"></i> &nbsp;Start chat</button>
-            </div>
-        </div>
-        <div class="col my-5">
-            <p class="fs-2">OR</p>
-        </div>
-        <div class="col my-5">
-            <p class="fs-5">Drop us a line and we'll talk — or get back to you as soon as we can.</p>
-            <div class="col mr-auto text-center">
-                <a class="btn btn-outline-dark my-5" href="mailto:info.parrot-ai@gmail.com">
-                    <i class="bi bi-envelope-open"></i>&nbsp;info.parrot-ai@gmail.com
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+<?php include '../contact/index.php'; ?>
 <!-- End contactus -->
 
 <!-- Subscribe modal -->
 <div class="modal modal-signin fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" id="subsciptionModal">
     <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+        <div class="modal-content rounded-5">
             <div class="row">
-                <div class="col-md-4 bg-primary bg-gradient p-2 rounded-start">
+                <div class="col-md-4 bg-primary bg-gradient p-2" style="border-radius: 0.8rem 0rem 0rem 0.8rem;">
                     <h4 class="modal-title fw-bold mx-2 mt-2 text-light"><strong>Checkout</strong></h4>
                     <div class="mt-5 pt-3 mx-2 pb-2" id="paymentDetails">
                         <ul class="mt-4 list-group mb-3 border-0">
@@ -378,17 +384,19 @@ include "../header.php";
                             </div>
                             <a class="btn btn-primary" href="<?php echo $base_url; ?>/dashboard">Lets go!</a>
                         </div>
-                        <div class="border-top mt-5 mb-3 pt-2" style="overflow:auto;">
-                            <div class="m-2" style="float:left;">
-                                <button type="button" data-bs-dismiss="modal" id="pay-later" class="btn btn-sm btn-warning text-dark">Pay later</button>
-                            </div>
-                            <div class="m-2" id="nav-buttons" style="float:right;">
-                                <button type="button" class="btn btn-outline-primary" id="prevBtn" onclick="nextPrev(-1)"><i class="bi bi-chevron-left fw-bold"></i> Back</button>
-                                <button type="button" class="btn btn-primary text-white" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                        <div class="mt-4 pt-2" style="overflow:auto;">
+                            <div class="mt-4 pt-3 border-top">
+                                <div class="m-2" style="float:left;">
+                                    <button type="button" data-bs-dismiss="modal" id="pay-later" class="btn btn-sm btn-warning text-dark">Pay later</button>
+                                </div>
+                                <div class="m-2" id="nav-buttons" style="float:right;">
+                                    <button type="button" class="btn btn-outline-primary" id="prevBtn" onclick="nextPrev(-1)"><i class="bi bi-chevron-left fw-bold"></i> Back</button>
+                                    <button type="button" class="btn btn-primary text-white" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                                </div>
                             </div>
                         </div>
                         <!-- Circles which indicate the steps -->
-                        <div style="text-align:center;margin-top:50px;">
+                        <div style="text-align:center; margin-top:50px;">
                             <span class="step"></span>
                             <span class="step"></span>
                             <span class="step"></span>
@@ -409,6 +417,7 @@ include "../header.php";
 
     //  Disable active plan's button
     var btns = document.querySelectorAll(".sub-btn");
+    var geoData = {};
     Array.prototype.slice.call(btns)
         .forEach(function(button) {
             var btn_id = button.id;
@@ -430,6 +439,7 @@ include "../header.php";
         })
         .then(function(geodata) {
             currencyCode = geodata.currency.code;
+            geoData.currencySymbol = geodata.currency.symbol
             return currencyCode;
         }).then(function(currencyCode) {
             const resultTo = currencyCode;
@@ -459,8 +469,7 @@ include "../header.php";
                     function displayResults(currency) {
                         let fromRate = currency.rates[currResultFrom];
                         let toRate = currency.rates[resultTo];
-                        resultToStr = resultTo + " ";
-                        finalLocalValue.innerHTML = resultToStr + Math.round(((toRate / fromRate) * searchValue)).toLocaleString();
+                        finalLocalValue.innerHTML = geoData.currencySymbol + Math.round(((toRate / fromRate) * searchValue)).toLocaleString();
                         // convertedCurrCompnt.style.display = "block";
 
                         var cmpnts = document.querySelectorAll(".local-curr-cmpnt");
@@ -482,8 +491,8 @@ include "../header.php";
     var planIds = {
         deluxe_monthly: "P-0UM585238E324170VMJDPEYQ",
         deluxe_yearly: "P-95T66635HR378740DMJDPKDA",
-        parakeet_monthly: "P-56386469G8147363UMJDPIOQ",
-        parakeet_yearly: "P-4W1495421M579311DMJDPMUQ"
+        express_monthly: "P-56386469G8147363UMJDPIOQ",
+        express_yearly: "P-4W1495421M579311DMJDPMUQ"
     };
 
     var userSelection = {
@@ -594,6 +603,13 @@ include "../header.php";
             monthlyPrice = monthly;
             yearlyPrice = yearly;
             offer = discount;
+
+            // select yearly plan initially by simulating click
+
+            var p = document.querySelector('input[name="period"]:checked');
+            if (p == null) { //none selected
+                document.getElementsByClassName("period")[0].click();
+            }
         }
         selectedPlan = plan;
     }
@@ -610,7 +626,7 @@ include "../header.php";
             input.onclick = () => {
                 btn.disabled = false;
 
-                Id("offer").innerText = offer + "%";
+                Id("offer").innerText = Math.round(offer) + "%";
 
                 var duration = input.value;
 
