@@ -112,13 +112,13 @@ include "header.php";
 
 <div class="masthead my-0">
     <div class="container px-4 py-5">
-        <h2 class="pb-2 border-bottom fw-bold">Scale your content creation</h2>
+        <h2 class="pb-2 border-bottom fw-bold">Scale your content creation like a pro</h2>
 
         <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
             <div class="d-flex flex-column align-items-start gap-2">
                 <h3 class="fw-bold">A plethora of use-cases.</h3>
                 <p class="text-muted">From magical converting content for your blog, to user bios and product descriptions, anything goes.
-                    ParrotAI generates text from scratch. It’s like having an AI assistant that can write for you in any style or format you want.
+                    ParrotAI generates text from scratch. It is an AI assistant that can write for you in any style or format you want.
                     Your imagination is literally the limit here!</p>
                 <button onclick="handleStartBtn()" class="btn btn-primary btn-lg fw-bold shadow">Start now</button>
             </div>
@@ -129,7 +129,7 @@ include "header.php";
                             <i class="bi bi-google fs-3"></i>
                         </div>
                         <h4 class="fw-bold fs-5 my-1">SEO-optimized posts</h4>
-                        <p class="text-muted">ParrotAI is trained on human-written SEO content so you can create optimized content in minutes!</p>
+                        <p class="text-muted">ParrotAI is trained on human-written SEO content so you can <strong>create search engine optimized content</strong> in minutes!</p>
                     </div>
                 </div>
 
@@ -139,7 +139,7 @@ include "header.php";
                             <i class="bi bi-badge-ad fs-3"></i>
                         </div>
                         <h4 class="fw-bold fs-5 my-1">Converting ad copy</h4>
-                        <p class="text-muted">Craft engaging ad copy that's bound to spur the desired actions from your target users and increase conversion rates.</p>
+                        <p class="text-muted">Craft converting ad copy that's spurs the desired actions from your target audience and <strong>increase ad conversion rates</strong>.</p>
                     </div>
                 </div>
 
@@ -149,7 +149,7 @@ include "header.php";
                             <i class="bi bi-instagram fs-3"></i>
                         </div>
                         <h4 class="fw-bold fs-5 my-1">Social media posts</h4>
-                        <p class="text-muted">Generate engaging social media posts for your brand campaigns on any platform with unparalleled ease.</p>
+                        <p class="text-muted"><strong>Generate engaging social media posts</strong> for your brand campaigns on any platform with unparalleled ease.</p>
                     </div>
                 </div>
 
@@ -159,7 +159,7 @@ include "header.php";
                             <i class="bi bi-pen fs-3"></i>
                         </div>
                         <h4 class="fw-bold fs-5 my-1">Anything, everything</h4>
-                        <p class="text-muted">From impressive essays and works of fiction to product descriptions and emails, your creativity is the limit.</p>
+                        <p class="text-muted">From <strong>refactoring existing content</strong> to crafting impressive articles and essays from scratch, it's entirely up to you!</p>
                     </div>
                 </div>
             </div>
@@ -167,8 +167,24 @@ include "header.php";
     </div>
 </div>
 
+<div class="container col-xxl-8 mt-3 px-1 py-5">
+    <div class="row align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-7 overflow-hidden border shadow-lg rounded-5">
+            <img src="assets/img/dashboard.png" class="d-block mx-lg-auto img-fluid rounded-lg-5" alt="" width="700" loading="lazy">
+        </div>
+        <div class="col-lg-5">
+            <div class="ms-5">
+                <h4 class="lh-1 mb-4"><strong>We know creating quality content is time-consuming, but it doesn't have to be.</strong></h4>
+                <p class="lead mb-4">Our AI allows you to write unique, naturally flowing content with just the click of a button, drastically cutting down writing time. That's why writers love it.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <button type="button" class="btn btn-primary px-4 gap-3" onclick="location.href='#reviews'"><i class="bi bi-star-fill"></i> See why agencies and freelancers love it</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<div class="px-4 py-5 my-5 text-center bg-white">
+<!-- <div class="px-4 py-5 my-5 text-center bg-white">
     <h3 class="fw-bold fs-3 my-5">We know creating quality content is time-consuming, but it doesn't have to be.</h3>
     <div class="col-lg-6 mx-auto my-5">
         <p class="lead my-5">Our AI allows you to write unique, naturally flowing content with just the click of a button, drastically cutting down writing time. That's why writers love it.</p>
@@ -176,7 +192,7 @@ include "header.php";
             <button type="button" class="btn btn-primary btn-lg px-4 gap-3" onclick="location.href='#reviews'"><i class="bi bi-star-fill"></i> See why agencies and freelancers love it</button>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="masthead">
     <div class="container col-xxl-8 mt-3 px-1 py-5">
@@ -316,18 +332,18 @@ include "header.php";
             </div>
         </div>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <a type="button" class="btn btn-primary btn-lg px-4 p-3 fw-bold empty-link" href="<?php echo $base_url; ?>/dashboard" onclick="handleStartBtn()">Find out yourself<i class="bi bi-arrow-right"></i></a>
+            <a type="button" class="btn btn-primary btn-lg rounded-5 px-4 fw-bold empty-link" href="<?php echo $base_url; ?>/dashboard" onclick="handleStartBtn()">Find out yourself <i class="bi bi-arrow-right"></i></a>
         </div>
     </div>
 </div>
 
-<div class="masthead mt-5">
-    <div class="px-4 py-5 text-center">
+<div class="masthead mt-5 py-5">
+    <div class="px-4 mt-5 py-5 text-center">
         <h4><strong class="display-5 fw-bolder my-5">ParrotAI isn't just your writing assistant. It is your wingman...</strong></h4>
         <div class="col-lg-6 mx-auto my-5">
             <p class="lead mb-4 mt-5">A wingman who's ready to take on that writing challenge with you.</p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">
-                <a type="button" class="btn btn-primary btn-lg px-4 p-3 fw-bold empty-link" href="<?php echo $base_url; ?>/dashboard" onclick="popSignupModal()">Try ParrotAI now <i class="bi bi-arrow-right"></i></a>
+                <a type="button" class="btn btn-dark btn-lg rounded-5 px-4 p-3 fw-bold empty-link" href="<?php echo $base_url; ?>/dashboard" onclick="popSignupModal()">Try ParrotAI now <i class="bi bi-arrow-right"></i></a>
             </div>
         </div>
     </div>

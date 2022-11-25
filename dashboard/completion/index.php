@@ -74,7 +74,7 @@ function generateText()
             curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization: Bearer ' . $key));
 
             // Remove unnecessary parameters in Goose API request
-            $rm_array = array('rem_input');
+            $rm_array = array('rem_input', 'stop', 'command');
             $_POST['model'] = 'text-davinci-002';
         } elseif ($api === 'HemingwAI') {
             curl_setopt($curl, CURLOPT_HTTPHEADER, array(
@@ -189,6 +189,7 @@ function generateText()
         $api = 'OpenAI';
         $key = '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';
         $url = 'https://api.openai.com/v1/completions';
+        // $text = json_decode(curlRequest($url, $api, $key));
         $text = json_decode(curlRequest($url, $api, $key))->choices[0]->text;
         return $text;
     }
@@ -202,7 +203,7 @@ function generateText()
         return $text;
     }
 
-    $text = genGoose();
+    $text = genOpenAI();
 
     return $text;
 }

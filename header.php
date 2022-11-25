@@ -349,6 +349,86 @@ $spinner = '<div class="spinner">
         var pathera = lokshen.substring(0, lokshen.lastIndexOf('/'));
         var director = pathera.substring(pathera.lastIndexOf('/'), pathera.length);
         var current_page = director.replace('/', '');
+
+        // url params
+
+        function getAllUrlParamsFun(url) {
+            // get query string from url (optional) or window
+            var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+            // we'll store the parameters here
+            var obj = {};
+            // if query string exists
+            if (queryString) {
+                // stuff after # is not part of query string, so get rid of it
+                queryString = queryString.split('#')[0];
+                // split our query string into its component parts
+                var arr = queryString.split('&');
+                for (var i = 0; i < arr.length; i++) {
+                    // separate the keys and the values
+                    var a = arr[i].split('=');
+                    // set parameter name and value (use 'true' if empty)
+                    var paramName = a[0];
+                    var paramValue = typeof(a[1]) === 'undefined' ? true : a[1];
+                    // (optional) keep case consistent
+                    paramName = paramName.toLowerCase();
+                    if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
+                    // if the paramName ends with square brackets, e.g. colors[] or colors[2]
+                    if (paramName.match(/\[(\d+)?\]$/)) {
+                        // create key if it doesn't exist
+                        var key = paramName.replace(/\[(\d+)?\]/, '');
+                        if (!obj[key]) obj[key] = [];
+                        // if it's an indexed array e.g. colors[2]
+                        if (paramName.match(/\[\d+\]$/)) {
+                            // get the index value and add the entry at the appropriate position
+                            var index = /\[(\d+)\]/.exec(paramName)[1];
+                            obj[key][index] = paramValue;
+                        } else {
+                            // otherwise add the value to the end of the array
+                            obj[key].push(paramValue);
+                        }
+                    } else {
+                        // we're dealing with a string
+                        if (!obj[paramName]) {
+                            // if it doesn't exist, create property
+                            obj[paramName] = paramValue;
+                        } else if (obj[paramName] && typeof obj[paramName] === 'string') {
+                            // if property does exist and it's a string, convert it to an array
+                            obj[paramName] = [obj[paramName]];
+                            obj[paramName].push(paramValue);
+                        } else {
+                            // otherwise add the property
+                            obj[paramName].push(paramValue);
+                        }
+                    }
+                }
+            }
+            return obj;
+        }
+
+        /* get data object */
+        var getAllUrlParams = getAllUrlParamsFun();
+        /* Check if the url with utm_parameters */
+        let isEmpty = (Object.keys(getAllUrlParams).length === 0)
+        if (!isEmpty) {
+            /* utm data */
+            let utm_source_value = getAllUrlParams.utm_source;
+            let utm_medium_value = getAllUrlParams.utm_medium;
+            let utm_campaign_value = getAllUrlParams.utm_campaign;
+            /* webflow form object (You should add embed code under webflow designer */
+            var utm_source_form_elem = document.getElementById("utm_source");
+            var utm_medium_form_elem = document.getElementById("utm_medium")
+            var utm_campaign_form_elem = document.getElementById("utm_campaign");
+            /* Check if elem exsist to avoid console errors  */
+            if (utm_source_form_elem) {
+                utm_source_form_elem.value = utm_source_value;
+            }
+            if (utm_medium_form_elem) {
+                utm_medium_form_elem.value = utm_medium_value;
+            }
+            if (utm_campaign_form_elem) {
+                utm_campaign_form_elem.value = utm_campaign_value;
+            }
+        }
     </script>
 </head>
 
