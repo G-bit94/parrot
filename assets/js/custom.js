@@ -56,7 +56,7 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 /* Dynamic page title */
 function changePageTitle() {
   newPageTitle = Id("title").textContent;
-  document.title = "ParrotAI | " + newPageTitle;
+  document.title = `${site_name} | ${newPageTitle}`;
 }
 
 /* Onload */
@@ -66,21 +66,21 @@ window.onload = function () {
 
 // Forms
 function clearInputs() {
-  var inputsCollection = document.getElementsByClassName("form-inputs");
+  var inputsCollection = Class("form-inputs");
   for (i = 0; i < inputsCollection.length; i++) {
     inputsCollection[i].value = "";
   }
 }
 
 function clearSignupInputs() {
-  var inputsCollection = document.getElementsByClassName("signup-form-inputs");
+  var inputsCollection = Class("signup-form-inputs");
   for (i = 0; i < inputsCollection.length; i++) {
     inputsCollection[i].value = "";
   }
 }
 
 function clearGenericFormInputs() {
-  var inputsCollection = document.getElementsByClassName("generic-form-inputs");
+  var inputsCollection = Class("generic-form-inputs");
   for (i = 0; i < inputsCollection.length; i++) {
     inputsCollection[i].value = "";
   }
@@ -107,56 +107,62 @@ Array.prototype.slice.call(formCollection).forEach(function (form) {
 });
 // end form validation
 
+
 function signinUser() {
   $("#signinForm").submit(function (e) {
-    e.preventDefault(); // avoid to execute the actual submit of the form when submit button is clicked.
-    e.stopImmediatePropagation(); // prevent multiple submission of the form.
+    e.preventDefault();
+    e.stopImmediatePropagation();
 
-    var form = $(this);
-    var url = form.attr("action");
+    const form = $(this);
+    const url = form.attr("action");
 
     $.ajax({
       type: "POST",
-      url: base_url + "/signin/",
-      data: form.serialize(), // serializes the form's elements.
-      success: function (data) {
-        if (data === "SIGNIN_SUCCESS") {
-          clearInputs();
-          $("#signinModal").modal("hide");
+      url: `${base_url}/signin/`,
+      data: form.serialize(),
+      success: (data) => {
+        switch (data) {
+          case "SIGNIN_SUCCESS":
+            clearInputs();
+            $("#signinModal").modal("hide");
 
-          // $("#signinStatus").val(1);
-          signinStatus = 1;
-          // $('#profile_cmpnt').show();
+            signinStatus = 1;
+            setTimeout(() => {
+              window.location.href = `${base_url}/dashboard`;
+            }, 1200);
 
-          setTimeout(function () {
-            window.location.href = base_url + "/dashboard";
-          }, 1200);
+            Swal.fire({
+              title: '<strong class="text-dark">Success</strong>',
+              icon: "success",
+              toast: true,
+              position: "top-end",
+              html: '<p class="text-dark">You are now signed in</p>',
+              showConfirmButton: false,
+            });
+            break;
 
-          Swal.fire({
-            title: '<strong class="text-dark">Success</strong>',
-            icon: "success",
-            toast: true,
-            position: "top-end",
-            html: '<p class="text-dark">You are now signed in</p>',
-            showConfirmButton: false,
-            // confirmButtonText: '<span data-bs-toggle="modal" data-bs-target="#newRegistrationModal">New registration <i class="bi bi-arrow-right"></i></span>',
-            // showCancelButton: true,
-            // cancelButtonText: 'Close'
-          });
-        } else if (data === "INVALID_PASSWORD") {
-          $("#password_err").show();
-          $("#password_err").html("Your password is incorrect");
-        } else if (data === "EMAIL_BLANK") {
-          $("#email_err").show();
-          $("#email_err").html("Please enter your email");
-        } else if (data === "EMAIL_INEXISTENT") {
-          $("#email_err").show();
-          $("#email_err").html(
-            "We couldn't find any account connected to that email"
-          );
+          case "INVALID_PASSWORD":
+            $("#password_err").show();
+            $("#password_err").html("Your password is incorrect");
+            break;
+
+          case "EMAIL_BLANK":
+            $("#email_err").show();
+            $("#email_err").html("Please enter your email");
+            break;
+
+          case "EMAIL_INEXISTENT":
+            $("#email_err").show();
+            $("#email_err").html(
+              "We couldn't find any account connected to that email"
+            );
+            break;
+
+          default:
+            break;
         }
       },
-      error: function () {
+      error: () => {
         Swal.fire({
           title: '<strong class="text-dark">Oops!</strong>',
           icon: "error",
@@ -172,30 +178,25 @@ function signinUser() {
 
 function signupUser() {
   $("#signupForm").submit(function (e) {
-    e.preventDefault(); // avoid to execute the actual submit of the form when submit button is clicked.
-    e.stopImmediatePropagation(); // prevent multiple submission of the form.
+    e.preventDefault();
+    e.stopImmediatePropagation();
 
     $("#signup-spinner").show();
     $("#signup-button-text").html("");
 
     fetch(geoLocAPI)
-      .then((response) => {
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((geodata) => {
-        // user info
-        const ip = geodata.ip;
-        const useragent =
-          geodata.user_agent.name + " " + geodata.user_agent.version;
-        const device = geodata.user_agent.device.name;
-        const platform =
-          geodata.user_agent.os.name + " " + geodata.user_agent.os.version;
-        const country = geodata.location.country.name;
-        const city = geodata.location.city;
-        const currencyCode = geodata.currency.code;
+        const { ip, user_agent, location, currency } = geodata;
+        const useragent = `${user_agent.name} ${user_agent.version}`;
+        const device = user_agent.device.name;
+        const platform = `${user_agent.os.name} ${user_agent.os.version}`;
+        const country = location.country.name;
+        const city = location.city;
+        const currencyCode = currency.code;
 
-        var form = $(this);
-        var formData = form.serializeArray();
+        const form = $(this);
+        const formData = form.serializeArray();
         formData.push({ name: "browser", value: useragent });
         formData.push({ name: "device", value: device });
         formData.push({ name: "platform", value: platform });
@@ -203,93 +204,101 @@ function signupUser() {
         formData.push({ name: "country", value: country });
         formData.push({ name: "city", value: city });
 
-        function hideSpinner() {
+        const hideSpinner = () => {
           $("#signup-spinner").hide();
           $("#signup-button-text").html("Sign up");
-        }
+        };
 
         $.ajax({
           type: "POST",
-          url: base_url + "/signup/",
+          url: `${base_url}/signup/`,
           data: formData,
-          success: function (json) {
-            var data = JSON.parse(json);
-            if (data.status == "SIGNUP_SUCCESS") {
-              // MailChimp
-              var sendInfo = {
-                u: "a3bd3895f8bbb8916d7064682",
-                id: "0eacf4ab73",
-                MERGE1: Id("usernamesignup").value,
-                MERGE2: Id("lname").value,
-                MERGE0: Id("emailsignup").value,
-              };
+          success: (json) => {
+            const data = JSON.parse(json);
+            switch (data.status) {
+              case "SIGNUP_SUCCESS":
+                const sendInfo = {
+                  u: "a3bd3895f8bbb8916d7064682",
+                  id: "0eacf4ab73",
+                  MERGE1: Id("usernamesignup").value,
+                  MERGE2: Id("lname").value,
+                  MERGE0: Id("emailsignup").value,
+                };
 
-              $.ajax({
-                type: "POST",
-                url: "https://gmail.us21.list-manage.com/subscribe/post",
-                data: sendInfo,
-                dataType: "jsonp",
-                contentType: "application/json; charset=utf-8",
-                success: function (resp) {
-                  var resp_data = JSON.parse(resp);
-                  showToastMessage(
-                    "MailChimp request result: " + resp_data.result,
-                    "danger"
-                  );
-                },
-              });
+                $.ajax({
+                  type: "POST",
+                  url: "https://gmail.us21.list-manage.com/subscribe/post",
+                  data: sendInfo,
+                  dataType: "jsonp",
+                  contentType: "application/json; charset=utf-8",
+                  success: (resp) => {
+                    const resp_data = JSON.parse(resp);
+                    showToastMessage(
+                      "MailChimp request result: " + resp_data.result,
+                      "danger"
+                    );
+                  },
+                });
 
-              if (getCredentials()) {
-                clearSignupInputs();
-              }
+                if (getCredentials()) {
+                  clearSignupInputs();
+                }
 
-              $("#signupModal").modal("hide");
-              Swal.fire({
-                title: '<strong class="text-dark">Success</strong>',
-                icon: "success",
-                toast: true,
-                position: "top-end",
-                html: '<p class="text-dark">Your account was created successfully</p>',
-                confirmButtonText:
-                  '<span onclick="popSigninModal();">Proceed to sign in <i class="bi bi-arrow-right"></i></span>',
-              });
-            } else if (data.status == "USERNAME_BLANK") {
-              $("#username_err").show();
-              $("#username_err").html("Your first name is required");
-              hideSpinner();
-            } else if (data.status == "EMAIL_BLANK") {
-              $("#emailexists_err").show();
-              $("#emailexists_err").html("Your email address is required");
-              hideSpinner();
-            } else if (data.status == "EMAIL_EXISTS") {
-              $("#emailexists_err").show();
-              $("#emailexists_err").html("That email is already taken");
-              hideSpinner();
-            } else if (data.status == "TEMP_EMAIL") {
-              $("#emailexists_err").show();
-              $("#emailexists_err").html("Please use a valid email");
-              hideSpinner();
-            } else if (data.status == "EMPTY_PASS") {
-              $("#signup_pwd_err").show();
-              $("#signup_pwd_err").html("Password is required");
-              hideSpinner();
-            } else if (data.status == "PASSWORD_MISMATCH") {
-              $("#mismatch_err").show();
-              $("#mismatch_err").html("Password mismatch");
-              hideSpinner();
-            } else if (data.status == "ERROR") {
-              Swal.fire({
-                title: '<strong class="text-dark">Oops!</strong>',
-                icon: "error",
-                toast: true,
-                position: "top-end",
-                html: '<p class="text-dark">An error occurred while attempting to save your information.</p>',
-                confirmButtonText: "Try again",
-              });
-              hideSpinner();
+                $("#signupModal").modal("hide");
+                Swal.fire({
+                  title: '<strong class="text-dark">Success</strong>',
+                  icon: "success",
+                  toast: true,
+                  position: "top-end",
+                  html: '<p class="text-dark">Your account was created successfully</p>',
+                  confirmButtonText:
+                    '<span onclick="popSigninModal();">Proceed to sign in <i class="bi bi-arrow-right"></i></span>',
+                });
+                break;
+              case "USERNAME_BLANK":
+                $("#username_err").show();
+                $("#username_err").html("Your first name is required");
+                hideSpinner();
+                break;
+              case "EMAIL_BLANK":
+                $("#emailexists_err").show();
+                $("#emailexists_err").html("Your email address is required");
+                hideSpinner();
+                break;
+              case "EMAIL_EXISTS":
+                $("#emailexists_err").show();
+                $("#emailexists_err").html("That email is already taken");
+                hideSpinner();
+                break;
+              case "TEMP_EMAIL":
+                $("#emailexists_err").show();
+                $("#emailexists_err").html("Please use a valid email");
+                hideSpinner();
+                break;
+              case "EMPTY_PASS":
+                $("#signup_pwd_err").show();
+                $("#signup_pwd_err").html("Password is required");
+                hideSpinner();
+                break;
+              case "PASSWORD_MISMATCH":
+                $("#mismatch_err").show();
+                $("#mismatch_err").html("Password mismatch");
+                hideSpinner();
+                break;
+              case "ERROR":
+                Swal.fire({
+                  title: '<strong class="text-dark">Oops!</strong>',
+                  icon: "error",
+                  toast: true,
+                  position: "top-end",
+                  html: '<p class="text-dark">An error occurred while attempting to save your information.</p>',
+                  confirmButtonText: "Try again",
+                });
+                hideSpinner();
+                break;
             }
           },
-          error: function () {
+          error: () => {
             Swal.fire({
               title: '<strong class="text-dark">Oops!</strong>',
               icon: "error",
@@ -332,9 +341,11 @@ function handleStartBtn() {
 }
 
 function popSignupModal() {
-  $("#signinModal").modal("hide");
-  $("#resetPwdEmailEntryModal").modal("hide");
-  $("#signupModal").modal("show");
+  if (signinStatus !== 1) {
+    $("#signinModal").modal("hide");
+    $("#resetPwdEmailEntryModal").modal("hide");
+    $("#signupModal").modal("show");
+  }
 }
 
 function popSigninModal() {
@@ -358,7 +369,7 @@ function popResetPwdEmailEntryModal(elem) {
 
 // clear form inputs
 function clearInputs() {
-  var inputsCollection = document.getElementsByClassName("new-reg-inputs");
+  var inputsCollection = Class("new-reg-inputs");
   for (i = 0; i < inputsCollection.length; i++) {
     inputsCollection[i].value = "";
     inputsCollection[i].classList.remove("is-invalid");
@@ -439,7 +450,7 @@ function showToastMessage(message, bgcolor) {
 
   liveToast.style.backgroundColor = bgcolor;
   liveToast.style.color = textcolor;
-  toastMessageCmpnt.innerText = message;
+  toastMessageCmpnt.innerHTML = message;
   toast.show();
 }
 
@@ -662,7 +673,7 @@ function popWpModal(type, subscription) {
 
       editor.root.innerHTML = content;
 
-      document.getElementsByClassName("ql-header")[0].innerText = "Style";
+      Class("ql-header")[0].innerText = "Style";
     }
 
   } else {
@@ -745,6 +756,280 @@ function publishToWordPress() {
     $("#wp-spinner").hide();
     $("#wp-button-text").html("Post");
     Id('wp-submit-btn').disabled = false;
+  }
+}
+
+// Web speech
+
+// Text to speech    
+function textToSpeech(action) {
+  var text = Id("outputarea").innerText;
+  var speech = new SpeechSynthesisUtterance();
+
+  if (text !== "") {
+    speech.text = text;
+    speech.rate = 1;
+    speech.volume = 1;
+    speech.pitch = 1;
+
+    speech.lang = 'en-US';
+
+    var element = Id("text-to-speech");
+    var wrapper = Id("text-to-speech-wrapper");
+
+    if (action == 'speak') {
+      element.remove();
+      wrapper.innerHTML = '<i id="text-to-speech" class="bi bi-volume-mute fs-4 mx-2" type="button" onclick="textToSpeech(' + "'mute'" + ')"></i>';
+      speechSynthesis.speak(speech);
+    } else if (action == 'mute') {
+      wrapper.innerHTML = '<i id="text-to-speech" class="bi bi-volume-down fs-4 mx-2" type="button" onclick="textToSpeech(' + "'speak'" + ')"></i>';
+      speechSynthesis.cancel(speech);
+    }
+  } else {
+    showToastMessage("Enter text to read out in the Canvas", "primary");
+    Id('outputarea').focus();
+  }
+}
+
+// Speech to text
+var langs = [
+  ["Afrikaans", ["af-ZA"]],
+  ["Bahasa Indonesia", ["id-ID"]],
+  ["Bahasa Melayu", ["ms-MY"]],
+  ["Català", ["ca-ES"]],
+  ["Čeština", ["cs-CZ"]],
+  ["Deutsch", ["de-DE"]],
+  [
+    "English",
+    ["en-AU", "Australia"],
+    ["en-CA", "Canada"],
+    ["en-IN", "India"],
+    ["en-NZ", "New Zealand"],
+    ["en-ZA", "South Africa"],
+    ["en-GB", "United Kingdom"],
+    ["en-US", "United States"],
+  ],
+  [
+    "Español",
+    ["es-AR", "Argentina"],
+    ["es-BO", "Bolivia"],
+    ["es-CL", "Chile"],
+    ["es-CO", "Colombia"],
+    ["es-CR", "Costa Rica"],
+    ["es-EC", "Ecuador"],
+    ["es-SV", "El Salvador"],
+    ["es-ES", "España"],
+    ["es-US", "Estados Unidos"],
+    ["es-GT", "Guatemala"],
+    ["es-HN", "Honduras"],
+    ["es-MX", "México"],
+    ["es-NI", "Nicaragua"],
+    ["es-PA", "Panamá"],
+    ["es-PY", "Paraguay"],
+    ["es-PE", "Perú"],
+    ["es-PR", "Puerto Rico"],
+    ["es-DO", "República Dominicana"],
+    ["es-UY", "Uruguay"],
+    ["es-VE", "Venezuela"],
+  ],
+  ["Euskara", ["eu-ES"]],
+  ["Français", ["fr-FR"]],
+  ["Galego", ["gl-ES"]],
+  ["Hrvatski", ["hr_HR"]],
+  ["IsiZulu", ["zu-ZA"]],
+  ["Íslenska", ["is-IS"]],
+  ["Italiano", ["it-IT", "Italia"], ["it-CH", "Svizzera"]],
+  ["Magyar", ["hu-HU"]],
+  ["Nederlands", ["nl-NL"]],
+  ["Norsk bokmål", ["nb-NO"]],
+  ["Polski", ["pl-PL"]],
+  ["Português", ["pt-BR", "Brasil"], ["pt-PT", "Portugal"]],
+  ["Română", ["ro-RO"]],
+  ["Slovenčina", ["sk-SK"]],
+  ["Suomi", ["fi-FI"]],
+  ["Svenska", ["sv-SE"]],
+  ["Türkçe", ["tr-TR"]],
+  ["български", ["bg-BG"]],
+  ["Pусский", ["ru-RU"]],
+  ["Српски", ["sr-RS"]],
+  ["한국어", ["ko-KR"]],
+  [
+    "中文",
+    ["cmn-Hans-CN", "普通话 (中国大陆)"],
+    ["cmn-Hans-HK", "普通话 (香港)"],
+    ["cmn-Hant-TW", "中文 (台灣)"],
+    ["yue-Hant-HK", "粵語 (香港)"],
+  ],
+  ["日本語", ["ja-JP"]],
+  ["Lingua latīna", ["la"]],
+];
+
+let select_language = document.querySelector("#select_language");
+let select_dialect = document.querySelector("#select_dialect");
+
+for (var i = 0; i < langs.length; i++) {
+  select_language.options[i] = new Option(langs[i][0], i);
+}
+
+// select_language.selectedIndex = 6;
+// updateDialect();
+// select_dialect.selectedIndex = 6;
+
+function updateDialect() {
+  try {
+    for (var i = select_dialect.options.length - 1; i >= 0; i--) {
+      select_dialect.remove(i);
+    }
+  }
+  catch (e) {
+    console.log("D: " + e);
+  }
+  var list = langs[select_language.selectedIndex];
+
+  console.log(list);
+
+  try {
+    for (var i = 1; i < list.length; i++) {
+      select_dialect.options.add(new Option(list[i][1], list[i][0]));
+    }
+  } catch (e) {
+    console.log("L: " + e);
+  }
+  select_dialect.style.visibility =
+    list[1].length == 1 ? "hidden" : "visible";
+}
+
+var lang_arr = ["select_language", "select_dialect"];
+var rem_lang = Id("rem_lang");
+Array.prototype.slice.call(Class("lang-inputs"))
+  .forEach((el) => {
+    el.onclick = () => {
+      if (rem_lang.checked == true) {
+        for (var i = 0; i < lang_arr.length; i++) {
+          setCookie(lang_arr[i], Id(lang_arr[i]).value, 365);
+        }
+        var checked = Id("rem_lang").checked;
+        checked = checked.toString();
+        console.log(checked);
+        setCookie("rem_lang", checked, 365);
+      }
+    }
+  })
+
+
+function handleSpeechRecognitionModal() {
+  for (var i = 0; i < lang_arr.length; i++) {
+    Id(lang_arr[i]).value = getCookie(lang_arr[i]);
+  }
+
+  var rem_cookie = getCookie("rem_lang");
+  if (rem_cookie == "true") {
+    speechToText();
+    rem_lang.checked = true;
+  } else {
+    $('#speechRecognitionModal').modal('show');
+    updateDialect();
+    rem_lang.checked = false;
+  }
+}
+
+function speechToText() {
+
+  $('#speechRecognitionModal').modal('hide');
+
+  var element = Id("speech-to-text");
+  var wrapper = Id("speech-to-text-wrapper");
+  var recognition = new webkitSpeechRecognition();
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  recognition.lang = Id("select_dialect").value;
+  // recognition.maxAlternatives = 1;
+
+  recognition.start();
+
+  element.remove();
+  wrapper.innerHTML = '<i id="speech-to-text-stop" class="bi bi-stop-circle text-danger fs-5 mx-2" type="button" title="Stop voice input. Right click to edit language settings"></i>';
+
+  var speech_stop = Id("speech-to-text-stop");
+  speech_stop.oncontextmenu = (e) => {
+    e.preventDefault();
+    $('#speechRecognitionModal').modal('show');
+  }
+
+
+  function restore() {
+    wrapper.innerHTML = '<i id="speech-to-text" class="bi bi-mic fs-5 mx-2" type="button" onclick="speechToText()" title="Speech input. Make sure to enable web speech recognition on your browser."></i>';
+    Id("interim").innerHTML = "";
+  }
+
+  Id("speech-to-text-stop").onclick = () => {
+    recognition.stop();
+  }
+
+  let final_transcript = "";
+
+  recognition.onresult = (event) => {
+    // Create the interim transcript string locally because we don't want it to persist like final transcript
+    let interim_transcript = "";
+
+    // Loop through the results from the speech recognition object.
+    for (let i = event.resultIndex; i < event.results.length; ++i) {
+      // If the result item is Final, add it to Final Transcript, Else add it to Interim transcript
+      if (event.results[i].isFinal) {
+        final_transcript += event.results[i][0].transcript;
+      } else {
+        interim_transcript += event.results[i][0].transcript;
+      }
+    }
+
+    setSelectionRange(canvas, x.selectionCaretStart, x.selectionCaretEnd);
+
+    canvas.innerHTML = final_transcript;
+    Id("interim").innerHTML = `<div class="row p-1">
+                                  <div class="col-md-2">
+                                    <i class="bi bi-mic-fill fs-4 text-secondary"></i>
+                                  </div>
+                                  <div class="col-md-10">    
+                                    ${interim_transcript}
+                                  </div>
+                                </div>`;
+
+    // setSelectionRange(canvas);
+    // pasteHtmlAtCaret(interim_transcript, true);
+  }
+
+  recognition.onspeechend = () => {
+    recognition.stop();
+    restore();
+  }
+
+  recognition.onnomatch = (event) => {
+    showToastMessage("Sorry, I didn't recognise that word", "primary");
+    restore();
+  }
+
+  recognition.onerror = (event) => {
+    showToastMessage("Error occurred in recognition: " + event.error, "primary");
+    restore();
+  }
+}
+
+// End web speech
+
+// Handle tour start button
+Id("start-tour-btn").onclick = () => {
+  if (signinStatus == 1) {
+    setCookie("dash_content_type", "product_description");
+    if (current_page == "dashboard") {
+      renderSelection("product_description");
+      tour.start();
+    } else {
+      setCookie("tour_status", "show");
+      location.href = `${base_url}/dashboard`;
+    }
+
+  } else {
+    handleStartBtn();
   }
 }
 

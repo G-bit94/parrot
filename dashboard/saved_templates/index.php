@@ -9,8 +9,6 @@ include "../../session.php";
 $queryStatus = "";
 $response = [];
 
-$base_url = "/parrot";
-
 $today = date("Y-m-d");
 
 $noresults = '

@@ -1,13 +1,17 @@
 <?php
-// Initialize the session
-session_start();
 
-// Unset all of the session variables
-$_SESSION = array();
+include '../session.php';
 
 // Destroy the session.
 session_destroy();
 
-// Redirect to login page
-header("location: /parrot");
+// Redirect to login page after rem0ving Google One Tap Cookie (by setting expiry time to 0)
+echo '<script type="text/javascript">
+        const d = new Date();
+        d.setTime(d.getTime() + (0 * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = "one_tap_skip=true;" + expires + ";path=/;SameSite=None;Secure";
+        window.location.replace("/parrot");
+    </script>';
+
 exit;

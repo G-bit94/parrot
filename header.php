@@ -1,8 +1,8 @@
 <?php
 
-include "config.php";
+// error_reporting(0);
 
-error_reporting(0);
+include "config.php";
 
 include "session.php";
 
@@ -15,6 +15,8 @@ $protocol = strpos(strtolower($_SERVER['SERVER_PROTOCOL']), 'https')
     === FALSE ? 'http' : 'https';
 $currenturl = $protocol . '://' . $domain . $script . '?' . $parameters;
 $new_url = preg_replace('/&?pageno=[^&]*/', '', $currenturl);
+
+$site_name = "ContentFlux";
 
 $base_url = '/parrot';
 
@@ -62,7 +64,7 @@ $spinner = '<div class="spinner">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ParrotAI</title>
+    <title><?php echo $site_name; ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo $base_url; ?>/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
@@ -70,28 +72,19 @@ $spinner = '<div class="spinner">
     <!-- Custom styles -->
     <link href="<?php echo $base_url; ?>/assets/css/custom-styles.css" rel="stylesheet" type="text/css">
 
+    <!-- Shepherd JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shepherd.js@10.0.1/dist/css/shepherd.css" />
+
     <!-- Icons -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-    <!-- Favicons -->
-    <!-- <link rel="apple-touch-icon" href="/parrot/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/parrot/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/parrot/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="manifest" href="/parrot/assets/img/favicons/manifest.json">
-    <link rel="icon" href="/parrot/assets/img/favicons/favicon.ico"> -->
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
-
-    <!-- Intro.js -->
-    <link rel="stytlesheet" src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
     <style type="text/css">
         @font-face {
-            font-family: "Futura";
-            src: url(/parrot/assets/fonts/futura/futura_book_font.ttf);
+            /* font-family: "Futura";
+            src: url(<?php echo $base_url; ?>/assets/fonts/futura/futura_book_font.ttf); */
+            font-family: "Mulish";
+            src: url(<?php echo $base_url; ?>/assets/fonts/mulish/static/Mulish-Medium.ttf);
         }
 
         body {
@@ -268,6 +261,9 @@ $spinner = '<div class="spinner">
     <script src="<?php echo $base_url; ?>/assets/js/jquery-3.6.0.min.js" type="text/javascript"></script>
     <script src="<?php echo $base_url; ?>/assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 
+    <!-- Google OAUTH 2.0 -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <!-- Global Scripts -->
     <script type="text/javascript">
         // Common functions and variables
@@ -275,46 +271,9 @@ $spinner = '<div class="spinner">
             return document.getElementById(id);
         }
 
-        // Base URL
-        const base_url = <?php echo json_encode($base_url); ?>;
-
-        // CSRF token
-        const csrf_token = <?php echo json_encode($_SESSION['csrf_token']); ?>;
-
-        // user
-        const user = <?php
-                        if ($user_id !== "" && $user_id !== null) {
-                            echo json_encode(openssl_encrypt($user_id, "AES-128-ECB", "ThisIsJustAStringOfGibberishToEncryptTheUserId"));
-                        } else {
-                            echo "null";
-                        }
-                        ?>
-        // sign in status
-        var sts = <?php echo json_encode($signinStatus); ?>;
-        var signinStatus = +sts;
-
-        // verification status
-        const vfyd = <?php echo json_encode($v_status); ?>;
-        const v_status = +vfyd;
-
-        //active subscription
-        const active_sub = <?php echo json_encode($active_sub); ?>;
-
-        // geolocation
-        const geoLocAPI = "https://api.ipregistry.co/?key=glm9znqelitu1301";
-        // Serialize navigator object
-        const navigator_obj = window.navigator;
-
-        const _navigator = {};
-        for (var i in navigator_obj) {
-            _navigator[i] = navigator_obj[i];
+        Class = (classname) => {
+            return document.getElementsByClassName(classname);
         }
-
-        // const geoLocAPI = base_url + "/apis/geolocation/?nav_obj=" + encodeURIComponent(JSON.stringify(_navigator));
-
-        // show prices in local currency
-        const currXChangeAPI = "https://api.exchangerate-api.com/v4/latest/USD";
-        const currResultFrom = "USD";
 
         // cookie functions
         function setCookie(cname, cvalue, exdays) {
@@ -343,6 +302,58 @@ $spinner = '<div class="spinner">
             }
             return "";
         }
+
+        // Base URL
+        const base_url = <?php echo json_encode($base_url); ?>;
+
+        // Site name
+        const site_name = <?php echo json_encode($site_name); ?>;
+
+        // CSRF token
+        const csrf_token = <?php echo json_encode($_SESSION['csrf_token']); ?>;
+
+        // user
+        const user = <?php
+                        if ($user_id !== "" && $user_id !== null) {
+                            echo json_encode(openssl_encrypt($user_id, "AES-128-ECB", "ThisIsJustAStringOfGibberishToEncryptTheUserId"));
+                        } else {
+                            echo "null";
+                        }
+                        ?>
+
+        const username = <?php echo json_encode($username); ?>
+
+        // sign in status
+        var sts = <?php echo json_encode($signinStatus); ?>;
+        var signinStatus = +sts;
+
+        // set cookie to prevent Google auto sign-in (loop) for logged-in users
+        if (signinStatus == 1) {
+            setCookie("one_tap_skip", "true", 365);
+        }
+
+        // verification status
+        const vfyd = <?php echo json_encode($v_status); ?>;
+        const v_status = +vfyd;
+
+        //active subscription
+        const active_sub = <?php echo json_encode($active_sub); ?>;
+
+        // geolocation
+        const geoLocAPI = "https://api.ipregistry.co/?key=glm9znqelitu1301";
+        // Serialize navigator object
+        const navigator_obj = window.navigator;
+
+        const _navigator = {};
+        for (var i in navigator_obj) {
+            _navigator[i] = navigator_obj[i];
+        }
+
+        // const geoLocAPI = base_url + "/apis/geolocation/?nav_obj=" + encodeURIComponent(JSON.stringify(_navigator));
+
+        // show prices in local currency
+        const currXChangeAPI = "https://api.exchangerate-api.com/v4/latest/USD";
+        const currResultFrom = "USD";
 
         // current page/dir        
         var lokshen = window.location.pathname;
@@ -442,7 +453,7 @@ $spinner = '<div class="spinner">
                     <span class="bg-white rounded-start p-1 d-flex justify-content-end">
                         <img src="<?php echo $base_url; ?>/assets/img/logo-transparent.png" alt="" width="26" height="27" class="rounded-circle" />
                     </span>
-                    <span class="bg-custom-primary rounded-end text-white px-2 pt-1">ParrotAI</span>
+                    <span class="bg-custom-primary rounded-end text-white px-2 pt-1"><?php echo $site_name; ?></span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -478,7 +489,7 @@ $spinner = '<div class="spinner">
                     <a class="nav-link fw-bold text-white" href="<?php echo $base_url; ?>/blog">Blog</a>
 
                     <div class="dropdown" id="profile_cmpnt" style="display: none;">
-                        <button class="btn btn-primary btn-sm rounded-pill mx-3 mt-1 dropdown-toggle fw-bold" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-outline-light btn-sm rounded-pill mx-3 mt-1 dropdown-toggle fw-bold" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle"></i>
                             <?php echo $row_user["username"]; ?>
                         </button>
@@ -487,7 +498,7 @@ $spinner = '<div class="spinner">
                                 <a href="<?php echo $base_url; ?>/account" class="btn btn-sm m-1 fw-bold">
                                     <i class="bi bi-person-circle"></i> Account
                                 </a>
-                                <a href="<?php echo $base_url; ?>/signout/" class="btn btn-sm m-1 fw-bold">
+                                <a href="<?php echo $base_url; ?>/signout/" class="btn btn-sm m-1 fw-bold g_id_signout">
                                     <i class="bi bi-box-arrow-right"></i> Signout
                                 </a>
                             </li>
@@ -497,6 +508,18 @@ $spinner = '<div class="spinner">
             </div>
         </nav>
     </header>
+
+    <!-- Google signin -->
+    <!-- One Tap -->
+    <div id="g_id_onload" data-client_id="202076057759-s1a7sbv9ss2uoru45b983tlnabn4kleb.apps.googleusercontent.com" data-context="signin" data-login_uri="http://localhost/parrot/google_auth/" data-itp_support="true" data-skip_prompt_cookie="one_tap_skip">
+    </div>
+
+    <!-- <script type="text/javascript">
+        const signout_button = Id("signout_button");
+        signout_button.onclick = () => {
+            google.accounts.id.disableAutoSelect();
+        }
+    </script> -->
 
     <!-- Begin page content -->
     <main class="flex-shrink-0">

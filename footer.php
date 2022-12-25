@@ -26,68 +26,214 @@
 </div>
 
 <!-- Cookie consent -->
-<div class="row fixed-bottom m-1" id="cookie-consent" style="display: none; z-index: 9999;">
-    <div class="col-md-4 col-sm-12 button-fixed">
-        <div class="p-3 pb-4 bg-custom text-white">
+<div class="row fixed-bottom m-2" id="cookie-consent" style="display: none !important;">
+    <div class="col-md-4 col-sm-12" style="transform: translate(200%, 0%);">
+        <div class="p-2 bg-custom text-light shadow-lg">
             <div class="row">
                 <div class="col-10">
-                    <h6>Allow Cookies</h6>
+                    <h6><i class='fas fa-cookie-bite' style='font-size:24px;'></i> Some delectable cookies just for you!</h6>
                 </div>
             </div>
-            <p style="font-size: 14px;">We use cookies to improve your experience.
+            <p style="font-size: 12px;">
+                They add a little extra crunch to your experience on <?php echo $site_name; ?>.
+                Happy browsing!
             </p>
-            <button style="font-size: 14px;" type="button" class="btn btn-danger w-100" onclick="setCookie('cookie_consent', 'true', 365)">Accept Cookies</button>
+            <div class="text-center">
+                <button style="font-size: 14px;" type="button" class="btn btn-danger w-50" onclick="setCookie('cookie_consent', 'true', 365)">Yummy! (Accept cookies)</button>
+            </div>
         </div>
     </div>
 </div>
 </main>
 
+<style type="text/css">
+    .site-footer {
+        color: #fff;
+        width: 100%;
+        height: 300px;
+        background-color: #CA6F1E;
+        padding: 40px;
+        border-top: 2px solid #4A235A;
+        /* margin-top: 40px; */
+        background: -webkit-linear-gradient(74deg, #180c3c 40%, #673AB7 40%);
+        background: -o-linear-gradient(70deg, #180c3c 40%, #673AB7 40%);
+        background: -moz-linear-gradient(70deg, #180c3c 40%, #673AB7 40%);
+        background: linear-gradient(70deg, #180c3c 40%, #673AB7 40%);
+    }
+
+    .site-footer h2 h4 {
+        color: #fff;
+        text-align: center;
+    }
+
+    .column {
+        width: 23%;
+        float: left;
+        padding: 5px;
+
+    }
+
+    p {
+        line-height: 1.6;
+        font-size: 16px;
+        padding: 10px;
+        /* text-transform: capitalize; */
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .address li {
+        text-align: left;
+    }
+
+    li {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .text-left {
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    .fa {
+        padding-right: 15px;
+    }
+
+    a {
+        text-decoration: none;
+        font-size: 18px;
+        color: #fff;
+
+    }
+
+    .text-left:nth-child(3) {
+        text-align: center;
+    }
+
+    .bottom {
+        background: #000;
+        color: #fff;
+        padding: 0;
+        position: relative;
+        text-align: center;
+    }
+
+    .bottom p {
+        padding: 10px;
+        margin: 0;
+        /* text-transform: uppercase; */
+    }
+
+    @media(max-width: 1024px) {
+        .column {
+            width: 4%;
+        }
+
+        .site-footer {
+            padding: 20px;
+            height: 500px;
+        }
+
+        .column:nth-child(4) h2,
+        .address {
+            text-align: center;
+        }
+    }
+
+    @media(max-width: 936px) {
+        .column {
+            float: none;
+            text-align: center;
+            width: 100%;
+
+        }
+
+        .address li {
+            text-align: center;
+        }
+
+        .text-left {
+            text-align: center;
+            padding-left: 0;
+        }
+
+        .text-left:nth-child(4) {
+            text-align: center;
+        }
+
+        .site-footer {
+            padding: 20px 0;
+            height: 100%;
+            background: -webkit-linear-gradient(70deg, #180c3c 40%, #673AB7 40%);
+            background: -o-linear-gradient(70deg, #180c3c 40%, #673AB7 40%);
+            background: -moz-linear-gradient(70deg, #180c3c 40%, #673AB7 40%);
+            background: linear-gradient(70deg, #180c3c 40%, #673AB7 40%);
+        }
+    }
+
+    @media(max-width: 470px) {
+        .site-footer {
+            background: linear-gradient(70deg, #180c3c 40%, #673AB7 40%);
+            background: -o-linear-gradient(70deg, #180c3c 40%, #673AB7 40%);
+            background: -moz-linear-gradient(70deg, #180c3c 40%, #673AB7 40%);
+            background: linear-gradient(70deg, #180c3c 40%, #673AB7 40%);
+        }
+    }
+</style>
+
 <!-- Footer -->
-<div class="bg-custom-dark">
-    <div class="container">
-        <footer class="py-5">
-            <div class="row">
-                <div class="col-3">
-                    <h5 class="fw-bold footer-heading text-light">Quick actions</h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="<?php echo $base_url; ?>/dashboard" onclick="handleStartBtn()" class="nav-link p-0 text-light empty-link">Get started</a></li>
-                        <li class="nav-item mb-2"><a href="<?php echo $base_url; ?>/pricing" class="nav-link p-0 text-light"><strong>Go pro!</strong></a></li>
-                        <li class="nav-item mb-2"><a href="#services" class="nav-link p-0 text-light">Become an affiliate</a></li>
-                        <li class="nav-item mb-2"><a href="javascript: void(0)" onclick="startChat()" class="nav-link p-0 text-light">Help</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-3">
-                    <h5 class="fw-bold footer-heading text-light">Company</h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#about-us" class="nav-link p-0 text-light">About us</a></li>
-                        <li class="nav-item mb-2"><a href="#contact-us" class="nav-link p-0 text-light">Contact us</a></li>
-                        <li class="nav-item mb-2"><a href="<?php echo $base_url; ?>/blog" class="nav-link p-0 text-light">News and insights</a></li>
-                        <li class="nav-item mb-2"><a href="#!press" class="nav-link p-0 text-light">Media & Press</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-5 offset-1">
-                    <form>
-                        <h5 class="fw-bold footer-heading text-light">Stay in the know</h5>
-                        <p class="text-light">Monthly digest of whats new and exciting from us.</p>
-                        <div class="d-flex w-100 gap-2">
-                            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                            <button class="btn btn-sm btn-primary" type="button">Notify&nbsp;me</button>
-                        </div>
-                    </form>
-                </div>
+<footer class="site-footer">
+    <div class="column">
+        <h4 class="text-left fw-bold"><?php echo $site_name; ?></h4>
+        <p>Generate quality content in <strong>just a couple of clicks</strong>. Take the hassle
+            out of content creation and let <?php echo $site_name; ?> generate
+            <strong>professional-grade content</strong> for you in a fraction of the time.
+        </p>
+    </div>
+    <div class="column">
+        <h4>Quick actions</h4>
+        <ul class="list-group list-group-flush">
+            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="<?php echo $base_url; ?>/dashboard" onclick="handleStartBtn()" class="empty-link">Get started</a></li>
+            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="<?php echo $base_url; ?>/pricing"><strong>Go pro!</strong></a></li>
+            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="#services">Become an affiliate</a></li>
+            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="javascript: void(0)" onclick="startChat()">Help</a></li>
+        </ul>
+    </div>
+    <div class="column">
+        <h4>Company</h4>
+        <ul class="list-group list-group-flush">
+            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="#about-us">About us</a></li>
+            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="#contact-us">Contact us</a></li>
+            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="<?php echo $base_url; ?>/blog">News and insights</a></li>
+            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="#!press">Media & Press</a></li>
+        </ul>
+    </div>
+    <div class="column">
+        <h4 class="text-left">Stay in the know</h4>
+        <form>
+            <p class="text-light">Get a monthly digest of whats new and exciting from us.</p>
+            <div class="d-flex w-100 gap-2">
+                <input id="newsletter" type="text" class="form-control" placeholder="Email address">
+                <button class="btn btn-sm btn-primary" type="button">Notify&nbsp;me</button>
             </div>
-            <div class="d-flex justify-content-between pt-4 mt-4 border-top border-secondary">
-                <p class="text-light">&copy; 2022 ParrotAI. All rights reserved.</p>
-                <ul class="list-unstyled d-flex">
-                    <li class="ms-3"><a class="text-light" href="#"><i class="bi bi-twitter"></i></a></li>
-                    <li class="ms-3"><a class="text-light" href="#"><i class="bi bi-instagram"></i></a></li>
-                    <li class="ms-3"><a class="text-light" href="#"><i class="bi bi-facebook"></i></a></li>
-                    <li class="ms-3"><a class="text-light" href="#"><i class="bi bi-linkedin"></i></a></li>
-                </ul>
-            </div>
-        </footer>
+        </form>
+    </div>
+
+</footer>
+<div class="bottom d-flex justify-content-center">
+    <p class="fw-bold">&copy; <?php echo $site_name; ?> <?php date("Y") ?></p>
+    <div class="d-flex justify-content-between">
+        <ul class="list-group list-unstyled list-group-horizontal pt-1">
+            <li class="ms-3"><a class="text-light" href="#"><i class="bi bi-twitter"></i></a></li>
+            <li class="ms-3"><a class="text-light" href="#"><i class="bi bi-instagram"></i></a></li>
+            <li class="ms-3"><a class="text-light" href="#"><i class="bi bi-facebook"></i></a></li>
+            <li class="ms-3"><a class="text-light" href="#"><i class="bi bi-linkedin"></i></a></li>
+        </ul>
     </div>
 </div>
 <!-- Footer -->
@@ -103,28 +249,28 @@
 
             <div class="modal-body p-5 pt-0">
                 <form class="row needs-validation" action="" method="POST" id="signupForm" novalidate>
-                    <div class="form-floating col-sm-6 mb-3">
-                        <input type="text" class="form-control form-inputs signup-form-inputs rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="usernamesignup" id="usernamesignup" placeholder="First name" autocomplete="off" maxlength="50" required>
+                    <div class="form-floating col-sm-6 mb-2">
+                        <input type="text" class="form-control form-control-sm form-inputs signup-form-inputs rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="usernamesignup" id="usernamesignup" placeholder="First name" autocomplete="off" maxlength="50" required>
                         <label class="text-muted" class="text-muted" for="usernamesignup">First name</label>
                         <span id="username_err" class="invalid-tooltip"></span>
                     </div>
-                    <div class="form-floating col-sm-6 mb-3">
-                        <input type="text" class="form-control form-inputs signup-form-inputs rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="lname" id="lname" placeholder="Last name" autocomplete="off" maxlength="50">
+                    <div class="form-floating col-sm-6 mb-2">
+                        <input type="text" class="form-control form-control-sm form-inputs signup-form-inputs rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="lname" id="lname" placeholder="Last name" autocomplete="off" maxlength="50">
                         <label class="text-muted" for="lname">Last name <sup class="text-muted">(Optional)</sup></label>
                         <span id="lname_err" class="invalid-tooltip"></span>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control form-inputs signup-form-inputs rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="emailsignup" id="emailsignup" placeholder="name@example.com" autocomplete="off" maxlength="50" required>
+                    <div class="form-floating mb-2">
+                        <input type="email" class="form-control form-control-sm form-inputs signup-form-inputs rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="emailsignup" id="emailsignup" placeholder="name@example.com" autocomplete="off" maxlength="50" required>
                         <label class="text-muted" for="emailsignup">Email address</label>
                         <span id="emailexists_err" class="invalid-tooltip"></span>
                     </div>
-                    <div class="form-floating col-sm-6 mb-3">
-                        <input type="password" class="form-control form-inputs  pass-input signup-form-inputs rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="pwdsignup" id="pwdsignup" placeholder="Password" autocomplete="off" minlength="6" maxlength="50" required>
+                    <div class="form-floating col-sm-6 mb-2">
+                        <input type="password" class="form-control form-control-sm form-inputs  pass-input signup-form-inputs rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="pwdsignup" id="pwdsignup" placeholder="Password" autocomplete="off" minlength="6" maxlength="50" required>
                         <label class="text-muted" for="pwdsignup">Password</label>
                         <span id="signup_pwd_err" class="invalid-tooltip"></span>
                     </div>
-                    <div class="form-floating col-sm-6 mb-3">
-                        <input type="password" class="form-control form-inputs  pass-input signup-form-inputs rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="confirmpwd" id="confirmpwd" placeholder="Confirm password" autocomplete="off" minlength="6" maxlength="50" required>
+                    <div class="form-floating col-sm-6 mb-2">
+                        <input type="password" class="form-control form-control-sm form-inputs  pass-input signup-form-inputs rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="confirmpwd" id="confirmpwd" placeholder="Confirm password" autocomplete="off" minlength="6" maxlength="50" required>
                         <label class="text-muted" for="confirmpwd">Confirm password</label>
                         <span id="mismatch_err" class="invalid-tooltip"></span>
                     </div>
@@ -136,17 +282,23 @@
                             </label>
                         </div>
                     </div>
-                    <button class="w-100 mb-2 btn btn-lg rounded-4 py-2 btn-primary" onclick="signupUser();">
+                    <input type="hidden" name="auth" value="email_pass">
+                    <button class="w-100 mb-2 btn btn-sm rounded-4 py-2 btn-primary" onclick="signupUser();">
                         <span id="signup-spinner" style="display: none;">
                             <span class="spinner-border spinner-border-sm text-white" role="status"></span>
                         </span>
                         <span id="signup-button-text">Sign up</span>
                     </button>
-                    <!-- <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" onclick="signupUser();">Sign up</button> -->
-                    <small class="text-muted">By clicking Sign up, you agree to the <a href="<?php echo $base_url; ?>/terms/">terms</a> of use.</small>
-                    <hr class="my-4">
+                    <h2 class="fs-6 fw-bold my-3">Or sign up with your Google account</h2>
+                    <div class="d-flex justify-content-center">
+                        <div id="g_id_onload" data-client_id="202076057759-s1a7sbv9ss2uoru45b983tlnabn4kleb.apps.googleusercontent.com" data-login_uri="http://localhost/parrot/google_auth/">
+                        </div>
+                        <div class="g_id_signin" data-type="standard" data-size="large" data-text="signup_with" data-shape="pill" data-theme="filled_blue" data-logo_alignment="left">
+                        </div>
+                    </div>
+                    <small class="text-muted my-2">By signing up, you agree to the <a href="<?php echo $base_url; ?>/terms/" target="_blank">terms</a> of use.</small>
                     <h2 class="fs-6 fw-bold mb-3">I already have an account</h2>
-                    <a class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4" onclick="popSigninModal();"> Sign in </a>
+                    <a class="w-100 mb-2 btn btn-sm btn-outline-primary rounded-4" onclick="popSigninModal();"> Sign in </a>
                 </form>
             </div>
         </div>
@@ -165,13 +317,13 @@
             </div>
             <div class="modal-body p-5 pt-0">
                 <form class="needs-validation" action="" method="POST" id="signinForm" novalidate>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control form-inputs rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="useremail" name="useremail" placeholder="name@example.com" autocomplete="off" maxlength="50" required>
+                    <div class="form-floating mb-2">
+                        <input type="email" class="form-control form-control-sm form-inputs rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="useremail" name="useremail" placeholder="name@example.com" autocomplete="off" maxlength="50" required>
                         <label class="text-muted" for="useremail">Email address</label>
                         <span id="email_err" class="invalid-tooltip"></span>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="password" class="form-control pass-input form-inputs rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="password" name="password" placeholder="Password" autocomplete="off" maxlength="50" required>
+                    <div class="form-floating mb-2">
+                        <input type="password" class="form-control form-control-sm form-inputs pass-input rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="password" name="password" placeholder="Password" autocomplete="off" maxlength="50" required>
                         <label class="text-muted" for="password">Password</label>
                         <span id="password_err" class="invalid-tooltip"></span>
                     </div>
@@ -183,15 +335,22 @@
                             </label>
                         </div>
                     </div>
+                    <input type="hidden" name="auth" value="email_pass">
                     <input type="hidden" id="signin" name="signin">
                     <div class="text-center">
-                        <button class="w-50 mb-2 btn btn-lg rounded-4 btn-primary" onclick="signinUser();">Sign in</button> <br>
+                        <button class="w-100 mb-3 btn rounded-4 btn-primary" onclick="signinUser();">Sign in</button> <br>
                         <div class="text-center mt-2 mb-4">
                             <span class="btn btn-sm btn-white shadow" type="button" onclick="popResetPwdEmailEntryModal()">I forgot my password</span>
                         </div>
-                        <!-- <small class="text-dark">New here?</small> <br> -->
-                        <h2 class="fs-6 fw-bold mb-3">New here?</h2>
-                        <a class="w-50 py-2 mt-2 mb-2 btn btn-outline-primary rounded-4" onclick="popSignupModal();">
+                        <h2 class="fs-6 fw-bold my-3">Or sign in with Google</h2>
+                        <div class="d-flex justify-content-center">
+                            <div id="g_id_onload" data-client_id="202076057759-s1a7sbv9ss2uoru45b983tlnabn4kleb.apps.googleusercontent.com" data-login_uri="http://localhost/parrot/google_auth/">
+                            </div>
+                            <div class="g_id_signin" data-type="standard" data-size="large" data-text="sign_in_with" data-shape="pill" data-theme="filled_blue" data-logo_alignment="left">
+                            </div>
+                        </div>
+                        <h2 class="fs-6 mt-4">New here?</h2>
+                        <a class="w-50 mt-2 mb-2 btn btn-sm btn-outline-primary rounded-4" onclick="popSignupModal();">
                             Sign up
                         </a>
                     </div>
@@ -216,7 +375,7 @@
                 <h2 class="fs-6 fw-bold mt-4 mb-3">Enter your email address below</h2>
                 <form class="needs-validation" action="" method="POST" id="resetPwdEmailEntryForm" novalidate>
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control form-inputs rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="reset_email" name="reset_email" placeholder="name@example.com" autocomplete="off" maxlength="50" required>
+                        <input type="email" class="form-control form-control-sm form-inputs rounded-4 border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="reset_email" name="reset_email" placeholder="name@example.com" autocomplete="off" maxlength="50" required>
                         <label class="text-muted" for="useremail">Email</label>
                         <span id="reset_email_err" class="invalid-tooltip"></span>
                     </div>
@@ -252,7 +411,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body py-0">
-                <p>It looks like ParrotAI is open in another tab or you've been signed out.</p>
+                <p>It looks like <?php echo $site_name; ?> is open in another tab or you've been signed out.</p>
             </div>
             <div class="modal-footer flex-column border-top-0">
                 <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2" onclick="handleStartBtn()">Continue here</button>
@@ -262,6 +421,38 @@
     </div>
 </div>
 <!-- End Signin Notification Modal -->
+
+<!-- Speech Recognition Mondal -->
+<div class="modal py-5 p-1 fade" tabindex="-1" role="dialog" id="speechRecognitionModal">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content rounded-5 shadow">
+            <div class="modal-header border-bottom-0">
+                <h1 class="modal-title fw-bold fs-5">Select language</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body py-0">
+                <div class="mt-4" id="div_language">
+                    <select class="form-select lang-inputs" id="select_language" onchange="updateDialect()"></select>
+                    <select class="form-select lang-inputs mt-2" id="select_dialect"></select>
+                </div>
+
+                <div class="d-flex justify-content-start my-1">
+                    <div class="form-check mx-2">
+                        <input class="form-check-input" type="checkbox" id="rem_lang">
+                        <label class="form-check-label text-dark text-sm" for="rem_lang">
+                            Remember language settings
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer flex-column border-top-0">
+                <button type="button" class="btn btn-primary w-100 mx-0 mb-2" onclick="speechToText()"><i class="bi bi-mic fs-5"></i> Start speech input</button>
+                <button type="button" class="btn btn-lg btn-light w-100 mx-0" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Speech Recognition Mondal -->
 
 <!-- Template details modal -->
 <div class="modal py-2 fade" tabindex="-1" role="dialog" id="templateDetailsModal">
@@ -488,8 +679,8 @@
                     echo $base_url;
                 } ?>/assets/js/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
-<!-- Intro JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.js" integrity="sha512-iC2jUAfCjQVVR2eGiPYjV2lb7ZIF0Tx3xPj/PdGZSJkSJVz5y+88tRwshNmrso1twhzhSQwBPXNLdAqUYmRAPg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Shepherd JS -->
+<script src="https://cdn.jsdelivr.net/npm/shepherd.js@10.0.1/dist/js/shepherd.min.js"></script>
 
 <script type="text/javascript">
     /**
@@ -643,8 +834,8 @@
     }
 
     // Show/hide password
-    var pass_inputs = document.getElementsByClassName("pass-input")
-    var pass_toggles = document.getElementsByClassName("pass-toggle")
+    var pass_inputs = Class("pass-input")
+    var pass_toggles = Class("pass-toggle")
     Array.prototype.slice.call(pass_toggles)
         .forEach(function(toggle) {
             toggle.onclick = () => {
@@ -660,8 +851,8 @@
         })
 
     // Hide error messages/tooltips
-    var form_inputs = document.getElementsByClassName("form-inputs")
-    var err_tooltips = document.getElementsByClassName("invalid-tooltip")
+    var form_inputs = Class("form-inputs")
+    var err_tooltips = Class("invalid-tooltip")
     Array.prototype.slice.call(form_inputs)
         .forEach(function(input) {
             input.oninput = () => {
@@ -695,68 +886,6 @@
         // set cookie
         setCookie("dash_" + id, value, 365);
     }
-
-    /**
-     * Undo/Redo
-     * Content change event listeners: https://stackoverflow.com/questions/1391278/contenteditable-change-events
-     * Answer by Balupton
-     */
-    // undo redo
-    // var textArray = [];
-    // var myOutputArea = Id('outputarea');
-    // var me_text = myOutputArea.innerHTML;
-    // var toastMessageCmpnt = document.getElementById("toastMessageCmpnt");
-
-    // var current_key = textArray.indexOf(me_text);
-    // var prev_key = +current_key - 1;
-    // var next_key = +current_key + 1;
-
-    // // myOutputArea.addEventListener("input", () => {
-    // //     me_text = myOutputArea.innerHTML;
-    // //     textArray.push(me_text);
-
-    // //     current_key = textArray.indexOf(me_text);
-    // //     prev_key = +current_key - 1;
-    // //     next_key = +current_key + 1;
-
-    // // });
-
-    // $('body').on('focus', '#outputarea', function() {
-    //     const $this = $(this);
-    //     $this.data('before', $this.html());
-    // }).on('blur keyup paste input', '#outputarea', function() {
-    //     const $this = $(this);
-    //     if ($this.data('before') !== $this.html()) {
-    //         me_text = myOutputArea.innerHTML;
-    //         textArray.push(me_text);
-
-    //         current_key = textArray.indexOf(me_text);
-    //         prev_key = +current_key - 1;
-    //         next_key = +current_key + 1;
-    //     }
-    // });
-
-    // function undo() {
-    //     if (prev_key) {
-    //         myOutputArea.innerHTML = textArray[prev_key];
-    //         current_key = prev_key;
-    //         prev_key = +current_key - 1;
-    //         next_key = +current_key + 1;
-    //     } else {
-    //         showToastMessage("Nothing to undo", "primary")
-    //     }
-    // }
-
-    // function redo() {
-    //     if (next_key) {
-    //         myOutputArea.innerHTML = textArray[next_key];
-    //         current_key = next_key;
-    //         prev_key = +current_key - 1;
-    //         next_key = +current_key + 1;
-    //     } else {
-    //         showToastMessage("Nothing to redo", "primary")
-    //     }
-    // }
 </script>
 
 </body>
