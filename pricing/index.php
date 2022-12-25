@@ -442,7 +442,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
 
     function showTab(n) {
         // This function will display the specified tab ...
-        var x = document.getElementsByClassName("tab");
+        var x = Class("tab");
         x[n].style.display = "block";
         //... and fix the Back/Next buttons:
         if (n == 0) {
@@ -468,7 +468,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
 
     function nextPrev(n) {
         // This function will figure out which tab to display
-        var x = document.getElementsByClassName("tab");
+        var x = Class("tab");
         // Exit the function if any field in the current tab is invalid:
         if (n == 1 && !validateForm()) return false;
         // Hide the current tab:
@@ -488,7 +488,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
     function validateForm() {
         // This function deals with validation of the form fields
         var x, y, i, valid = true;
-        x = document.getElementsByClassName("tab");
+        x = Class("tab");
         y = x[currentTab].getElementsByTagName("input");
         // A loop that checks every input field in the current tab:
         for (i = 0; i < y.length; i++) {
@@ -502,14 +502,14 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
         }
         // If the valid status is true, mark the step as finished and valid:
         if (valid) {
-            document.getElementsByClassName("step")[currentTab].className += " finish";
+            Class("step")[currentTab].className += " finish";
         }
         return valid; // return the valid status
     }
 
     function fixStepIndicator(n) {
         // This function removes the "active" class of all steps...
-        var i, x = document.getElementsByClassName("step");
+        var i, x = Class("step");
         for (i = 0; i < x.length; i++) {
             x[i].className = x[i].className.replace(" active", "");
         }
@@ -537,7 +537,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
 
             var p = document.querySelector('input[name="period"]:checked');
             if (p == null) { //none selected
-                document.getElementsByClassName("period")[0].click();
+                Class("period")[0].click();
             }
         }
         selectedPlan = plan;

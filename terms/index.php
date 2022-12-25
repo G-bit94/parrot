@@ -28,12 +28,12 @@ include "../header.php";
     </div>
 
     <div class="container mt-3">
-        <h6 class="text-muted">Read our terms below to learn more about your rights and responsibilities as a ParrotAI user. </h6>
+        <h6 class="text-muted">Read our terms below to learn more about your rights and responsibilities as a <?php echo $site_name; ?> user. </h6>
         <hr class="text-muted">
         <div class="col-md d-flex justify-content-center">
             <ol class="m-2 text-black">
-                <li class="m-1">By using ParrotAI, you accept to be bound by the terms below. If you do not agree with any of these Terms, then do not access the platform.</li>
-                <li class="m-1">ParrotAI (hereinafter referred to as “the Vendor”) is the legal owner of this website and platform.</li>
+                <li class="m-1">By using <?php echo $site_name; ?>, you accept to be bound by the terms below. If you do not agree with any of these Terms, then do not access the platform.</li>
+                <li class="m-1"><?php echo $site_name; ?> (hereinafter referred to as “the Vendor”) is the legal owner of this website and platform.</li>
                 <li class="m-1">All services rendered in this platform are rendered “as is”, “as available” and “with all faults”, and the Vendor does not give any warranty to
                     the users.</li>
                 <li class="m-1">The Company has no control over and does not guarantee the trustworthiness or accuracy of information provided by users.</li>
@@ -83,7 +83,7 @@ include "../header.php";
                 <li class="m-1">These Terms shall be governed in accordance with International law.</li>
                 <li class="m-1">Any dispute arising between the user of the Platform or the Service shall be resolved by way of Mediation. If the dispute is not resolved within 30 days, the
                     dispute shall abate.</li>
-                <li class="m-1">You may send us a notice regarding these terms via <a href="mailto: admin.parrot-ai@gmail.com">admin.parrot-ai@gmail.com</a>.</li>
+                <li class="m-1">You may send us a notice regarding these terms via <a href="mailto: contentflux.ai@gmail.com">contentflux.ai@gmail.com</a>.</li>
             </ol>
         </div>
     </div>
