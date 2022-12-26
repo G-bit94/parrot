@@ -296,7 +296,7 @@
                         <div class="g_id_signin" data-type="standard" data-size="large" data-text="signup_with" data-shape="pill" data-theme="filled_blue" data-logo_alignment="left">
                         </div>
                     </div>
-                    <small class="text-muted my-2">By signing up, you agree to the <a href="<?php echo $base_url; ?>/terms/" target="_blank">terms</a> of use.</small>
+                    <small class="text-muted my-2">By signing up, you agree to the <a class="text-primary" href="<?php echo $base_url; ?>/terms/" target="_blank">terms</a> of use.</small>
                     <h2 class="fs-6 fw-bold mb-3">I already have an account</h2>
                     <a class="w-100 mb-2 btn btn-sm btn-outline-primary rounded-4" onclick="popSigninModal();"> Sign in </a>
                 </form>
@@ -479,7 +479,7 @@
                             Add to Canvas
                         </button>
                         <button class="btn btn-sm btn-outline-teal border mx-2" onclick="popWpModal('saved', <?php echo $active_sub; ?>)">
-                            <img src="<?php echo $base_url; ?>/assets/img/wordpress.png" /> Post to blog
+                            <i class="bi bi-wordpress text-primary fs-5"></i> Post to blog
                         </button>
                         <button class="btn btn-sm btn-outline-danger border mx-2" onclick='deleteSavedTemplates("single")'>
                             <i type="button" class="bi bi-trash mx-2"></i> Delete
@@ -501,9 +501,9 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="publishToWordPressModal" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content rounded-5 shadow">
-            <div class="modal-body p-4 pt-0">
+            <div class="modal-body p-4 pt-3">
                 <div class="d-flex justify-content-between align-items-center border-bottom p-2 mb-2">
-                    <div class="fw-bold fs-6"><img src="<?php echo $base_url; ?>/assets/img/wordpress.png" class="m-1" />Post to WordPress</div>
+                    <div class="fw-bold fs-6"><i class="bi bi-wordpress text-primary fs-5"></i> Post to WordPress</div>
                     <button class="btn btn-sm btn-dark" data-bs-dismiss="modal" aria-label="Close">
                         Back
                     </button>
@@ -516,19 +516,19 @@
                     <small class="fw-bold">Post details</small>
                     <div class="row row-cols-3 mb-3">
                         <div class="col form-floating">
-                            <input type="number" class="form-control border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="wp-cat" name="wp-cat" autocomplete="off" placeholder="" maxlength="50">
+                            <input type="number" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-cat" name="wp-cat" autocomplete="off" placeholder="" maxlength="50">
                             <label class="text-muted" for="wp-cat">Category <sup><small>Category ID (Number)</small></sup></label>
                         </div>
                         <div class="col form-floating">
-                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="wp-title" name="wp-title" autocomplete="off" placeholder="" maxlength="50">
+                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-title" name="wp-title" autocomplete="off" placeholder="" maxlength="50">
                             <label class="text-muted" for="wp-title">Post title *</label>
                         </div>
                         <div class="col form-floating">
-                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="wp-tags" name="wp-tags" autocomplete="off" placeholder="" maxlength="50">
+                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-tags" name="wp-tags" autocomplete="off" placeholder="" maxlength="50">
                             <label class="text-muted" for="wp-tags">Tags <sup><small>Comma separated</small></sup></label>
                         </div>
                         <div class="col form-floating">
-                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="wp-excerpt" name="wp-excerpt" autocomplete="off" placeholder="" maxlength="100">
+                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-excerpt" name="wp-excerpt" autocomplete="off" placeholder="" maxlength="100">
                             <label class="text-muted" for="wp-excerpt">Excerpt<small class="m-1 text-muted"></small></label>
                         </div>
                     </div>
@@ -553,19 +553,19 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 form-floating">
-                            <input type="url" class="form-control border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="wp-url" id="wp-url" placeholder="" autocomplete="off" maxlength="100" required>
+                            <input type="url" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" name="wp-url" id="wp-url" placeholder="" autocomplete="off" maxlength="100" required>
                             <label class="text-muted" for="wp-url"><i class="bi bi-globe"></i> Site URL<sup><small>eg https://example.com</small></sup> *</label>
                         </div>
                         <div class="col-md-4 form-floating">
-                            <input type="number" class="form-control border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="wp-author" id="wp-author" placeholder="" autocomplete="off" maxlength="50">
+                            <input type="number" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" name="wp-author" id="wp-author" placeholder="" autocomplete="off" maxlength="50">
                             <label class="text-muted" for="wp-author">Post Author <sup><small>Author ID (Number)</small></sup></label>
                         </div>
                         <div class="col-md-4 form-floating">
-                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border-secondary rounded-0" name="wp-username" id="wp-username" placeholder="" autocomplete="off" maxlength="50" required>
+                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" name="wp-username" id="wp-username" placeholder="" autocomplete="off" maxlength="50" required>
                             <label class="text-muted" for="wp-username">Username/Email *</label>
                         </div>
                         <div class="col-md-4 form-floating">
-                            <input type="password" class="form-control pass-input border-top-0 border-start-0 border-end-0 border-secondary rounded-0" id="wp-pass" name="wp-pass" autocomplete="off" placeholder="" maxlength="50" required>
+                            <input type="password" class="form-control pass-input border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-pass" name="wp-pass" autocomplete="off" placeholder="" maxlength="50" required>
                             <label class="text-muted" for="wp-pass">WordPress password *</label>
                         </div>
                         <div class="d-flex justify-content-start my-3">

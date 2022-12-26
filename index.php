@@ -125,7 +125,7 @@ include "header.php";
             <div class="row row-cols-1 row-cols-sm-2 g-4 d-flex">
                 <div class="d-flex flex-column gap-2 p-1">
                     <div class="border rounded-5 shadow p-3">
-                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-start text-bg-primary bg-gradient fs-4 rounded-3">
+                        <div class="d-inline-flex align-items-center justify-content-start fs-4 rounded-3">
                             <i class="bi bi-google fs-3"></i>
                         </div>
                         <h4 class="fw-bold fs-5 my-1">SEO-optimized posts</h4>
@@ -135,7 +135,7 @@ include "header.php";
 
                 <div class="d-flex flex-column gap-2 p-1">
                     <div class="border rounded-5 shadow p-3">
-                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-start text-bg-primary bg-gradient fs-4 rounded-3">
+                        <div class="d-inline-flex align-items-center justify-content-start fs-4 rounded-3">
                             <i class="bi bi-badge-ad fs-3"></i>
                         </div>
                         <h4 class="fw-bold fs-5 my-1">Converting ad copy</h4>
@@ -145,17 +145,17 @@ include "header.php";
 
                 <div class="d-flex flex-column gap-2 p-1">
                     <div class="border rounded-5 shadow p-3">
-                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-start text-bg-primary bg-gradient fs-4 rounded-3">
+                        <div class="d-inline-flex align-items-center justify-content-start fs-4 rounded-3">
                             <i class="bi bi-instagram fs-3"></i>
                         </div>
                         <h4 class="fw-bold fs-5 my-1">Social media posts</h4>
-                        <p class="text-muted"><strong>Generate engaging social media posts</strong> for your brand campaigns on any platform with unparalleled ease.</p>
+                        <p class="text-muted"><strong>Generate engaging social media posts</strong> for your brand campaigns on any advertising platform with unparalleled ease.</p>
                     </div>
                 </div>
 
                 <div class="d-flex flex-column gap-2 p-1">
                     <div class="border rounded-5 shadow p-3">
-                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-start text-bg-primary bg-gradient fs-4 rounded-3">
+                        <div class="d-inline-flex align-items-center justify-content-start fs-4 rounded-3">
                             <i class="bi bi-pen fs-3"></i>
                         </div>
                         <h4 class="fw-bold fs-5 my-1">Anything, everything</h4>
@@ -332,7 +332,7 @@ include "header.php";
             </div>
         </div>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <a type="button" class="btn btn-primary btn-lg rounded-5 px-4 fw-bold empty-link" href="<?php echo $base_url; ?>/dashboard" onclick="handleStartBtn()">Find out yourself <i class="bi bi-arrow-right"></i></a>
+            <a type="button" class="btn btn-primary btn-lg rounded-4 px-4 fw-bold empty-link" href="<?php echo $base_url; ?>/dashboard" onclick="handleStartBtn()">Find out yourself <i class="bi bi-arrow-right"></i></a>
         </div>
     </div>
 </div>
@@ -343,7 +343,7 @@ include "header.php";
         <div class="col-lg-6 mx-auto my-5">
             <p class="lead mb-4 mt-5">A wingman who's ready to take on that writing challenge with you.</p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">
-                <a type="button" class="btn btn-dark btn-lg rounded-5 px-4 p-3 fw-bold empty-link" href="<?php echo $base_url; ?>/dashboard" onclick="popSignupModal()">Try <?php echo $site_name; ?> now <i class="bi bi-arrow-right"></i></a>
+                <a type="button" class="btn btn-dark btn-lg rounded-4 px-4 p-3 fw-bold empty-link" href="<?php echo $base_url; ?>/dashboard" onclick="popSignupModal()">Try <?php echo $site_name; ?> now <i class="bi bi-arrow-right"></i></a>
             </div>
         </div>
     </div>

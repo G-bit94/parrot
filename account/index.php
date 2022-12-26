@@ -76,17 +76,17 @@ if ($signinStatus == 1) {
                                         <div class="card border mb-4 rounded-5 shadow-sm">
                                             <form class="row px-2 py-3 rounded-5 needs-validation" action="" method="POST" id="editUserDetailsForm" novalidate>
                                                 <div class="form-floating col-sm-6 mb-3">
-                                                    <input type="text" class="form-control form-control-sm edit-user-form-inputs bg-white rounded-5" value="<?php echo $row_user["username"]; ?>" name="edit_username" id="edit_username" placeholder="First name" autocomplete="off" maxlength="50" required readonly>
+                                                    <input type="text" class="form-control form-control-sm edit-user-form-inputs bg-white rounded-4 border-top-0 border-start-0 border-end-0" value="<?php echo $row_user["username"]; ?>" name="edit_username" id="edit_username" placeholder="First name" autocomplete="off" maxlength="50" required readonly>
                                                     <label class="text-muted" for="edit_username">First name</label>
                                                     <span id="edit_username_err" class="invalid-tooltip"></span>
                                                 </div>
                                                 <div class="form-floating col-sm-6 mb-3">
-                                                    <input type="text" class="form-control form-control-sm edit-user-form-inputs bg-white rounded-5" value="<?php echo $row_user["l_name"]; ?>" name="edit_lname" id="edit_lname" placeholder="Last name" autocomplete="off" maxlength="50" required readonly>
+                                                    <input type="text" class="form-control form-control-sm edit-user-form-inputs bg-white rounded-4 border-top-0 border-start-0 border-end-0" value="<?php echo $row_user["l_name"]; ?>" name="edit_lname" id="edit_lname" placeholder="Last name" autocomplete="off" maxlength="50" required readonly>
                                                     <label class="text-muted" for="edit_lname">Last name</label>
                                                     <span id="edit_lname_err" class="invalid-tooltip"></span>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input type="email" class="form-control form-control-sm edit-user-form-inputs bg-white rounded-5" value="<?php echo $row_user["email"]; ?>" name="edit_user_email" id="edit_user_email" placeholder="name@example.com" autocomplete="off" maxlength="50" required readonly>
+                                                    <input type="email" class="form-control form-control-sm edit-user-form-inputs bg-white rounded-4 border-top-0 border-start-0 border-end-0" value="<?php echo $row_user["email"]; ?>" name="edit_user_email" id="edit_user_email" placeholder="name@example.com" autocomplete="off" maxlength="50" required readonly>
                                                     <label class="text-muted" for="edit_user_email">Email address</label>
                                                     <span id="edit_user_email_err" class="invalid-tooltip"></span>
                                                 </div>
@@ -178,7 +178,7 @@ if ($signinStatus == 1) {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="bg-white border-0 mb-4 rounded-3 shadow-sm p-3" id="saved_templates_list"></div>
+                                <div class="bg-white border-0 mb-4 rounded-3 p-3" id="saved_templates_list"></div>
                             </div>
                             <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
                                 <div class="row row-cols-3 g-2 mt-4">

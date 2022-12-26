@@ -12,7 +12,7 @@ $response = [];
 $today = date("Y-m-d");
 
 $noresults = '
-<div class="modal-content rounded-6">        
+<div class="modal-content">        
     <h6 class="bg-primary p-1 text-white rounded-top fw-bold">Blimey!</h6>        
     <p class="p-1 fs-6">It' . "'" . 's so empty here. <i class="bi bi-emoji-neutral"></i><br></p>    
 </div>';
