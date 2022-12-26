@@ -224,7 +224,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                                 <span class="btn btn-white border-secondary btn-sm mt-1 dropdown-toggle" type="button" data-bs-toggle="dropdown">
                                     Select tone
                                 </span>
-                                <ul class="dropdown-menu pt-0 mx-0 rounded-5 shadow overflow-auto" style="width: 200px; height: 250px; cursor: pointer;">
+                                <ul class="dropdown-menu pt-0 mx-0 rounded-3 p-2 shadow overflow-auto" style="width: 200px; height: 250px; cursor: pointer;">
                                     <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Formal</li>
                                     <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Informal</li>
                                     <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Humorous</li>
@@ -308,7 +308,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                                 <span class="btn btn-white border-secondary btn-sm mx-2 dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                     Sample prompts
                                 </span>
-                                <div class="dropdown-menu pt-0 mx-0 rounded-5 shadow overflow-hidden" aria-labelledby="dropdownMenu2" style="width: 380px;">
+                                <div class="dropdown-menu pt-0 mx-0 rounded-3 p-2 shadow overflow-hidden" aria-labelledby="dropdownMenu2" style="width: 380px;">
                                     <ul class="list-unstyled mb-0">
                                         <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1 truncated" type="button" onclick="completeUserPrompt('sample', 'auto_complete', 'news');">
                                             <div class="d-flex gap-2 w-100 justify-content-between">
@@ -506,13 +506,13 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                                             left top,
                                             left bottom,
 
-                                            color-stop(0.44, rgb(122, 153, 217)),
+                                            color-stop(0.44, rgb(116, 52, 252)),
                                             color-stop(0.72, rgb(73, 125, 189)),
                                             color-stop(0.86, rgb(28, 58, 148)));
                                 }
                             </style>
 
-                            <div class="d-flex justify-content-between shadow-sm border-bottom">
+                            <div class="d-flex justify-content-between shadow-sm border-bottom rounded-top-3 border">
                                 <div class="editButtons">
                                     <span title="STYLES">
                                         <button class="toolbar-edit btn" data-edit="bold"><i class="bi bi-type-bold"></i></button>
@@ -560,10 +560,10 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                                  </span> -->
                                 </div>
 
-                                <div class="d-flex justify-content-between mx-1 mt-2">
+                                <div class="d-flex justify-content-between mx-1">
                                     <span title="Post to WordPress">
                                         <button class="btn btn-sm fw-bold" onclick="popWpModal('gen_text', <?php echo $active_sub; ?>)">
-                                            <img src="<?php echo $base_url; ?>/assets/img/wordpress.png" />
+                                            <i class="bi bi-wordpress text-primary fs-5"></i>
                                         </button>
                                     </span>
                                     <span title="Share">
@@ -579,7 +579,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                     <div id="outputarea-wrapper">
                         <!-- Interim speech holder -->
                         <div id="interim" class="bg-info rounded mx-1 px-1 d-flex justify-content-center align-items-center"></div>
-                        <div class="overflow-auto" id="outputarea" style="user-select: text; white-space: pre-wrap; overflow-wrap: break-word;" contenteditable></div>
+                        <div class="overflow-auto bg-white rounded" id="outputarea" style="user-select: text; white-space: pre-wrap; overflow-wrap: break-word;" contenteditable></div>
                     </div>
 
                     <ul class="list-inline floating-toolbar text-light rounded-3 p-1 shadow" style="display: none;">
@@ -591,7 +591,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                     </ul>
 
                     <div class="mt-2 mx-2" id="canvas-actions-bar">
-                        <div class="d-flex justify-content-between border rounded-pill shadow-sm p-1">
+                        <div class="d-flex justify-content-between border rounded-4 shadow-sm p-1">
                             <div class="col-md-4">
                                 <div class="d-flex justify-content-start align-items-center">
                                     <div id="gen-spinner" style="display: none;">
@@ -599,18 +599,18 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                                         echo $spinner;
                                         ?>
                                     </div>
-                                    <span class="btn btn-primary rounded-pill fw-bold shadow-sm" onclick="completeUserPrompt('canvas', 'auto_complete', '')" type="button">
+                                    <span class="btn btn-primary rounded-4 fw-bold shadow-sm" onclick="completeUserPrompt('canvas', 'auto_complete', '')" type="button">
                                         <span id="gen-text">More text</span>
                                     </span>
                                 </div>
                             </div>
 
                             <div class="col-md-8 d-flex justify-content-end align-items-center">
-                                <button type="button" class="btn btn-sm btn-warning rounded-pill btn-controls" onclick='completeUserPrompt("canvas", "retry");'><i class="bi bi-arrow-repeat"></i> Try again</button>
-                                <button type="button" class="btn btn-sm btn-warning rounded-pill btn-controls" onclick='editCanvas("prompt")'>Remove prompt</button>
-                                <button type="button" class="btn btn-sm btn-warning rounded-pill btn-controls" onclick='editCanvas("gen_text")'>Remove generated text</button>
-                                <button type="button" class="btn btn-sm btn-warning rounded-pill btn-controls" onclick='editCanvas("clear")'>Clear</button>
-                                <!-- <button type="button" class="btn btn-sm btn-warning rounded-pill btn-controls" onclick='editCanvas("restore");'>Restore</button> -->
+                                <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls" onclick='completeUserPrompt("canvas", "retry");'><i class="bi bi-arrow-repeat"></i> Try again</button>
+                                <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls" onclick='editCanvas("prompt")'>Remove prompt</button>
+                                <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls" onclick='editCanvas("gen_text")'>Remove generated text</button>
+                                <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls" onclick='editCanvas("clear")'>Clear</button>
+                                <!-- <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls" onclick='editCanvas("restore");'>Restore</button> -->
                             </div>
                         </div>
                     </div>

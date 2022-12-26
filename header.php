@@ -100,6 +100,10 @@ $spinner = '<div class="spinner">
             background-color: #183454;
         }
 
+        .bg-custom-primary:hover {
+            background-color: #7434fc;
+        }
+
         .bg-custom-dark {
             background-color: #180c3c;
         }
@@ -464,7 +468,7 @@ $spinner = '<div class="spinner">
                         </li>
                     </ul>
                     <?php if ($signinStatus == 1) { ?>
-                        <a href="<?php echo $base_url; ?>/dashboard" onclick="handleStartBtn()" class="nav-link fw-bold m-1 text-white empty-link">
+                        <a href="<?php echo $base_url; ?>/dashboard" onclick="handleStartBtn()" class="nav-link fw-bold m-1 mx-3 text-white empty-link">
                             Dashboard
                         </a>
                     <?php } ?>
@@ -475,16 +479,10 @@ $spinner = '<div class="spinner">
                         </span>
                     </a>
 
-                    <a class="nav-link fw-bold text-white" href="<?php echo $base_url; ?>/pricing" id="pricing_btn" style="display: none;">Pricing</a>
+                    <a class="nav-link mx-4 fw-bold text-white" href="<?php echo $base_url; ?>/pricing" id="pricing_btn" style="display: none;">Pricing</a>
                     <?php if ($v_status == 1 && $active_sub != 2) { ?>
-                        <a class="nav-link fw-bold text-white" href="<?php echo $base_url; ?>/pricing" id="upgrade_btn" style="display: none;">Upgrade</a>
+                        <a class="nav-link mx-4 fw-bold text-white" href="<?php echo $base_url; ?>/pricing" id="upgrade_btn" style="display: none;">Upgrade</a>
                     <?php } ?>
-
-                    <!-- <a class="btn btn-primary rounded-pill px-3 mx-2 mb-1 mb-lg-0" href="<?php echo $base_url; ?>/#demo" id="demo_btn" style="display: none;">
-                        <span class="d-flex align-items-center">
-                            <span class="small">Demo</span>
-                        </span>
-                    </a> -->
 
                     <a class="nav-link fw-bold text-white" href="<?php echo $base_url; ?>/blog">Blog</a>
 
@@ -513,13 +511,6 @@ $spinner = '<div class="spinner">
     <!-- One Tap -->
     <div id="g_id_onload" data-client_id="202076057759-s1a7sbv9ss2uoru45b983tlnabn4kleb.apps.googleusercontent.com" data-context="signin" data-login_uri="http://localhost/parrot/google_auth/" data-itp_support="true" data-skip_prompt_cookie="one_tap_skip">
     </div>
-
-    <!-- <script type="text/javascript">
-        const signout_button = Id("signout_button");
-        signout_button.onclick = () => {
-            google.accounts.id.disableAutoSelect();
-        }
-    </script> -->
 
     <!-- Begin page content -->
     <main class="flex-shrink-0">
