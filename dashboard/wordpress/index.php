@@ -75,49 +75,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $_POST = json_decode(file_get_contents("php://input"), true);
 
-    if (hash_equals($_SESSION["csrf_token"], $_POST["csrf_token"]) && $_SESSION["email"] !== null) {
+    // if (hash_equals($_SESSION["csrf_token"], $_POST["csrf_token"]) && $_SESSION["email"] !== null) {
 
-        $response["title"] = wpRemotePostXMLRPC($_POST["url"], $_POST);
+    $response["title"] = wpRemotePostXMLRPC($_POST["url"], $_POST);
 
-        $title = $response["title"];
+    $title = $response["title"];
 
-        if (!empty($title)) {
+    if (!empty($title)) {
 
-            $user_id = openssl_decrypt($_POST['user'] ?? '', "AES-128-ECB", "ThisIsJustAStringOfGibberishToEncryptTheUserId");
-            $email = $mysqli->real_escape_string($_POST["username"]);
-            $pass = $mysqli->real_escape_string($_POST["pass"]);
-            $url = $mysqli->real_escape_string($_POST["url"]);
+        $user_id = openssl_decrypt($_POST['user'] ?? '', "AES-128-ECB", "ThisIsJustAStringOfGibberishToEncryptTheUserId");
+        $email = $mysqli->real_escape_string($_POST["username"]);
+        $pass = $mysqli->real_escape_string($_POST["pass"]);
+        $url = $mysqli->real_escape_string($_POST["url"]);
 
-            if (isset($_POST["rem_wp"]) && !empty($_POST["username"]) && !empty($_POST["pass"])) {
+        if (isset($_POST["rem_wp"]) && !empty($_POST["username"]) && !empty($_POST["pass"])) {
 
-                $sql = "UPDATE users SET wp_user = ?, wp_pass = ?, wp_url = ? WHERE id = ?";
+            $sql = "UPDATE users SET wp_user = ?, wp_pass = ?, wp_url = ? WHERE id = ?";
 
-                if ($stmt = $mysqli->prepare($sql)) {
+            if ($stmt = $mysqli->prepare($sql)) {
 
-                    $stmt->bind_param("ssss", $email, $pass, $url, $user_id);
+                $stmt->bind_param("ssss", $email, $pass, $url, $user_id);
 
-                    if ($stmt->execute()) {
-                        $response["status"] = "SUCCESS";
-                        $response["message"] = "WordPress credentials saved successfully";
-                    } else {
-                        $response["status"] = "ERROR";
-                        $response["message"] = "Sorry, couldn't save WordPress credentials";
-                    }
-
-                    $stmt->close();
+                if ($stmt->execute()) {
+                    $response["status"] = "SUCCESS";
+                    $response["message"] = "WordPress credentials saved successfully";
+                } else {
+                    $response["status"] = "ERROR";
+                    $response["message"] = "Sorry, couldn't save WordPress credentials";
                 }
-            } else {
-                $response["status"] = "SUCCESS";
-                $response["message"] = "Post submitted successfully";
+
+                $stmt->close();
             }
-        } else { //error message      
-            $response["status"] = "ERROR";
-            $response["message"] = "Sorry, couldn't submit post.";
+        } else {
+            $response["status"] = "SUCCESS";
+            $response["message"] = "Post submitted successfully";
         }
-    } else {
+    } else { //error message      
         $response["status"] = "ERROR";
-        $response["message"] = "Oops! Something went wrong";
+        $response["message"] = "Sorry, couldn't submit post.";
     }
+    // } else {
+    //     $response["status"] = "ERROR";
+    //     $response["message"] = "Oops! Something went wrong";
+    // }
 
 
     echo json_encode($response);

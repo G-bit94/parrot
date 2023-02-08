@@ -2,6 +2,21 @@
 
 // error_reporting(0);
 
+// Define a custom error handler function
+function customErrorHandler($errno, $errstr, $errfile, $errline)
+{
+    // Only log serious errors
+    if ($errno & error_reporting()) {
+        // Log the error message to a file
+        $log_file = $_SERVER['DOCUMENT_ROOT'] . "/parrot/.custom_error_log";
+        $time = gmdate("Y-m-d H:i:s", time() + 10800);
+        error_log("[$time] [$errno] $errstr in $errfile on line $errline\n", 3, $log_file);
+    }
+}
+
+// Set the custom error handler
+set_error_handler("customErrorHandler");
+
 include "config.php";
 
 include "session.php";
@@ -17,6 +32,8 @@ $currenturl = $protocol . '://' . $domain . $script . '?' . $parameters;
 $new_url = preg_replace('/&?pageno=[^&]*/', '', $currenturl);
 
 $site_name = "ContentFlux";
+
+$site_url = 'https://' . $domain;
 
 $base_url = '/parrot';
 
@@ -101,12 +118,26 @@ $spinner = '<div class="spinner">
         }
 
         .bg-custom-primary:hover {
-            background-color: #7434fc;
+            background-color: #0d6efd;
         }
 
         .bg-custom-dark {
             background-color: #180c3c;
         }
+
+        .bg-custom-dark:hover {
+            background-color: #0d6efd;
+        }
+
+        /* Bootstrap 5.3.0 fix */
+        /* a {
+            color: #0d6efd !important;
+            font-size: 10px;
+        }
+
+        a:hover {
+            color: #f5f5f5 !important;
+        } */
 
         textarea {
             resize: none;
@@ -457,7 +488,7 @@ $spinner = '<div class="spinner">
                     <span class="bg-white rounded-start p-1 d-flex justify-content-end">
                         <img src="<?php echo $base_url; ?>/assets/img/logo-transparent.png" alt="" width="26" height="27" class="rounded-circle" />
                     </span>
-                    <span class="bg-custom-primary rounded-end text-white px-2 pt-1"><?php echo $site_name; ?></span>
+                    <span class="bg-custom-dark rounded-end text-white px-2 pt-1"><?php echo $site_name; ?></span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -473,7 +504,7 @@ $spinner = '<div class="spinner">
                         </a>
                     <?php } ?>
 
-                    <a href="<?php echo $base_url; ?>/dashboard" class="btn bg-custom-primary text-light px-3 mx-2 mb-1 mb-lg-0 empty-link" onclick="handleStartBtn()" id="start_btn" style="display: none;">
+                    <a href="<?php echo $base_url; ?>/dashboard" class="btn bg-custom-dark text-light px-3 mx-2 mb-1 mb-lg-0 empty-link" onclick="handleStartBtn()" id="start_btn" style="display: none;">
                         <span class="d-flex align-items-center">
                             <strong class="fw-bold"><i class="bi bi-stars text-warning"></i>Get started</strong>
                         </span>

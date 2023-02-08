@@ -66,13 +66,6 @@
         text-align: center;
     }
 
-    .column {
-        width: 23%;
-        float: left;
-        padding: 5px;
-
-    }
-
     p {
         line-height: 1.6;
         font-size: 16px;
@@ -130,28 +123,15 @@
     }
 
     @media(max-width: 1024px) {
-        .column {
-            width: 4%;
-        }
 
         .site-footer {
             padding: 20px;
             height: 500px;
         }
 
-        .column:nth-child(4) h2,
-        .address {
-            text-align: center;
-        }
     }
 
     @media(max-width: 936px) {
-        .column {
-            float: none;
-            text-align: center;
-            width: 100%;
-
-        }
 
         .address li {
             text-align: center;
@@ -188,42 +168,43 @@
 
 <!-- Footer -->
 <footer class="site-footer">
-    <div class="column">
-        <h4 class="text-left fw-bold"><?php echo $site_name; ?></h4>
-        <p>Generate quality content in <strong>just a couple of clicks</strong>. Take the hassle
-            out of content creation and let <?php echo $site_name; ?> generate
-            <strong>professional-grade content</strong> for you in a fraction of the time.
-        </p>
+    <div class="row">
+        <div class="col-md-3 p-4">
+            <h4 class="text-left fw-bold"><?php echo $site_name; ?></h4>
+            <p>Generate quality content in <strong>just a couple of clicks</strong>. Take the hassle
+                out of content creation and let <?php echo $site_name; ?> generate
+                <strong>professional-grade content</strong> for you in a fraction of the time.
+            </p>
+        </div>
+        <div class="col-md-3 p-4">
+            <h4>Quick actions</h4>
+            <ul class="list-group list-group-flush">
+                <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="<?php echo $base_url; ?>/dashboard" onclick="handleStartBtn()" class="empty-link">Get started</a></li>
+                <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="<?php echo $base_url; ?>/pricing"><strong>Go pro!</strong></a></li>
+                <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="#services">Become an affiliate</a></li>
+                <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="javascript: void(0)" onclick="startChat()">Help</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3 p-4">
+            <h4>Company</h4>
+            <ul class="list-group list-group-flush">
+                <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="#about-us">About us</a></li>
+                <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="#contact-us">Contact us</a></li>
+                <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="<?php echo $base_url; ?>/blog">News and insights</a></li>
+                <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="#!press">Media & Press</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3 p-4">
+            <h4 class="text-left">Stay in the know</h4>
+            <form>
+                <p class="text-light">Get a monthly digest of whats new and exciting from us.</p>
+                <div class="d-flex w-100 gap-2">
+                    <input id="newsletter" type="text" class="form-control" placeholder="Email address">
+                    <button class="btn bg-custom-dark text-light" type="button">Notify&nbsp;me</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="column">
-        <h4>Quick actions</h4>
-        <ul class="list-group list-group-flush">
-            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="<?php echo $base_url; ?>/dashboard" onclick="handleStartBtn()" class="empty-link">Get started</a></li>
-            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="<?php echo $base_url; ?>/pricing"><strong>Go pro!</strong></a></li>
-            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="#services">Become an affiliate</a></li>
-            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="javascript: void(0)" onclick="startChat()">Help</a></li>
-        </ul>
-    </div>
-    <div class="column">
-        <h4>Company</h4>
-        <ul class="list-group list-group-flush">
-            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="#about-us">About us</a></li>
-            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="#contact-us">Contact us</a></li>
-            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="<?php echo $base_url; ?>/blog">News and insights</a></li>
-            <li><i class="fa fa-angle-double-right"></i><a class="text-light" href="#!press">Media & Press</a></li>
-        </ul>
-    </div>
-    <div class="column">
-        <h4 class="text-left">Stay in the know</h4>
-        <form>
-            <p class="text-light">Get a monthly digest of whats new and exciting from us.</p>
-            <div class="d-flex w-100 gap-2">
-                <input id="newsletter" type="text" class="form-control" placeholder="Email address">
-                <button class="btn btn-sm btn-primary" type="button">Notify&nbsp;me</button>
-            </div>
-        </form>
-    </div>
-
 </footer>
 <div class="bottom d-flex justify-content-center">
     <p class="fw-bold">&copy; <?php echo $site_name; ?> <?php date("Y") ?></p>
@@ -236,6 +217,7 @@
         </ul>
     </div>
 </div>
+
 <!-- Footer -->
 
 <!-- Signup modal -->
@@ -296,7 +278,13 @@
                         <div class="g_id_signin" data-type="standard" data-size="large" data-text="signup_with" data-shape="pill" data-theme="filled_blue" data-logo_alignment="left">
                         </div>
                     </div>
-                    <small class="text-muted my-2">By signing up, you agree to the <a class="text-primary" href="<?php echo $base_url; ?>/terms/" target="_blank">terms</a> of use.</small>
+                    <small class="text-muted my-2">
+                        By signing up, you agree to the
+                        <a class="text-primary" style="font-size: 0.875em !important;" href="<?php echo $base_url; ?>/terms" target="_blank">
+                            terms
+                        </a>
+                        of use.
+                    </small>
                     <h2 class="fs-6 fw-bold mb-3">I already have an account</h2>
                     <a class="w-100 mb-2 btn btn-sm btn-outline-primary rounded-4" onclick="popSigninModal();"> Sign in </a>
                 </form>
@@ -511,7 +499,13 @@
                 <div class="d-flex justify-content-center my-2">
                     <span id="wp-template-details-spinner" style="display: none;" class="loader mx-3"><?php echo $spinner; ?></span>
                 </div>
-                <?php if ($active_sub == 2) { ?>
+                <?php
+                if ($active_sub == 2) {
+
+                    $sql_wp = "SELECT wp_url, wp_user, wp_pass FROM users WHERE users.email = '$user_email'";
+                    $rs_wp = $mysqli->query($sql_wp);
+                    $row_wp = $rs_wp->fetch_assoc();
+                ?>
                     <!-- Post details -->
                     <small class="fw-bold">Post details</small>
                     <div class="row row-cols-3 mb-3">
@@ -549,11 +543,10 @@
                                 <span class="text-muted">Please note <i class="bi bi-info-circle-fill"></i></span>
                             </small>
                         </span>
-
                     </div>
                     <div class="row">
                         <div class="col-md-6 form-floating">
-                            <input type="url" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" name="wp-url" id="wp-url" placeholder="" autocomplete="off" maxlength="100" required>
+                            <input type="url" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" name="wp-url" id="wp-url" value="<?php echo $row_wp["wp_url"]; ?>" autocomplete="off" maxlength="100" required>
                             <label class="text-muted" for="wp-url"><i class="bi bi-globe"></i> Site URL<sup><small>eg https://example.com</small></sup> *</label>
                         </div>
                         <div class="col-md-4 form-floating">
@@ -561,11 +554,11 @@
                             <label class="text-muted" for="wp-author">Post Author <sup><small>Author ID (Number)</small></sup></label>
                         </div>
                         <div class="col-md-4 form-floating">
-                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" name="wp-username" id="wp-username" placeholder="" autocomplete="off" maxlength="50" required>
+                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" name="wp-username" id="wp-username" value="<?php echo $row_wp["wp_user"]; ?>" autocomplete="off" maxlength="50" required>
                             <label class="text-muted" for="wp-username">Username/Email *</label>
                         </div>
                         <div class="col-md-4 form-floating">
-                            <input type="password" class="form-control pass-input border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-pass" name="wp-pass" autocomplete="off" placeholder="" maxlength="50" required>
+                            <input type="password" class="form-control pass-input border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-pass" name="wp-pass" autocomplete="off" value="<?php echo $row_wp["wp_pass"]; ?>" maxlength="50" required>
                             <label class="text-muted" for="wp-pass">WordPress password *</label>
                         </div>
                         <div class="d-flex justify-content-start my-3">
@@ -583,15 +576,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="py-3">
+                    <div class="py-3 ps-2">
                         <div class="col form-check">
                             <input class="form-check-input" type="checkbox" value="" id="wp-status">
                             <label class="form-check-label" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Check this box to directly publish the post to WordPress, otherwise it will be saved as a draft in your account" for="flexCheckChecked">
                                 Publish to WordPress publicly
                             </label>
                         </div>
-                        <div class="col-md-2 mb-1">
-                            <button id="wp-submit-btn" class="w-100 my-2 btn rounded-4 btn-dark" onclick='publishToWordPress()'>
+                        <div class="col-md-2 mt-2 mb-1">
+                            <button id="wp-submit-btn" class="w-100 my-2 btn rounded-3 btn-dark" onclick='publishToWordPress()'>
                                 <span id="wp-spinner" style="display: none;">
                                     <span class="spinner-border spinner-border-sm text-white" role="status"></span>
                                 </span>
@@ -662,22 +655,10 @@
 <!-- Scripts -->
 
 <!-- Custom JS -->
-<script src="<?php
-                if ($base_url == "" || empty($base_url)) {
-                    $base_url = '/parrot';
-                    echo $base_url;
-                } else {
-                    echo $base_url;
-                }
-                ?>/assets/js/custom.js" type="text/javascript"></script>
+<script src="<?php echo $base_url; ?>/assets/js/custom.js" type="text/javascript"></script>
 
 <!-- SWAL -->
-<script src="<?php if ($base_url == "" || empty($base_url)) {
-                    $base_url = '/parrot';
-                    echo $base_url;
-                } else {
-                    echo $base_url;
-                } ?>/assets/js/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="<?php echo $base_url; ?>/assets/js/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
 <!-- Shepherd JS -->
 <script src="https://cdn.jsdelivr.net/npm/shepherd.js@10.0.1/dist/js/shepherd.min.js"></script>

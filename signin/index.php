@@ -46,9 +46,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     include "../session.php";
                                     // Store data in session variables
                                     $_SESSION["loggedin"] = true;
-                                    $_SESSION["id"] = $id;
+                                    $_SESSION["id"] = $id; //user ID
                                     $_SESSION["username"] = $username;
                                     $_SESSION["email"] = $email;
+                                    $_SESSION['csrf_token'] = session_id();
 
                                     $queryStatus = "SIGNIN_SUCCESS";
                                 } else {

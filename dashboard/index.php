@@ -23,7 +23,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
 <!-- Custom styles for the page -->
 <style>
     /* saved templates */
-    .saved_templates {
+    .saved-templates {
         /* height: 100%; */
         width: 0;
         position: fixed;
@@ -38,11 +38,11 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
     }
 
     @media screen and (max-height: 450px) {
-        .saved_templates {
+        .saved-templates {
             padding-top: 15px;
         }
 
-        .saved_templates a {
+        .saved-templates a {
             font-size: 18px;
         }
     }
@@ -275,7 +275,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                     <!-- Include prompt in response -->
                     <div class="form-group mb-3">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="rem_input" checked>
+                            <input class="form-check-input content-type-input" type="checkbox" role="switch" id="rem_input" checked>
                             <label class="form-check-label d-flex" for="rem_input">
                                 <small>Remove prompt from response&nbsp;
                                     <i tabindex="0" class="bi bi-question-circle" role="button" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Choose whether to include prompt in response or not."></i>
@@ -287,7 +287,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                     <!-- Highlight output -->
                     <div class="form-group mb-3">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="highlight" checked>
+                            <input class="form-check-input content-type-input" type="checkbox" role="switch" id="highlight" checked>
                             <label class="form-check-label d-flex" for="highlight">
                                 <small>Highlight output&nbsp;
                                     <i tabindex="0" class="bi bi-question-circle" role="button" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Choose whether to highlight output or not."></i>
@@ -388,7 +388,6 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
 
                                 .editButtons span {
                                     display: inline-block;
-                                    /* white-space: nowrap; */
                                     margin-top: 8px;
                                     background: #fff;
                                 }
@@ -411,9 +410,10 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                                 #outputarea {
                                     padding: 4px 10px;
                                     height: 380px;
+                                    overflow-y: scroll;
 
                                     /* Deal with line breaks  */
-                                    /* white-space: pre-line; */
+                                    white-space: pre-wrap;
                                 }
 
                                 #outputarea:focus {
@@ -422,42 +422,41 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
 
                                 /* Floating toolbar */
                                 /* ul.floating-toolbar {
-                        list-style: none;
-                        box-shadow: 0px 0px 4px rgba(0, 0, 0, .5);
-                        position: absolute;
-                    } */
-
-                                #canvas-actions-bar {
-                                    /* position: fixed;
-                                bottom: 50px;
-                                left: 50px;
-                                width: 50px;
-                                height: 50px;
-                                background-color: #fff;
-                                border-radius: 50%;
-                                box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1); */
+                                    list-style: none;
+                                    box-shadow: 0px 0px 4px rgba(0, 0, 0, .5);
+                                    position: absolute;
                                 }
 
-                                .floating-toolbar {
+                                #canvas-actions-bar {
+                                    position: fixed;
+                                    bottom: 50px;
+                                    left: 50px;
+                                    width: 50px;
+                                    height: 50px;
+                                    background-color: #fff;
+                                    border-radius: 50%;
+                                    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+                                } */
+
+                                #floating-toolbar {
                                     position: absolute;
-                                    height: 40px;
+                                    /* height: 40px; */
                                     border-radius: 2px;
-                                    background-color: #212121;
+                                    /* background-color: #212121; */
                                     text-align: center;
                                 }
 
-                                .floating-toolbar::before {
+                                #floating-toolbar::before {
                                     position: absolute;
-                                    content: '';
-                                    border-top: 10px solid black;
+                                    /* border-top: 10px solid black;
                                     border-left: 10px solid transparent;
-                                    border-right: 10px solid transparent;
+                                    border-right: 10px solid transparent; */
                                     left: 155px;
                                     top: 40px;
                                     text-align: center;
                                 }
 
-                                .floating-toolbar li {
+                                #floating-toolbar li {
                                     height: 32px;
                                     background-repeat: no-repeat;
                                     background-position: center;
@@ -465,7 +464,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                                 }
 
                                 .toolbar-item {
-                                    color: #F5F5F5;
+                                    /* color: #F5F5F5; */
                                     padding: 1px;
                                 }
 
@@ -563,7 +562,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                                 <div class="d-flex justify-content-between mx-1">
                                     <span title="Post to WordPress">
                                         <button class="btn btn-sm fw-bold" onclick="popWpModal('gen_text', <?php echo $active_sub; ?>)">
-                                            <i class="bi bi-wordpress text-primary fs-5"></i>
+                                            <i class="bi bi-wordpress text-primary fs-5"></i> <sup class="text-muted border">Beta</sup>
                                         </button>
                                     </span>
                                     <span title="Share">
@@ -577,18 +576,39 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                     </div>
 
                     <div id="outputarea-wrapper">
-                        <!-- Interim speech holder -->
-                        <div id="interim" class="bg-info rounded mx-1 px-1 d-flex justify-content-center align-items-center"></div>
-                        <div class="overflow-auto bg-white rounded" id="outputarea" style="user-select: text; white-space: pre-wrap; overflow-wrap: break-word;" contenteditable></div>
+                        <div id="interim" class="bg-info rounded mx-1 px-1 d-flex justify-content-center align-items-center"></div> <!-- Interim speech holder -->
+                        <div class="bg-white rounded" id="outputarea" contenteditable></div>
+                        <ul id="floating-toolbar" class="dropdown-menu rounded-3 p-2 px-3 shadow" style="display: none;">
+                            <li class="list-group-item toolbar-item text-start border-0 my-1" onclick="completeUserPrompt('toolbar', 'auto_complete', '')">
+                                <i class="bi bi-robot"></i>
+                                <small class="fw-bold"> Continue...</small>
+                            </li>
+                            <li class="list-group-item toolbar-item text-start border-0 my-1" onclick="completeUserPrompt('toolbar', 'paraphrase', '')">
+                                <i class="bi bi-pencil-square"></i>
+                                <small class="fw-bold"> Paraphrase</small>
+                            </li>
+                            <li class="list-group-item toolbar-item text-start border-0 my-1" onclick="completeUserPrompt('toolbar', 'execute', '')">
+                                <i class="bi bi-terminal"></i>
+                                <small class="fw-bold"> Run as command</small>
+                            </li>
+                            <hr class="w-100 my-1">
+                            <li class="list-group-item toolbar-item text-start border-0 mt-2 my-1" data-edit="copy">
+                                <i class="bi bi-clipboard2"></i>
+                                <small class="fw-bold"> Copy</small>
+                            </li>
+                            <li class="list-group-item toolbar-item text-start border-0 my-1" data-edit="cut">
+                                <i class="bi bi-scissors"></i>
+                                <small class="fw-bold"> Cut</small>
+                            </li>
+                            <li class="list-group-item toolbar-item text-start border-0 my-1" data-edit="delete">
+                                <i class="bi bi-trash"></i>
+                                <small class="fw-bold"> Delete</small>
+                            </li>
+                            <!-- <hr class="w-100 my-1">
+                            <li class="list-group-item toolbar-item text-start border-0 mt-2 my-1" data-edit="paste"><i class="bi bi-clipboard-check-fill"></i> Paste</li>
+                            <li class="list-group-item toolbar-item text-start border-0" data-edit="paste:null"><i class="bi bi-clipboard-check"></i> Paste without formatting</li> -->
+                        </ul>
                     </div>
-
-                    <ul class="list-inline floating-toolbar text-light rounded-3 p-1 shadow" style="display: none;">
-                        <li class="list-inline-item toolbar-item" onclick="completeUserPrompt('toolbar', 'auto_complete', '')"><span>Continue</span></li>
-                        <li class="list-inline-item vr"><span class="vr"></span></li>
-                        <li class="list-inline-item toolbar-item" onclick="completeUserPrompt('toolbar', 'paraphrase', '')"><span>Paraphrase</span></li>
-                        <li class="list-inline-item vr"><span class="vr"></span></li>
-                        <li class="list-inline-item toolbar-item" onclick="completeUserPrompt('toolbar', 'execute', '')"><span>Run command</span></li>
-                    </ul>
 
                     <div class="mt-2 mx-2" id="canvas-actions-bar">
                         <div class="d-flex justify-content-between border rounded-4 shadow-sm p-1">
@@ -626,11 +646,6 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
             </div>
         </div>
 
-
-        <!-- Content types -->
-        <div class="p-1"><?php include('templates.php'); ?></div>
-        <!-- End content types -->
-
         <!-- Offcanvas -->
 
         <div id="savedTemplatesCmpnt" class="offcanvas offcanvas-end rounded-start ms-0" data-bs-scroll="true" tabindex="-1">
@@ -641,7 +656,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                         <input type="search" oninput="fetchSavedTemplates(current_page, 'search')" placeholder="Search..." class="form-control form-control-sm border-top-0 border-start-0 border-end-0 rounded-0 col-6 bg-transparent text-light dash-search" id="temp_search_term" autocomplete="off" maxlength="50">
                         <i class="bi bi-search mt-2" onclick="fetchSavedTemplates(current_page, 'search')"></i>
                     </div>
-                    <small class="btn btn-sm btn-light border" onclick=''>
+                    <small class="btn btn-sm btn-light border" onclick="location.href=base_url + '/account#templates'">
                         View all
                     </small>
                     <i class="bi bi-caret-right-fill" type="button" class="btn-close" data-bs-dismiss="offcanvas"></i>
@@ -678,7 +693,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
         useModalOverlay: true,
         defaultStepOptions: {
             classes: 'shadow',
-            scrollTo: true,
+            scrollTo: false,
             confirmCancel: true,
             confirmCancelMessage: "Sure you want to cancel the tour?",
             // exitOnEsc: false
@@ -801,7 +816,10 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
             title: steps[i][1],
             text: steps[i][2],
             buttons: buttons,
-            cancelIcon: cancelIcon
+            cancelIcon: cancelIcon,
+            onShow: () => {
+                attachToArr[0].scrollIntoView();
+            }
         }, i + 1);
     }
 
@@ -818,6 +836,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
 
     if (tour_status != "complete" && tour_status != "cancel" && tour_status != "hide")
         tour.start();
+
 
     // Authentication
     window.addEventListener('DOMContentLoaded', (event) => {
@@ -860,19 +879,117 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
 
     document.querySelectorAll("[data-edit]").forEach(btn => {
         try {
-            btn.addEventListener("click", edit)
+            btn.addEventListener("click", edit);
         } catch (e) {
             console.error('error caught:', e);
         }
     });
 
-    function edit(ev) {
-        ev.preventDefault();
+    function edit(event) {
+        setSelectionRange(canvas, x.selectionCaretStart, x.selectionCaretEnd);
+        event.preventDefault();
+        // Id("floating-toolbar").style.display = "none";
         const cmd_val = this.getAttribute("data-edit").split(":");
+
+        // if (cmd_val[0] == "paste") {
+
+        //     // document.execCommand("delete");
+
+        //     // setCaretPosition(canvas, x.selectionCaretStart);
+
+        //     if (cmd_val[1] == "null") {
+        //         // Paste without formatting
+        //         // Create a hidden textarea element
+        //         var hiddenTextarea = document.createElement("textarea");
+        //         hiddenTextarea.style.position = "absolute";
+        //         hiddenTextarea.style.left = "-9999px";
+        //         document.body.appendChild(hiddenTextarea);
+
+        //         // Focus the textarea so that the paste command will work
+        //         hiddenTextarea.focus();
+
+        //         // Execute the paste action
+        //         document.execCommand("paste");
+
+        //         // Wait for the paste to complete
+        //         setTimeout(function() {
+        //             // Get the pasted content
+        //             var pastedContent = hiddenTextarea.value;
+
+        //             // Insert the pasted content into the contenteditable div as plain text
+        //             document.execCommand("insertText", false, pastedContent);
+
+        //             // Remove the hidden textarea element
+        //             document.body.removeChild(hiddenTextarea);
+        //         }, 50);
+
+        //     } else {
+        //         // Create a hidden textarea element
+        //         var hiddenTextarea = document.createElement("textarea");
+        //         hiddenTextarea.style.position = "absolute";
+        //         hiddenTextarea.style.left = "-9999px";
+        //         document.body.appendChild(hiddenTextarea);
+
+        //         // Focus the textarea so that the paste command will work
+        //         hiddenTextarea.focus();
+
+        //         // Execute the paste action
+        //         document.execCommand("paste");
+
+        //         // Wait for the paste to complete
+        //         setTimeout(function() {
+        //             // Get the pasted content
+        //             var pastedContent = hiddenTextarea.value;
+
+        //             // Insert the pasted content into the contenteditable div
+        //             document.execCommand("insertHTML", false, pastedContent);
+
+        //             // Remove the hidden textarea element
+        //             document.body.removeChild(hiddenTextarea);
+        //         }, 50);
+        //     }
+        // } else {
         document.execCommand(cmd_val[0], false, cmd_val[1]);
+        // }
+
+        // Remove highlight
+        setSelectionRange(canvas, x.selectionCaretStart, x.selectionCaretEnd);
+
+        setCaretPosition(canvas, x.selectionCaretEnd);
+
+        $("#floating-toolbar").fadeOut(200);
     }
 
-    // Floating toolbar                    
+    // Floating toolbar   
+    // Cut, copy, paste
+
+    // function toolbarCut() {
+    //     // Check if the user has selected some text
+    //     if (window.getSelection().toString()) {
+    //         // Get the selected text
+    //         var text = window.getSelection().toString();
+
+    //         // Put the selected text in the clipboard
+    //         event.clipboardData.setData("text/plain", text);
+
+    //         // Delete the selected text
+    //         document.execCommand("delete");
+    //     }
+    // }
+
+    // function toolbarCopy() {
+    //     // Check if the user has selected some text
+    //     if (window.getSelection().toString()) {
+    //         // Get the selected text
+    //         var text = window.getSelection().toString();
+
+    //         // Put the selected text in the clipboard
+    //         event.clipboardData.setData("text/plain", text);
+    //     }
+    // }
+
+
+    // floating action
     if (!window.x) {
         x = {};
     }
@@ -988,97 +1105,137 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
         }
     }
 
-    // function setCaretPosition(element, position) {
 
-    //     // Creates range object
-    //     var setpos = document.createRange();
-
-    //     // Creates object for selection
-    //     var set = window.getSelection();
-
-    //     // Set start position of range
-    //     setpos.setStart(element.childNodes[0], position);
-
-    //     // Collapse range within its boundary points
-    //     // Returns boolean
-    //     setpos.collapse(true);
-
-    //     // Remove all ranges set
-    //     set.removeAllRanges();
-
-    //     // Add range with respect to range object.
-    //     set.addRange(setpos);
-
-    //     // Set cursor on focus
-    //     element.focus();
-    //     console.log(position)
-    // }
-
-    // function createRange(node, chars, range) {
-    //     if (!range) {
-    //         range = document.createRange()
-    //         range.selectNode(node);
-    //         range.setStart(node, 0);
+    // function setCaretPosition(target, position) {
+    //     if (target.contentEditable === 'true') {
+    //         var sel = window.getSelection();
+    //         var range = document.createRange();
+    //         range.setStart(target.childNodes[0], position);
+    //         range.collapse(true);
+    //         sel.removeAllRanges();
+    //         sel.addRange(range);
+    //     } else {
+    //         target.focus();
+    //         target.setSelectionRange(position, position);
     //     }
 
-    //     if (chars.count === 0) {
-    //         range.setEnd(node, chars.count);
-    //     } else if (node && chars.count > 0) {
-    //         if (node.nodeType === Node.TEXT_NODE) {
-    //             if (node.textContent.length < chars.count) {
-    //                 chars.count -= node.textContent.length;
-    //             } else {
-    //                 range.setEnd(node, chars.count);
-    //                 chars.count = 0;
-    //             }
-    //         } else {
-    //             for (var lp = 0; lp < node.childNodes.length; lp++) {
-    //                 range = createRange(node.childNodes[lp], chars, range);
-
-    //                 if (chars.count === 0) {
-    //                     break;
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    //     return range;
+    //     console.log(position);
     // }
 
-    // function setCaretPosition(element, chars) {
-    //     if (chars >= 0) {
-    //         var selection = window.getSelection();
 
-    //         range = createRange(element.parentNode, {
-    //             count: chars
-    //         });
+    function setCaretPosition(target, position) {
+        if (target.contentEditable === 'true') {
+            var sel = window.getSelection();
+            var range = document.createRange();
+            if (target.childNodes.length > 0) {
+                range.setStart(target.childNodes[0], position);
+            } else {
+                range.setStart(target, position);
+            }
+            range.collapse(true);
+            sel.removeAllRanges();
+            sel.addRange(range);
+        } else {
+            target.focus();
+            target.setSelectionRange(position, position);
+        }
+
+        console.log(position);
+    }
 
 
-    //         if (range) {
-    //             range.collapse(false);
-    //             selection.removeAllRanges();
-    //             selection.addRange(range);
-    //         }
-    //     }
-    // }
+    function setCaretToEnd(target) {
+        var sel = window.getSelection();
+        var range = document.createRange();
+        range.selectNodeContents(target);
+        range.setEndAfter(target.lastChild);
+        range.collapse(false);
+        sel.removeAllRanges();
+        sel.addRange(range);
+    }
+
+
+    function getCaretPosition(element) {
+        var caretOffset = 0;
+
+        if (window.getSelection) {
+            var range = window.getSelection().getRangeAt(0);
+            var preCaretRange = range.cloneRange();
+            preCaretRange.selectNodeContents(element);
+            preCaretRange.setEnd(range.endContainer, range.endOffset);
+            caretOffset = preCaretRange.toString().length;
+        } else if (document.selection && document.selection.type != "Control") {
+            var textRange = document.selection.createRange();
+            var preCaretTextRange = document.body.createTextRange();
+            preCaretTextRange.moveToElementText(element);
+            preCaretTextRange.setEndPoint("EndToEnd", textRange);
+            caretOffset = preCaretTextRange.text.length;
+        }
+
+        return caretOffset;
+    }
+
+    /**
+     * Function to insert text at cursor position and select/highlight it
+     * https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
+     * Updated answer by Tim Down
+     */
+    function pasteHtmlAtCaret(html, selectPastedContent) {
+        var sel, range;
+        sel = window.getSelection();
+        if (sel.getRangeAt && sel.rangeCount) {
+            range = sel.getRangeAt(0);
+            range.deleteContents();
+
+            var el = document.createElement("div");
+            el.innerHTML = html;
+            var frag = document.createDocumentFragment(),
+                node, lastNode;
+            while ((node = el.firstChild)) {
+                lastNode = frag.appendChild(node);
+            }
+            var firstNode = frag.firstChild;
+            range.insertNode(frag);
+
+            // Preserve the selection
+            if (lastNode) {
+                range = range.cloneRange();
+                range.setStartAfter(lastNode);
+                if (selectPastedContent) {
+                    range.setStartBefore(firstNode);
+                    showFloatingToolbar();
+                } else {
+                    range.collapse(true);
+                }
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        }
+    }
+
 
     function onlySpaces(str) {
         return str.trim().length === 0;
     }
 
+
     function showFloatingToolbar() {
+        const floating = document.querySelector('#floating-toolbar');
+
         var selectedText = x.Selector.getSelected();
         if (!onlySpaces(selectedText)) {
-            x.selectionCaretStart = getSelectionCharacterOffsetWithin(canvas).start
-            x.selectionCaretEnd = getSelectionCharacterOffsetWithin(canvas).end;
+            var selectionCaretPos = getSelectionCharacterOffsetWithin(canvas);
+            x.selectionCaretStart = selectionCaretPos.start
+            x.selectionCaretEnd = selectionCaretPos.end;
             let selection = t;
             let rect = selection.getRangeAt(0).getBoundingClientRect();
-            var element = document.querySelectorAll(".floating-toolbar")[0];
-            element.style.top = `calc(${rect.top}px - 48px)`;
-            element.style.left = `calc(${rect.left}px + calc(${rect.width}px / 2) - 40px)`;
-            $('.floating-toolbar').fadeIn(200);
+
+            floating.style.top = `calc(${rect.top}px - 48px)`;
+            floating.style.left = `calc(${rect.left}px + calc(${rect.width}px / 2) - 40px)`;
+
+            $('#floating-toolbar').fadeIn(200);
         } else {
-            $('.floating-toolbar').fadeOut(200);
+            $('#floating-toolbar').fadeOut(200);
         }
     }
 
@@ -1092,11 +1249,11 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
     //     pageY = e.pageY;
     // });
 
-    var container = $("#reusable-container");
+    // var container = $("#reusable-container");
 
     // Hide sections initially
-    $(".content-type").hide();
-    container.hide();
+    // $(".content-type").hide();
+    // container.hide();
 
     // Content type selection
     var content_types = Class('content-selection');
@@ -1135,28 +1292,48 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
         var elem = document.querySelector('input[value="' + type + '"]');
         elem.checked = true;
 
-        var cmpnt = Id(type + "_cmpnt");
-
         var container = $("#reusable-container");
 
-        container.html(cmpnt.innerHTML);
-        container.fadeIn(10, () => {
+        // $(document).ready(() => {
+        $("#reusable-container").load(`content-types/ ${type}_cmpnt`);
+        console.log((`content-types/ ${type}_cmpnt`))
+        // });
 
-            // On DOM change
-            // Store cookies on input value change
-            setCookie("dash_content_type", type, 365);
+        // var xhr = new XMLHttpRequest();
+        // xhr.open("GET", "content-types/", true);
+        // xhr.onreadystatechange = function() {
+        //     if (xhr.readyState === 4 && xhr.status === 200) {
+        //         document.getElementById("reusable-container").innerHTML =
+        //             xhr.responseText.split("<div id='" + type + "'_cmpnt'>")[1].split("</div>")[0];
+        //     }
+        // };
+        // xhr.send();
 
-            var ctype_inputs = Class("content-type-input");
 
-            Array.prototype.slice.call(ctype_inputs)
-                .forEach((el) => {
-                    el.oninput = () => {
+        // container.fadeIn(10, () => {
+
+        // On DOM change
+        // Store cookies on input value change
+        setCookie("dash_content_type", type, 365);
+
+        var ctype_inputs = Class("content-type-input");
+
+        Array.prototype.slice.call(ctype_inputs)
+            .forEach((el) => {
+                el.oninput = () => {
+                    if (el.type == "checkbox")
+                        setCookie(el.id, el.checked, 365);
+                    else
                         setCookie(el.id, el.value, 365);
-                    }
-                    if (el.value == "")
-                        el.value = getCookie(el.id);
-                });
-        });
+                }
+                if (el.value == "")
+                    el.value = getCookie(el.id);
+                if (el.type == "checkbox") {
+                    el.checked = JSON.parse(getCookie(el.id));
+                }
+
+            });
+        // });
     }
 
     /**
@@ -1215,53 +1392,12 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
         }
     }
 
-    /**
-     * Function to insert text at cursor position and select/highlight it
-     * https://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
-     * Updated answer by Tim Down
-     */
-    function pasteHtmlAtCaret(html, selectPastedContent) {
-        var sel, range;
-        sel = window.getSelection();
-        if (sel.getRangeAt && sel.rangeCount) {
-            range = sel.getRangeAt(0);
-            range.deleteContents();
-
-            var el = document.createElement("div");
-            el.innerHTML = html.trim();
-            var frag = document.createDocumentFragment(),
-                node, lastNode;
-            while ((node = el.firstChild)) {
-                lastNode = frag.appendChild(node);
-            }
-            var firstNode = frag.firstChild;
-            range.insertNode(frag);
-
-            // Preserve the selection
-            if (lastNode) {
-                range = range.cloneRange();
-                range.setStartAfter(lastNode);
-                if (selectPastedContent) {
-                    range.setStartBefore(firstNode);
-                    showFloatingToolbar();
-                } else {
-                    range.collapse(true);
-                }
-                sel.removeAllRanges();
-                sel.addRange(range);
-            }
-        }
-    }
-
     // Complete use prompt
     // Object to store previous request details for use in retry attempt
     if (typeof sendInfo !== "undefined" && sendInfo !== null && sendInfo !== "")
         var previousRequest = sendInfo;
 
     function completeUserPrompt(source, command, element) {
-
-        // Keep selection highklighted        
-        setSelectionRange(canvas, x.selectionCaretStart, x.selectionCaretEnd);
 
         const outputarea = $("#outputarea");
         creativity = $("#creativity").val();
@@ -1286,7 +1422,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                         if (Id("starter_context").value !== "")
                             context = Id("starter_context").value;
                         else {
-                            context = canvas.text();
+                            context = canvas.innerText;
                         }
                         break;
                     case "article_outline":
@@ -1315,10 +1451,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                         }
                         break;
                     case "paraphrase":
-                        if (!x.selectedText || x.selectedText == "")
-                            context = canvas.innerText;
-                        else
-                            context = x.selectedText;
+                        context = canvas.innerText;
                         break;
                     case "article_body":
                         if (Id("article_body_title").value !== "") {
@@ -1367,30 +1500,39 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                         }
                         break;
                     case "email_body":
-                        if (Id("starter_context").value !== "")
-                            context = Id("starter_context").value;
-                        else
-                            context = "";
+                        context = Id("email_body_intent").value;
+                        if (context !== "") {
+                            var inputs = Class("email-body");
+                            for (var i = 0; i < inputs.length; i++) {
+                                sendInfo[inputs[i].id] = inputs[i].value;
+                            }
+                        }
                         break;
-                    case "ads_copy":
-                        if (Id("starter_context").value !== "")
-                            context = Id("starter_context").value;
-                        else
-                            context = "";
+                    case "ad_copy":
+                        context = Id("ad_product_name").value;
+                        if (context !== "") {
+                            var inputs = Class("ad-copy");
+                            for (var i = 0; i < inputs.length; i++) {
+                                sendInfo[inputs[i].id] = inputs[i].value;
+                            }
+                        }
                         break;
                 }
                 break;
             case "sample":
                 context = Id(element + "_context").innerText;
-                rem_input = false;
+                rem_input = false; //Don't remove prompt
                 break;
             case "canvas":
                 if (command == "retry")
                     // sendInfo = previousRequest.body;
                     console.log(sendInfo)
                 else
-                    context = x.selectedText ?? outputarea.text();
+                    context = canvas.innerText;
+
             case "toolbar":
+                // Keep selection highlighted        
+                setSelectionRange(canvas, x.selectionCaretStart, x.selectionCaretEnd);
                 if (x.selectedText !== "") {
                     switch (command) {
                         case "auto_complete":
@@ -1439,25 +1581,8 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
             else
                 sendInfo.tone = "semi-formal";
 
-
             // Store request params for retry attempt
             localStorage.previousRequest = JSON.stringify(sendInfo);
-
-            // Stream response
-            const source = new EventSource("completion/");
-
-            source.addEventListener("message", (event) => {
-                const div = document.getElementById("response");
-                var text = JSON.parse(event.data).choices[0].text;
-                var id = JSON.parse(event.data).id;
-                div.innerHTML += text;
-
-                var finish_reason = JSON.parse(event.data).choices[0].finish_reason;
-
-                if (finish_reason == "length") {
-                    source.close();
-                }
-            });
 
             $.ajax({
                 type: 'POST',
@@ -1471,84 +1596,12 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                     resp_holder = data;
                     if (data !== null) {
                         if (data.status != 'hash_error') {
-                            $('.floating-toolbar').fadeOut(200);
 
-                            // Write result to outputarea 
-                            try {
-                                // outputarea.focus();
-                                // Cursor position
-                                if (command === 'auto_complete') {
-                                    // setCaretPosition(canvas, x.selectionCaretEnd);
-                                    setSelectionRange(canvas, x.selectionCaretEnd, x.selectionCaretEnd)
-                                    // outputarea.focus();
-                                } else if (command === "paraphrase") {
-                                    // setCaretPosition(canvas, x.selectionCaretEnd);
-                                    document.execCommand("delete", false, "");
-                                    // setSelectionRange(canvas, x.selectionCaretEnd, x.selectionCaretEnd)
-                                } else {
-                                    outputarea.focus();
-                                }
+                            // If shepherd tour is active
+                            if (tour.isActive())
+                                if (tour.getCurrentStep().id == "step_2")
+                                    tour.next();
 
-                                data = data.replace('<|endoftext|>', '');
-
-                                // Include/exclude prompt in text and write response
-                                if (rem_input === true) {
-                                    pasteHtmlAtCaret(data, highlight);
-                                } else {
-                                    pasteHtmlAtCaret(context + ' ' + data, highlight);
-                                }
-
-                                // // Create an EventSource object
-                                // const es = new EventSource("completion/");
-
-                                // // Listen for the message event
-                                // es.addEventListener("message", (event) => {
-                                //     const data = event.data;
-
-                                //     data = data.replace('<|endoftext|>', '');
-
-                                //     // Include/exclude prompt in text and write response
-                                //     if (rem_input === true) {
-                                //         pasteHtmlAtCaret(data, highlight);
-                                //     } else {
-                                //         pasteHtmlAtCaret(context + ' ' + data, highlight);
-                                //     }
-                                // });
-
-
-                                // Create an EventSource object
-                                // const es = new EventSource("completion/");
-
-                                // // Listen for the message event
-                                // es.addEventListener("message", (event) => {
-                                //     var data = event;
-
-                                //     console.log(data);
-
-                                //     // Get the contenteditable div
-                                //     const div = document.getElementById("outputarea");
-
-                                //     // If the div is defined and has a caret position
-                                //     if (div && window.getSelection().rangeCount > 0) {
-                                //         // Get the caret position
-                                //         const range = window.getSelection().getRangeAt(0);
-
-                                //         // Insert the data at the caret position
-                                //         range.insertNode(document.createTextNode(data));
-                                //     } else {
-                                //         // Append the data to the end of the div
-                                //         div.appendChild(document.createTextNode(data));
-                                //     }
-                                // });
-
-
-                                // If shepherd tour is active
-                                if (tour.isActive())
-                                    if (tour.getCurrentStep().id == "step_2")
-                                        tour.next();
-                            } catch (e) {
-                                console.error('error caught:', e);
-                            }
                         } else {
                             $("#signinNotifModal").modal("show");
                         }
@@ -1564,12 +1617,158 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                 }
 
             });
+
+            $('#floating-toolbar').fadeOut(200);
+
+            // if (command === "paraphrase")
+            //     if (x.selectedText !== "")
+            // document.execCommand("delete", false, "");
+
+            // Stream response
+            const evt_source = new EventSource("stream/");
+
+            let prevChars = ""; // declare and initialize prevChars
+            let prevCharsSub = "";
+            count = 0;
+            const counter = Math.floor(Math.random() * 20) + 1;
+
+            evt_source.onmessage = (event) => {
+
+                // canvas.focus();
+
+                $("#gen-spinner").show();
+                $("#gen-text").html("Getting the juice...");
+
+                count++;
+
+                // get cursor position
+                if (count == 1) {
+                    x.streamTextStart = getCaretPosition(canvas);
+                    if (rem_input !== true) {
+                        setCaretToEnd(canvas);
+                        pasteHtmlAtCaret(context + ' ', false);
+                    }
+                }
+
+                if (event.data === '[DONE]') {
+                    evt_source.close();
+
+                    x.streamTextEnd = getCaretPosition(canvas);
+
+                    console.log(x.streamTextStart, x.streamTextEnd);
+
+                    if (Id("highlight").checked) {
+                        if (!onlySpaces(canvas.textContent)) {
+                            // highlight streamed text
+                            setSelectionRange(canvas, x.streamTextStart, x.streamTextEnd);
+                            showFloatingToolbar()
+                        }
+                    }
+
+                    console.log("*********************[DONE]*********************");
+                    count = 0;
+
+                    $("#gen-spinner").hide();
+                    $("#gen-text").html("More text");
+                } else {
+
+                    // outputarea.focus();
+
+                    var finish_reason = JSON.parse(event.data).choices[0].finish_reason;
+
+                    if (finish_reason == "stop") {
+                        text = " ";
+                    } else {
+                        text = JSON.parse(event.data).choices[0].text;
+
+                        prevChars += text;
+
+                        var canvas_content = canvas.textContent;
+
+                        // if text contains /r or /n
+                        if (/\r\n|\r|\n/.test(text)) {
+                            prevCharsSub += text;
+                            // remove large spacing
+                            if (prevCharsSub === "\r\n\r\n" || prevCharsSub === " \r\n\r\n" || prevCharsSub === "\r\n\r\n\r\n" || prevCharsSub === " \r\n\r\n\r\n") {
+
+                                if (canvas_content.length < 5) {
+                                    // set caret position at start position of canvas if empty
+                                    setCaretPosition(canvas, 0);
+                                    text = "";
+                                } else {
+                                    // if canvas contains any text, set caret position to the very end for first stream event
+                                    if (count == 1) {
+                                        text = " ";
+                                        setCaretPosition(canvas, canvas_content.length);
+                                    } else {
+                                        // subsequent streams                                        
+                                        text = "\n";
+                                    }
+
+                                }
+
+                                text = text.replace(/\n/, "");
+
+                                console.log("*********************[SPACING]*********************");
+                            }
+
+                            // if (prevCharsSub == "\r\n\r\n" || prevCharsSub == "\n\r\n\r") {
+                            //     text = "\n";
+                            // }
+                        }
+
+                    }
+
+                    // Random spacing
+                    if (count == counter) {
+                        text = text + " ";
+                        console.log("*********************[RANDOM]*********************");
+                    }
+
+                    // Auto scroll to bottom
+                    Id("outputarea").scrollTop = Id("outputarea").scrollHeight;
+
+                    // Write result to outputarea 
+
+                    // Cursor position
+                    if (command === 'auto_complete') {
+                        if (source === "canvas") {
+                            setCaretToEnd(canvas);
+                            // setCaretPosition(canvas, canvas_content.length);
+                        }
+
+                    } else if (command === "paraphrase") {
+
+                        if (count == 1) {
+                            document.execCommand("delete", false, "");
+                        }
+
+                        setCaretToEnd(canvas);
+                    }
+
+                    // Include/exclude prompt in text and write response
+                    if (rem_input === true) {
+                        pasteHtmlAtCaret(text, false);
+                    } else {
+                        pasteHtmlAtCaret(context + ' ' + text, false);
+                    }
+
+                    x.response_text = prevChars;
+                    resp_holder = prevChars;
+
+                    // If shepherd tour is active
+                    if (tour.isActive())
+                        if (tour.getCurrentStep().id == "step_2")
+                            tour.next();
+
+                    console.log(event.data);
+                }
+            };
+
         } else {
             showToastMessage("<i class='bi bi-emoji-neutral fs-5'></i> Oops! Looks like you forgot to key in some details.", "primary");
         }
     }
-
-    // var gen_text = substr(response, gen_text_start, gen_text_end);
 
     function editCanvas(type) {
 
@@ -1675,6 +1874,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
             $('#redo').addClass("disabled");
         }
     }
+
     $('#outputarea').bind('blur keyup keydown paste input', function(e) {
         save_history();
         localStorage.dash_canvas_content = $('#outputarea').html();
@@ -1701,8 +1901,8 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
         const id = "email_body_subject";
         const elem = Id(id);
         var val = Id("outputarea").textContent;
-        val = val.replace('"', ''); //Replace quotes in generated email subject
-        val = val.replace('"', ''); //Replace quotes in generated email subject
+        val = val.replace('"', ''); //Replace opening quotes in generated email subject
+        val = val.replace('"', ''); //Replace closing quotes in generated email subject
         val = val.trim();
         setCookie(id, val, 365);
         elem.value = val;
@@ -1733,7 +1933,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
 
             $.ajax({
                 type: 'POST',
-                url: 'saved_templates/',
+                url: 'saved-templates/',
                 data: JSON.stringify(templatedata),
                 contentType: "application/json; charset=utf-8",
                 success: (json) => {

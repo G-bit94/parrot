@@ -464,7 +464,7 @@ function fetchSingleItem(template) {
   $("#template-details-spinner").show();
   $.ajax({
     type: 'POST',
-    url: base_url + '/dashboard/saved_templates/',
+    url: base_url + '/dashboard/saved-templates/',
     data: JSON.stringify({
       "template": template,
       "fetch_single": true,
@@ -497,10 +497,22 @@ function fetchSingleItem(template) {
 function fetchSavedTemplates(page, intent) {
   var str = Id('temp_search_term').value;
 
+  if (Id("filter-reset")) {
+    Id("filter-reset").style.display = "block";
+  }
+
   post_data = {
     "user": user,
     "csrf_token": csrf_token,
     "page": page
+  }
+
+  if (Id("content-type-filter")) {
+    const contentTypeFilter = Id("content-type-filter");
+    const selectedOption = contentTypeFilter.options[contentTypeFilter.selectedIndex];
+    if (!selectedOption.disabled) { //true
+      post_data.type = Id("content-type-filter").value;
+    }
   }
 
   if (intent === 'search') {
@@ -514,7 +526,7 @@ function fetchSavedTemplates(page, intent) {
 
   $.ajax({
     type: 'POST',
-    url: base_url + '/dashboard/saved_templates/',
+    url: base_url + '/dashboard/saved-templates/',
     data: JSON.stringify(post_data),
     contentType: "application/json; charset=utf-8",
     success: (data) => {
@@ -586,7 +598,7 @@ function deleteSavedTemplates(type) {
     // Id("deleteConfirm").hide();
     $.ajax({
       type: 'POST',
-      url: base_url + '/dashboard/saved_templates/',
+      url: base_url + '/dashboard/saved-templates/',
       data: JSON.stringify(payload),
       contentType: "application/json; charset=utf-8",
       success: (json) => {
@@ -1017,22 +1029,23 @@ function speechToText() {
 // End web speech
 
 // Handle tour start button
-Id("start-tour-btn").onclick = () => {
-  if (signinStatus == 1) {
-    setCookie("dash_content_type", "product_description");
-    if (current_page == "dashboard") {
-      renderSelection("product_description");
-      tour.start();
-    } else {
-      setCookie("tour_status", "show");
-      location.href = `${base_url}/dashboard`;
-    }
+if (Id("start-tour-btn")) {
+  Id("start-tour-btn").onclick = () => {
+    if (signinStatus == 1) {
+      setCookie("dash_content_type", "product_description");
+      if (current_page == "dashboard") {
+        renderSelection("product_description");
+        tour.start();
+      } else {
+        setCookie("tour_status", "show");
+        location.href = `${base_url}/dashboard`;
+      }
 
-  } else {
-    handleStartBtn();
+    } else {
+      handleStartBtn();
+    }
   }
 }
-
 /**
  * End custom functions
  */
