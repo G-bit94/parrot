@@ -93,7 +93,7 @@ if ($signinStatus == 1) {
                                                     <span id="edit_user_email_err" class="invalid-tooltip"></span>
                                                 </div>
                                                 <div class="text-center">
-                                                    <button class="w-50 mt-3 mb-2 btn rounded-3 py-2 btn-primary" id="pwd_reset_btn" onclick="editUserDetails();">
+                                                    <button class="w-50 mt-3 mb-2 btn rounded-3 py-2 btn-primary" id="pwd_reset_btn" onclick="editUserDetails();" disabled>
                                                         <span id="reset-pwd-spinner" style="display: none;">
                                                             <span class="spinner-border spinner-border-sm text-white" role="status"></span>
                                                         </span>
@@ -342,7 +342,6 @@ if ($signinStatus == 1) {
             }
             e.preventDefault();
             history.pushState({}, '', href);
-            console.log("HISTORY.PUSH")
         });
 
         var titles = Class("shepherd-title");
@@ -356,6 +355,7 @@ if ($signinStatus == 1) {
                 .forEach((el) => {
                     el.readOnly = false;
                 });
+            Id("pwd_reset_btn").disabled = false;
             Id("edit_username").focus();
         }
 
@@ -389,6 +389,7 @@ if ($signinStatus == 1) {
                                 .forEach((el) => {
                                     el.readOnly = true;
                                 });
+                            Id("pwd_reset_btn").disabled = true;
                         } else {
                             showToastMessage(`${data.status}: ${data.message}`, "danger");
                         }

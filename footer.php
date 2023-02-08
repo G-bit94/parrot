@@ -273,7 +273,7 @@
                     </button>
                     <h2 class="fs-6 fw-bold my-3">Or sign up with your Google account</h2>
                     <div class="d-flex justify-content-center">
-                        <div id="g_id_onload" data-client_id="202076057759-s1a7sbv9ss2uoru45b983tlnabn4kleb.apps.googleusercontent.com" data-login_uri="http://localhost/parrot/google_auth/">
+                        <div id="g_id_onload" data-client_id="202076057759-s1a7sbv9ss2uoru45b983tlnabn4kleb.apps.googleusercontent.com" data-login_uri="<?php echo $base_url; ?>/google_auth/">
                         </div>
                         <div class="g_id_signin" data-type="standard" data-size="large" data-text="signup_with" data-shape="pill" data-theme="filled_blue" data-logo_alignment="left">
                         </div>
@@ -332,7 +332,7 @@
                         </div>
                         <h2 class="fs-6 fw-bold my-3">Or sign in with Google</h2>
                         <div class="d-flex justify-content-center">
-                            <div id="g_id_onload" data-client_id="202076057759-s1a7sbv9ss2uoru45b983tlnabn4kleb.apps.googleusercontent.com" data-login_uri="http://localhost/parrot/google_auth/">
+                            <div id="g_id_onload" data-client_id="202076057759-s1a7sbv9ss2uoru45b983tlnabn4kleb.apps.googleusercontent.com" data-login_uri="<?php echo $base_url; ?>/google_auth/">
                             </div>
                             <div class="g_id_signin" data-type="standard" data-size="large" data-text="sign_in_with" data-shape="pill" data-theme="filled_blue" data-logo_alignment="left">
                             </div>
