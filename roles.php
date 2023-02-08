@@ -2,11 +2,13 @@
 
 error_reporting(0);
 
-$user_email = $_SESSION["email"];
+$user_email = $_SESSION["email"] ?? '';
 
 $_SESSION['csrf_token'] = bin2hex(random_bytes(24));
 
 $active_sub = '';
+
+// if ($user_email) {
 
 $sql_user = "SELECT id, email, username, l_name, admin, super_adm, verified, created_at FROM users WHERE users.email = '$user_email'";
 $rs_user = $mysqli->query($sql_user);
@@ -73,7 +75,8 @@ class AccessLevel
     }
   }
 }
-
+// } else
+//   $user_id = "";
 
 $errorMessage = '
 <div class="modal modal-sheet position-static d-block py-2 mt-5" tabindex="-1" role="dialog" id="modalSheet">
