@@ -209,7 +209,6 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
             <div id="content-tour-second" class="col-md-3 border-start border-end border-bottom py-3 px-4 overflow-auto" style="height: 650px;">
                 <!-- Reusable container -->
                 <div id="reusable-container" class="mt-4"></div>
-
                 <!-- Options -->
                 <div class="p-1">
                     <div class="mt-3">
@@ -1294,46 +1293,35 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
 
         var container = $("#reusable-container");
 
-        // $(document).ready(() => {
-        $("#reusable-container").load(`content-types/ ${type}_cmpnt`);
-        console.log((`content-types/ ${type}_cmpnt`))
-        // });
+        $(document).ready(() => {
+            $("#reusable-container").load(`content-types/ #${type}_cmpnt`);
+            console.log((`content-types/ ${type}_cmpnt`))
+        });
 
-        // var xhr = new XMLHttpRequest();
-        // xhr.open("GET", "content-types/", true);
-        // xhr.onreadystatechange = function() {
-        //     if (xhr.readyState === 4 && xhr.status === 200) {
-        //         document.getElementById("reusable-container").innerHTML =
-        //             xhr.responseText.split("<div id='" + type + "'_cmpnt'>")[1].split("</div>")[0];
-        //     }
-        // };
-        // xhr.send();
+        container.fadeIn(10, () => {
 
+            // On DOM change
+            // Store cookies on input value change
+            setCookie("dash_content_type", type, 365);
 
-        // container.fadeIn(10, () => {
+            var ctype_inputs = Class("content-type-input");
 
-        // On DOM change
-        // Store cookies on input value change
-        setCookie("dash_content_type", type, 365);
+            Array.prototype.slice.call(ctype_inputs)
+                .forEach((el) => {
+                    el.oninput = () => {
+                        if (el.type == "checkbox")
+                            setCookie(el.id, el.checked, 365);
+                        else
+                            setCookie(el.id, el.value, 365);
+                    }
+                    if (el.value == "")
+                        el.value = getCookie(el.id);
+                    if (el.type == "checkbox") {
+                        el.checked = JSON.parse(getCookie(el.id));
+                    }
 
-        var ctype_inputs = Class("content-type-input");
-
-        Array.prototype.slice.call(ctype_inputs)
-            .forEach((el) => {
-                el.oninput = () => {
-                    if (el.type == "checkbox")
-                        setCookie(el.id, el.checked, 365);
-                    else
-                        setCookie(el.id, el.value, 365);
-                }
-                if (el.value == "")
-                    el.value = getCookie(el.id);
-                if (el.type == "checkbox") {
-                    el.checked = JSON.parse(getCookie(el.id));
-                }
-
-            });
-        // });
+                });
+        });
     }
 
     /**
