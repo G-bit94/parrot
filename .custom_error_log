@@ -1,0 +1,2 @@
+[2023-02-07 22:15:57] [2] include(sessfion.php): failed to open stream: No such file or directory in F:\servers\xampp\htdocs\parrot\header.php on line 22
+[2023-02-07 22:15:57] [2] include(): Failed opening 'sessfion.php' for inclusion (include_path='F:\servers\xampp\php\PEAR') in F:\servers\xampp\htdocs\parrot\header.php on line 22
