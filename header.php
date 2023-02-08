@@ -117,9 +117,9 @@ $spinner = '<div class="spinner">
             background-color: #183454;
         }
 
-        .bg-custom-primary:hover {
+        /* .bg-custom-primary:hover {
             background-color: #0d6efd;
-        }
+        } */
 
         .bg-custom-dark {
             background-color: #180c3c;
@@ -540,7 +540,7 @@ $spinner = '<div class="spinner">
 
     <!-- Google signin -->
     <!-- One Tap -->
-    <div id="g_id_onload" data-client_id="202076057759-s1a7sbv9ss2uoru45b983tlnabn4kleb.apps.googleusercontent.com" data-context="signin" data-login_uri="http://localhost/parrot/google_auth/" data-itp_support="true" data-skip_prompt_cookie="one_tap_skip">
+    <div id="g_id_onload" data-client_id="202076057759-s1a7sbv9ss2uoru45b983tlnabn4kleb.apps.googleusercontent.com" data-context="signin" data-login_uri="<?php echo $base_url; ?>/google_auth/" data-itp_support="true" data-skip_prompt_cookie="one_tap_skip">
     </div>
 
     <!-- Begin page content -->

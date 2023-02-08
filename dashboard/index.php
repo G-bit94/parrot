@@ -7,9 +7,9 @@ include "../header.php";
 // }
 
 if ($signinStatus == 1) {
-    if ($v_status != 1) {
-        echo '<script type="text/javascript">window.location.href = base_url + "/pricing";</script>';
-    }
+    // if ($v_status != 1) {
+    //     echo '<script type="text/javascript">window.location.href = base_url + "/pricing";</script>';
+    // }
 } else {
     echo '<script type="text/javascript">window.location.href = "' . $base_url . '"</script>';
     exit;

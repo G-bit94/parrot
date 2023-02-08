@@ -328,11 +328,10 @@ function handleStartBtn() {
   // new user
   if (signinStatus === 1) {
     // verified users
-    if (v_status === 1) {
-      window.location.href = base_url + "/dashboard";
-    } else {
-      window.location.href = base_url + "/pricing";
-    }
+    // if (v_status === 1)
+    window.location.href = base_url + "/dashboard";
+    // else 
+    //   window.location.href = base_url + "/pricing";    
   } else {
     $("#signupModal").modal("hide");
     $("#signinModal").modal("show");
