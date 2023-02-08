@@ -265,7 +265,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                         </label>
                         <?php if ($active_sub == 1) { ?>
                             <input type="range" class="form-range context-params" max="1000" step="5" id="word_count" oninput="getSliderValue('word_count')">
-                        <?php } elseif ($active_sub == 2) { ?>
+                        <?php } else { ?>
                             <input type="range" class="form-range context-params" max="1600" step="5" id="word_count" oninput="getSliderValue('word_count')">
                         <?php } ?>
                         <small class="fw-bold" id="word_count_show"></small>
