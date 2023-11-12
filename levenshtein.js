@@ -90,6 +90,9 @@ function get_template_context(subject) {
 
     console.log(highest_sim)
 
+
+    /** Could have used the map function in hindsight */
+
     str_index = sims.indexOf(highest_sim);
 
     // Since templates index = strings index

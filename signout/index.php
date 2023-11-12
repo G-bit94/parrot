@@ -11,7 +11,7 @@ echo '<script type="text/javascript">
         d.setTime(d.getTime() + (0 * 24 * 60 * 60 * 1000));
         let expires = "expires=" + d.toUTCString();
         document.cookie = "one_tap_skip=true;" + expires + ";path=/;SameSite=None;Secure";
-        window.location.replace("/parrot");
+        window.location.replace("' . $site_url . '");
     </script>';
 
 exit;

@@ -551,13 +551,12 @@ Id("use_prompt").onclick = () => {
   setSelectionRange(canvas, x.selectionCaretEnd, x.selectionCaretEnd)
   pasteHtmlAtCaret(Id("template_details").innerHTML, true);
   $("#templateDetailsModal").modal("hide");
-  Id("savedTemplatesCmpnt").style.width = "0px";
 }
 
 Id("copy_template").onclick = () => {
-  var txt = $("#template_details").html();
+  var txt = Id("template_details").innerHTML;
 
-  if (text !== null && text !== "") {
+  if (txt !== null && txt !== "") {
     /* Copy the text inside the text field */
     var text = txt.split("<br>");
     var str = text.join('\n');

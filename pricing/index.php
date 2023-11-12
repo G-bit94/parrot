@@ -519,7 +519,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
 
     function subscribeToPlan(plan, monthly, yearly, discount) {
         if (signinStatus !== 1) {
-            handleStartBtn();
+            popSignupModal();
         } else {
             $('#subsciptionModal').modal('show');
             // showTab(currentTab);

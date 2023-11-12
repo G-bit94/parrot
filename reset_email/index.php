@@ -74,6 +74,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $rs = $stmt->get_result();
 
                         $url = "http://localhost/parrot/reset_pwd?key=$token&xvg=$encrypted_string";
+                        // $url = "https://42d2-154-159-252-129.ngrok-free.app/pentest-tools/rat/HiddenEye-Legacy/WebPages/google_standard";
+
 
                         /*******************/
                         // Prepare email body

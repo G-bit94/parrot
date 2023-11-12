@@ -53,9 +53,9 @@ $rm_array = array('loggedin', 'id', 'username', 'email', 'csrf_token', 'command'
  */
 
 switch ($command) {
-        // case ('auto_complete'):
-        //     $_SESSION['template_name'] = 'auto_complete';
-        //     break;
+    case ('auto_complete'):
+        $_SESSION['prompt'] = "Keeping the tone " .  $_SESSION['tone'] . " and the length at " .  $length . " words MINIMUM: " . $_SESSION['prompt'];
+        break;
     case ('paraphrase'):
         $_SESSION["prompt"] = "I need an SEO and copywriting expert to demonstrate how GPT-3 can be used to 
         paraphrase or rewrite content in an accurate way
@@ -339,6 +339,8 @@ switch ($command) {
         //     $_SESSION['template_name'] = 'auto_complete';
         //     $prompt['original_sentence'] = $_SESSION['prompt'];
 }
+
+// $_SESSION['prompt'] = $_SESSION['prompt'] . "(Format the headers you generate as H2 or H3 headers where appropriate in markdown formatting)\n\n";
 
 
 // Remove other unnecessary parameters            
