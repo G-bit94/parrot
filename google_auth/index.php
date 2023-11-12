@@ -6,10 +6,12 @@ error_reporting(0);
 
 require_once '../vendor/autoload.php';
 
+include "../session.php";
+
 // Load the client ID and secret from the JSON file
 $credentials = json_decode(file_get_contents(__DIR__ . '/client_secret.json'), true);
 
-$redirectUri = 'http://localhost/parrot/google_auth/';
+// $redirectUri = $site_url . $base_url . '/google_auth/';
 
 // Initialize the client object
 $client = new Google_Client();
@@ -20,6 +22,8 @@ $client->addScope("profile");
 
 // authenticate code from Google OAuth Flow 
 if (isset($_GET['code'])) {
+
+    $post_auth_redir = $site_url . $base_url . "/dashboard/";
 
     // Exchange the authorization code for an access token
     $accessToken = $client->fetchAccessTokenWithAuthCode($_GET['code']);
@@ -34,7 +38,6 @@ if (isset($_GET['code'])) {
     $firstName = $userInfo->getGivenName();
     $lastName = $userInfo->getFamilyName();
 
-    include "../session.php";
     $_SESSION["email"] = $email;
 
     $data_string_signin = (object) [
@@ -64,10 +67,10 @@ if (isset($_GET['code'])) {
         }
     }
 
-    $signin_status = authUserLocal($data_string_signin, "http://localhost/parrot/signin/");
+    $signin_status = authUserLocal($data_string_signin, $site_url . $base_url . "/signin/");
 
     if ($signin_status == "SIGNIN_SUCCESS") {
-        echo '<script type="text/javascript">window.location.href="http://localhost/parrot/dashboard/";</script>';
+        header('Location: ' . filter_var($post_auth_redir, FILTER_SANITIZE_URL));
     } elseif ($signin_status == "EMAIL_INEXISTENT") {
         $data_string_signup = (object) [
             'emailsignup' => $email,
@@ -84,10 +87,10 @@ if (isset($_GET['code'])) {
             'city' => ''
         ];
 
-        $signup = json_decode(authUserLocal($data_string_signup, "http://localhost/parrot/signup/"));
+        $signup = json_decode(authUserLocal($data_string_signup, $site_url . $base_url . "/signup/"));
 
         if ($signup->status == "SIGNUP_SUCCESS") {
-            echo '<script type="text/javascript">window.location.href="http://localhost/parrot/dashboard/";</script>';
+            header('Location: ' . filter_var($post_auth_redir, FILTER_SANITIZE_URL));
         } else {
             echo $signup->status;
             exit;
@@ -97,5 +100,6 @@ if (isset($_GET['code'])) {
         exit;
     }
 } else {
-    echo '<script>location.href="' . $client->createAuthUrl() . '";</script>';
+    $auth_url = $client->createAuthUrl();
+    header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
 }

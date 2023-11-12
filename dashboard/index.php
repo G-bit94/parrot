@@ -294,6 +294,19 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                             </label>
                         </div>
                     </div>
+
+                    <!-- Enable web results -->
+                    <!-- <div class="form-group mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input content-type-input" type="checkbox" role="switch" id="web_results" checked>
+                            <label class="form-check-label d-flex" for="web_results">
+                                <small>Enable web results&nbsp;
+                                    <i tabindex="0" class="bi bi-question-circle" role="button" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Choose whether to include results from the web."></i>
+                                </small>
+                            </label>
+                        </div>
+                    </div> -->
+
                 </div>
             </div>
 
@@ -374,7 +387,6 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                                 <?php } ?>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
-                                <img src="../assets/img/copy.png" alt="" data-edit="copy" data-bs-toggle="tooltip" data-bs-title="Copy selected text" class="mx-2" type="button" />
                                 <i class="bi bi-suit-heart-fill mx-2 fs-5 text-danger opacity-75" data-bs-toggle="tooltip" data-bs-placement="top" title="Save template" id="save" type="button"></i>
                                 <i class="bi bi-list-stars mx-2 fs-4" onclick="fetchSavedTemplates(current_page, 'list')" type="button" title="View saved templates" data-bs-toggle="offcanvas" data-bs-target="#savedTemplatesCmpnt"></i>
                             </div>
@@ -575,33 +587,42 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                     </div>
 
                     <div id="outputarea-wrapper">
-                        <div id="interim" class="bg-info rounded mx-1 px-1 d-flex justify-content-center align-items-center"></div> <!-- Interim speech holder -->
+                        <div id="interim" class="bg-info rounded mx-1 px-2 d-flex justify-content-center align-items-center"></div> <!-- Interim speech holder -->
                         <div class="bg-white rounded" id="outputarea" contenteditable></div>
-                        <ul id="floating-toolbar" class="dropdown-menu rounded-3 p-2 px-3 shadow" style="display: none;">
-                            <li class="list-group-item toolbar-item text-start border-0 my-1" onclick="completeUserPrompt('toolbar', 'auto_complete', '')">
+                        <ul id="floating-toolbar" class="dropdown-menu rounded-3 p-2 px-2 shadow" style="display: none;">
+                            <li class="list-group-item toolbar-item text-start border-0" onclick="completeUserPrompt('toolbar', 'auto_complete', '')">
                                 <i class="bi bi-robot"></i>
-                                <small class="fw-bold"> Continue...</small>
+                                <small> Continue...</small>
                             </li>
-                            <li class="list-group-item toolbar-item text-start border-0 my-1" onclick="completeUserPrompt('toolbar', 'paraphrase', '')">
+                            <li class="list-group-item toolbar-item text-start border-0" onclick="completeUserPrompt('toolbar', 'paraphrase', '')">
                                 <i class="bi bi-pencil-square"></i>
-                                <small class="fw-bold"> Paraphrase</small>
+                                <small> Paraphrase</small>
                             </li>
-                            <li class="list-group-item toolbar-item text-start border-0 my-1" onclick="completeUserPrompt('toolbar', 'execute', '')">
+                            <li class="list-group-item toolbar-item text-start border-0" onclick="completeUserPrompt('toolbar', 'execute', '')">
                                 <i class="bi bi-terminal"></i>
-                                <small class="fw-bold"> Run as command</small>
+                                <small> Run as command</small>
+                            </li>
+                            <hr class="w-100 my-1">
+                            <li class="list-group-item toolbar-item text-start border-0" onclick="completeUserPrompt('toolbar', 'expand', '')">
+                                <i class="bi bi-chevron-expand fs-5"></i>
+                                <small> Expand</small>
+                            </li>
+                            <li class="list-group-item toolbar-item text-start border-0" onclick="completeUserPrompt('toolbar', 'expand', '')">
+                                <i class="bi bi-pen"></i>
+                                <small> Edit Grammar</small>
                             </li>
                             <hr class="w-100 my-1">
                             <li class="list-group-item toolbar-item text-start border-0 mt-2 my-1" data-edit="copy">
                                 <i class="bi bi-clipboard2"></i>
-                                <small class="fw-bold"> Copy</small>
+                                <small> Copy</small>
                             </li>
-                            <li class="list-group-item toolbar-item text-start border-0 my-1" data-edit="cut">
+                            <li class="list-group-item toolbar-item text-start border-0" data-edit="cut">
                                 <i class="bi bi-scissors"></i>
-                                <small class="fw-bold"> Cut</small>
+                                <small> Cut</small>
                             </li>
-                            <li class="list-group-item toolbar-item text-start border-0 my-1" data-edit="delete">
-                                <i class="bi bi-trash"></i>
-                                <small class="fw-bold"> Delete</small>
+                            <li class="list-group-item toolbar-item text-start border-0" data-edit="delete">
+                                <i class="bi bi-eraser-fill"></i>
+                                <small> Delete</small>
                             </li>
                             <!-- <hr class="w-100 my-1">
                             <li class="list-group-item toolbar-item text-start border-0 mt-2 my-1" data-edit="paste"><i class="bi bi-clipboard-check-fill"></i> Paste</li>
@@ -618,12 +639,11 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                                         echo $spinner;
                                         ?>
                                     </div>
-                                    <span class="btn btn-primary rounded-4 fw-bold shadow-sm" onclick="completeUserPrompt('canvas', 'auto_complete', '')" type="button">
-                                        <span id="gen-text">More text</span>
-                                    </span>
+                                    <button class="btn btn-sm btn-primary rounded-4 fw-bold shadow-sm" onclick="completeUserPrompt('canvas', 'auto_complete', '')" type="button">
+                                        <span id="gen-text"><i class="bi bi-play fs-5 py-1 px-2"></i></span>
+                                    </button>
                                 </div>
                             </div>
-
                             <div class="col-md-8 d-flex justify-content-end align-items-center">
                                 <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls" onclick='completeUserPrompt("canvas", "retry");'><i class="bi bi-arrow-repeat"></i> Try again</button>
                                 <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls" onclick='editCanvas("prompt")'>Remove prompt</button>
@@ -951,7 +971,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
         document.execCommand(cmd_val[0], false, cmd_val[1]);
         // }
 
-        // Remove highlight
+        // Retain highlight
         setSelectionRange(canvas, x.selectionCaretStart, x.selectionCaretEnd);
 
         setCaretPosition(canvas, x.selectionCaretEnd);
@@ -1294,34 +1314,95 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
         var container = $("#reusable-container");
 
         $(document).ready(() => {
-            $("#reusable-container").load(`content-types/ #${type}_cmpnt`);
-            console.log((`content-types/ ${type}_cmpnt`))
+            container.load(`content-types/ #${type}_cmpnt`, () => { //callback
+
+                // On DOM change
+                // Store cookies on input value change
+                setCookie("dash_content_type", type, 365);
+
+                var ctype_inputs = Class("content-type-input");
+
+                Array.prototype.slice.call(ctype_inputs)
+                    .forEach((el) => {
+                        el.oninput = () => {
+                            if (el.type == "checkbox")
+                                setCookie(el.id, el.checked, 365);
+                            else
+                                setCookie(el.id, el.value, 365);
+                        }
+                        if (el.value == "")
+                            el.value = getCookie(el.id);
+                        if (el.type == "checkbox") {
+                            el.checked = JSON.parse(getCookie(el.id));
+                        }
+                    });
+            });
         });
 
-        container.fadeIn(10, () => {
 
-            // On DOM change
-            // Store cookies on input value change
-            setCookie("dash_content_type", type, 365);
+        // var container = $("#reusable-container");
 
-            var ctype_inputs = Class("content-type-input");
+        // $(document).ready(() => {
+        //     container.load(`content-types/ #${type}_cmpnt`)
+        //         .then(() => {
 
-            Array.prototype.slice.call(ctype_inputs)
-                .forEach((el) => {
-                    el.oninput = () => {
-                        if (el.type == "checkbox")
-                            setCookie(el.id, el.checked, 365);
-                        else
-                            setCookie(el.id, el.value, 365);
-                    }
-                    if (el.value == "")
-                        el.value = getCookie(el.id);
-                    if (el.type == "checkbox") {
-                        el.checked = JSON.parse(getCookie(el.id));
-                    }
+        //             // On DOM change
+        //             // Store cookies on input value change
+        //             setCookie("dash_content_type", type, 365);
 
-                });
-        });
+        //             var ctype_inputs = Class("content-type-input");
+
+        //             Array.prototype.slice.call(ctype_inputs)
+        //                 .forEach((el) => {
+        //                     el.oninput = () => {
+        //                         if (el.type == "checkbox")
+        //                             setCookie(el.id, el.checked, 365);
+        //                         else
+        //                             setCookie(el.id, el.value, 365);
+        //                     }
+        //                     if (el.value == "")
+        //                         el.value = getCookie(el.id);
+        //                     if (el.type == "checkbox") {
+        //                         el.checked = JSON.parse(getCookie(el.id));
+        //                     }
+        //                 });
+        //         })
+        //         .catch((error) => {
+        //             console.error(error);
+        //         });
+        // });
+
+
+
+
+        // $(document).ready(() => {
+        //     container.load(`content-types/ #${type}_cmpnt`);
+        // });
+
+        // container.fadeIn(1000, () => {
+
+        //     // On DOM change
+        //     // Store cookies on input value change
+        //     setCookie("dash_content_type", type, 365);
+
+        //     var ctype_inputs = Class("content-type-input");
+
+        //     Array.prototype.slice.call(ctype_inputs)
+        //         .forEach((el) => {
+        //             el.oninput = () => {
+        //                 if (el.type == "checkbox")
+        //                     setCookie(el.id, el.checked, 365);
+        //                 else
+        //                     setCookie(el.id, el.value, 365);
+        //             }
+        //             if (el.value == "")
+        //                 el.value = getCookie(el.id);
+        //             if (el.type == "checkbox") {
+        //                 el.checked = JSON.parse(getCookie(el.id));
+        //             }
+
+        //         });
+        // });
     }
 
     /**
@@ -1352,9 +1433,22 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
 
     // Complete prompt on tab key press
     window.addEventListener("keydown", (evt) => {
-        if (signinStatus == 1 && evt.keyCode == "9" && document.activeElement.id == "outputarea") {
-            evt.preventDefault(); //prevent changing focus to other elements
-            completeUserPrompt("canvas", "auto_complete", "");
+
+        if (signinStatus == 1) {
+
+            // Complete prompt on tab key press
+            if (evt.key == "Tab" && document.activeElement.id == "outputarea") {
+                evt.preventDefault();
+                completeUserPrompt("canvas", "auto_complete", "");
+            }
+
+            // Hide Canvas floating toolbar
+            if (evt.key == "Escape") {
+                if (Id("floating-toolbar").style.display == "block" || x.selectedText != "") {
+                    $("#floating-toolbar").hide();
+                    setSelectionRange(canvas, x.selectionCaretEnd, x.selectionCaretEnd);
+                }
+            }
         }
     }, false);
 
@@ -1365,7 +1459,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
     function copyToClipboard(id) {
         /* Get the text field */
         var copyText = Id(id);
-        var text = copyText.innerHTML;
+        var text = copyText.innerText;
 
         /* Select the text field */
         // copyText.select();
@@ -1387,6 +1481,10 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
 
     function completeUserPrompt(source, command, element) {
 
+        // https://ddg-webapp-aagd.vercel.app/search?max_results=3&q=QD-OLED
+        // https://github.com/G-bit94/chatgpt-advanced-qunash/blob/main/src/content-scripts/api.ts
+        // https://www.postman.com/api-evangelist/workspace/search/documentation/35240-757748f8-766b-4132-a453-18d766054556
+
         const outputarea = $("#outputarea");
         creativity = $("#creativity").val();
         word_count = $("#word_count").val();
@@ -1401,6 +1499,8 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
             "word_count": word_count,
             "command": command
         };
+
+        var context = "";
 
         // Handle context
         switch (source) {
@@ -1553,7 +1653,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
 
             prompt_holder = context;
             $("#gen-spinner").show();
-            $("#gen-text").html("Getting the juice...");
+            $("#gen-text").html("Crunching...");
             sendInfo.command = command;
 
             // API v1 - E
@@ -1580,7 +1680,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                 traditional: true,
                 success: (data) => {
                     $("#gen-spinner").hide();
-                    $("#gen-text").html("More text");
+                    $("#gen-text").html('<i class="bi bi-play fs-5 py-1 px-2"></i>');
                     resp_holder = data;
                     if (data !== null) {
                         if (data.status != 'hash_error') {
@@ -1600,7 +1700,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                 },
                 error: () => {
                     $("#gen-spinner").hide();
-                    $("#gen-text").html("More text");
+                    $("#gen-text").html('<i class="bi bi-play fs-5 py-1 px-2"></i>');
                     showToastMessage(`<i class="bi bi-emoji-neutral fs-5"></i> Oops! Looks like your connection to ${site_name} dropped the ball`);
                 }
 
@@ -1625,7 +1725,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                 // canvas.focus();
 
                 $("#gen-spinner").show();
-                $("#gen-text").html("Getting the juice...");
+                $("#gen-text").html("Crunching...");
 
                 count++;
 
@@ -1657,7 +1757,7 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                     count = 0;
 
                     $("#gen-spinner").hide();
-                    $("#gen-text").html("More text");
+                    $("#gen-text").html('<i class="bi bi-play fs-5 py-1 px-2"></i>');
                 } else {
 
                     // outputarea.focus();
@@ -1687,7 +1787,12 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                                     // if canvas contains any text, set caret position to the very end for first stream event
                                     if (count == 1) {
                                         text = " ";
-                                        setCaretPosition(canvas, canvas_content.length);
+                                        if (!onlySpaces(selectedText)) {
+                                            // setSelectionRange(canvas, canvas_content.length, canvas_content.length);
+                                            // setCaretPosition(canvas, x.selectionCaretEnd);
+                                        } else {
+                                            setCaretPosition(canvas, canvas_content.length);
+                                        }
                                     } else {
                                         // subsequent streams                                        
                                         text = "\n";

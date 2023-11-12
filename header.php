@@ -2,46 +2,9 @@
 
 // error_reporting(0);
 
-// Define a custom error handler function
-function customErrorHandler($errno, $errstr, $errfile, $errline)
-{
-    // Only log serious errors
-    if ($errno & error_reporting()) {
-        // Log the error message to a file
-        $log_file = $_SERVER['DOCUMENT_ROOT'] . "/parrot/.custom_error_log";
-        $time = gmdate("Y-m-d H:i:s", time() + 10800);
-        error_log("[$time] [$errno] $errstr in $errfile on line $errline\n", 3, $log_file);
-    }
-}
-
-// Set the custom error handler
-set_error_handler("customErrorHandler");
-
 include "config.php";
 
 include "session.php";
-
-//Get current URL and parameters for correct pagination
-$protocol = $_SERVER['SERVER_PROTOCOL'];
-$domain     = $_SERVER['HTTP_HOST'];
-$script   = $_SERVER['SCRIPT_NAME'];
-$parameters   = $_SERVER['QUERY_STRING'];
-$protocol = strpos(strtolower($_SERVER['SERVER_PROTOCOL']), 'https')
-    === FALSE ? 'http' : 'https';
-$currenturl = $protocol . '://' . $domain . $script . '?' . $parameters;
-$new_url = preg_replace('/&?pageno=[^&]*/', '', $currenturl);
-
-$site_name = "ContentFlux";
-
-$site_url = 'https://' . $domain;
-
-$base_url = '/parrot';
-
-$today = date("Y-m-d");
-
-$sql_offset = $result = "";
-
-$signinStatus = 0;
 
 include 'roles.php';
 
@@ -65,7 +28,6 @@ $spinner = '<div class="spinner">
             <div class="bar11"></div>
             <div class="bar12"></div>
             </div>';
-
 ?>
 
 <!DOCTYPE html>
@@ -293,7 +255,7 @@ $spinner = '<div class="spinner">
     </style>
 
     <!-- Main JS Files -->
-    <script src="<?php echo $base_url; ?>/assets/js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="<?php echo $base_url; ?>/assets/js/jquery-3.6.3.min.js" type="text/javascript"></script>
     <script src="<?php echo $base_url; ?>/assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 
     <!-- Google OAUTH 2.0 -->
@@ -504,7 +466,7 @@ $spinner = '<div class="spinner">
                         </a>
                     <?php } ?>
 
-                    <a href="<?php echo $base_url; ?>/dashboard" class="btn bg-custom-dark text-light px-3 mx-2 mb-1 mb-lg-0 empty-link" onclick="handleStartBtn()" id="start_btn" style="display: none;">
+                    <a href="<?php echo $base_url; ?>/dashboard" class="btn bg-custom-dark text-light px-3 mx-2 mb-1 mb-lg-0 empty-link" onclick="popSignupModal()" id="start_btn" style="display: none;">
                         <span class="d-flex align-items-center">
                             <strong class="fw-bold"><i class="bi bi-stars text-warning"></i>Get started</strong>
                         </span>

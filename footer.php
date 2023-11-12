@@ -487,112 +487,116 @@
 
 <!-- Publish to WordPress modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="publishToWordPressModal" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content rounded-5 shadow">
-            <div class="modal-body p-4 pt-3">
-                <div class="d-flex justify-content-between align-items-center border-bottom p-2 mb-2">
-                    <div class="fw-bold fs-6"><i class="bi bi-wordpress text-primary fs-5"></i> Post to WordPress</div>
-                    <button class="btn btn-sm btn-dark" data-bs-dismiss="modal" aria-label="Close">
-                        Back
-                    </button>
+            <div class="modal-body m-3 p-3 pt-2">
+                <div class="">
+                    <div class="d-flex justify-content-between align-items-center border-bottom p-2 mb-2">
+                        <div class="fw-bold fs-6"><i class="bi bi-wordpress text-primary fs-5"></i> Post to WordPress</div>
+                        <button class="btn btn-sm btn-dark" data-bs-dismiss="modal" aria-label="Close">
+                            Back
+                        </button>
+                    </div>
+                    <div class="d-flex justify-content-center my-2">
+                        <span id="wp-template-details-spinner" style="display: none;" class="loader mx-3"><?php echo $spinner; ?></span>
+                    </div>
                 </div>
-                <div class="d-flex justify-content-center my-2">
-                    <span id="wp-template-details-spinner" style="display: none;" class="loader mx-3"><?php echo $spinner; ?></span>
-                </div>
-                <?php
-                if ($active_sub == 2) {
+                <div style="height: 450px; overflow-y:auto; overflow-x:hidden;">
+                    <?php
+                    if ($active_sub == 2) {
 
-                    $sql_wp = "SELECT wp_url, wp_user, wp_pass FROM users WHERE users.email = '$user_email'";
-                    $rs_wp = $mysqli->query($sql_wp);
-                    $row_wp = $rs_wp->fetch_assoc();
-                ?>
-                    <!-- Post details -->
-                    <small class="fw-bold">Post details</small>
-                    <div class="row row-cols-3 mb-3">
-                        <div class="col form-floating">
-                            <input type="number" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-cat" name="wp-cat" autocomplete="off" placeholder="" maxlength="50">
-                            <label class="text-muted" for="wp-cat">Category <sup><small>Category ID (Number)</small></sup></label>
+                        $sql_wp = "SELECT wp_url, wp_user, wp_pass FROM users WHERE users.email = '$user_email'";
+                        $rs_wp = $mysqli->query($sql_wp);
+                        $row_wp = $rs_wp->fetch_assoc();
+                    ?>
+                        <!-- Post details -->
+                        <small class="fw-bold">Post details</small>
+                        <div class="row row-cols-3 mb-3">
+                            <div class="col form-floating">
+                                <input type="number" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-cat" name="wp-cat" autocomplete="off" placeholder="" maxlength="50">
+                                <label class="text-muted" for="wp-cat">Category <sup><small>Category ID (Number)</small></sup></label>
+                            </div>
+                            <div class="col form-floating">
+                                <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-title" name="wp-title" autocomplete="off" placeholder="" maxlength="50">
+                                <label class="text-muted" for="wp-title">Post title *</label>
+                            </div>
+                            <div class="col form-floating">
+                                <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-tags" name="wp-tags" autocomplete="off" placeholder="" maxlength="50">
+                                <label class="text-muted" for="wp-tags">Tags <sup><small>Comma separated</small></sup></label>
+                            </div>
+                            <div class="col form-floating">
+                                <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-excerpt" name="wp-excerpt" autocomplete="off" placeholder="" maxlength="100">
+                                <label class="text-muted" for="wp-excerpt">Excerpt<small class="m-1 text-muted"></small></label>
+                            </div>
                         </div>
-                        <div class="col form-floating">
-                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-title" name="wp-title" autocomplete="off" placeholder="" maxlength="50">
-                            <label class="text-muted" for="wp-title">Post title *</label>
+                        <small class="fw-bold">Post body</small>
+                        <div class="my-2">
+                            <div id="wp-content"></div> <!-- content to be appended to form dynamically -->
                         </div>
-                        <div class="col form-floating">
-                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-tags" name="wp-tags" autocomplete="off" placeholder="" maxlength="50">
-                            <label class="text-muted" for="wp-tags">Tags <sup><small>Comma separated</small></sup></label>
-                        </div>
-                        <div class="col form-floating">
-                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-excerpt" name="wp-excerpt" autocomplete="off" placeholder="" maxlength="100">
-                            <label class="text-muted" for="wp-excerpt">Excerpt<small class="m-1 text-muted"></small></label>
-                        </div>
-                    </div>
-                    <small class="fw-bold">Post body</small>
-                    <div class="my-2">
-                        <div id="wp-content"></div> <!-- content to be appended to form dynamically -->
-                    </div>
-                    <!-- WP credentials -->
-                    <div class="col-md my-2">
-                        <span class="fw-bold mt-2">Enter your WordPress credentials below
-                            <small tabindex="0" role="button" type="button" data-bs-toggle="popover" data-bs-html="true" title="" data-bs-content="                                                                
+                        <!-- WP credentials -->
+                        <div class="col-md my-2">
+                            <span class="fw-bold mt-2">Enter your WordPress credentials below
+                                <small tabindex="0" role="button" type="button" data-bs-toggle="popover" data-bs-html="true" title="" data-bs-content="                                                                
                                 <p>Your password is used to verify your WordPress identity. We do not store your credentials (unless you want us to by checking the box below) and we only need them to authenticate requests to your
                                     WordPress account.</p>
 
                                 <p>We use the XML-RPC API thus ensure it is enabled on your WordPress site and server. XML-RPC is usually enabled by default. Not sure? Follow
                                     <a href='https://codex.wordpress.org/XML-RPC_Support'
                                 target='_blank' class='link-dark fw-bold'>this guide</a> to enable it.</p>" data-bs-original-title="Please note">
-                                <span class="text-muted">Please note <i class="bi bi-info-circle-fill"></i></span>
-                            </small>
-                        </span>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 form-floating">
-                            <input type="url" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" name="wp-url" id="wp-url" value="<?php echo $row_wp["wp_url"]; ?>" autocomplete="off" maxlength="100" required>
-                            <label class="text-muted" for="wp-url"><i class="bi bi-globe"></i> Site URL<sup><small>eg https://example.com</small></sup> *</label>
+                                    <span class="text-muted">Please note <i class="bi bi-info-circle-fill"></i></span>
+                                </small>
+                            </span>
                         </div>
-                        <div class="col-md-4 form-floating">
-                            <input type="number" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" name="wp-author" id="wp-author" placeholder="" autocomplete="off" maxlength="50">
-                            <label class="text-muted" for="wp-author">Post Author <sup><small>Author ID (Number)</small></sup></label>
+                        <div class="row">
+                            <div class="col-md-6 form-floating">
+                                <input type="url" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" name="wp-url" id="wp-url" value="<?php echo $row_wp["wp_url"]; ?>" autocomplete="off" maxlength="100" required>
+                                <label class="text-muted" for="wp-url"><i class="bi bi-globe"></i> Site URL<sup><small>eg https://example.com</small></sup> *</label>
+                            </div>
+                            <div class="col-md-4 form-floating">
+                                <input type="number" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" name="wp-author" id="wp-author" placeholder="" autocomplete="off" maxlength="50">
+                                <label class="text-muted" for="wp-author">Post Author <sup><small>Author ID (Number)</small></sup></label>
+                            </div>
+                            <div class="col-md-4 form-floating">
+                                <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" name="wp-username" id="wp-username" value="<?php echo $row_wp["wp_user"]; ?>" autocomplete="off" maxlength="50" required>
+                                <label class="text-muted" for="wp-username">Username/Email *</label>
+                            </div>
+                            <div class="col-md-4 form-floating">
+                                <input type="password" class="form-control pass-input border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-pass" name="wp-pass" autocomplete="off" value="<?php echo $row_wp["wp_pass"]; ?>" maxlength="50" required>
+                                <label class="text-muted" for="wp-pass">WordPress password *</label>
+                            </div>
+                            <div class="d-flex justify-content-start my-3">
+                                <div class="form-check mx-2">
+                                    <input class="form-check-input pass-toggle" type="checkbox" id="showPassSwitch">
+                                    <label class="form-check-label text-dark text-sm" for="flexCheckDefault">
+                                        Show password
+                                    </label>
+                                </div>
+                                <div class="form-check mx-2">
+                                    <input class="form-check-input" name="rem_wp" type="checkbox" id="remWPCred">
+                                    <label class="form-check-label text-dark text-sm" for="flexCheckDefault">
+                                        Remember WordPress credentials
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-4 form-floating">
-                            <input type="text" class="form-control border-top-0 border-start-0 border-end-0 border rounded-0" name="wp-username" id="wp-username" value="<?php echo $row_wp["wp_user"]; ?>" autocomplete="off" maxlength="50" required>
-                            <label class="text-muted" for="wp-username">Username/Email *</label>
-                        </div>
-                        <div class="col-md-4 form-floating">
-                            <input type="password" class="form-control pass-input border-top-0 border-start-0 border-end-0 border rounded-0" id="wp-pass" name="wp-pass" autocomplete="off" value="<?php echo $row_wp["wp_pass"]; ?>" maxlength="50" required>
-                            <label class="text-muted" for="wp-pass">WordPress password *</label>
-                        </div>
-                        <div class="d-flex justify-content-start my-3">
-                            <div class="form-check mx-2">
-                                <input class="form-check-input pass-toggle" type="checkbox" id="showPassSwitch">
-                                <label class="form-check-label text-dark text-sm" for="flexCheckDefault">
-                                    Show password
+                        <div class="py-3 ps-2">
+                            <div class="col form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="wp-status">
+                                <label class="form-check-label" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Check this box to directly publish the post to WordPress, otherwise it will be saved as a draft in your account" for="flexCheckChecked">
+                                    Publish to WordPress publicly
                                 </label>
                             </div>
-                            <div class="form-check mx-2">
-                                <input class="form-check-input" name="rem_wp" type="checkbox" id="remWPCred">
-                                <label class="form-check-label text-dark text-sm" for="flexCheckDefault">
-                                    Remember WordPress credentials
-                                </label>
+                            <div class="col-md-2 mt-2 mb-1">
+                                <button id="wp-submit-btn" class="w-100 my-2 btn rounded-3 btn-dark" onclick='publishToWordPress()'>
+                                    <span id="wp-spinner" style="display: none;">
+                                        <span class="spinner-border spinner-border-sm text-white" role="status"></span>
+                                    </span>
+                                    <span id="wp-button-text">Post</span>
+                                </button>
                             </div>
                         </div>
-                    </div>
-                    <div class="py-3 ps-2">
-                        <div class="col form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="wp-status">
-                            <label class="form-check-label" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Check this box to directly publish the post to WordPress, otherwise it will be saved as a draft in your account" for="flexCheckChecked">
-                                Publish to WordPress publicly
-                            </label>
-                        </div>
-                        <div class="col-md-2 mt-2 mb-1">
-                            <button id="wp-submit-btn" class="w-100 my-2 btn rounded-3 btn-dark" onclick='publishToWordPress()'>
-                                <span id="wp-spinner" style="display: none;">
-                                    <span class="spinner-border spinner-border-sm text-white" role="status"></span>
-                                </span>
-                                <span id="wp-button-text">Post</span>
-                            </button>
-                        </div>
-                    </div>
-                <?php } ?>
+                    <?php } ?>
+                </div>
             </div>
         </div>
     </div>
