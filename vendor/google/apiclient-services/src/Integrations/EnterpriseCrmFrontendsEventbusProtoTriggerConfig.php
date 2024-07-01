@@ -35,6 +35,10 @@ class EnterpriseCrmFrontendsEventbusProtoTriggerConfig extends \Google\Collectio
   /**
    * @var string
    */
+  public $errorCatcherId;
+  /**
+   * @var string
+   */
   public $label;
   /**
    * @var string
@@ -58,6 +62,10 @@ class EnterpriseCrmFrontendsEventbusProtoTriggerConfig extends \Google\Collectio
    * @var string
    */
   public $triggerId;
+  /**
+   * @var string
+   */
+  public $triggerName;
   /**
    * @var string
    */
@@ -122,6 +130,20 @@ class EnterpriseCrmFrontendsEventbusProtoTriggerConfig extends \Google\Collectio
   public function getEnabledClients()
   {
     return $this->enabledClients;
+  }
+  /**
+   * @param string
+   */
+  public function setErrorCatcherId($errorCatcherId)
+  {
+    $this->errorCatcherId = $errorCatcherId;
+  }
+  /**
+   * @return string
+   */
+  public function getErrorCatcherId()
+  {
+    return $this->errorCatcherId;
   }
   /**
    * @param string
@@ -234,6 +256,20 @@ class EnterpriseCrmFrontendsEventbusProtoTriggerConfig extends \Google\Collectio
   public function getTriggerId()
   {
     return $this->triggerId;
+  }
+  /**
+   * @param string
+   */
+  public function setTriggerName($triggerName)
+  {
+    $this->triggerName = $triggerName;
+  }
+  /**
+   * @return string
+   */
+  public function getTriggerName()
+  {
+    return $this->triggerName;
   }
   /**
    * @param string

@@ -26,7 +26,7 @@ use Google\Service\CertificateManager\Operation;
  * Typical usage is:
  *  <code>
  *   $certificatemanagerService = new Google\Service\CertificateManager(...);
- *   $certificateMapEntries = $certificatemanagerService->certificateMapEntries;
+ *   $certificateMapEntries = $certificatemanagerService->projects_locations_certificateMaps_certificateMapEntries;
  *  </code>
  */
 class ProjectsLocationsCertificateMapsCertificateMapEntries extends \Google\Service\Resource
@@ -43,6 +43,7 @@ class ProjectsLocationsCertificateMapsCertificateMapEntries extends \Google\Serv
    * @opt_param string certificateMapEntryId Required. A user-provided name of the
    * certificate map entry.
    * @return Operation
+   * @throws \Google\Service\Exception
    */
   public function create($parent, CertificateMapEntry $postBody, $optParams = [])
   {
@@ -58,6 +59,7 @@ class ProjectsLocationsCertificateMapsCertificateMapEntries extends \Google\Serv
    * `projects/locations/certificateMaps/certificateMapEntries`.
    * @param array $optParams Optional parameters.
    * @return Operation
+   * @throws \Google\Service\Exception
    */
   public function delete($name, $optParams = [])
   {
@@ -73,6 +75,7 @@ class ProjectsLocationsCertificateMapsCertificateMapEntries extends \Google\Serv
    * `projects/locations/certificateMaps/certificateMapEntries`.
    * @param array $optParams Optional parameters.
    * @return CertificateMapEntry
+   * @throws \Google\Service\Exception
    */
   public function get($name, $optParams = [])
   {
@@ -93,7 +96,7 @@ class ProjectsLocationsCertificateMapsCertificateMapEntries extends \Google\Serv
    * Certificate Map Entries.
    * @opt_param string orderBy A list of Certificate Map Entry field names used to
    * specify the order of the returned results. The default sorting order is
-   * ascending. To specify descending order for a field, add a suffix " desc".
+   * ascending. To specify descending order for a field, add a suffix `" desc"`.
    * @opt_param int pageSize Maximum number of certificate map entries to return.
    * The service may return fewer than this value. If unspecified, at most 50
    * certificate map entries will be returned. The maximum value is 1000; values
@@ -103,6 +106,7 @@ class ProjectsLocationsCertificateMapsCertificateMapEntries extends \Google\Serv
    * a prior `ListCertificateMapEntries` call, and that the system should return
    * the next page of data.
    * @return ListCertificateMapEntriesResponse
+   * @throws \Google\Service\Exception
    */
   public function listProjectsLocationsCertificateMapsCertificateMapEntries($parent, $optParams = [])
   {
@@ -120,9 +124,11 @@ class ProjectsLocationsCertificateMapsCertificateMapEntries extends \Google\Serv
    * @param array $optParams Optional parameters.
    *
    * @opt_param string updateMask Required. The update mask applies to the
-   * resource. For the `FieldMask` definition, see https://developers.google.com
-   * /protocol-buffers/docs/reference/google.protobuf#fieldmask.
+   * resource. For the `FieldMask` definition, see
+   * https://developers.google.com/protocol-
+   * buffers/docs/reference/google.protobuf#fieldmask.
    * @return Operation
+   * @throws \Google\Service\Exception
    */
   public function patch($name, CertificateMapEntry $postBody, $optParams = [])
   {

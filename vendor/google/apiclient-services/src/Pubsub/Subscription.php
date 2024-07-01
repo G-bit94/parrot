@@ -23,8 +23,12 @@ class Subscription extends \Google\Model
    * @var int
    */
   public $ackDeadlineSeconds;
+  protected $analyticsHubSubscriptionInfoType = AnalyticsHubSubscriptionInfo::class;
+  protected $analyticsHubSubscriptionInfoDataType = '';
   protected $bigqueryConfigType = BigQueryConfig::class;
   protected $bigqueryConfigDataType = '';
+  protected $cloudStorageConfigType = CloudStorageConfig::class;
+  protected $cloudStorageConfigDataType = '';
   protected $deadLetterPolicyType = DeadLetterPolicy::class;
   protected $deadLetterPolicyDataType = '';
   /**
@@ -93,6 +97,20 @@ class Subscription extends \Google\Model
     return $this->ackDeadlineSeconds;
   }
   /**
+   * @param AnalyticsHubSubscriptionInfo
+   */
+  public function setAnalyticsHubSubscriptionInfo(AnalyticsHubSubscriptionInfo $analyticsHubSubscriptionInfo)
+  {
+    $this->analyticsHubSubscriptionInfo = $analyticsHubSubscriptionInfo;
+  }
+  /**
+   * @return AnalyticsHubSubscriptionInfo
+   */
+  public function getAnalyticsHubSubscriptionInfo()
+  {
+    return $this->analyticsHubSubscriptionInfo;
+  }
+  /**
    * @param BigQueryConfig
    */
   public function setBigqueryConfig(BigQueryConfig $bigqueryConfig)
@@ -105,6 +123,20 @@ class Subscription extends \Google\Model
   public function getBigqueryConfig()
   {
     return $this->bigqueryConfig;
+  }
+  /**
+   * @param CloudStorageConfig
+   */
+  public function setCloudStorageConfig(CloudStorageConfig $cloudStorageConfig)
+  {
+    $this->cloudStorageConfig = $cloudStorageConfig;
+  }
+  /**
+   * @return CloudStorageConfig
+   */
+  public function getCloudStorageConfig()
+  {
+    return $this->cloudStorageConfig;
   }
   /**
    * @param DeadLetterPolicy

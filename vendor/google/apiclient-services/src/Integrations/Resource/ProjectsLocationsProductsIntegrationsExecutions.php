@@ -28,7 +28,7 @@ use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaListExecutionsResp
  * Typical usage is:
  *  <code>
  *   $integrationsService = new Google\Service\Integrations(...);
- *   $executions = $integrationsService->executions;
+ *   $executions = $integrationsService->projects_locations_products_integrations_executions;
  *  </code>
  */
 class ProjectsLocationsProductsIntegrationsExecutions extends \Google\Service\Resource
@@ -42,6 +42,7 @@ class ProjectsLocationsProductsIntegrationsExecutions extends \Google\Service\Re
    * @param GoogleCloudIntegrationsV1alphaCancelExecutionRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleCloudIntegrationsV1alphaCancelExecutionResponse
+   * @throws \Google\Service\Exception
    */
   public function cancel($name, GoogleCloudIntegrationsV1alphaCancelExecutionRequest $postBody, $optParams = [])
   {
@@ -57,6 +58,7 @@ class ProjectsLocationsProductsIntegrationsExecutions extends \Google\Service\Re
    * tion_id}/executions/{execution_id}
    * @param array $optParams Optional parameters.
    * @return GoogleCloudIntegrationsV1alphaDownloadExecutionResponse
+   * @throws \Google\Service\Exception
    */
   public function download($name, $optParams = [])
   {
@@ -72,6 +74,7 @@ class ProjectsLocationsProductsIntegrationsExecutions extends \Google\Service\Re
    * tion_id}/executions/{execution_id}
    * @param array $optParams Optional parameters.
    * @return GoogleCloudIntegrationsV1alphaExecution
+   * @throws \Google\Service\Exception
    */
   public function get($name, $optParams = [])
   {
@@ -81,8 +84,9 @@ class ProjectsLocationsProductsIntegrationsExecutions extends \Google\Service\Re
   }
   /**
    * Lists the results of all the integration executions. The response includes
-   * the same information as the [execution log](https://cloud.google.com
-   * /application-integration/docs/viewing-logs) in the Integration UI.
+   * the same information as the [execution
+   * log](https://cloud.google.com/application-integration/docs/viewing-logs) in
+   * the Integration UI.
    * (executions.listProjectsLocationsProductsIntegrationsExecutions)
    *
    * @param string $parent Required. The parent resource name of the integration
@@ -90,12 +94,14 @@ class ProjectsLocationsProductsIntegrationsExecutions extends \Google\Service\Re
    * @param array $optParams Optional parameters.
    *
    * @opt_param string filter Optional. Standard filter field, we support
-   * filtering on all fields in EventExecutionParamIndexes table. All fields
-   * support for EQUALS, in additional: CreateTimestamp support for LESS_THAN,
-   * GREATER_THAN ParameterKey, ParameterValue, ParameterType support for HAS For
-   * example: "parameter_value" HAS \"parameter1\" Also supports operators like
-   * AND, OR, NOT For example, trigger_id=\"id1\" AND
-   * event_execution_state=\"FAILED\"
+   * filtering on following fields: workflow_name: the name of the integration.
+   * CreateTimestamp: the execution created time. event_execution_state: the state
+   * of the executions. execution_id: the id of the execution. trigger_id: the id
+   * of the trigger. parameter_type: the type of the parameters involved in the
+   * execution. All fields support for EQUALS, in additional: CreateTimestamp
+   * support for LESS_THAN, GREATER_THAN ParameterType support for HAS For
+   * example: "parameter_type" HAS \"string\" Also supports operators like AND,
+   * OR, NOT For example, trigger_id=\"id1\" AND workflow_name=\"testWorkflow\"
    * @opt_param string filterParams.customFilter Optional user-provided custom
    * filter.
    * @opt_param string filterParams.endTime End timestamp.
@@ -114,8 +120,7 @@ class ProjectsLocationsProductsIntegrationsExecutions extends \Google\Service\Re
    * @opt_param string filterParams.taskStatuses List of possible task statuses.
    * @opt_param string filterParams.workflowName Workflow name.
    * @opt_param string orderBy Optional. The results would be returned in order
-   * you specified here. Currently supporting "last_modified_time" and
-   * "create_time".
+   * you specified here. Currently supporting "create_time".
    * @opt_param int pageSize Optional. The size of entries in the response.
    * @opt_param string pageToken Optional. The token returned in the previous
    * response.
@@ -126,11 +131,15 @@ class ProjectsLocationsProductsIntegrationsExecutions extends \Google\Service\Re
    * recent acl information to list event execution infos and renew the acl cache.
    * Note that fetching the most recent acl is synchronous, so it will increase
    * RPC call latency.
+   * @opt_param bool snapshotMetadataWithoutParams Optional. If true, the service
+   * will provide execution info with snapshot metadata only i.e. without event
+   * parameters.
    * @opt_param bool truncateParams Optional. If true, the service will truncate
    * the params to only keep the first 1000 characters of string params and empty
    * the executions in order to make response smaller. Only works for UI and when
    * the params fields are not filtered out.
    * @return GoogleCloudIntegrationsV1alphaListExecutionsResponse
+   * @throws \Google\Service\Exception
    */
   public function listProjectsLocationsProductsIntegrationsExecutions($parent, $optParams = [])
   {

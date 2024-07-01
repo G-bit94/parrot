@@ -20,7 +20,7 @@ namespace Google\Service;
 use Google\Client;
 
 /**
- * Service definition for CloudSupport (v2beta).
+ * Service definition for CloudSupport (v2).
  *
  * <p>
  * Manages Google Cloud technical support cases for Customer Care support
@@ -39,12 +39,12 @@ class CloudSupport extends \Google\Service
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
 
-  public $attachments;
   public $caseClassifications;
   public $cases;
   public $cases_attachments;
   public $cases_comments;
   public $media;
+  public $rootUrlTemplate;
 
   /**
    * Constructs the internal representation of the CloudSupport service.
@@ -57,31 +57,12 @@ class CloudSupport extends \Google\Service
   {
     parent::__construct($clientOrConfig);
     $this->rootUrl = $rootUrl ?: 'https://cloudsupport.googleapis.com/';
+    $this->rootUrlTemplate = $rootUrl ?: 'https://cloudsupport.UNIVERSE_DOMAIN/';
     $this->servicePath = '';
     $this->batchPath = 'batch';
-    $this->version = 'v2beta';
+    $this->version = 'v2';
     $this->serviceName = 'cloudsupport';
 
-    $this->attachments = new CloudSupport\Resource\Attachments(
-        $this,
-        $this->serviceName,
-        'attachments',
-        [
-          'methods' => [
-            'create' => [
-              'path' => 'v2beta/{+parent}/attachments',
-              'httpMethod' => 'POST',
-              'parameters' => [
-                'parent' => [
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ],
-              ],
-            ],
-          ]
-        ]
-    );
     $this->caseClassifications = new CloudSupport\Resource\CaseClassifications(
         $this,
         $this->serviceName,
@@ -89,7 +70,7 @@ class CloudSupport extends \Google\Service
         [
           'methods' => [
             'search' => [
-              'path' => 'v2beta/caseClassifications:search',
+              'path' => 'v2/caseClassifications:search',
               'httpMethod' => 'GET',
               'parameters' => [
                 'pageSize' => [
@@ -116,7 +97,7 @@ class CloudSupport extends \Google\Service
         [
           'methods' => [
             'close' => [
-              'path' => 'v2beta/{+name}:close',
+              'path' => 'v2/{+name}:close',
               'httpMethod' => 'POST',
               'parameters' => [
                 'name' => [
@@ -126,7 +107,7 @@ class CloudSupport extends \Google\Service
                 ],
               ],
             ],'create' => [
-              'path' => 'v2beta/{+parent}/cases',
+              'path' => 'v2/{+parent}/cases',
               'httpMethod' => 'POST',
               'parameters' => [
                 'parent' => [
@@ -136,7 +117,7 @@ class CloudSupport extends \Google\Service
                 ],
               ],
             ],'escalate' => [
-              'path' => 'v2beta/{+name}:escalate',
+              'path' => 'v2/{+name}:escalate',
               'httpMethod' => 'POST',
               'parameters' => [
                 'name' => [
@@ -146,7 +127,7 @@ class CloudSupport extends \Google\Service
                 ],
               ],
             ],'get' => [
-              'path' => 'v2beta/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'GET',
               'parameters' => [
                 'name' => [
@@ -156,7 +137,7 @@ class CloudSupport extends \Google\Service
                 ],
               ],
             ],'list' => [
-              'path' => 'v2beta/{+parent}/cases',
+              'path' => 'v2/{+parent}/cases',
               'httpMethod' => 'GET',
               'parameters' => [
                 'parent' => [
@@ -178,7 +159,7 @@ class CloudSupport extends \Google\Service
                 ],
               ],
             ],'patch' => [
-              'path' => 'v2beta/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'PATCH',
               'parameters' => [
                 'name' => [
@@ -192,9 +173,14 @@ class CloudSupport extends \Google\Service
                 ],
               ],
             ],'search' => [
-              'path' => 'v2beta/cases:search',
+              'path' => 'v2/{+parent}/cases:search',
               'httpMethod' => 'GET',
               'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
                 'pageSize' => [
                   'location' => 'query',
                   'type' => 'integer',
@@ -219,7 +205,7 @@ class CloudSupport extends \Google\Service
         [
           'methods' => [
             'list' => [
-              'path' => 'v2beta/{+parent}/attachments',
+              'path' => 'v2/{+parent}/attachments',
               'httpMethod' => 'GET',
               'parameters' => [
                 'parent' => [
@@ -247,7 +233,7 @@ class CloudSupport extends \Google\Service
         [
           'methods' => [
             'create' => [
-              'path' => 'v2beta/{+parent}/comments',
+              'path' => 'v2/{+parent}/comments',
               'httpMethod' => 'POST',
               'parameters' => [
                 'parent' => [
@@ -257,7 +243,7 @@ class CloudSupport extends \Google\Service
                 ],
               ],
             ],'list' => [
-              'path' => 'v2beta/{+parent}/comments',
+              'path' => 'v2/{+parent}/comments',
               'httpMethod' => 'GET',
               'parameters' => [
                 'parent' => [
@@ -285,7 +271,7 @@ class CloudSupport extends \Google\Service
         [
           'methods' => [
             'download' => [
-              'path' => 'v2beta/{+name}:download',
+              'path' => 'v2/{+name}:download',
               'httpMethod' => 'GET',
               'parameters' => [
                 'name' => [
@@ -295,7 +281,7 @@ class CloudSupport extends \Google\Service
                 ],
               ],
             ],'upload' => [
-              'path' => 'v2beta/{+parent}/attachments',
+              'path' => 'v2/{+parent}/attachments',
               'httpMethod' => 'POST',
               'parameters' => [
                 'parent' => [

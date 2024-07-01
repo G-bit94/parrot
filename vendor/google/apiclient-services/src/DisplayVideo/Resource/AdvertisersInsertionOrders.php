@@ -27,7 +27,7 @@ use Google\Service\DisplayVideo\ListInsertionOrdersResponse;
  * Typical usage is:
  *  <code>
  *   $displayvideoService = new Google\Service\DisplayVideo(...);
- *   $insertionOrders = $displayvideoService->insertionOrders;
+ *   $insertionOrders = $displayvideoService->advertisers_insertionOrders;
  *  </code>
  */
 class AdvertisersInsertionOrders extends \Google\Service\Resource
@@ -41,6 +41,7 @@ class AdvertisersInsertionOrders extends \Google\Service\Resource
    * @param InsertionOrder $postBody
    * @param array $optParams Optional parameters.
    * @return InsertionOrder
+   * @throws \Google\Service\Exception
    */
   public function create($advertiserId, InsertionOrder $postBody, $optParams = [])
   {
@@ -59,6 +60,7 @@ class AdvertisersInsertionOrders extends \Google\Service\Resource
    * @param string $insertionOrderId The ID of the insertion order to delete.
    * @param array $optParams Optional parameters.
    * @return DisplayvideoEmpty
+   * @throws \Google\Service\Exception
    */
   public function delete($advertiserId, $insertionOrderId, $optParams = [])
   {
@@ -76,6 +78,7 @@ class AdvertisersInsertionOrders extends \Google\Service\Resource
    * fetch.
    * @param array $optParams Optional parameters.
    * @return InsertionOrder
+   * @throws \Google\Service\Exception
    */
   public function get($advertiserId, $insertionOrderId, $optParams = [])
   {
@@ -93,28 +96,25 @@ class AdvertisersInsertionOrders extends \Google\Service\Resource
    * insertion orders for.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string filter Allows filtering by insertion order properties.
+   * @opt_param string filter Allows filtering by insertion order fields.
    * Supported syntax: * Filter expressions are made up of one or more
    * restrictions. * Restrictions can be combined by `AND` or `OR` logical
    * operators. A sequence of restrictions implicitly uses `AND`. * A restriction
-   * has the form of `{field} {operator} {value}`. * The operator used on
-   * `budget.budget_segments.date_range.end_date` must be LESS THAN (<). * The
-   * operator used on `updateTime` must be `GREATER THAN OR EQUAL TO (>=)` or
-   * `LESS THAN OR EQUAL TO (<=)`. * The operators used on all other fields must
-   * be `EQUALS (=)`. * Supported fields: - `campaignId` - `displayName` -
-   * `entityStatus` - `budget.budget_segments.date_range.end_date` (input as YYYY-
-   * MM-DD) - `updateTime` (input in ISO 8601 format, or YYYY-MM-DDTHH:MM:SSZ)
-   * Examples: * All insertion orders under a campaign: `campaignId="1234"` * All
-   * `ENTITY_STATUS_ACTIVE` or `ENTITY_STATUS_PAUSED` insertion orders under an
-   * advertiser: `(entityStatus="ENTITY_STATUS_ACTIVE" OR
-   * entityStatus="ENTITY_STATUS_PAUSED")` * All insertion orders whose budget
-   * segments' dates end before March 28, 2019:
-   * `budget.budget_segments.date_range.end_date<"2019-03-28"` * All insertion
-   * orders with an update time less than or equal to `2020-11-04T18:54:47Z
-   * (format of ISO 8601)`: `updateTime<="2020-11-04T18:54:47Z"` * All insertion
-   * orders with an update time greater than or equal to `2020-11-04T18:54:47Z
-   * (format of ISO 8601)`: `updateTime>="2020-11-04T18:54:47Z"` The length of
-   * this field should be no more than 500 characters.
+   * has the form of `{field} {operator} {value}`. * The `updateTime` field must
+   * use the `GREATER THAN OR EQUAL TO (>=)` or `LESS THAN OR EQUAL TO (<=)`
+   * operators. * All other fields must use the `EQUALS (=)` operator. Supported
+   * fields: * `campaignId` * `displayName` * `entityStatus` * `updateTime` (input
+   * in ISO 8601 format, or `YYYY-MM-DDTHH:MM:SSZ`) Examples: * All insertion
+   * orders under a campaign: `campaignId="1234"` * All `ENTITY_STATUS_ACTIVE` or
+   * `ENTITY_STATUS_PAUSED` insertion orders under an advertiser:
+   * `(entityStatus="ENTITY_STATUS_ACTIVE" OR
+   * entityStatus="ENTITY_STATUS_PAUSED")` * All insertion orders with an update
+   * time less than or equal to 2020-11-04T18:54:47Z (format of ISO 8601):
+   * `updateTime<="2020-11-04T18:54:47Z"` * All insertion orders with an update
+   * time greater than or equal to 2020-11-04T18:54:47Z (format of ISO 8601):
+   * `updateTime>="2020-11-04T18:54:47Z"` The length of this field should be no
+   * more than 500 characters. Reference our [filter `LIST` requests](/display-
+   * video/api/guides/how-tos/filters) guide for more information.
    * @opt_param string orderBy Field by which to sort the list. Acceptable values
    * are: * "displayName" (default) * "entityStatus" * "updateTime" The default
    * sorting order is ascending. To specify descending order for a field, a suffix
@@ -127,6 +127,7 @@ class AdvertisersInsertionOrders extends \Google\Service\Resource
    * the previous call to `ListInsertionOrders` method. If not specified, the
    * first page of results will be returned.
    * @return ListInsertionOrdersResponse
+   * @throws \Google\Service\Exception
    */
   public function listAdvertisersInsertionOrders($advertiserId, $optParams = [])
   {
@@ -145,17 +146,19 @@ class AdvertisersInsertionOrders extends \Google\Service\Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string filter Allows filtering by assigned targeting option
-   * properties. Supported syntax: * Filter expressions are made up of one or more
-   * restrictions. * Restrictions can be combined by the logical operator `OR` on
-   * the same field. * A restriction has the form of `{field} {operator} {value}`.
-   * * The operator must be `EQUALS (=)`. * Supported fields: - `targetingType` -
-   * `inheritance` Examples: * AssignedTargetingOptions of targeting type
-   * TARGETING_TYPE_PROXIMITY_LOCATION_LIST or TARGETING_TYPE_CHANNEL
+   * fields. Supported syntax: * Filter expressions are made up of one or more
+   * restrictions. * Restrictions can be combined by the logical operator `OR`. *
+   * A restriction has the form of `{field} {operator} {value}`. * All fields must
+   * use the `EQUALS (=)` operator. Supported fields: * `targetingType` *
+   * `inheritance` Examples: * `AssignedTargetingOption` resources of targeting
+   * type `TARGETING_TYPE_PROXIMITY_LOCATION_LIST` or `TARGETING_TYPE_CHANNEL`:
    * `targetingType="TARGETING_TYPE_PROXIMITY_LOCATION_LIST" OR
-   * targetingType="TARGETING_TYPE_CHANNEL"` * AssignedTargetingOptions with
-   * inheritance status of NOT_INHERITED or INHERITED_FROM_PARTNER
+   * targetingType="TARGETING_TYPE_CHANNEL"` * `AssignedTargetingOption` resources
+   * with inheritance status of `NOT_INHERITED` or `INHERITED_FROM_PARTNER`:
    * `inheritance="NOT_INHERITED" OR inheritance="INHERITED_FROM_PARTNER"` The
-   * length of this field should be no more than 500 characters.
+   * length of this field should be no more than 500 characters. Reference our
+   * [filter `LIST` requests](/display-video/api/guides/how-tos/filters) guide for
+   * more information.
    * @opt_param string orderBy Field by which to sort the list. Acceptable values
    * are: * `targetingType` (default) The default sorting order is ascending. To
    * specify descending order for a field, a suffix "desc" should be added to the
@@ -168,6 +171,7 @@ class AdvertisersInsertionOrders extends \Google\Service\Resource
    * previous call to `BulkListInsertionOrderAssignedTargetingOptions` method. If
    * not specified, the first page of results will be returned.
    * @return BulkListInsertionOrderAssignedTargetingOptionsResponse
+   * @throws \Google\Service\Exception
    */
   public function listAssignedTargetingOptions($advertiserId, $insertionOrderId, $optParams = [])
   {
@@ -189,6 +193,7 @@ class AdvertisersInsertionOrders extends \Google\Service\Resource
    * @opt_param string updateMask Required. The mask to control which fields to
    * update.
    * @return InsertionOrder
+   * @throws \Google\Service\Exception
    */
   public function patch($advertiserId, $insertionOrderId, InsertionOrder $postBody, $optParams = [])
   {

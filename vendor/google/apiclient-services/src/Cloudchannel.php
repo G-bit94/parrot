@@ -53,9 +53,12 @@ class Cloudchannel extends \Google\Service
   public $accounts_offers;
   public $accounts_reportJobs;
   public $accounts_reports;
+  public $accounts_skuGroups;
+  public $accounts_skuGroups_billableSkus;
   public $operations;
   public $products;
   public $products_skus;
+  public $rootUrlTemplate;
 
   /**
    * Constructs the internal representation of the Cloudchannel service.
@@ -68,6 +71,7 @@ class Cloudchannel extends \Google\Service
   {
     parent::__construct($clientOrConfig);
     $this->rootUrl = $rootUrl ?: 'https://cloudchannel.googleapis.com/';
+    $this->rootUrlTemplate = $rootUrl ?: 'https://cloudchannel.UNIVERSE_DOMAIN/';
     $this->servicePath = '';
     $this->batchPath = 'batch';
     $this->version = 'v1';
@@ -452,11 +456,19 @@ class Cloudchannel extends \Google\Service
                   'type' => 'string',
                   'required' => true,
                 ],
+                'changeOfferPurchase.billingAccount' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
                 'changeOfferPurchase.entitlement' => [
                   'location' => 'query',
                   'type' => 'string',
                 ],
                 'changeOfferPurchase.newSku' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'createEntitlementPurchase.billingAccount' => [
                   'location' => 'query',
                   'type' => 'string',
                 ],
@@ -533,6 +545,21 @@ class Cloudchannel extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+              ],
+            ],'queryEligibleBillingAccounts' => [
+              'path' => 'v1/{+customer}:queryEligibleBillingAccounts',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'customer' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'skus' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
                 ],
               ],
             ],'transferEntitlements' => [
@@ -725,6 +752,28 @@ class Cloudchannel extends \Google\Service
                   'type' => 'string',
                 ],
               ],
+            ],'listEntitlementChanges' => [
+              'path' => 'v1/{+parent}:listEntitlementChanges',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'filter' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
             ],'lookupOffer' => [
               'path' => 'v1/{+entitlement}:lookupOffer',
               'httpMethod' => 'GET',
@@ -790,6 +839,10 @@ class Cloudchannel extends \Google\Service
                   'location' => 'query',
                   'type' => 'string',
                 ],
+                'showFutureOffers' => [
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ],
               ],
             ],
           ]
@@ -851,6 +904,62 @@ class Cloudchannel extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->accounts_skuGroups = new Cloudchannel\Resource\AccountsSkuGroups(
+        $this,
+        $this->serviceName,
+        'skuGroups',
+        [
+          'methods' => [
+            'list' => [
+              'path' => 'v1/{+parent}/skuGroups',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->accounts_skuGroups_billableSkus = new Cloudchannel\Resource\AccountsSkuGroupsBillableSkus(
+        $this,
+        $this->serviceName,
+        'billableSkus',
+        [
+          'methods' => [
+            'list' => [
+              'path' => 'v1/{+parent}/billableSkus',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
               ],
             ],

@@ -40,10 +40,8 @@ class GoogleChromePolicyVersionsV1PolicySchema extends \Google\Collection
   public $name;
   protected $noticesType = GoogleChromePolicyVersionsV1PolicySchemaNoticeDescription::class;
   protected $noticesDataType = 'array';
-  protected $policyApiLifecycleType = ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle::class;
+  protected $policyApiLifecycleType = GoogleChromePolicyVersionsV1PolicyApiLifecycle::class;
   protected $policyApiLifecycleDataType = '';
-  protected $policyApiLifeycleType = ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle::class;
-  protected $policyApiLifeycleDataType = '';
   /**
    * @var string
    */
@@ -56,6 +54,10 @@ class GoogleChromePolicyVersionsV1PolicySchema extends \Google\Collection
    * @var string
    */
   public $supportUri;
+  /**
+   * @var string[]
+   */
+  public $supportedPlatforms;
   /**
    * @var string[]
    */
@@ -160,32 +162,18 @@ class GoogleChromePolicyVersionsV1PolicySchema extends \Google\Collection
     return $this->notices;
   }
   /**
-   * @param ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle
+   * @param GoogleChromePolicyVersionsV1PolicyApiLifecycle
    */
-  public function setPolicyApiLifecycle(ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle $policyApiLifecycle)
+  public function setPolicyApiLifecycle(GoogleChromePolicyVersionsV1PolicyApiLifecycle $policyApiLifecycle)
   {
     $this->policyApiLifecycle = $policyApiLifecycle;
   }
   /**
-   * @return ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle
+   * @return GoogleChromePolicyVersionsV1PolicyApiLifecycle
    */
   public function getPolicyApiLifecycle()
   {
     return $this->policyApiLifecycle;
-  }
-  /**
-   * @param ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle
-   */
-  public function setPolicyApiLifeycle(ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle $policyApiLifeycle)
-  {
-    $this->policyApiLifeycle = $policyApiLifeycle;
-  }
-  /**
-   * @return ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle
-   */
-  public function getPolicyApiLifeycle()
-  {
-    return $this->policyApiLifeycle;
   }
   /**
    * @param string
@@ -228,6 +216,20 @@ class GoogleChromePolicyVersionsV1PolicySchema extends \Google\Collection
   public function getSupportUri()
   {
     return $this->supportUri;
+  }
+  /**
+   * @param string[]
+   */
+  public function setSupportedPlatforms($supportedPlatforms)
+  {
+    $this->supportedPlatforms = $supportedPlatforms;
+  }
+  /**
+   * @return string[]
+   */
+  public function getSupportedPlatforms()
+  {
+    return $this->supportedPlatforms;
   }
   /**
    * @param string[]

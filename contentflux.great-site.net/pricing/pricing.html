@@ -1,0 +1,94 @@
+
+<!-- Deluxe monthly -->
+<div id="paypal-button-container-P-0UM585238E324170VMJDPEYQ"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=ATuV90R7q8x324-DDeuvdt9BCXBDxMCUR7V2zS5U_sK1NvhPEZ1Ik1oicO2LlrcDzlyAC8cXb0JS7x_i&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+<script>
+    paypal.Buttons({
+        style: {
+            shape: 'rect',
+            color: 'gold',
+            layout: 'vertical',
+            label: 'Make payment'
+        },
+        createSubscription: function(data, actions) {
+            return actions.subscription.create({
+                /* Creates the subscription */
+                plan_id: 'P-0UM585238E324170VMJDPEYQ'
+            });
+        },
+        onApprove: function(data, actions) {
+            alert(data.subscriptionID); // You can add optional success message for the subscriber here
+        }
+    }).render('#paypal-button-container-P-0UM585238E324170VMJDPEYQ'); // Renders the PayPal button
+</script>
+
+<!-- Deluxe yearly -->
+<div id="paypal-button-container-P-95T66635HR378740DMJDPKDA"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=ATuV90R7q8x324-DDeuvdt9BCXBDxMCUR7V2zS5U_sK1NvhPEZ1Ik1oicO2LlrcDzlyAC8cXb0JS7x_i&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+<script>
+    paypal.Buttons({
+        style: {
+            shape: 'rect',
+            color: 'gold',
+            layout: 'vertical',
+            label: 'Make payment'
+        },
+        createSubscription: function(data, actions) {
+            return actions.subscription.create({
+                /* Creates the subscription */
+                plan_id: 'P-95T66635HR378740DMJDPKDA'
+            });
+        },
+        onApprove: function(data, actions) {
+            alert(data.subscriptionID); // You can add optional success message for the subscriber here
+        }
+    }).render('#paypal-button-container-P-95T66635HR378740DMJDPKDA'); // Renders the PayPal button
+</script>
+
+
+<!-- Parakeet monthly -->
+<div id="paypal-button-container-P-56386469G8147363UMJDPIOQ"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=ATuV90R7q8x324-DDeuvdt9BCXBDxMCUR7V2zS5U_sK1NvhPEZ1Ik1oicO2LlrcDzlyAC8cXb0JS7x_i&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+<script>
+    paypal.Buttons({
+        style: {
+            shape: 'rect',
+            color: 'gold',
+            layout: 'vertical',
+            label: 'Make payment'
+        },
+        createSubscription: function(data, actions) {
+            return actions.subscription.create({
+                /* Creates the subscription */
+                plan_id: 'P-56386469G8147363UMJDPIOQ'
+            });
+        },
+        onApprove: function(data, actions) {
+            alert(data.subscriptionID); // You can add optional success message for the subscriber here
+        }
+    }).render('#paypal-button-container-P-56386469G8147363UMJDPIOQ'); // Renders the PayPal button
+</script>
+
+
+<!-- Parakeet yearly -->
+<div id="paypal-button-container-P-4W1495421M579311DMJDPMUQ"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=ATuV90R7q8x324-DDeuvdt9BCXBDxMCUR7V2zS5U_sK1NvhPEZ1Ik1oicO2LlrcDzlyAC8cXb0JS7x_i&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+<script>
+    paypal.Buttons({
+        style: {
+            shape: 'rect',
+            color: 'gold',
+            layout: 'vertical',
+            label: 'Make payment'
+        },
+        createSubscription: function(data, actions) {
+            return actions.subscription.create({
+                /* Creates the subscription */
+                plan_id: 'P-4W1495421M579311DMJDPMUQ'
+            });
+        },
+        onApprove: function(data, actions) {
+            alert(data.subscriptionID); // You can add optional success message for the subscriber here
+        }
+    }).render('#paypal-button-container-P-4W1495421M579311DMJDPMUQ'); // Renders the PayPal button
+</script>

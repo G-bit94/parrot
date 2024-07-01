@@ -39,6 +39,7 @@ class Accounts extends \Google\Service\Resource
    * accounts/{account}
    * @param array $optParams Optional parameters.
    * @return Account
+   * @throws \Google\Service\Exception
    */
   public function get($name, $optParams = [])
   {
@@ -54,6 +55,7 @@ class Accounts extends \Google\Service\Resource
    * Format: accounts/{account}
    * @param array $optParams Optional parameters.
    * @return AdBlockingRecoveryTag
+   * @throws \Google\Service\Exception
    */
   public function getAdBlockingRecoveryTag($name, $optParams = [])
   {
@@ -75,6 +77,7 @@ class Accounts extends \Google\Service\Resource
    * paginating, all other parameters provided to `ListAccounts` must match the
    * call that provided the page token.
    * @return ListAccountsResponse
+   * @throws \Google\Service\Exception
    */
   public function listAccounts($optParams = [])
   {
@@ -95,10 +98,11 @@ class Accounts extends \Google\Service\Resource
    * returned. The maximum value is 10000; values above 10000 will be coerced to
    * 10000.
    * @opt_param string pageToken A page token, received from a previous
-   * `ListAccounts` call. Provide this to retrieve the subsequent page. When
-   * paginating, all other parameters provided to `ListAccounts` must match the
-   * call that provided the page token.
+   * `ListChildAccounts` call. Provide this to retrieve the subsequent page. When
+   * paginating, all other parameters provided to `ListChildAccounts` must match
+   * the call that provided the page token.
    * @return ListChildAccountsResponse
+   * @throws \Google\Service\Exception
    */
   public function listChildAccounts($parent, $optParams = [])
   {

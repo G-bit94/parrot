@@ -19,6 +19,8 @@ namespace Google\Service\Batch;
 
 class AgentTask extends \Google\Model
 {
+  protected $agentTaskSpecType = AgentTaskSpec::class;
+  protected $agentTaskSpecDataType = '';
   /**
    * @var string
    */
@@ -35,7 +37,25 @@ class AgentTask extends \Google\Model
    * @var string
    */
   public $task;
+  /**
+   * @var string
+   */
+  public $taskSource;
 
+  /**
+   * @param AgentTaskSpec
+   */
+  public function setAgentTaskSpec(AgentTaskSpec $agentTaskSpec)
+  {
+    $this->agentTaskSpec = $agentTaskSpec;
+  }
+  /**
+   * @return AgentTaskSpec
+   */
+  public function getAgentTaskSpec()
+  {
+    return $this->agentTaskSpec;
+  }
   /**
    * @param string
    */
@@ -105,6 +125,20 @@ class AgentTask extends \Google\Model
   public function getTask()
   {
     return $this->task;
+  }
+  /**
+   * @param string
+   */
+  public function setTaskSource($taskSource)
+  {
+    $this->taskSource = $taskSource;
+  }
+  /**
+   * @return string
+   */
+  public function getTaskSource()
+  {
+    return $this->taskSource;
   }
 }
 

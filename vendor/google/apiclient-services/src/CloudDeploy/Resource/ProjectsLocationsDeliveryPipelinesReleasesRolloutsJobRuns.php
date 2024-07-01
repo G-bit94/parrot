@@ -19,13 +19,15 @@ namespace Google\Service\CloudDeploy\Resource;
 
 use Google\Service\CloudDeploy\JobRun;
 use Google\Service\CloudDeploy\ListJobRunsResponse;
+use Google\Service\CloudDeploy\TerminateJobRunRequest;
+use Google\Service\CloudDeploy\TerminateJobRunResponse;
 
 /**
  * The "jobRuns" collection of methods.
  * Typical usage is:
  *  <code>
  *   $clouddeployService = new Google\Service\CloudDeploy(...);
- *   $jobRuns = $clouddeployService->jobRuns;
+ *   $jobRuns = $clouddeployService->projects_locations_deliveryPipelines_releases_rollouts_jobRuns;
  *  </code>
  */
 class ProjectsLocationsDeliveryPipelinesReleasesRolloutsJobRuns extends \Google\Service\Resource
@@ -33,11 +35,12 @@ class ProjectsLocationsDeliveryPipelinesReleasesRolloutsJobRuns extends \Google\
   /**
    * Gets details of a single JobRun. (jobRuns.get)
    *
-   * @param string $name Required. Name of the `JobRun`. Format must be projects/{
-   * project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/relea
-   * ses/{release_name}/rollouts/{rollout_name}/jobRuns/{job_run_name}.
+   * @param string $name Required. Name of the `JobRun`. Format must be `projects/
+   * {project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/rele
+   * ases/{release_name}/rollouts/{rollout_name}/jobRuns/{job_run_name}`.
    * @param array $optParams Optional parameters.
    * @return JobRun
+   * @throws \Google\Service\Exception
    */
   public function get($name, $optParams = [])
   {
@@ -66,12 +69,30 @@ class ProjectsLocationsDeliveryPipelinesReleasesRolloutsJobRuns extends \Google\
    * paginating, all other provided parameters match the call that provided the
    * page token.
    * @return ListJobRunsResponse
+   * @throws \Google\Service\Exception
    */
   public function listProjectsLocationsDeliveryPipelinesReleasesRolloutsJobRuns($parent, $optParams = [])
   {
     $params = ['parent' => $parent];
     $params = array_merge($params, $optParams);
     return $this->call('list', [$params], ListJobRunsResponse::class);
+  }
+  /**
+   * Terminates a Job Run in a given project and location. (jobRuns.terminate)
+   *
+   * @param string $name Required. Name of the `JobRun`. Format must be `projects/
+   * {project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/
+   * {release}/rollouts/{rollout}/jobRuns/{jobRun}`.
+   * @param TerminateJobRunRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return TerminateJobRunResponse
+   * @throws \Google\Service\Exception
+   */
+  public function terminate($name, TerminateJobRunRequest $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('terminate', [$params], TerminateJobRunResponse::class);
   }
 }
 

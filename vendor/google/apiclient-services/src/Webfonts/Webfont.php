@@ -20,10 +20,16 @@ namespace Google\Service\Webfonts;
 class Webfont extends \Google\Collection
 {
   protected $collection_key = 'variants';
+  protected $axesType = Axis::class;
+  protected $axesDataType = 'array';
   /**
    * @var string
    */
   public $category;
+  /**
+   * @var string[]
+   */
+  public $colorCapabilities;
   /**
    * @var string
    */
@@ -41,6 +47,10 @@ class Webfont extends \Google\Collection
    */
   public $lastModified;
   /**
+   * @var string
+   */
+  public $menu;
+  /**
    * @var string[]
    */
   public $subsets;
@@ -54,6 +64,20 @@ class Webfont extends \Google\Collection
   public $version;
 
   /**
+   * @param Axis[]
+   */
+  public function setAxes($axes)
+  {
+    $this->axes = $axes;
+  }
+  /**
+   * @return Axis[]
+   */
+  public function getAxes()
+  {
+    return $this->axes;
+  }
+  /**
    * @param string
    */
   public function setCategory($category)
@@ -66,6 +90,20 @@ class Webfont extends \Google\Collection
   public function getCategory()
   {
     return $this->category;
+  }
+  /**
+   * @param string[]
+   */
+  public function setColorCapabilities($colorCapabilities)
+  {
+    $this->colorCapabilities = $colorCapabilities;
+  }
+  /**
+   * @return string[]
+   */
+  public function getColorCapabilities()
+  {
+    return $this->colorCapabilities;
   }
   /**
    * @param string
@@ -122,6 +160,20 @@ class Webfont extends \Google\Collection
   public function getLastModified()
   {
     return $this->lastModified;
+  }
+  /**
+   * @param string
+   */
+  public function setMenu($menu)
+  {
+    $this->menu = $menu;
+  }
+  /**
+   * @return string
+   */
+  public function getMenu()
+  {
+    return $this->menu;
   }
   /**
    * @param string[]

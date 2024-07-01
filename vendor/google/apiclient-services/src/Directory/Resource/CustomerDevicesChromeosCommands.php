@@ -24,7 +24,7 @@ use Google\Service\Directory\DirectoryChromeosdevicesCommand;
  * Typical usage is:
  *  <code>
  *   $adminService = new Google\Service\Directory(...);
- *   $commands = $adminService->commands;
+ *   $commands = $adminService->customer_devices_chromeos_commands;
  *  </code>
  */
 class CustomerDevicesChromeosCommands extends \Google\Service\Resource
@@ -37,6 +37,7 @@ class CustomerDevicesChromeosCommands extends \Google\Service\Resource
    * @param string $commandId Immutable. ID of Chrome OS Device Command.
    * @param array $optParams Optional parameters.
    * @return DirectoryChromeosdevicesCommand
+   * @throws \Google\Service\Exception
    */
   public function get($customerId, $deviceId, $commandId, $optParams = [])
   {

@@ -20,6 +20,8 @@ namespace Google\Service\Integrations;
 class GoogleCloudIntegrationsV1alphaTaskConfig extends \Google\Collection
 {
   protected $collection_key = 'nextTasks';
+  protected $conditionalFailurePoliciesType = GoogleCloudIntegrationsV1alphaConditionalFailurePolicies::class;
+  protected $conditionalFailurePoliciesDataType = '';
   /**
    * @var string
    */
@@ -28,6 +30,14 @@ class GoogleCloudIntegrationsV1alphaTaskConfig extends \Google\Collection
    * @var string
    */
   public $displayName;
+  /**
+   * @var string
+   */
+  public $errorCatcherId;
+  /**
+   * @var string
+   */
+  public $externalTaskType;
   protected $failurePolicyType = GoogleCloudIntegrationsV1alphaFailurePolicy::class;
   protected $failurePolicyDataType = '';
   /**
@@ -42,6 +52,8 @@ class GoogleCloudIntegrationsV1alphaTaskConfig extends \Google\Collection
   public $nextTasksExecutionPolicy;
   protected $parametersType = GoogleCloudIntegrationsV1alphaEventParameter::class;
   protected $parametersDataType = 'map';
+  protected $positionType = GoogleCloudIntegrationsV1alphaCoordinate::class;
+  protected $positionDataType = '';
   protected $successPolicyType = GoogleCloudIntegrationsV1alphaSuccessPolicy::class;
   protected $successPolicyDataType = '';
   protected $synchronousCallFailurePolicyType = GoogleCloudIntegrationsV1alphaFailurePolicy::class;
@@ -63,6 +75,20 @@ class GoogleCloudIntegrationsV1alphaTaskConfig extends \Google\Collection
    */
   public $taskTemplate;
 
+  /**
+   * @param GoogleCloudIntegrationsV1alphaConditionalFailurePolicies
+   */
+  public function setConditionalFailurePolicies(GoogleCloudIntegrationsV1alphaConditionalFailurePolicies $conditionalFailurePolicies)
+  {
+    $this->conditionalFailurePolicies = $conditionalFailurePolicies;
+  }
+  /**
+   * @return GoogleCloudIntegrationsV1alphaConditionalFailurePolicies
+   */
+  public function getConditionalFailurePolicies()
+  {
+    return $this->conditionalFailurePolicies;
+  }
   /**
    * @param string
    */
@@ -90,6 +116,34 @@ class GoogleCloudIntegrationsV1alphaTaskConfig extends \Google\Collection
   public function getDisplayName()
   {
     return $this->displayName;
+  }
+  /**
+   * @param string
+   */
+  public function setErrorCatcherId($errorCatcherId)
+  {
+    $this->errorCatcherId = $errorCatcherId;
+  }
+  /**
+   * @return string
+   */
+  public function getErrorCatcherId()
+  {
+    return $this->errorCatcherId;
+  }
+  /**
+   * @param string
+   */
+  public function setExternalTaskType($externalTaskType)
+  {
+    $this->externalTaskType = $externalTaskType;
+  }
+  /**
+   * @return string
+   */
+  public function getExternalTaskType()
+  {
+    return $this->externalTaskType;
   }
   /**
    * @param GoogleCloudIntegrationsV1alphaFailurePolicy
@@ -160,6 +214,20 @@ class GoogleCloudIntegrationsV1alphaTaskConfig extends \Google\Collection
   public function getParameters()
   {
     return $this->parameters;
+  }
+  /**
+   * @param GoogleCloudIntegrationsV1alphaCoordinate
+   */
+  public function setPosition(GoogleCloudIntegrationsV1alphaCoordinate $position)
+  {
+    $this->position = $position;
+  }
+  /**
+   * @return GoogleCloudIntegrationsV1alphaCoordinate
+   */
+  public function getPosition()
+  {
+    return $this->position;
   }
   /**
    * @param GoogleCloudIntegrationsV1alphaSuccessPolicy

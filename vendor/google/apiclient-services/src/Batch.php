@@ -23,7 +23,7 @@ use Google\Client;
  * Service definition for Batch (v1).
  *
  * <p>
- * An API to manage the running of batch jobs on Google Cloud Platform.</p>
+ * An API to manage the running of Batch resources on Google Cloud Platform.</p>
  *
  * <p>
  * For more information about this service, see the API
@@ -43,6 +43,7 @@ class Batch extends \Google\Service
   public $projects_locations_jobs_taskGroups_tasks;
   public $projects_locations_operations;
   public $projects_locations_state;
+  public $rootUrlTemplate;
 
   /**
    * Constructs the internal representation of the Batch service.
@@ -55,6 +56,7 @@ class Batch extends \Google\Service
   {
     parent::__construct($clientOrConfig);
     $this->rootUrl = $rootUrl ?: 'https://batch.googleapis.com/';
+    $this->rootUrlTemplate = $rootUrl ?: 'https://batch.UNIVERSE_DOMAIN/';
     $this->servicePath = '';
     $this->batchPath = 'batch';
     $this->version = 'v1';
@@ -154,20 +156,6 @@ class Batch extends \Google\Service
                   'required' => true,
                 ],
               ],
-            ],'getIamPolicy' => [
-              'path' => 'v1/{+resource}:getIamPolicy',
-              'httpMethod' => 'GET',
-              'parameters' => [
-                'resource' => [
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ],
-                'options.requestedPolicyVersion' => [
-                  'location' => 'query',
-                  'type' => 'integer',
-                ],
-              ],
             ],'list' => [
               'path' => 'v1/{+parent}/jobs',
               'httpMethod' => 'GET',
@@ -181,6 +169,10 @@ class Batch extends \Google\Service
                   'location' => 'query',
                   'type' => 'string',
                 ],
+                'orderBy' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
                 'pageSize' => [
                   'location' => 'query',
                   'type' => 'integer',
@@ -188,26 +180,6 @@ class Batch extends \Google\Service
                 'pageToken' => [
                   'location' => 'query',
                   'type' => 'string',
-                ],
-              ],
-            ],'setIamPolicy' => [
-              'path' => 'v1/{+resource}:setIamPolicy',
-              'httpMethod' => 'POST',
-              'parameters' => [
-                'resource' => [
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ],
-              ],
-            ],'testIamPermissions' => [
-              'path' => 'v1/{+resource}:testIamPermissions',
-              'httpMethod' => 'POST',
-              'parameters' => [
-                'resource' => [
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
                 ],
               ],
             ],

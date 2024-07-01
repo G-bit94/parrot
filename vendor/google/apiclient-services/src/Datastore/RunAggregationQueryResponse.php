@@ -21,8 +21,14 @@ class RunAggregationQueryResponse extends \Google\Model
 {
   protected $batchType = AggregationResultBatch::class;
   protected $batchDataType = '';
+  protected $explainMetricsType = ExplainMetrics::class;
+  protected $explainMetricsDataType = '';
   protected $queryType = AggregationQuery::class;
   protected $queryDataType = '';
+  /**
+   * @var string
+   */
+  public $transaction;
 
   /**
    * @param AggregationResultBatch
@@ -39,6 +45,20 @@ class RunAggregationQueryResponse extends \Google\Model
     return $this->batch;
   }
   /**
+   * @param ExplainMetrics
+   */
+  public function setExplainMetrics(ExplainMetrics $explainMetrics)
+  {
+    $this->explainMetrics = $explainMetrics;
+  }
+  /**
+   * @return ExplainMetrics
+   */
+  public function getExplainMetrics()
+  {
+    return $this->explainMetrics;
+  }
+  /**
    * @param AggregationQuery
    */
   public function setQuery(AggregationQuery $query)
@@ -51,6 +71,20 @@ class RunAggregationQueryResponse extends \Google\Model
   public function getQuery()
   {
     return $this->query;
+  }
+  /**
+   * @param string
+   */
+  public function setTransaction($transaction)
+  {
+    $this->transaction = $transaction;
+  }
+  /**
+   * @return string
+   */
+  public function getTransaction()
+  {
+    return $this->transaction;
   }
 }
 

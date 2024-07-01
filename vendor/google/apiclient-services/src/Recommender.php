@@ -52,6 +52,7 @@ class Recommender extends \Google\Service
   public $projects_locations_insightTypes_insights;
   public $projects_locations_recommenders;
   public $projects_locations_recommenders_recommendations;
+  public $rootUrlTemplate;
 
   /**
    * Constructs the internal representation of the Recommender service.
@@ -64,6 +65,7 @@ class Recommender extends \Google\Service
   {
     parent::__construct($clientOrConfig);
     $this->rootUrl = $rootUrl ?: 'https://recommender.googleapis.com/';
+    $this->rootUrlTemplate = $rootUrl ?: 'https://recommender.UNIVERSE_DOMAIN/';
     $this->servicePath = '';
     $this->batchPath = 'batch';
     $this->version = 'v1';
@@ -245,6 +247,16 @@ class Recommender extends \Google\Service
                   'required' => true,
                 ],
               ],
+            ],'markDismissed' => [
+              'path' => 'v1/{+name}:markDismissed',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
             ],'markFailed' => [
               'path' => 'v1/{+name}:markFailed',
               'httpMethod' => 'POST',
@@ -361,6 +373,16 @@ class Recommender extends \Google\Service
               ],
             ],'markClaimed' => [
               'path' => 'v1/{+name}:markClaimed',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'markDismissed' => [
+              'path' => 'v1/{+name}:markDismissed',
               'httpMethod' => 'POST',
               'parameters' => [
                 'name' => [
@@ -569,6 +591,16 @@ class Recommender extends \Google\Service
                   'required' => true,
                 ],
               ],
+            ],'markDismissed' => [
+              'path' => 'v1/{+name}:markDismissed',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
             ],'markFailed' => [
               'path' => 'v1/{+name}:markFailed',
               'httpMethod' => 'POST',
@@ -761,6 +793,16 @@ class Recommender extends \Google\Service
               ],
             ],'markClaimed' => [
               'path' => 'v1/{+name}:markClaimed',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'markDismissed' => [
+              'path' => 'v1/{+name}:markDismissed',
               'httpMethod' => 'POST',
               'parameters' => [
                 'name' => [

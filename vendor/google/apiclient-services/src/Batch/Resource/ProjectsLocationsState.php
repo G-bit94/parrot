@@ -25,7 +25,7 @@ use Google\Service\Batch\ReportAgentStateResponse;
  * Typical usage is:
  *  <code>
  *   $batchService = new Google\Service\Batch(...);
- *   $state = $batchService->state;
+ *   $state = $batchService->projects_locations_state;
  *  </code>
  */
 class ProjectsLocationsState extends \Google\Service\Resource
@@ -38,6 +38,7 @@ class ProjectsLocationsState extends \Google\Service\Resource
    * @param ReportAgentStateRequest $postBody
    * @param array $optParams Optional parameters.
    * @return ReportAgentStateResponse
+   * @throws \Google\Service\Exception
    */
   public function report($parent, ReportAgentStateRequest $postBody, $optParams = [])
   {

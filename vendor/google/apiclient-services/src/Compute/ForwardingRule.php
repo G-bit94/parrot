@@ -19,7 +19,7 @@ namespace Google\Service\Compute;
 
 class ForwardingRule extends \Google\Collection
 {
-  protected $collection_key = 'serviceDirectoryRegistrations';
+  protected $collection_key = 'sourceIpRanges';
   protected $internal_gapi_mappings = [
         "iPAddress" => "IPAddress",
         "iPProtocol" => "IPProtocol",
@@ -41,9 +41,17 @@ class ForwardingRule extends \Google\Collection
    */
   public $allowGlobalAccess;
   /**
+   * @var bool
+   */
+  public $allowPscGlobalAccess;
+  /**
    * @var string
    */
   public $backendService;
+  /**
+   * @var string
+   */
+  public $baseForwardingRule;
   /**
    * @var string
    */
@@ -60,6 +68,10 @@ class ForwardingRule extends \Google\Collection
    * @var string
    */
   public $id;
+  /**
+   * @var string
+   */
+  public $ipCollection;
   /**
    * @var string
    */
@@ -137,6 +149,10 @@ class ForwardingRule extends \Google\Collection
    */
   public $serviceName;
   /**
+   * @var string[]
+   */
+  public $sourceIpRanges;
+  /**
    * @var string
    */
   public $subnetwork;
@@ -202,6 +218,20 @@ class ForwardingRule extends \Google\Collection
     return $this->allowGlobalAccess;
   }
   /**
+   * @param bool
+   */
+  public function setAllowPscGlobalAccess($allowPscGlobalAccess)
+  {
+    $this->allowPscGlobalAccess = $allowPscGlobalAccess;
+  }
+  /**
+   * @return bool
+   */
+  public function getAllowPscGlobalAccess()
+  {
+    return $this->allowPscGlobalAccess;
+  }
+  /**
    * @param string
    */
   public function setBackendService($backendService)
@@ -214,6 +244,20 @@ class ForwardingRule extends \Google\Collection
   public function getBackendService()
   {
     return $this->backendService;
+  }
+  /**
+   * @param string
+   */
+  public function setBaseForwardingRule($baseForwardingRule)
+  {
+    $this->baseForwardingRule = $baseForwardingRule;
+  }
+  /**
+   * @return string
+   */
+  public function getBaseForwardingRule()
+  {
+    return $this->baseForwardingRule;
   }
   /**
    * @param string
@@ -270,6 +314,20 @@ class ForwardingRule extends \Google\Collection
   public function getId()
   {
     return $this->id;
+  }
+  /**
+   * @param string
+   */
+  public function setIpCollection($ipCollection)
+  {
+    $this->ipCollection = $ipCollection;
+  }
+  /**
+   * @return string
+   */
+  public function getIpCollection()
+  {
+    return $this->ipCollection;
   }
   /**
    * @param string
@@ -550,6 +608,20 @@ class ForwardingRule extends \Google\Collection
   public function getServiceName()
   {
     return $this->serviceName;
+  }
+  /**
+   * @param string[]
+   */
+  public function setSourceIpRanges($sourceIpRanges)
+  {
+    $this->sourceIpRanges = $sourceIpRanges;
+  }
+  /**
+   * @return string[]
+   */
+  public function getSourceIpRanges()
+  {
+    return $this->sourceIpRanges;
   }
   /**
    * @param string

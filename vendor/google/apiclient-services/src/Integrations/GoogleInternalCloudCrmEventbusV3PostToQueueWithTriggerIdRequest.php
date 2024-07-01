@@ -34,9 +34,17 @@ class GoogleInternalCloudCrmEventbusV3PostToQueueWithTriggerIdRequest extends \G
    */
   public $priority;
   /**
+   * @var int
+   */
+  public $quotaRetryCount;
+  /**
    * @var string
    */
   public $requestId;
+  /**
+   * @var string
+   */
+  public $resourceName;
   /**
    * @var string
    */
@@ -49,6 +57,10 @@ class GoogleInternalCloudCrmEventbusV3PostToQueueWithTriggerIdRequest extends \G
    * @var string
    */
   public $triggerId;
+  /**
+   * @var string
+   */
+  public $userGeneratedExecutionId;
   /**
    * @var string
    */
@@ -111,6 +123,20 @@ class GoogleInternalCloudCrmEventbusV3PostToQueueWithTriggerIdRequest extends \G
     return $this->priority;
   }
   /**
+   * @param int
+   */
+  public function setQuotaRetryCount($quotaRetryCount)
+  {
+    $this->quotaRetryCount = $quotaRetryCount;
+  }
+  /**
+   * @return int
+   */
+  public function getQuotaRetryCount()
+  {
+    return $this->quotaRetryCount;
+  }
+  /**
    * @param string
    */
   public function setRequestId($requestId)
@@ -123,6 +149,20 @@ class GoogleInternalCloudCrmEventbusV3PostToQueueWithTriggerIdRequest extends \G
   public function getRequestId()
   {
     return $this->requestId;
+  }
+  /**
+   * @param string
+   */
+  public function setResourceName($resourceName)
+  {
+    $this->resourceName = $resourceName;
+  }
+  /**
+   * @return string
+   */
+  public function getResourceName()
+  {
+    return $this->resourceName;
   }
   /**
    * @param string
@@ -165,6 +205,20 @@ class GoogleInternalCloudCrmEventbusV3PostToQueueWithTriggerIdRequest extends \G
   public function getTriggerId()
   {
     return $this->triggerId;
+  }
+  /**
+   * @param string
+   */
+  public function setUserGeneratedExecutionId($userGeneratedExecutionId)
+  {
+    $this->userGeneratedExecutionId = $userGeneratedExecutionId;
+  }
+  /**
+   * @return string
+   */
+  public function getUserGeneratedExecutionId()
+  {
+    return $this->userGeneratedExecutionId;
   }
   /**
    * @param string

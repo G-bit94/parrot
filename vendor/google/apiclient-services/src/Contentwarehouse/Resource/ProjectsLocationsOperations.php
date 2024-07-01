@@ -24,7 +24,7 @@ use Google\Service\Contentwarehouse\GoogleLongrunningOperation;
  * Typical usage is:
  *  <code>
  *   $contentwarehouseService = new Google\Service\Contentwarehouse(...);
- *   $operations = $contentwarehouseService->operations;
+ *   $operations = $contentwarehouseService->projects_locations_operations;
  *  </code>
  */
 class ProjectsLocationsOperations extends \Google\Service\Resource
@@ -37,6 +37,7 @@ class ProjectsLocationsOperations extends \Google\Service\Resource
    * @param string $name The name of the operation resource.
    * @param array $optParams Optional parameters.
    * @return GoogleLongrunningOperation
+   * @throws \Google\Service\Exception
    */
   public function get($name, $optParams = [])
   {

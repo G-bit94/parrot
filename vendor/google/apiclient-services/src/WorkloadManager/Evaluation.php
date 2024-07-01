@@ -20,10 +20,16 @@ namespace Google\Service\WorkloadManager;
 class Evaluation extends \Google\Collection
 {
   protected $collection_key = 'ruleVersions';
+  protected $bigQueryDestinationType = BigQueryDestination::class;
+  protected $bigQueryDestinationDataType = '';
   /**
    * @var string
    */
   public $createTime;
+  /**
+   * @var string
+   */
+  public $customRulesBucket;
   /**
    * @var string
    */
@@ -51,8 +57,26 @@ class Evaluation extends \Google\Collection
   /**
    * @var string
    */
+  public $schedule;
+  /**
+   * @var string
+   */
   public $updateTime;
 
+  /**
+   * @param BigQueryDestination
+   */
+  public function setBigQueryDestination(BigQueryDestination $bigQueryDestination)
+  {
+    $this->bigQueryDestination = $bigQueryDestination;
+  }
+  /**
+   * @return BigQueryDestination
+   */
+  public function getBigQueryDestination()
+  {
+    return $this->bigQueryDestination;
+  }
   /**
    * @param string
    */
@@ -66,6 +90,20 @@ class Evaluation extends \Google\Collection
   public function getCreateTime()
   {
     return $this->createTime;
+  }
+  /**
+   * @param string
+   */
+  public function setCustomRulesBucket($customRulesBucket)
+  {
+    $this->customRulesBucket = $customRulesBucket;
+  }
+  /**
+   * @return string
+   */
+  public function getCustomRulesBucket()
+  {
+    return $this->customRulesBucket;
   }
   /**
    * @param string
@@ -164,6 +202,20 @@ class Evaluation extends \Google\Collection
   public function getRuleVersions()
   {
     return $this->ruleVersions;
+  }
+  /**
+   * @param string
+   */
+  public function setSchedule($schedule)
+  {
+    $this->schedule = $schedule;
+  }
+  /**
+   * @return string
+   */
+  public function getSchedule()
+  {
+    return $this->schedule;
   }
   /**
    * @param string

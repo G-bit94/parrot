@@ -26,7 +26,7 @@ use Google\Service\ChromePolicy\GoogleProtobufEmpty;
  * Typical usage is:
  *  <code>
  *   $chromepolicyService = new Google\Service\ChromePolicy(...);
- *   $orgunits = $chromepolicyService->orgunits;
+ *   $orgunits = $chromepolicyService->customers_policies_orgunits;
  *  </code>
  */
 class CustomersPoliciesOrgunits extends \Google\Service\Resource
@@ -45,6 +45,7 @@ class CustomersPoliciesOrgunits extends \Google\Service\Resource
    * @param GoogleChromePolicyVersionsV1BatchInheritOrgUnitPoliciesRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleProtobufEmpty
+   * @throws \Google\Service\Exception
    */
   public function batchInherit($customer, GoogleChromePolicyVersionsV1BatchInheritOrgUnitPoliciesRequest $postBody, $optParams = [])
   {
@@ -65,6 +66,7 @@ class CustomersPoliciesOrgunits extends \Google\Service\Resource
    * @param GoogleChromePolicyVersionsV1BatchModifyOrgUnitPoliciesRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleProtobufEmpty
+   * @throws \Google\Service\Exception
    */
   public function batchModify($customer, GoogleChromePolicyVersionsV1BatchModifyOrgUnitPoliciesRequest $postBody, $optParams = [])
   {

@@ -51,6 +51,7 @@ class DataCatalog extends \Google\Service
   public $projects_locations_tagTemplates_fields_enumValues;
   public $projects_locations_taxonomies;
   public $projects_locations_taxonomies_policyTags;
+  public $rootUrlTemplate;
 
   /**
    * Constructs the internal representation of the DataCatalog service.
@@ -63,6 +64,7 @@ class DataCatalog extends \Google\Service
   {
     parent::__construct($clientOrConfig);
     $this->rootUrl = $rootUrl ?: 'https://datacatalog.googleapis.com/';
+    $this->rootUrlTemplate = $rootUrl ?: 'https://datacatalog.UNIVERSE_DOMAIN/';
     $this->servicePath = '';
     $this->batchPath = 'batch';
     $this->version = 'v1';
@@ -97,6 +99,14 @@ class DataCatalog extends \Google\Service
                   'type' => 'string',
                 ],
                 'linkedResource' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'location' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'project' => [
                   'location' => 'query',
                   'type' => 'string',
                 ],
@@ -429,6 +439,16 @@ class DataCatalog extends \Google\Service
                 'updateMask' => [
                   'location' => 'query',
                   'type' => 'string',
+                ],
+              ],
+            ],'reconcile' => [
+              'path' => 'v1/{+parent}/tags:reconcile',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
                 ],
               ],
             ],
@@ -816,6 +836,10 @@ class DataCatalog extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+                'filter' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
                 'pageSize' => [
                   'location' => 'query',

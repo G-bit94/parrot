@@ -25,7 +25,7 @@ use Google\Service\WorkloadManager\WriteInsightResponse;
  * Typical usage is:
  *  <code>
  *   $workloadmanagerService = new Google\Service\WorkloadManager(...);
- *   $insights = $workloadmanagerService->insights;
+ *   $insights = $workloadmanagerService->projects_locations_insights;
  *  </code>
  */
 class ProjectsLocationsInsights extends \Google\Service\Resource
@@ -39,6 +39,7 @@ class ProjectsLocationsInsights extends \Google\Service\Resource
    * @param WriteInsightRequest $postBody
    * @param array $optParams Optional parameters.
    * @return WriteInsightResponse
+   * @throws \Google\Service\Exception
    */
   public function writeInsight($location, WriteInsightRequest $postBody, $optParams = [])
   {

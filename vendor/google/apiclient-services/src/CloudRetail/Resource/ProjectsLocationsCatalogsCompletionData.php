@@ -25,7 +25,7 @@ use Google\Service\CloudRetail\GoogleLongrunningOperation;
  * Typical usage is:
  *  <code>
  *   $retailService = new Google\Service\CloudRetail(...);
- *   $completionData = $retailService->completionData;
+ *   $completionData = $retailService->projects_locations_catalogs_completionData;
  *  </code>
  */
 class ProjectsLocationsCatalogsCompletionData extends \Google\Service\Resource
@@ -44,6 +44,7 @@ class ProjectsLocationsCatalogsCompletionData extends \Google\Service\Resource
    * @param GoogleCloudRetailV2ImportCompletionDataRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleLongrunningOperation
+   * @throws \Google\Service\Exception
    */
   public function import($parent, GoogleCloudRetailV2ImportCompletionDataRequest $postBody, $optParams = [])
   {

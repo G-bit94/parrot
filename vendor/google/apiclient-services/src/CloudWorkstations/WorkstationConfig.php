@@ -19,7 +19,7 @@ namespace Google\Service\CloudWorkstations;
 
 class WorkstationConfig extends \Google\Collection
 {
-  protected $collection_key = 'persistentDirectories';
+  protected $collection_key = 'replicaZones';
   /**
    * @var string[]
    */
@@ -41,9 +41,21 @@ class WorkstationConfig extends \Google\Collection
    */
   public $deleteTime;
   /**
+   * @var bool
+   */
+  public $disableTcpConnections;
+  /**
    * @var string
    */
   public $displayName;
+  /**
+   * @var bool
+   */
+  public $enableAuditAgent;
+  protected $encryptionKeyType = CustomerEncryptionKey::class;
+  protected $encryptionKeyDataType = '';
+  protected $ephemeralDirectoriesType = EphemeralDirectory::class;
+  protected $ephemeralDirectoriesDataType = 'array';
   /**
    * @var string
    */
@@ -55,15 +67,25 @@ class WorkstationConfig extends \Google\Collection
    */
   public $idleTimeout;
   /**
+   * @var string[]
+   */
+  public $labels;
+  /**
    * @var string
    */
   public $name;
   protected $persistentDirectoriesType = PersistentDirectory::class;
   protected $persistentDirectoriesDataType = 'array';
+  protected $readinessChecksType = ReadinessCheck::class;
+  protected $readinessChecksDataType = 'array';
   /**
    * @var bool
    */
   public $reconciling;
+  /**
+   * @var string[]
+   */
+  public $replicaZones;
   /**
    * @var string
    */
@@ -162,6 +184,20 @@ class WorkstationConfig extends \Google\Collection
     return $this->deleteTime;
   }
   /**
+   * @param bool
+   */
+  public function setDisableTcpConnections($disableTcpConnections)
+  {
+    $this->disableTcpConnections = $disableTcpConnections;
+  }
+  /**
+   * @return bool
+   */
+  public function getDisableTcpConnections()
+  {
+    return $this->disableTcpConnections;
+  }
+  /**
    * @param string
    */
   public function setDisplayName($displayName)
@@ -174,6 +210,48 @@ class WorkstationConfig extends \Google\Collection
   public function getDisplayName()
   {
     return $this->displayName;
+  }
+  /**
+   * @param bool
+   */
+  public function setEnableAuditAgent($enableAuditAgent)
+  {
+    $this->enableAuditAgent = $enableAuditAgent;
+  }
+  /**
+   * @return bool
+   */
+  public function getEnableAuditAgent()
+  {
+    return $this->enableAuditAgent;
+  }
+  /**
+   * @param CustomerEncryptionKey
+   */
+  public function setEncryptionKey(CustomerEncryptionKey $encryptionKey)
+  {
+    $this->encryptionKey = $encryptionKey;
+  }
+  /**
+   * @return CustomerEncryptionKey
+   */
+  public function getEncryptionKey()
+  {
+    return $this->encryptionKey;
+  }
+  /**
+   * @param EphemeralDirectory[]
+   */
+  public function setEphemeralDirectories($ephemeralDirectories)
+  {
+    $this->ephemeralDirectories = $ephemeralDirectories;
+  }
+  /**
+   * @return EphemeralDirectory[]
+   */
+  public function getEphemeralDirectories()
+  {
+    return $this->ephemeralDirectories;
   }
   /**
    * @param string
@@ -218,6 +296,20 @@ class WorkstationConfig extends \Google\Collection
     return $this->idleTimeout;
   }
   /**
+   * @param string[]
+   */
+  public function setLabels($labels)
+  {
+    $this->labels = $labels;
+  }
+  /**
+   * @return string[]
+   */
+  public function getLabels()
+  {
+    return $this->labels;
+  }
+  /**
    * @param string
    */
   public function setName($name)
@@ -246,6 +338,20 @@ class WorkstationConfig extends \Google\Collection
     return $this->persistentDirectories;
   }
   /**
+   * @param ReadinessCheck[]
+   */
+  public function setReadinessChecks($readinessChecks)
+  {
+    $this->readinessChecks = $readinessChecks;
+  }
+  /**
+   * @return ReadinessCheck[]
+   */
+  public function getReadinessChecks()
+  {
+    return $this->readinessChecks;
+  }
+  /**
    * @param bool
    */
   public function setReconciling($reconciling)
@@ -258,6 +364,20 @@ class WorkstationConfig extends \Google\Collection
   public function getReconciling()
   {
     return $this->reconciling;
+  }
+  /**
+   * @param string[]
+   */
+  public function setReplicaZones($replicaZones)
+  {
+    $this->replicaZones = $replicaZones;
+  }
+  /**
+   * @return string[]
+   */
+  public function getReplicaZones()
+  {
+    return $this->replicaZones;
   }
   /**
    * @param string

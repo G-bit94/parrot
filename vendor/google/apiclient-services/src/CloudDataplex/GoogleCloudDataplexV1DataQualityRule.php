@@ -26,11 +26,19 @@ class GoogleCloudDataplexV1DataQualityRule extends \Google\Model
   /**
    * @var string
    */
+  public $description;
+  /**
+   * @var string
+   */
   public $dimension;
   /**
    * @var bool
    */
   public $ignoreNull;
+  /**
+   * @var string
+   */
+  public $name;
   protected $nonNullExpectationType = GoogleCloudDataplexV1DataQualityRuleNonNullExpectation::class;
   protected $nonNullExpectationDataType = '';
   protected $rangeExpectationType = GoogleCloudDataplexV1DataQualityRuleRangeExpectation::class;
@@ -41,6 +49,8 @@ class GoogleCloudDataplexV1DataQualityRule extends \Google\Model
   protected $rowConditionExpectationDataType = '';
   protected $setExpectationType = GoogleCloudDataplexV1DataQualityRuleSetExpectation::class;
   protected $setExpectationDataType = '';
+  protected $sqlAssertionType = GoogleCloudDataplexV1DataQualityRuleSqlAssertion::class;
+  protected $sqlAssertionDataType = '';
   protected $statisticRangeExpectationType = GoogleCloudDataplexV1DataQualityRuleStatisticRangeExpectation::class;
   protected $statisticRangeExpectationDataType = '';
   protected $tableConditionExpectationType = GoogleCloudDataplexV1DataQualityRuleTableConditionExpectation::class;
@@ -62,6 +72,20 @@ class GoogleCloudDataplexV1DataQualityRule extends \Google\Model
   public function getColumn()
   {
     return $this->column;
+  }
+  /**
+   * @param string
+   */
+  public function setDescription($description)
+  {
+    $this->description = $description;
+  }
+  /**
+   * @return string
+   */
+  public function getDescription()
+  {
+    return $this->description;
   }
   /**
    * @param string
@@ -90,6 +114,20 @@ class GoogleCloudDataplexV1DataQualityRule extends \Google\Model
   public function getIgnoreNull()
   {
     return $this->ignoreNull;
+  }
+  /**
+   * @param string
+   */
+  public function setName($name)
+  {
+    $this->name = $name;
+  }
+  /**
+   * @return string
+   */
+  public function getName()
+  {
+    return $this->name;
   }
   /**
    * @param GoogleCloudDataplexV1DataQualityRuleNonNullExpectation
@@ -160,6 +198,20 @@ class GoogleCloudDataplexV1DataQualityRule extends \Google\Model
   public function getSetExpectation()
   {
     return $this->setExpectation;
+  }
+  /**
+   * @param GoogleCloudDataplexV1DataQualityRuleSqlAssertion
+   */
+  public function setSqlAssertion(GoogleCloudDataplexV1DataQualityRuleSqlAssertion $sqlAssertion)
+  {
+    $this->sqlAssertion = $sqlAssertion;
+  }
+  /**
+   * @return GoogleCloudDataplexV1DataQualityRuleSqlAssertion
+   */
+  public function getSqlAssertion()
+  {
+    return $this->sqlAssertion;
   }
   /**
    * @param GoogleCloudDataplexV1DataQualityRuleStatisticRangeExpectation

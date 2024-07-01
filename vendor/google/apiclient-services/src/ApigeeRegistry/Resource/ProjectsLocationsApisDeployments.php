@@ -33,7 +33,7 @@ use Google\Service\ApigeeRegistry\TestIamPermissionsResponse;
  * Typical usage is:
  *  <code>
  *   $apigeeregistryService = new Google\Service\ApigeeRegistry(...);
- *   $deployments = $apigeeregistryService->deployments;
+ *   $deployments = $apigeeregistryService->projects_locations_apis_deployments;
  *  </code>
  */
 class ProjectsLocationsApisDeployments extends \Google\Service\Resource
@@ -51,6 +51,7 @@ class ProjectsLocationsApisDeployments extends \Google\Service\Resource
    * value should be 4-63 characters, and valid characters are /a-z-/. Following
    * AIP-162, IDs must not have the form of a UUID.
    * @return ApiDeployment
+   * @throws \Google\Service\Exception
    */
   public function create($parent, ApiDeployment $postBody, $optParams = [])
   {
@@ -70,6 +71,7 @@ class ProjectsLocationsApisDeployments extends \Google\Service\Resource
    * deleted. (Otherwise, the request will only work if there are no child
    * resources.)
    * @return ApigeeregistryEmpty
+   * @throws \Google\Service\Exception
    */
   public function delete($name, $optParams = [])
   {
@@ -85,6 +87,7 @@ class ProjectsLocationsApisDeployments extends \Google\Service\Resource
    * `projects/sample/locations/global/apis/petstore/deployments/prod@c7cfa2a8`
    * @param array $optParams Optional parameters.
    * @return ApiDeployment
+   * @throws \Google\Service\Exception
    */
   public function deleteRevision($name, $optParams = [])
   {
@@ -99,6 +102,7 @@ class ProjectsLocationsApisDeployments extends \Google\Service\Resource
    * `projects/locations/apis/deployments`
    * @param array $optParams Optional parameters.
    * @return ApiDeployment
+   * @throws \Google\Service\Exception
    */
   public function get($name, $optParams = [])
   {
@@ -129,6 +133,7 @@ class ProjectsLocationsApisDeployments extends \Google\Service\Resource
    * documentation](https://cloud.google.com/iam/help/conditions/resource-
    * policies).
    * @return Policy
+   * @throws \Google\Service\Exception
    */
   public function getIamPolicy($resource, $optParams = [])
   {
@@ -159,6 +164,7 @@ class ProjectsLocationsApisDeployments extends \Google\Service\Resource
    * paginating, all other parameters provided to `ListApiDeployments` must match
    * the call that provided the page token.
    * @return ListApiDeploymentsResponse
+   * @throws \Google\Service\Exception
    */
   public function listProjectsLocationsApisDeployments($parent, $optParams = [])
   {
@@ -174,11 +180,15 @@ class ProjectsLocationsApisDeployments extends \Google\Service\Resource
    * for.
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string filter An expression that can be used to filter the list.
+   * Filters use the Common Expression Language and can refer to all message
+   * fields.
    * @opt_param int pageSize The maximum number of revisions to return per page.
    * @opt_param string pageToken The page token, received from a previous
    * ListApiDeploymentRevisions call. Provide this to retrieve the subsequent
    * page.
    * @return ListApiDeploymentRevisionsResponse
+   * @throws \Google\Service\Exception
    */
   public function listRevisions($name, $optParams = [])
   {
@@ -201,6 +211,7 @@ class ProjectsLocationsApisDeployments extends \Google\Service\Resource
    * default values are ignored). If an asterisk "*" is specified, all fields are
    * updated, including fields that are unspecified/default in the request.
    * @return ApiDeployment
+   * @throws \Google\Service\Exception
    */
   public function patch($name, ApiDeployment $postBody, $optParams = [])
   {
@@ -216,6 +227,7 @@ class ProjectsLocationsApisDeployments extends \Google\Service\Resource
    * @param RollbackApiDeploymentRequest $postBody
    * @param array $optParams Optional parameters.
    * @return ApiDeployment
+   * @throws \Google\Service\Exception
    */
   public function rollback($name, RollbackApiDeploymentRequest $postBody, $optParams = [])
   {
@@ -235,6 +247,7 @@ class ProjectsLocationsApisDeployments extends \Google\Service\Resource
    * @param SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
+   * @throws \Google\Service\Exception
    */
   public function setIamPolicy($resource, SetIamPolicyRequest $postBody, $optParams = [])
   {
@@ -246,10 +259,12 @@ class ProjectsLocationsApisDeployments extends \Google\Service\Resource
    * Adds a tag to a specified revision of a deployment. (deployments.tagRevision)
    *
    * @param string $name Required. The name of the deployment to be tagged,
-   * including the revision ID.
+   * including the revision ID is optional. If a revision is not specified, it
+   * will tag the latest revision.
    * @param TagApiDeploymentRevisionRequest $postBody
    * @param array $optParams Optional parameters.
    * @return ApiDeployment
+   * @throws \Google\Service\Exception
    */
   public function tagRevision($name, TagApiDeploymentRevisionRequest $postBody, $optParams = [])
   {
@@ -272,6 +287,7 @@ class ProjectsLocationsApisDeployments extends \Google\Service\Resource
    * @param TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return TestIamPermissionsResponse
+   * @throws \Google\Service\Exception
    */
   public function testIamPermissions($resource, TestIamPermissionsRequest $postBody, $optParams = [])
   {
