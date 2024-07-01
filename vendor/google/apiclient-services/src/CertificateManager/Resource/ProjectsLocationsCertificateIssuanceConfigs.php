@@ -26,7 +26,7 @@ use Google\Service\CertificateManager\Operation;
  * Typical usage is:
  *  <code>
  *   $certificatemanagerService = new Google\Service\CertificateManager(...);
- *   $certificateIssuanceConfigs = $certificatemanagerService->certificateIssuanceConfigs;
+ *   $certificateIssuanceConfigs = $certificatemanagerService->projects_locations_certificateIssuanceConfigs;
  *  </code>
  */
 class ProjectsLocationsCertificateIssuanceConfigs extends \Google\Service\Resource
@@ -43,6 +43,7 @@ class ProjectsLocationsCertificateIssuanceConfigs extends \Google\Service\Resour
    * @opt_param string certificateIssuanceConfigId Required. A user-provided name
    * of the certificate config.
    * @return Operation
+   * @throws \Google\Service\Exception
    */
   public function create($parent, CertificateIssuanceConfig $postBody, $optParams = [])
   {
@@ -59,6 +60,7 @@ class ProjectsLocationsCertificateIssuanceConfigs extends \Google\Service\Resour
    * `projects/locations/certificateIssuanceConfigs`.
    * @param array $optParams Optional parameters.
    * @return Operation
+   * @throws \Google\Service\Exception
    */
   public function delete($name, $optParams = [])
   {
@@ -75,6 +77,7 @@ class ProjectsLocationsCertificateIssuanceConfigs extends \Google\Service\Resour
    * `projects/locations/certificateIssuanceConfigs`.
    * @param array $optParams Optional parameters.
    * @return CertificateIssuanceConfig
+   * @throws \Google\Service\Exception
    */
   public function get($name, $optParams = [])
   {
@@ -94,7 +97,7 @@ class ProjectsLocationsCertificateIssuanceConfigs extends \Google\Service\Resour
    * Configs returned.
    * @opt_param string orderBy A list of Certificate Config field names used to
    * specify the order of the returned results. The default sorting order is
-   * ascending. To specify descending order for a field, add a suffix " desc".
+   * ascending. To specify descending order for a field, add a suffix `" desc"`.
    * @opt_param int pageSize Maximum number of certificate configs to return per
    * call.
    * @opt_param string pageToken The value returned by the last
@@ -102,6 +105,7 @@ class ProjectsLocationsCertificateIssuanceConfigs extends \Google\Service\Resour
    * continuation of a prior `ListCertificateIssuanceConfigs` call, and that the
    * system should return the next page of data.
    * @return ListCertificateIssuanceConfigsResponse
+   * @throws \Google\Service\Exception
    */
   public function listProjectsLocationsCertificateIssuanceConfigs($parent, $optParams = [])
   {

@@ -34,8 +34,16 @@ class JobConfigurationLoad extends \Google\Collection
   public $autodetect;
   protected $clusteringType = Clustering::class;
   protected $clusteringDataType = '';
+  /**
+   * @var string
+   */
+  public $columnNameCharacterMap;
   protected $connectionPropertiesType = ConnectionProperty::class;
   protected $connectionPropertiesDataType = 'array';
+  /**
+   * @var bool
+   */
+  public $copyFilesOnly;
   /**
    * @var string
    */
@@ -62,6 +70,10 @@ class JobConfigurationLoad extends \Google\Collection
    * @var string
    */
   public $fieldDelimiter;
+  /**
+   * @var string
+   */
+  public $fileSetSpecType;
   protected $hivePartitioningOptionsType = HivePartitioningOptions::class;
   protected $hivePartitioningOptionsDataType = '';
   /**
@@ -194,6 +206,20 @@ class JobConfigurationLoad extends \Google\Collection
     return $this->clustering;
   }
   /**
+   * @param string
+   */
+  public function setColumnNameCharacterMap($columnNameCharacterMap)
+  {
+    $this->columnNameCharacterMap = $columnNameCharacterMap;
+  }
+  /**
+   * @return string
+   */
+  public function getColumnNameCharacterMap()
+  {
+    return $this->columnNameCharacterMap;
+  }
+  /**
    * @param ConnectionProperty[]
    */
   public function setConnectionProperties($connectionProperties)
@@ -206,6 +232,20 @@ class JobConfigurationLoad extends \Google\Collection
   public function getConnectionProperties()
   {
     return $this->connectionProperties;
+  }
+  /**
+   * @param bool
+   */
+  public function setCopyFilesOnly($copyFilesOnly)
+  {
+    $this->copyFilesOnly = $copyFilesOnly;
+  }
+  /**
+   * @return bool
+   */
+  public function getCopyFilesOnly()
+  {
+    return $this->copyFilesOnly;
   }
   /**
    * @param string
@@ -318,6 +358,20 @@ class JobConfigurationLoad extends \Google\Collection
   public function getFieldDelimiter()
   {
     return $this->fieldDelimiter;
+  }
+  /**
+   * @param string
+   */
+  public function setFileSetSpecType($fileSetSpecType)
+  {
+    $this->fileSetSpecType = $fileSetSpecType;
+  }
+  /**
+   * @return string
+   */
+  public function getFileSetSpecType()
+  {
+    return $this->fileSetSpecType;
   }
   /**
    * @param HivePartitioningOptions

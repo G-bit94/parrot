@@ -25,7 +25,7 @@ use Google\Service\Gmail\ListCseIdentitiesResponse;
  * Typical usage is:
  *  <code>
  *   $gmailService = new Google\Service\Gmail(...);
- *   $identities = $gmailService->identities;
+ *   $identities = $gmailService->users_settings_cse_identities;
  *  </code>
  */
 class UsersSettingsCseIdentities extends \Google\Service\Resource
@@ -34,15 +34,14 @@ class UsersSettingsCseIdentities extends \Google\Service\Resource
    * Creates and configures a client-side encryption identity that's authorized to
    * send mail from the user account. Google publishes the S/MIME certificate to a
    * shared domain-wide directory so that people within a Google Workspace
-   * organization can encrypt and send mail to the identity.
-   * [Beta](https://workspace.google.com/terms/service-terms/index.html).
-   * (identities.create)
+   * organization can encrypt and send mail to the identity. (identities.create)
    *
    * @param string $userId The requester's primary email address. To indicate the
    * authenticated user, you can use the special value `me`.
    * @param CseIdentity $postBody
    * @param array $optParams Optional parameters.
    * @return CseIdentity
+   * @throws \Google\Service\Exception
    */
   public function create($userId, CseIdentity $postBody, $optParams = [])
   {
@@ -54,15 +53,14 @@ class UsersSettingsCseIdentities extends \Google\Service\Resource
    * Deletes a client-side encryption identity. The authenticated user can no
    * longer use the identity to send encrypted messages. You cannot restore the
    * identity after you delete it. Instead, use the CreateCseIdentity method to
-   * create another identity with the same configuration.
-   * [Beta](https://workspace.google.com/terms/service-terms/index.html).
-   * (identities.delete)
+   * create another identity with the same configuration. (identities.delete)
    *
    * @param string $userId The requester's primary email address. To indicate the
    * authenticated user, you can use the special value `me`.
    * @param string $cseEmailAddress The primary email address associated with the
    * client-side encryption identity configuration that's removed.
    * @param array $optParams Optional parameters.
+   * @throws \Google\Service\Exception
    */
   public function delete($userId, $cseEmailAddress, $optParams = [])
   {
@@ -71,9 +69,7 @@ class UsersSettingsCseIdentities extends \Google\Service\Resource
     return $this->call('delete', [$params]);
   }
   /**
-   * Retrieves a client-side encryption identity configuration.
-   * [Beta](https://workspace.google.com/terms/service-terms/index.html).
-   * (identities.get)
+   * Retrieves a client-side encryption identity configuration. (identities.get)
    *
    * @param string $userId The requester's primary email address. To indicate the
    * authenticated user, you can use the special value `me`.
@@ -81,6 +77,7 @@ class UsersSettingsCseIdentities extends \Google\Service\Resource
    * client-side encryption identity configuration that's retrieved.
    * @param array $optParams Optional parameters.
    * @return CseIdentity
+   * @throws \Google\Service\Exception
    */
   public function get($userId, $cseEmailAddress, $optParams = [])
   {
@@ -90,7 +87,6 @@ class UsersSettingsCseIdentities extends \Google\Service\Resource
   }
   /**
    * Lists the client-side encrypted identities for an authenticated user.
-   * [Beta](https://workspace.google.com/terms/service-terms/index.html).
    * (identities.listUsersSettingsCseIdentities)
    *
    * @param string $userId The requester's primary email address. To indicate the
@@ -103,6 +99,7 @@ class UsersSettingsCseIdentities extends \Google\Service\Resource
    * identities to return. If the token is not supplied, then the API will return
    * the first page of results.
    * @return ListCseIdentitiesResponse
+   * @throws \Google\Service\Exception
    */
   public function listUsersSettingsCseIdentities($userId, $optParams = [])
   {
@@ -113,8 +110,7 @@ class UsersSettingsCseIdentities extends \Google\Service\Resource
   /**
    * Associates a different key pair with an existing client-side encryption
    * identity. The updated key pair must validate against Google's [S/MIME
-   * certificate profiles](https://support.google.com/a/answer/7300887?hl=en).
-   * [Beta](https://workspace.google.com/terms/service-terms/index.html).
+   * certificate profiles](https://support.google.com/a/answer/7300887).
    * (identities.patch)
    *
    * @param string $userId The requester's primary email address. To indicate the
@@ -124,6 +120,7 @@ class UsersSettingsCseIdentities extends \Google\Service\Resource
    * @param CseIdentity $postBody
    * @param array $optParams Optional parameters.
    * @return CseIdentity
+   * @throws \Google\Service\Exception
    */
   public function patch($userId, $emailAddress, CseIdentity $postBody, $optParams = [])
   {

@@ -19,11 +19,15 @@ namespace Google\Service\AccessContextManager;
 
 class GcpUserAccessBinding extends \Google\Collection
 {
-  protected $collection_key = 'accessLevels';
+  protected $collection_key = 'restrictedClientApplications';
   /**
    * @var string[]
    */
   public $accessLevels;
+  /**
+   * @var string[]
+   */
+  public $dryRunAccessLevels;
   /**
    * @var string
    */
@@ -32,6 +36,8 @@ class GcpUserAccessBinding extends \Google\Collection
    * @var string
    */
   public $name;
+  protected $restrictedClientApplicationsType = Application::class;
+  protected $restrictedClientApplicationsDataType = 'array';
 
   /**
    * @param string[]
@@ -46,6 +52,20 @@ class GcpUserAccessBinding extends \Google\Collection
   public function getAccessLevels()
   {
     return $this->accessLevels;
+  }
+  /**
+   * @param string[]
+   */
+  public function setDryRunAccessLevels($dryRunAccessLevels)
+  {
+    $this->dryRunAccessLevels = $dryRunAccessLevels;
+  }
+  /**
+   * @return string[]
+   */
+  public function getDryRunAccessLevels()
+  {
+    return $this->dryRunAccessLevels;
   }
   /**
    * @param string
@@ -74,6 +94,20 @@ class GcpUserAccessBinding extends \Google\Collection
   public function getName()
   {
     return $this->name;
+  }
+  /**
+   * @param Application[]
+   */
+  public function setRestrictedClientApplications($restrictedClientApplications)
+  {
+    $this->restrictedClientApplications = $restrictedClientApplications;
+  }
+  /**
+   * @return Application[]
+   */
+  public function getRestrictedClientApplications()
+  {
+    return $this->restrictedClientApplications;
   }
 }
 

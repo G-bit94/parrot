@@ -45,11 +45,19 @@ class GoogleCloudContentwarehouseV1Document extends \Google\Collection
   /**
    * @var string
    */
+  public $dispositionTime;
+  /**
+   * @var string
+   */
   public $documentSchemaName;
   /**
    * @var string
    */
   public $inlineRawDocument;
+  /**
+   * @var bool
+   */
+  public $legalHold;
   /**
    * @var string
    */
@@ -72,10 +80,6 @@ class GoogleCloudContentwarehouseV1Document extends \Google\Collection
    * @var string
    */
   public $referenceId;
-  /**
-   * @var string
-   */
-  public $structuredContentUri;
   /**
    * @var bool
    */
@@ -184,6 +188,20 @@ class GoogleCloudContentwarehouseV1Document extends \Google\Collection
   /**
    * @param string
    */
+  public function setDispositionTime($dispositionTime)
+  {
+    $this->dispositionTime = $dispositionTime;
+  }
+  /**
+   * @return string
+   */
+  public function getDispositionTime()
+  {
+    return $this->dispositionTime;
+  }
+  /**
+   * @param string
+   */
   public function setDocumentSchemaName($documentSchemaName)
   {
     $this->documentSchemaName = $documentSchemaName;
@@ -208,6 +226,20 @@ class GoogleCloudContentwarehouseV1Document extends \Google\Collection
   public function getInlineRawDocument()
   {
     return $this->inlineRawDocument;
+  }
+  /**
+   * @param bool
+   */
+  public function setLegalHold($legalHold)
+  {
+    $this->legalHold = $legalHold;
+  }
+  /**
+   * @return bool
+   */
+  public function getLegalHold()
+  {
+    return $this->legalHold;
   }
   /**
    * @param string
@@ -292,20 +324,6 @@ class GoogleCloudContentwarehouseV1Document extends \Google\Collection
   public function getReferenceId()
   {
     return $this->referenceId;
-  }
-  /**
-   * @param string
-   */
-  public function setStructuredContentUri($structuredContentUri)
-  {
-    $this->structuredContentUri = $structuredContentUri;
-  }
-  /**
-   * @return string
-   */
-  public function getStructuredContentUri()
-  {
-    return $this->structuredContentUri;
   }
   /**
    * @param bool

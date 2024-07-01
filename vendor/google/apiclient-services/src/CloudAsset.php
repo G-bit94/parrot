@@ -23,7 +23,8 @@ use Google\Client;
  * Service definition for CloudAsset (v1).
  *
  * <p>
- * The cloud asset API manages the history and inventory of cloud resources.</p>
+ * The Cloud Asset API manages the history and inventory of Google Cloud
+ * resources.</p>
  *
  * <p>
  * For more information about this service, see the API
@@ -44,6 +45,7 @@ class CloudAsset extends \Google\Service
   public $operations;
   public $savedQueries;
   public $v1;
+  public $rootUrlTemplate;
 
   /**
    * Constructs the internal representation of the CloudAsset service.
@@ -56,6 +58,7 @@ class CloudAsset extends \Google\Service
   {
     parent::__construct($clientOrConfig);
     $this->rootUrl = $rootUrl ?: 'https://cloudasset.googleapis.com/';
+    $this->rootUrlTemplate = $rootUrl ?: 'https://cloudasset.UNIVERSE_DOMAIN/';
     $this->servicePath = '';
     $this->batchPath = 'batch';
     $this->version = 'v1';

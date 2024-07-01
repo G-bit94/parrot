@@ -22,6 +22,8 @@ class EnterpriseCrmFrontendsEventbusProtoTaskConfig extends \Google\Collection
   protected $collection_key = 'nextTasks';
   protected $alertConfigsType = EnterpriseCrmEventbusProtoTaskAlertConfig::class;
   protected $alertConfigsDataType = 'array';
+  protected $conditionalFailurePoliciesType = EnterpriseCrmEventbusProtoConditionalFailurePolicies::class;
+  protected $conditionalFailurePoliciesDataType = '';
   /**
    * @var string
    */
@@ -38,6 +40,14 @@ class EnterpriseCrmFrontendsEventbusProtoTaskConfig extends \Google\Collection
    * @var bool
    */
   public $disableStrictTypeValidation;
+  /**
+   * @var string
+   */
+  public $errorCatcherId;
+  /**
+   * @var string
+   */
+  public $externalTaskType;
   protected $failurePolicyType = EnterpriseCrmEventbusProtoFailurePolicy::class;
   protected $failurePolicyDataType = '';
   /**
@@ -122,6 +132,20 @@ class EnterpriseCrmFrontendsEventbusProtoTaskConfig extends \Google\Collection
     return $this->alertConfigs;
   }
   /**
+   * @param EnterpriseCrmEventbusProtoConditionalFailurePolicies
+   */
+  public function setConditionalFailurePolicies(EnterpriseCrmEventbusProtoConditionalFailurePolicies $conditionalFailurePolicies)
+  {
+    $this->conditionalFailurePolicies = $conditionalFailurePolicies;
+  }
+  /**
+   * @return EnterpriseCrmEventbusProtoConditionalFailurePolicies
+   */
+  public function getConditionalFailurePolicies()
+  {
+    return $this->conditionalFailurePolicies;
+  }
+  /**
    * @param string
    */
   public function setCreateTime($createTime)
@@ -176,6 +200,34 @@ class EnterpriseCrmFrontendsEventbusProtoTaskConfig extends \Google\Collection
   public function getDisableStrictTypeValidation()
   {
     return $this->disableStrictTypeValidation;
+  }
+  /**
+   * @param string
+   */
+  public function setErrorCatcherId($errorCatcherId)
+  {
+    $this->errorCatcherId = $errorCatcherId;
+  }
+  /**
+   * @return string
+   */
+  public function getErrorCatcherId()
+  {
+    return $this->errorCatcherId;
+  }
+  /**
+   * @param string
+   */
+  public function setExternalTaskType($externalTaskType)
+  {
+    $this->externalTaskType = $externalTaskType;
+  }
+  /**
+   * @return string
+   */
+  public function getExternalTaskType()
+  {
+    return $this->externalTaskType;
   }
   /**
    * @param EnterpriseCrmEventbusProtoFailurePolicy

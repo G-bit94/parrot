@@ -36,6 +36,10 @@ class Workstation extends \Google\Model
    */
   public $displayName;
   /**
+   * @var string[]
+   */
+  public $env;
+  /**
    * @var string
    */
   public $etag;
@@ -46,11 +50,23 @@ class Workstation extends \Google\Model
   /**
    * @var string
    */
+  public $kmsKey;
+  /**
+   * @var string[]
+   */
+  public $labels;
+  /**
+   * @var string
+   */
   public $name;
   /**
    * @var bool
    */
   public $reconciling;
+  /**
+   * @var string
+   */
+  public $startTime;
   /**
    * @var string
    */
@@ -121,6 +137,20 @@ class Workstation extends \Google\Model
     return $this->displayName;
   }
   /**
+   * @param string[]
+   */
+  public function setEnv($env)
+  {
+    $this->env = $env;
+  }
+  /**
+   * @return string[]
+   */
+  public function getEnv()
+  {
+    return $this->env;
+  }
+  /**
    * @param string
    */
   public function setEtag($etag)
@@ -151,6 +181,34 @@ class Workstation extends \Google\Model
   /**
    * @param string
    */
+  public function setKmsKey($kmsKey)
+  {
+    $this->kmsKey = $kmsKey;
+  }
+  /**
+   * @return string
+   */
+  public function getKmsKey()
+  {
+    return $this->kmsKey;
+  }
+  /**
+   * @param string[]
+   */
+  public function setLabels($labels)
+  {
+    $this->labels = $labels;
+  }
+  /**
+   * @return string[]
+   */
+  public function getLabels()
+  {
+    return $this->labels;
+  }
+  /**
+   * @param string
+   */
   public function setName($name)
   {
     $this->name = $name;
@@ -175,6 +233,20 @@ class Workstation extends \Google\Model
   public function getReconciling()
   {
     return $this->reconciling;
+  }
+  /**
+   * @param string
+   */
+  public function setStartTime($startTime)
+  {
+    $this->startTime = $startTime;
+  }
+  /**
+   * @return string
+   */
+  public function getStartTime()
+  {
+    return $this->startTime;
   }
   /**
    * @param string

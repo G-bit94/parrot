@@ -25,7 +25,7 @@ use Google\Service\ArtifactRegistry\UploadKfpArtifactRequest;
  * Typical usage is:
  *  <code>
  *   $artifactregistryService = new Google\Service\ArtifactRegistry(...);
- *   $kfpArtifacts = $artifactregistryService->kfpArtifacts;
+ *   $kfpArtifacts = $artifactregistryService->projects_locations_repositories_kfpArtifacts;
  *  </code>
  */
 class ProjectsLocationsRepositoriesKfpArtifacts extends \Google\Service\Resource
@@ -41,6 +41,7 @@ class ProjectsLocationsRepositoriesKfpArtifacts extends \Google\Service\Resource
    * @param UploadKfpArtifactRequest $postBody
    * @param array $optParams Optional parameters.
    * @return UploadKfpArtifactMediaResponse
+   * @throws \Google\Service\Exception
    */
   public function upload($parent, UploadKfpArtifactRequest $postBody, $optParams = [])
   {

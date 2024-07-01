@@ -24,6 +24,10 @@ class GoogleCloudIntegrationsV1alphaTestIntegrationsRequest extends \Google\Mode
    */
   public $clientId;
   /**
+   * @var array[]
+   */
+  public $configParameters;
+  /**
    * @var string
    */
   public $deadlineSecondsTime;
@@ -55,6 +59,20 @@ class GoogleCloudIntegrationsV1alphaTestIntegrationsRequest extends \Google\Mode
   public function getClientId()
   {
     return $this->clientId;
+  }
+  /**
+   * @param array[]
+   */
+  public function setConfigParameters($configParameters)
+  {
+    $this->configParameters = $configParameters;
+  }
+  /**
+   * @return array[]
+   */
+  public function getConfigParameters()
+  {
+    return $this->configParameters;
   }
   /**
    * @param string

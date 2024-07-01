@@ -64,6 +64,8 @@ class Cluster extends \Google\Collection
    * @var string
    */
   public $description;
+  protected $enableK8sBetaApisType = K8sBetaAPIConfig::class;
+  protected $enableK8sBetaApisDataType = '';
   /**
    * @var bool
    */
@@ -76,10 +78,18 @@ class Cluster extends \Google\Collection
    * @var string
    */
   public $endpoint;
+  protected $enterpriseConfigType = EnterpriseConfig::class;
+  protected $enterpriseConfigDataType = '';
+  /**
+   * @var string
+   */
+  public $etag;
   /**
    * @var string
    */
   public $expireTime;
+  protected $fleetType = Fleet::class;
+  protected $fleetDataType = '';
   /**
    * @var string
    */
@@ -160,6 +170,8 @@ class Cluster extends \Google\Collection
   protected $nodePoolsDataType = 'array';
   protected $notificationConfigType = NotificationConfig::class;
   protected $notificationConfigDataType = '';
+  protected $parentProductConfigType = ParentProductConfig::class;
+  protected $parentProductConfigDataType = '';
   protected $privateClusterConfigType = PrivateClusterConfig::class;
   protected $privateClusterConfigDataType = '';
   protected $releaseChannelType = ReleaseChannel::class;
@@ -170,6 +182,16 @@ class Cluster extends \Google\Collection
   public $resourceLabels;
   protected $resourceUsageExportConfigType = ResourceUsageExportConfig::class;
   protected $resourceUsageExportConfigDataType = '';
+  /**
+   * @var bool
+   */
+  public $satisfiesPzi;
+  /**
+   * @var bool
+   */
+  public $satisfiesPzs;
+  protected $securityPostureConfigType = SecurityPostureConfig::class;
+  protected $securityPostureConfigDataType = '';
   /**
    * @var string
    */
@@ -430,6 +452,20 @@ class Cluster extends \Google\Collection
     return $this->description;
   }
   /**
+   * @param K8sBetaAPIConfig
+   */
+  public function setEnableK8sBetaApis(K8sBetaAPIConfig $enableK8sBetaApis)
+  {
+    $this->enableK8sBetaApis = $enableK8sBetaApis;
+  }
+  /**
+   * @return K8sBetaAPIConfig
+   */
+  public function getEnableK8sBetaApis()
+  {
+    return $this->enableK8sBetaApis;
+  }
+  /**
    * @param bool
    */
   public function setEnableKubernetesAlpha($enableKubernetesAlpha)
@@ -472,6 +508,34 @@ class Cluster extends \Google\Collection
     return $this->endpoint;
   }
   /**
+   * @param EnterpriseConfig
+   */
+  public function setEnterpriseConfig(EnterpriseConfig $enterpriseConfig)
+  {
+    $this->enterpriseConfig = $enterpriseConfig;
+  }
+  /**
+   * @return EnterpriseConfig
+   */
+  public function getEnterpriseConfig()
+  {
+    return $this->enterpriseConfig;
+  }
+  /**
+   * @param string
+   */
+  public function setEtag($etag)
+  {
+    $this->etag = $etag;
+  }
+  /**
+   * @return string
+   */
+  public function getEtag()
+  {
+    return $this->etag;
+  }
+  /**
    * @param string
    */
   public function setExpireTime($expireTime)
@@ -484,6 +548,20 @@ class Cluster extends \Google\Collection
   public function getExpireTime()
   {
     return $this->expireTime;
+  }
+  /**
+   * @param Fleet
+   */
+  public function setFleet(Fleet $fleet)
+  {
+    $this->fleet = $fleet;
+  }
+  /**
+   * @return Fleet
+   */
+  public function getFleet()
+  {
+    return $this->fleet;
   }
   /**
    * @param string
@@ -878,6 +956,20 @@ class Cluster extends \Google\Collection
     return $this->notificationConfig;
   }
   /**
+   * @param ParentProductConfig
+   */
+  public function setParentProductConfig(ParentProductConfig $parentProductConfig)
+  {
+    $this->parentProductConfig = $parentProductConfig;
+  }
+  /**
+   * @return ParentProductConfig
+   */
+  public function getParentProductConfig()
+  {
+    return $this->parentProductConfig;
+  }
+  /**
    * @param PrivateClusterConfig
    */
   public function setPrivateClusterConfig(PrivateClusterConfig $privateClusterConfig)
@@ -932,6 +1024,48 @@ class Cluster extends \Google\Collection
   public function getResourceUsageExportConfig()
   {
     return $this->resourceUsageExportConfig;
+  }
+  /**
+   * @param bool
+   */
+  public function setSatisfiesPzi($satisfiesPzi)
+  {
+    $this->satisfiesPzi = $satisfiesPzi;
+  }
+  /**
+   * @return bool
+   */
+  public function getSatisfiesPzi()
+  {
+    return $this->satisfiesPzi;
+  }
+  /**
+   * @param bool
+   */
+  public function setSatisfiesPzs($satisfiesPzs)
+  {
+    $this->satisfiesPzs = $satisfiesPzs;
+  }
+  /**
+   * @return bool
+   */
+  public function getSatisfiesPzs()
+  {
+    return $this->satisfiesPzs;
+  }
+  /**
+   * @param SecurityPostureConfig
+   */
+  public function setSecurityPostureConfig(SecurityPostureConfig $securityPostureConfig)
+  {
+    $this->securityPostureConfig = $securityPostureConfig;
+  }
+  /**
+   * @return SecurityPostureConfig
+   */
+  public function getSecurityPostureConfig()
+  {
+    return $this->securityPostureConfig;
   }
   /**
    * @param string

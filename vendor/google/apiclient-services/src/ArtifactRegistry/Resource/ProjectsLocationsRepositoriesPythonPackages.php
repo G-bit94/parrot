@@ -25,7 +25,7 @@ use Google\Service\ArtifactRegistry\PythonPackage;
  * Typical usage is:
  *  <code>
  *   $artifactregistryService = new Google\Service\ArtifactRegistry(...);
- *   $pythonPackages = $artifactregistryService->pythonPackages;
+ *   $pythonPackages = $artifactregistryService->projects_locations_repositories_pythonPackages;
  *  </code>
  */
 class ProjectsLocationsRepositoriesPythonPackages extends \Google\Service\Resource
@@ -36,6 +36,7 @@ class ProjectsLocationsRepositoriesPythonPackages extends \Google\Service\Resour
    * @param string $name Required. The name of the python package.
    * @param array $optParams Optional parameters.
    * @return PythonPackage
+   * @throws \Google\Service\Exception
    */
   public function get($name, $optParams = [])
   {
@@ -51,10 +52,12 @@ class ProjectsLocationsRepositoriesPythonPackages extends \Google\Service\Resour
    * packages will be listed.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int pageSize The maximum number of artifacts to return.
+   * @opt_param int pageSize The maximum number of artifacts to return. Maximum
+   * page size is 1,000.
    * @opt_param string pageToken The next_page_token value returned from a
    * previous list request, if any.
    * @return ListPythonPackagesResponse
+   * @throws \Google\Service\Exception
    */
   public function listProjectsLocationsRepositoriesPythonPackages($parent, $optParams = [])
   {

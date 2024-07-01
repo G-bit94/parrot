@@ -45,6 +45,10 @@ class AddSubnetworkRequest extends \Google\Collection
    */
   public $description;
   /**
+   * @var string
+   */
+  public $internalRange;
+  /**
    * @var int
    */
   public $ipPrefixLength;
@@ -72,6 +76,10 @@ class AddSubnetworkRequest extends \Google\Collection
    * @var string[]
    */
   public $requestedRanges;
+  /**
+   * @var string
+   */
+  public $role;
   protected $secondaryIpRangeSpecsType = SecondaryIpRangeSpec::class;
   protected $secondaryIpRangeSpecsDataType = 'array';
   /**
@@ -172,6 +180,20 @@ class AddSubnetworkRequest extends \Google\Collection
     return $this->description;
   }
   /**
+   * @param string
+   */
+  public function setInternalRange($internalRange)
+  {
+    $this->internalRange = $internalRange;
+  }
+  /**
+   * @return string
+   */
+  public function getInternalRange()
+  {
+    return $this->internalRange;
+  }
+  /**
    * @param int
    */
   public function setIpPrefixLength($ipPrefixLength)
@@ -268,6 +290,20 @@ class AddSubnetworkRequest extends \Google\Collection
   public function getRequestedRanges()
   {
     return $this->requestedRanges;
+  }
+  /**
+   * @param string
+   */
+  public function setRole($role)
+  {
+    $this->role = $role;
+  }
+  /**
+   * @return string
+   */
+  public function getRole()
+  {
+    return $this->role;
   }
   /**
    * @param SecondaryIpRangeSpec[]

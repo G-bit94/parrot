@@ -28,6 +28,7 @@ use Google\Service\Contentwarehouse\GoogleCloudContentwarehouseV1ListLinkedSourc
 use Google\Service\Contentwarehouse\GoogleCloudContentwarehouseV1ListLinkedSourcesResponse;
 use Google\Service\Contentwarehouse\GoogleCloudContentwarehouseV1ListLinkedTargetsRequest;
 use Google\Service\Contentwarehouse\GoogleCloudContentwarehouseV1ListLinkedTargetsResponse;
+use Google\Service\Contentwarehouse\GoogleCloudContentwarehouseV1LockDocumentRequest;
 use Google\Service\Contentwarehouse\GoogleCloudContentwarehouseV1SearchDocumentsRequest;
 use Google\Service\Contentwarehouse\GoogleCloudContentwarehouseV1SearchDocumentsResponse;
 use Google\Service\Contentwarehouse\GoogleCloudContentwarehouseV1SetAclRequest;
@@ -41,7 +42,7 @@ use Google\Service\Contentwarehouse\GoogleProtobufEmpty;
  * Typical usage is:
  *  <code>
  *   $contentwarehouseService = new Google\Service\Contentwarehouse(...);
- *   $documents = $contentwarehouseService->documents;
+ *   $documents = $contentwarehouseService->projects_locations_documents;
  *  </code>
  */
 class ProjectsLocationsDocuments extends \Google\Service\Resource
@@ -54,6 +55,7 @@ class ProjectsLocationsDocuments extends \Google\Service\Resource
    * @param GoogleCloudContentwarehouseV1CreateDocumentRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleCloudContentwarehouseV1CreateDocumentResponse
+   * @throws \Google\Service\Exception
    */
   public function create($parent, GoogleCloudContentwarehouseV1CreateDocumentRequest $postBody, $optParams = [])
   {
@@ -72,6 +74,7 @@ class ProjectsLocationsDocuments extends \Google\Service\Resource
    * @param GoogleCloudContentwarehouseV1DeleteDocumentRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleProtobufEmpty
+   * @throws \Google\Service\Exception
    */
   public function delete($name, GoogleCloudContentwarehouseV1DeleteDocumentRequest $postBody, $optParams = [])
   {
@@ -87,10 +90,13 @@ class ProjectsLocationsDocuments extends \Google\Service\Resource
    * @param string $resource Required. REQUIRED: The resource for which the policy
    * is being requested. Format for document:
    * projects/{project_number}/locations/{location}/documents/{document_id}.
+   * Format for collection:
+   * projects/{project_number}/locations/{location}/collections/{collection_id}.
    * Format for project: projects/{project_number}.
    * @param GoogleCloudContentwarehouseV1FetchAclRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleCloudContentwarehouseV1FetchAclResponse
+   * @throws \Google\Service\Exception
    */
   public function fetchAcl($resource, GoogleCloudContentwarehouseV1FetchAclRequest $postBody, $optParams = [])
   {
@@ -109,6 +115,7 @@ class ProjectsLocationsDocuments extends \Google\Service\Resource
    * @param GoogleCloudContentwarehouseV1GetDocumentRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleCloudContentwarehouseV1Document
+   * @throws \Google\Service\Exception
    */
   public function get($name, GoogleCloudContentwarehouseV1GetDocumentRequest $postBody, $optParams = [])
   {
@@ -125,6 +132,7 @@ class ProjectsLocationsDocuments extends \Google\Service\Resource
    * @param GoogleCloudContentwarehouseV1ListLinkedSourcesRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleCloudContentwarehouseV1ListLinkedSourcesResponse
+   * @throws \Google\Service\Exception
    */
   public function linkedSources($parent, GoogleCloudContentwarehouseV1ListLinkedSourcesRequest $postBody, $optParams = [])
   {
@@ -141,12 +149,30 @@ class ProjectsLocationsDocuments extends \Google\Service\Resource
    * @param GoogleCloudContentwarehouseV1ListLinkedTargetsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleCloudContentwarehouseV1ListLinkedTargetsResponse
+   * @throws \Google\Service\Exception
    */
   public function linkedTargets($parent, GoogleCloudContentwarehouseV1ListLinkedTargetsRequest $postBody, $optParams = [])
   {
     $params = ['parent' => $parent, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
     return $this->call('linkedTargets', [$params], GoogleCloudContentwarehouseV1ListLinkedTargetsResponse::class);
+  }
+  /**
+   * Lock the document so the document cannot be updated by other users.
+   * (documents.lock)
+   *
+   * @param string $name Required. The name of the document to lock. Format:
+   * projects/{project_number}/locations/{location}/documents/{document}.
+   * @param GoogleCloudContentwarehouseV1LockDocumentRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return GoogleCloudContentwarehouseV1Document
+   * @throws \Google\Service\Exception
+   */
+  public function lock($name, GoogleCloudContentwarehouseV1LockDocumentRequest $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('lock', [$params], GoogleCloudContentwarehouseV1Document::class);
   }
   /**
    * Updates a document. Returns INVALID_ARGUMENT if the name of the document is
@@ -159,6 +185,7 @@ class ProjectsLocationsDocuments extends \Google\Service\Resource
    * @param GoogleCloudContentwarehouseV1UpdateDocumentRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleCloudContentwarehouseV1UpdateDocumentResponse
+   * @throws \Google\Service\Exception
    */
   public function patch($name, GoogleCloudContentwarehouseV1UpdateDocumentRequest $postBody, $optParams = [])
   {
@@ -176,6 +203,7 @@ class ProjectsLocationsDocuments extends \Google\Service\Resource
    * @param GoogleCloudContentwarehouseV1SearchDocumentsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleCloudContentwarehouseV1SearchDocumentsResponse
+   * @throws \Google\Service\Exception
    */
   public function search($parent, GoogleCloudContentwarehouseV1SearchDocumentsRequest $postBody, $optParams = [])
   {
@@ -190,10 +218,13 @@ class ProjectsLocationsDocuments extends \Google\Service\Resource
    * @param string $resource Required. REQUIRED: The resource for which the policy
    * is being requested. Format for document:
    * projects/{project_number}/locations/{location}/documents/{document_id}.
+   * Format for collection:
+   * projects/{project_number}/locations/{location}/collections/{collection_id}.
    * Format for project: projects/{project_number}.
    * @param GoogleCloudContentwarehouseV1SetAclRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleCloudContentwarehouseV1SetAclResponse
+   * @throws \Google\Service\Exception
    */
   public function setAcl($resource, GoogleCloudContentwarehouseV1SetAclRequest $postBody, $optParams = [])
   {

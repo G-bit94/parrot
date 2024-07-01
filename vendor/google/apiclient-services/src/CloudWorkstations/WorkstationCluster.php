@@ -29,6 +29,10 @@ class WorkstationCluster extends \Google\Collection
   /**
    * @var string
    */
+  public $controlPlaneIp;
+  /**
+   * @var string
+   */
   public $createTime;
   /**
    * @var bool
@@ -42,10 +46,16 @@ class WorkstationCluster extends \Google\Collection
    * @var string
    */
   public $displayName;
+  protected $domainConfigType = DomainConfig::class;
+  protected $domainConfigDataType = '';
   /**
    * @var string
    */
   public $etag;
+  /**
+   * @var string[]
+   */
+  public $labels;
   /**
    * @var string
    */
@@ -104,6 +114,20 @@ class WorkstationCluster extends \Google\Collection
   /**
    * @param string
    */
+  public function setControlPlaneIp($controlPlaneIp)
+  {
+    $this->controlPlaneIp = $controlPlaneIp;
+  }
+  /**
+   * @return string
+   */
+  public function getControlPlaneIp()
+  {
+    return $this->controlPlaneIp;
+  }
+  /**
+   * @param string
+   */
   public function setCreateTime($createTime)
   {
     $this->createTime = $createTime;
@@ -158,6 +182,20 @@ class WorkstationCluster extends \Google\Collection
     return $this->displayName;
   }
   /**
+   * @param DomainConfig
+   */
+  public function setDomainConfig(DomainConfig $domainConfig)
+  {
+    $this->domainConfig = $domainConfig;
+  }
+  /**
+   * @return DomainConfig
+   */
+  public function getDomainConfig()
+  {
+    return $this->domainConfig;
+  }
+  /**
    * @param string
    */
   public function setEtag($etag)
@@ -170,6 +208,20 @@ class WorkstationCluster extends \Google\Collection
   public function getEtag()
   {
     return $this->etag;
+  }
+  /**
+   * @param string[]
+   */
+  public function setLabels($labels)
+  {
+    $this->labels = $labels;
+  }
+  /**
+   * @return string[]
+   */
+  public function getLabels()
+  {
+    return $this->labels;
   }
   /**
    * @param string

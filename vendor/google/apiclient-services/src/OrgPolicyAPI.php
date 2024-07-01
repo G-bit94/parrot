@@ -23,8 +23,8 @@ use Google\Client;
  * Service definition for OrgPolicyAPI (v2).
  *
  * <p>
- * The Org Policy API allows users to configure governance rules on their GCP
- * resources across the Cloud Resource Hierarchy.</p>
+ * The Organization Policy API allows users to configure governance rules on
+ * their Google Cloud resources across the resource hierarchy.</p>
  *
  * <p>
  * For more information about this service, see the API
@@ -46,6 +46,7 @@ class OrgPolicyAPI extends \Google\Service
   public $organizations_policies;
   public $projects_constraints;
   public $projects_policies;
+  public $rootUrlTemplate;
 
   /**
    * Constructs the internal representation of the OrgPolicyAPI service.
@@ -58,6 +59,7 @@ class OrgPolicyAPI extends \Google\Service
   {
     parent::__construct($clientOrConfig);
     $this->rootUrl = $rootUrl ?: 'https://orgpolicy.googleapis.com/';
+    $this->rootUrlTemplate = $rootUrl ?: 'https://orgpolicy.UNIVERSE_DOMAIN/';
     $this->servicePath = '';
     $this->batchPath = 'batch';
     $this->version = 'v2';
@@ -116,6 +118,10 @@ class OrgPolicyAPI extends \Google\Service
                   'type' => 'string',
                   'required' => true,
                 ],
+                'etag' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
               ],
             ],'get' => [
               'path' => 'v2/{+name}',
@@ -163,6 +169,10 @@ class OrgPolicyAPI extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+                'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
               ],
             ],
@@ -290,6 +300,10 @@ class OrgPolicyAPI extends \Google\Service
                   'type' => 'string',
                   'required' => true,
                 ],
+                'etag' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
               ],
             ],'get' => [
               'path' => 'v2/{+name}',
@@ -337,6 +351,10 @@ class OrgPolicyAPI extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+                'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
               ],
             ],
@@ -396,6 +414,10 @@ class OrgPolicyAPI extends \Google\Service
                   'type' => 'string',
                   'required' => true,
                 ],
+                'etag' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
               ],
             ],'get' => [
               'path' => 'v2/{+name}',
@@ -443,6 +465,10 @@ class OrgPolicyAPI extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+                'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
               ],
             ],

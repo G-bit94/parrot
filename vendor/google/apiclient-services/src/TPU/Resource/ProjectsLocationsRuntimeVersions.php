@@ -25,7 +25,7 @@ use Google\Service\TPU\RuntimeVersion;
  * Typical usage is:
  *  <code>
  *   $tpuService = new Google\Service\TPU(...);
- *   $runtimeVersions = $tpuService->runtimeVersions;
+ *   $runtimeVersions = $tpuService->projects_locations_runtimeVersions;
  *  </code>
  */
 class ProjectsLocationsRuntimeVersions extends \Google\Service\Resource
@@ -36,6 +36,7 @@ class ProjectsLocationsRuntimeVersions extends \Google\Service\Resource
    * @param string $name Required. The resource name.
    * @param array $optParams Optional parameters.
    * @return RuntimeVersion
+   * @throws \Google\Service\Exception
    */
   public function get($name, $optParams = [])
   {
@@ -56,6 +57,7 @@ class ProjectsLocationsRuntimeVersions extends \Google\Service\Resource
    * @opt_param string pageToken The next_page_token value returned from a
    * previous List request, if any.
    * @return ListRuntimeVersionsResponse
+   * @throws \Google\Service\Exception
    */
   public function listProjectsLocationsRuntimeVersions($parent, $optParams = [])
   {

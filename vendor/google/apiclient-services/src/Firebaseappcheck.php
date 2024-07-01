@@ -43,6 +43,7 @@ class Firebaseappcheck extends \Google\Service
       "https://www.googleapis.com/auth/firebase";
 
   public $jwks;
+  public $oauthClients;
   public $projects_apps;
   public $projects_apps_appAttestConfig;
   public $projects_apps_debugTokens;
@@ -52,6 +53,7 @@ class Firebaseappcheck extends \Google\Service
   public $projects_apps_recaptchaV3Config;
   public $projects_apps_safetyNetConfig;
   public $projects_services;
+  public $rootUrlTemplate;
 
   /**
    * Constructs the internal representation of the Firebaseappcheck service.
@@ -64,6 +66,7 @@ class Firebaseappcheck extends \Google\Service
   {
     parent::__construct($clientOrConfig);
     $this->rootUrl = $rootUrl ?: 'https://firebaseappcheck.googleapis.com/';
+    $this->rootUrlTemplate = $rootUrl ?: 'https://firebaseappcheck.UNIVERSE_DOMAIN/';
     $this->servicePath = '';
     $this->batchPath = 'batch';
     $this->version = 'v1';
@@ -80,6 +83,56 @@ class Firebaseappcheck extends \Google\Service
               'httpMethod' => 'GET',
               'parameters' => [
                 'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->oauthClients = new Firebaseappcheck\Resource\OauthClients(
+        $this,
+        $this->serviceName,
+        'oauthClients',
+        [
+          'methods' => [
+            'exchangeAppAttestAssertion' => [
+              'path' => 'v1/{+app}:exchangeAppAttestAssertion',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'app' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'exchangeAppAttestAttestation' => [
+              'path' => 'v1/{+app}:exchangeAppAttestAttestation',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'app' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'exchangeDebugToken' => [
+              'path' => 'v1/{+app}:exchangeDebugToken',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'app' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'generateAppAttestChallenge' => [
+              'path' => 'v1/{+app}:generateAppAttestChallenge',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'app' => [
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,

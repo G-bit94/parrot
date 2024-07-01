@@ -26,7 +26,7 @@ use Google\Service\SecurityCommandCenter\SecuritycenterEmpty;
  * Typical usage is:
  *  <code>
  *   $securitycenterService = new Google\Service\SecurityCommandCenter(...);
- *   $bigQueryExports = $securitycenterService->bigQueryExports;
+ *   $bigQueryExports = $securitycenterService->organizations_bigQueryExports;
  *  </code>
  */
 class OrganizationsBigQueryExports extends \Google\Service\Resource
@@ -41,10 +41,11 @@ class OrganizationsBigQueryExports extends \Google\Service\Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string bigQueryExportId Required. Unique identifier provided by
-   * the client within the parent scope. It must consist of lower case letters,
-   * numbers, and hyphen, with the first character a letter, the last a letter or
-   * a number, and a 63 character maximum.
+   * the client within the parent scope. It must consist of only lowercase
+   * letters, numbers, and hyphens, must start with a letter, must end with either
+   * a letter or a number, and must be 63 characters or less.
    * @return GoogleCloudSecuritycenterV1BigQueryExport
+   * @throws \Google\Service\Exception
    */
   public function create($parent, GoogleCloudSecuritycenterV1BigQueryExport $postBody, $optParams = [])
   {
@@ -61,6 +62,7 @@ class OrganizationsBigQueryExports extends \Google\Service\Resource
    * projects/{project}/bigQueryExports/{export_id}
    * @param array $optParams Optional parameters.
    * @return SecuritycenterEmpty
+   * @throws \Google\Service\Exception
    */
   public function delete($name, $optParams = [])
   {
@@ -77,6 +79,7 @@ class OrganizationsBigQueryExports extends \Google\Service\Resource
    * projects/{project}/bigQueryExports/{export_id}
    * @param array $optParams Optional parameters.
    * @return GoogleCloudSecuritycenterV1BigQueryExport
+   * @throws \Google\Service\Exception
    */
   public function get($name, $optParams = [])
   {
@@ -105,6 +108,7 @@ class OrganizationsBigQueryExports extends \Google\Service\Resource
    * When paginating, all other parameters provided to `ListBigQueryExports` must
    * match the call that provided the page token.
    * @return ListBigQueryExportsResponse
+   * @throws \Google\Service\Exception
    */
   public function listOrganizationsBigQueryExports($parent, $optParams = [])
   {
@@ -127,6 +131,7 @@ class OrganizationsBigQueryExports extends \Google\Service\Resource
    * @opt_param string updateMask The list of fields to be updated. If empty all
    * mutable fields will be updated.
    * @return GoogleCloudSecuritycenterV1BigQueryExport
+   * @throws \Google\Service\Exception
    */
   public function patch($name, GoogleCloudSecuritycenterV1BigQueryExport $postBody, $optParams = [])
   {

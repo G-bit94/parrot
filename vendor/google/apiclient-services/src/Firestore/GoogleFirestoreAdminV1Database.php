@@ -23,10 +23,28 @@ class GoogleFirestoreAdminV1Database extends \Google\Model
    * @var string
    */
   public $appEngineIntegrationMode;
+  protected $cmekConfigType = GoogleFirestoreAdminV1CmekConfig::class;
+  protected $cmekConfigDataType = '';
   /**
    * @var string
    */
   public $concurrencyMode;
+  /**
+   * @var string
+   */
+  public $createTime;
+  /**
+   * @var string
+   */
+  public $deleteProtectionState;
+  /**
+   * @var string
+   */
+  public $deleteTime;
+  /**
+   * @var string
+   */
+  public $earliestVersionTime;
   /**
    * @var string
    */
@@ -46,7 +64,27 @@ class GoogleFirestoreAdminV1Database extends \Google\Model
   /**
    * @var string
    */
+  public $pointInTimeRecoveryEnablement;
+  /**
+   * @var string
+   */
+  public $previousId;
+  /**
+   * @var string
+   */
   public $type;
+  /**
+   * @var string
+   */
+  public $uid;
+  /**
+   * @var string
+   */
+  public $updateTime;
+  /**
+   * @var string
+   */
+  public $versionRetentionPeriod;
 
   /**
    * @param string
@@ -63,6 +101,20 @@ class GoogleFirestoreAdminV1Database extends \Google\Model
     return $this->appEngineIntegrationMode;
   }
   /**
+   * @param GoogleFirestoreAdminV1CmekConfig
+   */
+  public function setCmekConfig(GoogleFirestoreAdminV1CmekConfig $cmekConfig)
+  {
+    $this->cmekConfig = $cmekConfig;
+  }
+  /**
+   * @return GoogleFirestoreAdminV1CmekConfig
+   */
+  public function getCmekConfig()
+  {
+    return $this->cmekConfig;
+  }
+  /**
    * @param string
    */
   public function setConcurrencyMode($concurrencyMode)
@@ -75,6 +127,62 @@ class GoogleFirestoreAdminV1Database extends \Google\Model
   public function getConcurrencyMode()
   {
     return $this->concurrencyMode;
+  }
+  /**
+   * @param string
+   */
+  public function setCreateTime($createTime)
+  {
+    $this->createTime = $createTime;
+  }
+  /**
+   * @return string
+   */
+  public function getCreateTime()
+  {
+    return $this->createTime;
+  }
+  /**
+   * @param string
+   */
+  public function setDeleteProtectionState($deleteProtectionState)
+  {
+    $this->deleteProtectionState = $deleteProtectionState;
+  }
+  /**
+   * @return string
+   */
+  public function getDeleteProtectionState()
+  {
+    return $this->deleteProtectionState;
+  }
+  /**
+   * @param string
+   */
+  public function setDeleteTime($deleteTime)
+  {
+    $this->deleteTime = $deleteTime;
+  }
+  /**
+   * @return string
+   */
+  public function getDeleteTime()
+  {
+    return $this->deleteTime;
+  }
+  /**
+   * @param string
+   */
+  public function setEarliestVersionTime($earliestVersionTime)
+  {
+    $this->earliestVersionTime = $earliestVersionTime;
+  }
+  /**
+   * @return string
+   */
+  public function getEarliestVersionTime()
+  {
+    return $this->earliestVersionTime;
   }
   /**
    * @param string
@@ -135,6 +243,34 @@ class GoogleFirestoreAdminV1Database extends \Google\Model
   /**
    * @param string
    */
+  public function setPointInTimeRecoveryEnablement($pointInTimeRecoveryEnablement)
+  {
+    $this->pointInTimeRecoveryEnablement = $pointInTimeRecoveryEnablement;
+  }
+  /**
+   * @return string
+   */
+  public function getPointInTimeRecoveryEnablement()
+  {
+    return $this->pointInTimeRecoveryEnablement;
+  }
+  /**
+   * @param string
+   */
+  public function setPreviousId($previousId)
+  {
+    $this->previousId = $previousId;
+  }
+  /**
+   * @return string
+   */
+  public function getPreviousId()
+  {
+    return $this->previousId;
+  }
+  /**
+   * @param string
+   */
   public function setType($type)
   {
     $this->type = $type;
@@ -145,6 +281,48 @@ class GoogleFirestoreAdminV1Database extends \Google\Model
   public function getType()
   {
     return $this->type;
+  }
+  /**
+   * @param string
+   */
+  public function setUid($uid)
+  {
+    $this->uid = $uid;
+  }
+  /**
+   * @return string
+   */
+  public function getUid()
+  {
+    return $this->uid;
+  }
+  /**
+   * @param string
+   */
+  public function setUpdateTime($updateTime)
+  {
+    $this->updateTime = $updateTime;
+  }
+  /**
+   * @return string
+   */
+  public function getUpdateTime()
+  {
+    return $this->updateTime;
+  }
+  /**
+   * @param string
+   */
+  public function setVersionRetentionPeriod($versionRetentionPeriod)
+  {
+    $this->versionRetentionPeriod = $versionRetentionPeriod;
+  }
+  /**
+   * @return string
+   */
+  public function getVersionRetentionPeriod()
+  {
+    return $this->versionRetentionPeriod;
   }
 }
 

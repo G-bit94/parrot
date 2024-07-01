@@ -26,7 +26,7 @@ use Google\Service\CertificateManager\Operation;
  * Typical usage is:
  *  <code>
  *   $certificatemanagerService = new Google\Service\CertificateManager(...);
- *   $dnsAuthorizations = $certificatemanagerService->dnsAuthorizations;
+ *   $dnsAuthorizations = $certificatemanagerService->projects_locations_dnsAuthorizations;
  *  </code>
  */
 class ProjectsLocationsDnsAuthorizations extends \Google\Service\Resource
@@ -43,6 +43,7 @@ class ProjectsLocationsDnsAuthorizations extends \Google\Service\Resource
    * @opt_param string dnsAuthorizationId Required. A user-provided name of the
    * dns authorization.
    * @return Operation
+   * @throws \Google\Service\Exception
    */
   public function create($parent, DnsAuthorization $postBody, $optParams = [])
   {
@@ -57,6 +58,7 @@ class ProjectsLocationsDnsAuthorizations extends \Google\Service\Resource
    * be in the format `projects/locations/dnsAuthorizations`.
    * @param array $optParams Optional parameters.
    * @return Operation
+   * @throws \Google\Service\Exception
    */
   public function delete($name, $optParams = [])
   {
@@ -71,6 +73,7 @@ class ProjectsLocationsDnsAuthorizations extends \Google\Service\Resource
    * Must be in the format `projects/locations/dnsAuthorizations`.
    * @param array $optParams Optional parameters.
    * @return DnsAuthorization
+   * @throws \Google\Service\Exception
    */
   public function get($name, $optParams = [])
   {
@@ -91,7 +94,7 @@ class ProjectsLocationsDnsAuthorizations extends \Google\Service\Resource
    * returned.
    * @opt_param string orderBy A list of Dns Authorization field names used to
    * specify the order of the returned results. The default sorting order is
-   * ascending. To specify descending order for a field, add a suffix " desc".
+   * ascending. To specify descending order for a field, add a suffix `" desc"`.
    * @opt_param int pageSize Maximum number of dns authorizations to return per
    * call.
    * @opt_param string pageToken The value returned by the last
@@ -99,6 +102,7 @@ class ProjectsLocationsDnsAuthorizations extends \Google\Service\Resource
    * prior `ListDnsAuthorizations` call, and that the system should return the
    * next page of data.
    * @return ListDnsAuthorizationsResponse
+   * @throws \Google\Service\Exception
    */
   public function listProjectsLocationsDnsAuthorizations($parent, $optParams = [])
   {
@@ -116,9 +120,11 @@ class ProjectsLocationsDnsAuthorizations extends \Google\Service\Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string updateMask Required. The update mask applies to the
-   * resource. For the `FieldMask` definition, see https://developers.google.com
-   * /protocol-buffers/docs/reference/google.protobuf#fieldmask.
+   * resource. For the `FieldMask` definition, see
+   * https://developers.google.com/protocol-
+   * buffers/docs/reference/google.protobuf#fieldmask.
    * @return Operation
+   * @throws \Google\Service\Exception
    */
   public function patch($name, DnsAuthorization $postBody, $optParams = [])
   {

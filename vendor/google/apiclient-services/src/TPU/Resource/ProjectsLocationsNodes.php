@@ -30,7 +30,7 @@ use Google\Service\TPU\StopNodeRequest;
  * Typical usage is:
  *  <code>
  *   $tpuService = new Google\Service\TPU(...);
- *   $nodes = $tpuService->nodes;
+ *   $nodes = $tpuService->projects_locations_nodes;
  *  </code>
  */
 class ProjectsLocationsNodes extends \Google\Service\Resource
@@ -44,6 +44,7 @@ class ProjectsLocationsNodes extends \Google\Service\Resource
    *
    * @opt_param string nodeId The unqualified resource name.
    * @return Operation
+   * @throws \Google\Service\Exception
    */
   public function create($parent, Node $postBody, $optParams = [])
   {
@@ -57,6 +58,7 @@ class ProjectsLocationsNodes extends \Google\Service\Resource
    * @param string $name Required. The resource name.
    * @param array $optParams Optional parameters.
    * @return Operation
+   * @throws \Google\Service\Exception
    */
   public function delete($name, $optParams = [])
   {
@@ -70,6 +72,7 @@ class ProjectsLocationsNodes extends \Google\Service\Resource
    * @param string $name Required. The resource name.
    * @param array $optParams Optional parameters.
    * @return Node
+   * @throws \Google\Service\Exception
    */
   public function get($name, $optParams = [])
   {
@@ -84,6 +87,7 @@ class ProjectsLocationsNodes extends \Google\Service\Resource
    * @param GetGuestAttributesRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GetGuestAttributesResponse
+   * @throws \Google\Service\Exception
    */
   public function getGuestAttributes($name, GetGuestAttributesRequest $postBody, $optParams = [])
   {
@@ -101,6 +105,7 @@ class ProjectsLocationsNodes extends \Google\Service\Resource
    * @opt_param string pageToken The next_page_token value returned from a
    * previous List request, if any.
    * @return ListNodesResponse
+   * @throws \Google\Service\Exception
    */
   public function listProjectsLocationsNodes($parent, $optParams = [])
   {
@@ -119,6 +124,7 @@ class ProjectsLocationsNodes extends \Google\Service\Resource
    * Supported fields: [description, tags, labels, metadata,
    * network_config.enable_external_ips].
    * @return Operation
+   * @throws \Google\Service\Exception
    */
   public function patch($name, Node $postBody, $optParams = [])
   {
@@ -129,10 +135,11 @@ class ProjectsLocationsNodes extends \Google\Service\Resource
   /**
    * Starts a node. (nodes.start)
    *
-   * @param string $name The resource name.
+   * @param string $name Required. The resource name.
    * @param StartNodeRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Operation
+   * @throws \Google\Service\Exception
    */
   public function start($name, StartNodeRequest $postBody, $optParams = [])
   {
@@ -144,10 +151,11 @@ class ProjectsLocationsNodes extends \Google\Service\Resource
    * Stops a node. This operation is only available with single TPU nodes.
    * (nodes.stop)
    *
-   * @param string $name The resource name.
+   * @param string $name Required. The resource name.
    * @param StopNodeRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Operation
+   * @throws \Google\Service\Exception
    */
   public function stop($name, StopNodeRequest $postBody, $optParams = [])
   {

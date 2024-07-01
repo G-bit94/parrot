@@ -17,11 +17,8 @@
 
 namespace Google\Service\Integrations\Resource;
 
-use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaArchiveIntegrationVersionRequest;
-use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaArchiveIntegrationVersionResponse;
-use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaDeactivateIntegrationVersionRequest;
-use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaDeactivateIntegrationVersionResponse;
 use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaDownloadIntegrationVersionResponse;
+use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaDownloadJsonPackageResponse;
 use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaIntegrationVersion;
 use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaListIntegrationVersionsResponse;
 use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaPublishIntegrationVersionRequest;
@@ -29,8 +26,6 @@ use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaPublishIntegration
 use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaUnpublishIntegrationVersionRequest;
 use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequest;
 use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaUploadIntegrationVersionResponse;
-use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaValidateIntegrationVersionRequest;
-use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaValidateIntegrationVersionResponse;
 use Google\Service\Integrations\GoogleProtobufEmpty;
 
 /**
@@ -38,34 +33,11 @@ use Google\Service\Integrations\GoogleProtobufEmpty;
  * Typical usage is:
  *  <code>
  *   $integrationsService = new Google\Service\Integrations(...);
- *   $versions = $integrationsService->versions;
+ *   $versions = $integrationsService->projects_locations_integrations_versions;
  *  </code>
  */
 class ProjectsLocationsIntegrationsVersions extends \Google\Service\Resource
 {
-  /**
-   * Soft-deletes the integration. Changes the status of the integration to
-   * ARCHIVED. If the integration being ARCHIVED is tagged as "HEAD", the tag is
-   * removed from this snapshot and set to the previous non-ARCHIVED snapshot. The
-   * PUBLISH_REQUESTED, DUE_FOR_DELETION tags are removed too. This RPC throws an
-   * exception if the version being archived is DRAFT, and if the `locked_by` user
-   * is not the same as the user performing the Archive. Audit fields updated
-   * include last_modified_timestamp, last_modified_by. Any existing lock is
-   * released when Archiving a integration. Currently, there is no unarchive
-   * mechanism. (versions.archive)
-   *
-   * @param string $name Required. The version to archive. Format: projects/{proje
-   * ct}/locations/{location}/integrations/{integration}/versions/{version}
-   * @param GoogleCloudIntegrationsV1alphaArchiveIntegrationVersionRequest $postBody
-   * @param array $optParams Optional parameters.
-   * @return GoogleCloudIntegrationsV1alphaArchiveIntegrationVersionResponse
-   */
-  public function archive($name, GoogleCloudIntegrationsV1alphaArchiveIntegrationVersionRequest $postBody, $optParams = [])
-  {
-    $params = ['name' => $name, 'postBody' => $postBody];
-    $params = array_merge($params, $optParams);
-    return $this->call('archive', [$params], GoogleCloudIntegrationsV1alphaArchiveIntegrationVersionResponse::class);
-  }
   /**
    * Create a integration with a draft version in the specified project.
    * (versions.create)
@@ -76,37 +48,21 @@ class ProjectsLocationsIntegrationsVersions extends \Google\Service\Resource
    * @param GoogleCloudIntegrationsV1alphaIntegrationVersion $postBody
    * @param array $optParams Optional parameters.
    *
+   * @opt_param bool createSampleIntegrations Optional. Optional. Indicates if
+   * sample workflow should be created.
    * @opt_param bool newIntegration Set this flag to true, if draft version is to
    * be created for a brand new integration. False, if the request is for an
    * existing integration. For backward compatibility reasons, even if this flag
    * is set to `false` and no existing integration is found, a new draft
    * integration will still be created.
    * @return GoogleCloudIntegrationsV1alphaIntegrationVersion
+   * @throws \Google\Service\Exception
    */
   public function create($parent, GoogleCloudIntegrationsV1alphaIntegrationVersion $postBody, $optParams = [])
   {
     $params = ['parent' => $parent, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
     return $this->call('create', [$params], GoogleCloudIntegrationsV1alphaIntegrationVersion::class);
-  }
-  /**
-   * Sets the status of the ACTIVE integration to SNAPSHOT with a new tag
-   * "PREVIOUSLY_PUBLISHED" after validating it. The "HEAD" and
-   * "PUBLISH_REQUESTED" tags do not change. This RPC throws an exception if the
-   * version being snapshot is not ACTIVE. Audit fields added include action,
-   * action_by, action_timestamp. (versions.deactivate)
-   *
-   * @param string $name Required. The version to deactivate. Format: projects/{pr
-   * oject}/locations/{location}/integrations/{integration}/versions/{version}
-   * @param GoogleCloudIntegrationsV1alphaDeactivateIntegrationVersionRequest $postBody
-   * @param array $optParams Optional parameters.
-   * @return GoogleCloudIntegrationsV1alphaDeactivateIntegrationVersionResponse
-   */
-  public function deactivate($name, GoogleCloudIntegrationsV1alphaDeactivateIntegrationVersionRequest $postBody, $optParams = [])
-  {
-    $params = ['name' => $name, 'postBody' => $postBody];
-    $params = array_merge($params, $optParams);
-    return $this->call('deactivate', [$params], GoogleCloudIntegrationsV1alphaDeactivateIntegrationVersionResponse::class);
   }
   /**
    * Soft-deletes the integration. Changes the status of the integration to
@@ -123,6 +79,7 @@ class ProjectsLocationsIntegrationsVersions extends \Google\Service\Resource
    * t}/locations/{location}/integrations/{integration}/versions/{version}
    * @param array $optParams Optional parameters.
    * @return GoogleProtobufEmpty
+   * @throws \Google\Service\Exception
    */
   public function delete($name, $optParams = [])
   {
@@ -139,7 +96,10 @@ class ProjectsLocationsIntegrationsVersions extends \Google\Service\Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string fileFormat File format for download request.
+   * @opt_param string files Optional. Integration related file to download like
+   * Integration Json, Config variable, testcase etc.
    * @return GoogleCloudIntegrationsV1alphaDownloadIntegrationVersionResponse
+   * @throws \Google\Service\Exception
    */
   public function download($name, $optParams = [])
   {
@@ -148,12 +108,34 @@ class ProjectsLocationsIntegrationsVersions extends \Google\Service\Resource
     return $this->call('download', [$params], GoogleCloudIntegrationsV1alphaDownloadIntegrationVersionResponse::class);
   }
   /**
+   * Downloads an Integration version package like IntegrationVersion,Integration
+   * Config etc. Retrieves the IntegrationVersion package for a given
+   * `integration_id` and returns the response as a JSON.
+   * (versions.downloadJsonPackage)
+   *
+   * @param string $name Required. Integration version name Format: projects/{proj
+   * ect}/locations/{location}/integrations/{integration}/versions/{version}
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string files Optional. Integration related file to download like
+   * Integration Version, Config variable, testcase etc.
+   * @return GoogleCloudIntegrationsV1alphaDownloadJsonPackageResponse
+   * @throws \Google\Service\Exception
+   */
+  public function downloadJsonPackage($name, $optParams = [])
+  {
+    $params = ['name' => $name];
+    $params = array_merge($params, $optParams);
+    return $this->call('downloadJsonPackage', [$params], GoogleCloudIntegrationsV1alphaDownloadJsonPackageResponse::class);
+  }
+  /**
    * Get a integration in the specified project. (versions.get)
    *
    * @param string $name Required. The version to retrieve. Format: projects/{proj
    * ect}/locations/{location}/integrations/{integration}/versions/{version}
    * @param array $optParams Optional parameters.
    * @return GoogleCloudIntegrationsV1alphaIntegrationVersion
+   * @throws \Google\Service\Exception
    */
   public function get($name, $optParams = [])
   {
@@ -197,6 +179,7 @@ class ProjectsLocationsIntegrationsVersions extends \Google\Service\Resource
    * When paginating, all other parameters provided to `ListIntegrationVersions`
    * must match the call that provided the page token.
    * @return GoogleCloudIntegrationsV1alphaListIntegrationVersionsResponse
+   * @throws \Google\Service\Exception
    */
   public function listProjectsLocationsIntegrationsVersions($parent, $optParams = [])
   {
@@ -215,6 +198,7 @@ class ProjectsLocationsIntegrationsVersions extends \Google\Service\Resource
    * @opt_param string updateMask Field mask specifying the fields in the above
    * integration that have been modified and need to be updated.
    * @return GoogleCloudIntegrationsV1alphaIntegrationVersion
+   * @throws \Google\Service\Exception
    */
   public function patch($name, GoogleCloudIntegrationsV1alphaIntegrationVersion $postBody, $optParams = [])
   {
@@ -235,6 +219,7 @@ class ProjectsLocationsIntegrationsVersions extends \Google\Service\Resource
    * @param GoogleCloudIntegrationsV1alphaPublishIntegrationVersionRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleCloudIntegrationsV1alphaPublishIntegrationVersionResponse
+   * @throws \Google\Service\Exception
    */
   public function publish($name, GoogleCloudIntegrationsV1alphaPublishIntegrationVersionRequest $postBody, $optParams = [])
   {
@@ -254,6 +239,7 @@ class ProjectsLocationsIntegrationsVersions extends \Google\Service\Resource
    * @param GoogleCloudIntegrationsV1alphaUnpublishIntegrationVersionRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleProtobufEmpty
+   * @throws \Google\Service\Exception
    */
   public function unpublish($name, GoogleCloudIntegrationsV1alphaUnpublishIntegrationVersionRequest $postBody, $optParams = [])
   {
@@ -272,29 +258,13 @@ class ProjectsLocationsIntegrationsVersions extends \Google\Service\Resource
    * @param GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleCloudIntegrationsV1alphaUploadIntegrationVersionResponse
+   * @throws \Google\Service\Exception
    */
   public function upload($parent, GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequest $postBody, $optParams = [])
   {
     $params = ['parent' => $parent, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
     return $this->call('upload', [$params], GoogleCloudIntegrationsV1alphaUploadIntegrationVersionResponse::class);
-  }
-  /**
-   * Validates the given integration. If the id doesn't exist, a NotFoundException
-   * is thrown. If validation fails a CanonicalCodeException is thrown. If there
-   * was no failure an empty response is returned. (versions.validate)
-   *
-   * @param string $name Required. The version to validate. Format: projects/{proj
-   * ect}/locations/{location}/integrations/{integration}/versions/{version}
-   * @param GoogleCloudIntegrationsV1alphaValidateIntegrationVersionRequest $postBody
-   * @param array $optParams Optional parameters.
-   * @return GoogleCloudIntegrationsV1alphaValidateIntegrationVersionResponse
-   */
-  public function validate($name, GoogleCloudIntegrationsV1alphaValidateIntegrationVersionRequest $postBody, $optParams = [])
-  {
-    $params = ['name' => $name, 'postBody' => $postBody];
-    $params = array_merge($params, $optParams);
-    return $this->call('validate', [$params], GoogleCloudIntegrationsV1alphaValidateIntegrationVersionResponse::class);
   }
 }
 

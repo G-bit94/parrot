@@ -33,6 +33,10 @@ class HttpCheck extends \Google\Collection
    */
   public $contentType;
   /**
+   * @var string
+   */
+  public $customContentType;
+  /**
    * @var string[]
    */
   public $headers;
@@ -54,6 +58,8 @@ class HttpCheck extends \Google\Collection
    * @var string
    */
   public $requestMethod;
+  protected $serviceAgentAuthenticationType = ServiceAgentAuthentication::class;
+  protected $serviceAgentAuthenticationDataType = '';
   /**
    * @var bool
    */
@@ -118,6 +124,20 @@ class HttpCheck extends \Google\Collection
   public function getContentType()
   {
     return $this->contentType;
+  }
+  /**
+   * @param string
+   */
+  public function setCustomContentType($customContentType)
+  {
+    $this->customContentType = $customContentType;
+  }
+  /**
+   * @return string
+   */
+  public function getCustomContentType()
+  {
+    return $this->customContentType;
   }
   /**
    * @param string[]
@@ -202,6 +222,20 @@ class HttpCheck extends \Google\Collection
   public function getRequestMethod()
   {
     return $this->requestMethod;
+  }
+  /**
+   * @param ServiceAgentAuthentication
+   */
+  public function setServiceAgentAuthentication(ServiceAgentAuthentication $serviceAgentAuthentication)
+  {
+    $this->serviceAgentAuthentication = $serviceAgentAuthentication;
+  }
+  /**
+   * @return ServiceAgentAuthentication
+   */
+  public function getServiceAgentAuthentication()
+  {
+    return $this->serviceAgentAuthentication;
   }
   /**
    * @param bool

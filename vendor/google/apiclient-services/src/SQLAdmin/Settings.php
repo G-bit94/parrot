@@ -26,6 +26,8 @@ class Settings extends \Google\Collection
   public $activationPolicy;
   protected $activeDirectoryConfigType = SqlActiveDirectoryConfig::class;
   protected $activeDirectoryConfigDataType = '';
+  protected $advancedMachineFeaturesType = AdvancedMachineFeatures::class;
+  protected $advancedMachineFeaturesDataType = '';
   /**
    * @var string[]
    */
@@ -48,6 +50,8 @@ class Settings extends \Google\Collection
    * @var bool
    */
   public $crashSafeReplicationEnabled;
+  protected $dataCacheConfigType = DataCacheConfig::class;
+  protected $dataCacheConfigDataType = '';
   /**
    * @var string
    */
@@ -68,6 +72,18 @@ class Settings extends \Google\Collection
   public $deletionProtectionEnabled;
   protected $denyMaintenancePeriodsType = DenyMaintenancePeriod::class;
   protected $denyMaintenancePeriodsDataType = 'array';
+  /**
+   * @var string
+   */
+  public $edition;
+  /**
+   * @var bool
+   */
+  public $enableDataplexIntegration;
+  /**
+   * @var bool
+   */
+  public $enableGoogleMlIntegration;
   protected $insightsConfigType = InsightsConfig::class;
   protected $insightsConfigDataType = '';
   protected $ipConfigurationType = IpConfiguration::class;
@@ -144,6 +160,20 @@ class Settings extends \Google\Collection
   public function getActiveDirectoryConfig()
   {
     return $this->activeDirectoryConfig;
+  }
+  /**
+   * @param AdvancedMachineFeatures
+   */
+  public function setAdvancedMachineFeatures(AdvancedMachineFeatures $advancedMachineFeatures)
+  {
+    $this->advancedMachineFeatures = $advancedMachineFeatures;
+  }
+  /**
+   * @return AdvancedMachineFeatures
+   */
+  public function getAdvancedMachineFeatures()
+  {
+    return $this->advancedMachineFeatures;
   }
   /**
    * @param string[]
@@ -230,6 +260,20 @@ class Settings extends \Google\Collection
     return $this->crashSafeReplicationEnabled;
   }
   /**
+   * @param DataCacheConfig
+   */
+  public function setDataCacheConfig(DataCacheConfig $dataCacheConfig)
+  {
+    $this->dataCacheConfig = $dataCacheConfig;
+  }
+  /**
+   * @return DataCacheConfig
+   */
+  public function getDataCacheConfig()
+  {
+    return $this->dataCacheConfig;
+  }
+  /**
    * @param string
    */
   public function setDataDiskSizeGb($dataDiskSizeGb)
@@ -312,6 +356,48 @@ class Settings extends \Google\Collection
   public function getDenyMaintenancePeriods()
   {
     return $this->denyMaintenancePeriods;
+  }
+  /**
+   * @param string
+   */
+  public function setEdition($edition)
+  {
+    $this->edition = $edition;
+  }
+  /**
+   * @return string
+   */
+  public function getEdition()
+  {
+    return $this->edition;
+  }
+  /**
+   * @param bool
+   */
+  public function setEnableDataplexIntegration($enableDataplexIntegration)
+  {
+    $this->enableDataplexIntegration = $enableDataplexIntegration;
+  }
+  /**
+   * @return bool
+   */
+  public function getEnableDataplexIntegration()
+  {
+    return $this->enableDataplexIntegration;
+  }
+  /**
+   * @param bool
+   */
+  public function setEnableGoogleMlIntegration($enableGoogleMlIntegration)
+  {
+    $this->enableGoogleMlIntegration = $enableGoogleMlIntegration;
+  }
+  /**
+   * @return bool
+   */
+  public function getEnableGoogleMlIntegration()
+  {
+    return $this->enableGoogleMlIntegration;
   }
   /**
    * @param InsightsConfig

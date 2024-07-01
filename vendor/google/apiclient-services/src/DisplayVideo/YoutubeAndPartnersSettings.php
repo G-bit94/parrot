@@ -17,35 +17,40 @@
 
 namespace Google\Service\DisplayVideo;
 
-class YoutubeAndPartnersSettings extends \Google\Model
+class YoutubeAndPartnersSettings extends \Google\Collection
 {
-  protected $biddingStrategyType = YoutubeAndPartnersBiddingStrategy::class;
-  protected $biddingStrategyDataType = '';
+  protected $collection_key = 'relatedVideoIds';
   /**
    * @var string
    */
   public $contentCategory;
+  /**
+   * @var string
+   */
+  public $effectiveContentCategory;
   protected $inventorySourceSettingsType = YoutubeAndPartnersInventorySourceConfig::class;
   protected $inventorySourceSettingsDataType = '';
-  protected $thirdPartyMeasurementSettingsType = YoutubeAndPartnersThirdPartyMeasurementSettings::class;
-  protected $thirdPartyMeasurementSettingsDataType = '';
+  /**
+   * @var string
+   */
+  public $leadFormId;
+  /**
+   * @var string
+   */
+  public $linkedMerchantId;
+  /**
+   * @var string[]
+   */
+  public $relatedVideoIds;
+  protected $targetFrequencyType = TargetFrequency::class;
+  protected $targetFrequencyDataType = '';
+  protected $thirdPartyMeasurementConfigsType = ThirdPartyMeasurementConfigs::class;
+  protected $thirdPartyMeasurementConfigsDataType = '';
+  protected $videoAdSequenceSettingsType = VideoAdSequenceSettings::class;
+  protected $videoAdSequenceSettingsDataType = '';
   protected $viewFrequencyCapType = FrequencyCap::class;
   protected $viewFrequencyCapDataType = '';
 
-  /**
-   * @param YoutubeAndPartnersBiddingStrategy
-   */
-  public function setBiddingStrategy(YoutubeAndPartnersBiddingStrategy $biddingStrategy)
-  {
-    $this->biddingStrategy = $biddingStrategy;
-  }
-  /**
-   * @return YoutubeAndPartnersBiddingStrategy
-   */
-  public function getBiddingStrategy()
-  {
-    return $this->biddingStrategy;
-  }
   /**
    * @param string
    */
@@ -59,6 +64,20 @@ class YoutubeAndPartnersSettings extends \Google\Model
   public function getContentCategory()
   {
     return $this->contentCategory;
+  }
+  /**
+   * @param string
+   */
+  public function setEffectiveContentCategory($effectiveContentCategory)
+  {
+    $this->effectiveContentCategory = $effectiveContentCategory;
+  }
+  /**
+   * @return string
+   */
+  public function getEffectiveContentCategory()
+  {
+    return $this->effectiveContentCategory;
   }
   /**
    * @param YoutubeAndPartnersInventorySourceConfig
@@ -75,18 +94,88 @@ class YoutubeAndPartnersSettings extends \Google\Model
     return $this->inventorySourceSettings;
   }
   /**
-   * @param YoutubeAndPartnersThirdPartyMeasurementSettings
+   * @param string
    */
-  public function setThirdPartyMeasurementSettings(YoutubeAndPartnersThirdPartyMeasurementSettings $thirdPartyMeasurementSettings)
+  public function setLeadFormId($leadFormId)
   {
-    $this->thirdPartyMeasurementSettings = $thirdPartyMeasurementSettings;
+    $this->leadFormId = $leadFormId;
   }
   /**
-   * @return YoutubeAndPartnersThirdPartyMeasurementSettings
+   * @return string
    */
-  public function getThirdPartyMeasurementSettings()
+  public function getLeadFormId()
   {
-    return $this->thirdPartyMeasurementSettings;
+    return $this->leadFormId;
+  }
+  /**
+   * @param string
+   */
+  public function setLinkedMerchantId($linkedMerchantId)
+  {
+    $this->linkedMerchantId = $linkedMerchantId;
+  }
+  /**
+   * @return string
+   */
+  public function getLinkedMerchantId()
+  {
+    return $this->linkedMerchantId;
+  }
+  /**
+   * @param string[]
+   */
+  public function setRelatedVideoIds($relatedVideoIds)
+  {
+    $this->relatedVideoIds = $relatedVideoIds;
+  }
+  /**
+   * @return string[]
+   */
+  public function getRelatedVideoIds()
+  {
+    return $this->relatedVideoIds;
+  }
+  /**
+   * @param TargetFrequency
+   */
+  public function setTargetFrequency(TargetFrequency $targetFrequency)
+  {
+    $this->targetFrequency = $targetFrequency;
+  }
+  /**
+   * @return TargetFrequency
+   */
+  public function getTargetFrequency()
+  {
+    return $this->targetFrequency;
+  }
+  /**
+   * @param ThirdPartyMeasurementConfigs
+   */
+  public function setThirdPartyMeasurementConfigs(ThirdPartyMeasurementConfigs $thirdPartyMeasurementConfigs)
+  {
+    $this->thirdPartyMeasurementConfigs = $thirdPartyMeasurementConfigs;
+  }
+  /**
+   * @return ThirdPartyMeasurementConfigs
+   */
+  public function getThirdPartyMeasurementConfigs()
+  {
+    return $this->thirdPartyMeasurementConfigs;
+  }
+  /**
+   * @param VideoAdSequenceSettings
+   */
+  public function setVideoAdSequenceSettings(VideoAdSequenceSettings $videoAdSequenceSettings)
+  {
+    $this->videoAdSequenceSettings = $videoAdSequenceSettings;
+  }
+  /**
+   * @return VideoAdSequenceSettings
+   */
+  public function getVideoAdSequenceSettings()
+  {
+    return $this->videoAdSequenceSettings;
   }
   /**
    * @param FrequencyCap

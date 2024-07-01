@@ -1,0 +1,26 @@
+
+{
+    "context":"In a recent press release, the company, through its spokesperson, has said that it will no longer",
+    "top_p":0.9,
+    "temp":0.5,
+    "response_length":272,
+    "remove_input":true
+}
+
+
+{
+    "context":"Are you still struggling with content creation and writing?",
+    "top_p":0.9,
+    "temp":0.8,
+    "response_length":128,
+    "remove_input":true
+}
+
+
+{
+    "context":"Are you still struggling with content creation and writing?",
+    "top_p":0.9,
+    "temp":0.8,
+    "response_length":128,
+    "remove_input":true
+}

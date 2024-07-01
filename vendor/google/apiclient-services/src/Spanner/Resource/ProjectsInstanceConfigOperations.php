@@ -24,7 +24,7 @@ use Google\Service\Spanner\ListInstanceConfigOperationsResponse;
  * Typical usage is:
  *  <code>
  *   $spannerService = new Google\Service\Spanner(...);
- *   $instanceConfigOperations = $spannerService->instanceConfigOperations;
+ *   $instanceConfigOperations = $spannerService->projects_instanceConfigOperations;
  *  </code>
  */
 class ProjectsInstanceConfigOperations extends \Google\Service\Resource
@@ -75,6 +75,7 @@ class ProjectsInstanceConfigOperations extends \Google\Service\Resource
    * next_page_token from a previous ListInstanceConfigOperationsResponse to the
    * same `parent` and with the same `filter`.
    * @return ListInstanceConfigOperationsResponse
+   * @throws \Google\Service\Exception
    */
   public function listProjectsInstanceConfigOperations($parent, $optParams = [])
   {

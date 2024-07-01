@@ -25,12 +25,16 @@ class GoogleCloudDatacatalogV1Entry extends \Google\Model
   protected $bigqueryTableSpecDataType = '';
   protected $businessContextType = GoogleCloudDatacatalogV1BusinessContext::class;
   protected $businessContextDataType = '';
+  protected $cloudBigtableSystemSpecType = GoogleCloudDatacatalogV1CloudBigtableSystemSpec::class;
+  protected $cloudBigtableSystemSpecDataType = '';
   protected $dataSourceType = GoogleCloudDatacatalogV1DataSource::class;
   protected $dataSourceDataType = '';
   protected $dataSourceConnectionSpecType = GoogleCloudDatacatalogV1DataSourceConnectionSpec::class;
   protected $dataSourceConnectionSpecDataType = '';
   protected $databaseTableSpecType = GoogleCloudDatacatalogV1DatabaseTableSpec::class;
   protected $databaseTableSpecDataType = '';
+  protected $datasetSpecType = GoogleCloudDatacatalogV1DatasetSpec::class;
+  protected $datasetSpecDataType = '';
   /**
    * @var string
    */
@@ -39,6 +43,8 @@ class GoogleCloudDatacatalogV1Entry extends \Google\Model
    * @var string
    */
   public $displayName;
+  protected $featureOnlineStoreSpecType = GoogleCloudDatacatalogV1FeatureOnlineStoreSpec::class;
+  protected $featureOnlineStoreSpecDataType = '';
   protected $filesetSpecType = GoogleCloudDatacatalogV1FilesetSpec::class;
   protected $filesetSpecDataType = '';
   /**
@@ -61,6 +67,8 @@ class GoogleCloudDatacatalogV1Entry extends \Google\Model
   public $linkedResource;
   protected $lookerSystemSpecType = GoogleCloudDatacatalogV1LookerSystemSpec::class;
   protected $lookerSystemSpecDataType = '';
+  protected $modelSpecType = GoogleCloudDatacatalogV1ModelSpec::class;
+  protected $modelSpecDataType = '';
   /**
    * @var string
    */
@@ -71,6 +79,8 @@ class GoogleCloudDatacatalogV1Entry extends \Google\Model
   protected $routineSpecDataType = '';
   protected $schemaType = GoogleCloudDatacatalogV1Schema::class;
   protected $schemaDataType = '';
+  protected $serviceSpecType = GoogleCloudDatacatalogV1ServiceSpec::class;
+  protected $serviceSpecDataType = '';
   protected $sourceSystemTimestampsType = GoogleCloudDatacatalogV1SystemTimestamps::class;
   protected $sourceSystemTimestampsDataType = '';
   protected $sqlDatabaseSystemSpecType = GoogleCloudDatacatalogV1SqlDatabaseSystemSpec::class;
@@ -133,6 +143,20 @@ class GoogleCloudDatacatalogV1Entry extends \Google\Model
     return $this->businessContext;
   }
   /**
+   * @param GoogleCloudDatacatalogV1CloudBigtableSystemSpec
+   */
+  public function setCloudBigtableSystemSpec(GoogleCloudDatacatalogV1CloudBigtableSystemSpec $cloudBigtableSystemSpec)
+  {
+    $this->cloudBigtableSystemSpec = $cloudBigtableSystemSpec;
+  }
+  /**
+   * @return GoogleCloudDatacatalogV1CloudBigtableSystemSpec
+   */
+  public function getCloudBigtableSystemSpec()
+  {
+    return $this->cloudBigtableSystemSpec;
+  }
+  /**
    * @param GoogleCloudDatacatalogV1DataSource
    */
   public function setDataSource(GoogleCloudDatacatalogV1DataSource $dataSource)
@@ -175,6 +199,20 @@ class GoogleCloudDatacatalogV1Entry extends \Google\Model
     return $this->databaseTableSpec;
   }
   /**
+   * @param GoogleCloudDatacatalogV1DatasetSpec
+   */
+  public function setDatasetSpec(GoogleCloudDatacatalogV1DatasetSpec $datasetSpec)
+  {
+    $this->datasetSpec = $datasetSpec;
+  }
+  /**
+   * @return GoogleCloudDatacatalogV1DatasetSpec
+   */
+  public function getDatasetSpec()
+  {
+    return $this->datasetSpec;
+  }
+  /**
    * @param string
    */
   public function setDescription($description)
@@ -201,6 +239,20 @@ class GoogleCloudDatacatalogV1Entry extends \Google\Model
   public function getDisplayName()
   {
     return $this->displayName;
+  }
+  /**
+   * @param GoogleCloudDatacatalogV1FeatureOnlineStoreSpec
+   */
+  public function setFeatureOnlineStoreSpec(GoogleCloudDatacatalogV1FeatureOnlineStoreSpec $featureOnlineStoreSpec)
+  {
+    $this->featureOnlineStoreSpec = $featureOnlineStoreSpec;
+  }
+  /**
+   * @return GoogleCloudDatacatalogV1FeatureOnlineStoreSpec
+   */
+  public function getFeatureOnlineStoreSpec()
+  {
+    return $this->featureOnlineStoreSpec;
   }
   /**
    * @param GoogleCloudDatacatalogV1FilesetSpec
@@ -301,6 +353,20 @@ class GoogleCloudDatacatalogV1Entry extends \Google\Model
     return $this->lookerSystemSpec;
   }
   /**
+   * @param GoogleCloudDatacatalogV1ModelSpec
+   */
+  public function setModelSpec(GoogleCloudDatacatalogV1ModelSpec $modelSpec)
+  {
+    $this->modelSpec = $modelSpec;
+  }
+  /**
+   * @return GoogleCloudDatacatalogV1ModelSpec
+   */
+  public function getModelSpec()
+  {
+    return $this->modelSpec;
+  }
+  /**
    * @param string
    */
   public function setName($name)
@@ -355,6 +421,20 @@ class GoogleCloudDatacatalogV1Entry extends \Google\Model
   public function getSchema()
   {
     return $this->schema;
+  }
+  /**
+   * @param GoogleCloudDatacatalogV1ServiceSpec
+   */
+  public function setServiceSpec(GoogleCloudDatacatalogV1ServiceSpec $serviceSpec)
+  {
+    $this->serviceSpec = $serviceSpec;
+  }
+  /**
+   * @return GoogleCloudDatacatalogV1ServiceSpec
+   */
+  public function getServiceSpec()
+  {
+    return $this->serviceSpec;
   }
   /**
    * @param GoogleCloudDatacatalogV1SystemTimestamps

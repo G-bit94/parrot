@@ -36,6 +36,7 @@ class Projects extends \Google\Service\Resource
    * provisioned.
    * @param array $optParams Optional parameters.
    * @return GoogleCloudIntegrationsV1alphaGetClientMetadataResponse
+   * @throws \Google\Service\Exception
    */
   public function getClientmetadata($parent, $optParams = [])
   {

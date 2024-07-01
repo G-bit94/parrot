@@ -25,7 +25,7 @@ use Google\Service\ChromePolicy\GoogleChromePolicyVersionsV1ResolveResponse;
  * Typical usage is:
  *  <code>
  *   $chromepolicyService = new Google\Service\ChromePolicy(...);
- *   $policies = $chromepolicyService->policies;
+ *   $policies = $chromepolicyService->customers_policies;
  *  </code>
  */
 class CustomersPolicies extends \Google\Service\Resource
@@ -39,6 +39,7 @@ class CustomersPolicies extends \Google\Service\Resource
    * @param GoogleChromePolicyVersionsV1ResolveRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GoogleChromePolicyVersionsV1ResolveResponse
+   * @throws \Google\Service\Exception
    */
   public function resolve($customer, GoogleChromePolicyVersionsV1ResolveRequest $postBody, $optParams = [])
   {

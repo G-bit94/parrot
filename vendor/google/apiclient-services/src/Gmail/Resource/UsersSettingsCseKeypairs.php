@@ -28,22 +28,21 @@ use Google\Service\Gmail\ObliterateCseKeyPairRequest;
  * Typical usage is:
  *  <code>
  *   $gmailService = new Google\Service\Gmail(...);
- *   $keypairs = $gmailService->keypairs;
+ *   $keypairs = $gmailService->users_settings_cse_keypairs;
  *  </code>
  */
 class UsersSettingsCseKeypairs extends \Google\Service\Resource
 {
   /**
    * Creates and uploads a client-side encryption S/MIME public key certificate
-   * chain and private key metadata for the authenticated user.
-   * [Beta](https://workspace.google.com/terms/service-terms/index.html).
-   * (keypairs.create)
+   * chain and private key metadata for the authenticated user. (keypairs.create)
    *
    * @param string $userId The requester's primary email address. To indicate the
    * authenticated user, you can use the special value `me`.
    * @param CseKeyPair $postBody
    * @param array $optParams Optional parameters.
    * @return CseKeyPair
+   * @throws \Google\Service\Exception
    */
   public function create($userId, CseKeyPair $postBody, $optParams = [])
   {
@@ -56,8 +55,7 @@ class UsersSettingsCseKeypairs extends \Google\Service\Resource
    * longer use the key pair to decrypt incoming CSE message texts or sign
    * outgoing CSE mail. To regain access, use the EnableCseKeyPair to turn on the
    * key pair. After 30 days, you can permanently delete the key pair by using the
-   * ObliterateCseKeyPair method. [Beta](https://workspace.google.com/terms
-   * /service-terms/index.html). (keypairs.disable)
+   * ObliterateCseKeyPair method. (keypairs.disable)
    *
    * @param string $userId The requester's primary email address. To indicate the
    * authenticated user, you can use the special value `me`.
@@ -65,6 +63,7 @@ class UsersSettingsCseKeypairs extends \Google\Service\Resource
    * @param DisableCseKeyPairRequest $postBody
    * @param array $optParams Optional parameters.
    * @return CseKeyPair
+   * @throws \Google\Service\Exception
    */
   public function disable($userId, $keyPairId, DisableCseKeyPairRequest $postBody, $optParams = [])
   {
@@ -75,7 +74,6 @@ class UsersSettingsCseKeypairs extends \Google\Service\Resource
   /**
    * Turns on a client-side encryption key pair that was turned off. The key pair
    * becomes active again for any associated client-side encryption identities.
-   * [Beta](https://workspace.google.com/terms/service-terms/index.html).
    * (keypairs.enable)
    *
    * @param string $userId The requester's primary email address. To indicate the
@@ -84,6 +82,7 @@ class UsersSettingsCseKeypairs extends \Google\Service\Resource
    * @param EnableCseKeyPairRequest $postBody
    * @param array $optParams Optional parameters.
    * @return CseKeyPair
+   * @throws \Google\Service\Exception
    */
   public function enable($userId, $keyPairId, EnableCseKeyPairRequest $postBody, $optParams = [])
   {
@@ -92,15 +91,14 @@ class UsersSettingsCseKeypairs extends \Google\Service\Resource
     return $this->call('enable', [$params], CseKeyPair::class);
   }
   /**
-   * Retrieves an existing client-side encryption key pair.
-   * [Beta](https://workspace.google.com/terms/service-terms/index.html).
-   * (keypairs.get)
+   * Retrieves an existing client-side encryption key pair. (keypairs.get)
    *
    * @param string $userId The requester's primary email address. To indicate the
    * authenticated user, you can use the special value `me`.
    * @param string $keyPairId The identifier of the key pair to retrieve.
    * @param array $optParams Optional parameters.
    * @return CseKeyPair
+   * @throws \Google\Service\Exception
    */
   public function get($userId, $keyPairId, $optParams = [])
   {
@@ -110,7 +108,6 @@ class UsersSettingsCseKeypairs extends \Google\Service\Resource
   }
   /**
    * Lists client-side encryption key pairs for an authenticated user.
-   * [Beta](https://workspace.google.com/terms/service-terms/index.html).
    * (keypairs.listUsersSettingsCseKeypairs)
    *
    * @param string $userId The requester's primary email address. To indicate the
@@ -123,6 +120,7 @@ class UsersSettingsCseKeypairs extends \Google\Service\Resource
    * pairs to return. If the token is not supplied, then the API will return the
    * first page of results.
    * @return ListCseKeyPairsResponse
+   * @throws \Google\Service\Exception
    */
   public function listUsersSettingsCseKeypairs($userId, $optParams = [])
   {
@@ -136,14 +134,14 @@ class UsersSettingsCseKeypairs extends \Google\Service\Resource
    * 30 days. To turn off a key pair, use the DisableCseKeyPair method. Gmail
    * can't restore or decrypt any messages that were encrypted by an obliterated
    * key. Authenticated users and Google Workspace administrators lose access to
-   * reading the encrypted messages. [Beta](https://workspace.google.com/terms
-   * /service-terms/index.html). (keypairs.obliterate)
+   * reading the encrypted messages. (keypairs.obliterate)
    *
    * @param string $userId The requester's primary email address. To indicate the
    * authenticated user, you can use the special value `me`.
    * @param string $keyPairId The identifier of the key pair to obliterate.
    * @param ObliterateCseKeyPairRequest $postBody
    * @param array $optParams Optional parameters.
+   * @throws \Google\Service\Exception
    */
   public function obliterate($userId, $keyPairId, ObliterateCseKeyPairRequest $postBody, $optParams = [])
   {

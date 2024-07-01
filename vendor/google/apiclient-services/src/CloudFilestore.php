@@ -43,6 +43,7 @@ class CloudFilestore extends \Google\Service
   public $projects_locations_instances;
   public $projects_locations_instances_snapshots;
   public $projects_locations_operations;
+  public $rootUrlTemplate;
 
   /**
    * Constructs the internal representation of the CloudFilestore service.
@@ -55,6 +56,7 @@ class CloudFilestore extends \Google\Service
   {
     parent::__construct($clientOrConfig);
     $this->rootUrl = $rootUrl ?: 'https://file.googleapis.com/';
+    $this->rootUrlTemplate = $rootUrl ?: 'https://file.UNIVERSE_DOMAIN/';
     $this->servicePath = '';
     $this->batchPath = 'batch';
     $this->version = 'v1';
@@ -274,8 +276,28 @@ class CloudFilestore extends \Google\Service
                   'type' => 'string',
                 ],
               ],
+            ],'promoteReplica' => [
+              'path' => 'v1/{+name}:promoteReplica',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
             ],'restore' => [
               'path' => 'v1/{+name}:restore',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'revert' => [
+              'path' => 'v1/{+name}:revert',
               'httpMethod' => 'POST',
               'parameters' => [
                 'name' => [

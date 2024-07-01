@@ -33,6 +33,12 @@ class GoogleCloudIntegrationsV1alphaIntegrationTemplateVersion extends \Google\C
    */
   public $description;
   /**
+   * @var bool
+   */
+  public $enableVariableMasking;
+  protected $errorCatcherConfigsType = GoogleCloudIntegrationsV1alphaErrorCatcherConfig::class;
+  protected $errorCatcherConfigsDataType = 'array';
+  /**
    * @var string
    */
   public $lastModifierEmail;
@@ -110,6 +116,34 @@ class GoogleCloudIntegrationsV1alphaIntegrationTemplateVersion extends \Google\C
   public function getDescription()
   {
     return $this->description;
+  }
+  /**
+   * @param bool
+   */
+  public function setEnableVariableMasking($enableVariableMasking)
+  {
+    $this->enableVariableMasking = $enableVariableMasking;
+  }
+  /**
+   * @return bool
+   */
+  public function getEnableVariableMasking()
+  {
+    return $this->enableVariableMasking;
+  }
+  /**
+   * @param GoogleCloudIntegrationsV1alphaErrorCatcherConfig[]
+   */
+  public function setErrorCatcherConfigs($errorCatcherConfigs)
+  {
+    $this->errorCatcherConfigs = $errorCatcherConfigs;
+  }
+  /**
+   * @return GoogleCloudIntegrationsV1alphaErrorCatcherConfig[]
+   */
+  public function getErrorCatcherConfigs()
+  {
+    return $this->errorCatcherConfigs;
   }
   /**
    * @param string

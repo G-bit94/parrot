@@ -46,6 +46,26 @@ class AccessApprovalSettings extends \Google\Collection
    * @var string[]
    */
   public $notificationEmails;
+  /**
+   * @var string
+   */
+  public $notificationPubsubTopic;
+  /**
+   * @var bool
+   */
+  public $preferNoBroadApprovalRequests;
+  /**
+   * @var int
+   */
+  public $preferredRequestExpirationDays;
+  /**
+   * @var string
+   */
+  public $requestScopeMaxWidthPreference;
+  /**
+   * @var bool
+   */
+  public $requireCustomerVisibleJustification;
 
   /**
    * @param string
@@ -144,6 +164,76 @@ class AccessApprovalSettings extends \Google\Collection
   public function getNotificationEmails()
   {
     return $this->notificationEmails;
+  }
+  /**
+   * @param string
+   */
+  public function setNotificationPubsubTopic($notificationPubsubTopic)
+  {
+    $this->notificationPubsubTopic = $notificationPubsubTopic;
+  }
+  /**
+   * @return string
+   */
+  public function getNotificationPubsubTopic()
+  {
+    return $this->notificationPubsubTopic;
+  }
+  /**
+   * @param bool
+   */
+  public function setPreferNoBroadApprovalRequests($preferNoBroadApprovalRequests)
+  {
+    $this->preferNoBroadApprovalRequests = $preferNoBroadApprovalRequests;
+  }
+  /**
+   * @return bool
+   */
+  public function getPreferNoBroadApprovalRequests()
+  {
+    return $this->preferNoBroadApprovalRequests;
+  }
+  /**
+   * @param int
+   */
+  public function setPreferredRequestExpirationDays($preferredRequestExpirationDays)
+  {
+    $this->preferredRequestExpirationDays = $preferredRequestExpirationDays;
+  }
+  /**
+   * @return int
+   */
+  public function getPreferredRequestExpirationDays()
+  {
+    return $this->preferredRequestExpirationDays;
+  }
+  /**
+   * @param string
+   */
+  public function setRequestScopeMaxWidthPreference($requestScopeMaxWidthPreference)
+  {
+    $this->requestScopeMaxWidthPreference = $requestScopeMaxWidthPreference;
+  }
+  /**
+   * @return string
+   */
+  public function getRequestScopeMaxWidthPreference()
+  {
+    return $this->requestScopeMaxWidthPreference;
+  }
+  /**
+   * @param bool
+   */
+  public function setRequireCustomerVisibleJustification($requireCustomerVisibleJustification)
+  {
+    $this->requireCustomerVisibleJustification = $requireCustomerVisibleJustification;
+  }
+  /**
+   * @return bool
+   */
+  public function getRequireCustomerVisibleJustification()
+  {
+    return $this->requireCustomerVisibleJustification;
   }
 }
 

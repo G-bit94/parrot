@@ -25,7 +25,7 @@ use Google\Service\CloudRun\GoogleCloudRunV2Task;
  * Typical usage is:
  *  <code>
  *   $runService = new Google\Service\CloudRun(...);
- *   $tasks = $runService->tasks;
+ *   $tasks = $runService->projects_locations_jobs_executions_tasks;
  *  </code>
  */
 class ProjectsLocationsJobsExecutionsTasks extends \Google\Service\Resource
@@ -37,6 +37,7 @@ class ProjectsLocationsJobsExecutionsTasks extends \Google\Service\Resource
    * oject}/locations/{location}/jobs/{job}/executions/{execution}/tasks/{task}
    * @param array $optParams Optional parameters.
    * @return GoogleCloudRunV2Task
+   * @throws \Google\Service\Exception
    */
   public function get($name, $optParams = [])
   {
@@ -61,6 +62,7 @@ class ProjectsLocationsJobsExecutionsTasks extends \Google\Service\Resource
    * @opt_param bool showDeleted If true, returns deleted (but unexpired)
    * resources along with active ones.
    * @return GoogleCloudRunV2ListTasksResponse
+   * @throws \Google\Service\Exception
    */
   public function listProjectsLocationsJobsExecutionsTasks($parent, $optParams = [])
   {

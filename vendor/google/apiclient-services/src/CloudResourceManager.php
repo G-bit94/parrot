@@ -52,6 +52,7 @@ class CloudResourceManager extends \Google\Service
   public $tagKeys;
   public $tagValues;
   public $tagValues_tagHolds;
+  public $rootUrlTemplate;
 
   /**
    * Constructs the internal representation of the CloudResourceManager service.
@@ -64,6 +65,7 @@ class CloudResourceManager extends \Google\Service
   {
     parent::__construct($clientOrConfig);
     $this->rootUrl = $rootUrl ?: 'https://cloudresourcemanager.googleapis.com/';
+    $this->rootUrlTemplate = $rootUrl ?: 'https://cloudresourcemanager.UNIVERSE_DOMAIN/';
     $this->servicePath = '';
     $this->batchPath = 'batch';
     $this->version = 'v3';
@@ -605,6 +607,15 @@ class CloudResourceManager extends \Google\Service
                   'required' => true,
                 ],
               ],
+            ],'getNamespaced' => [
+              'path' => 'v3/tagKeys/namespaced',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
             ],'list' => [
               'path' => 'v3/tagKeys',
               'httpMethod' => 'GET',
@@ -715,6 +726,15 @@ class CloudResourceManager extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+              ],
+            ],'getNamespaced' => [
+              'path' => 'v3/tagValues/namespaced',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
               ],
             ],'list' => [

@@ -17,16 +17,33 @@
 
 namespace Google\Service\Integrations;
 
-class EnterpriseCrmEventbusProtoEventExecutionSnapshotEventExecutionSnapshotMetadata extends \Google\Model
+class EnterpriseCrmEventbusProtoEventExecutionSnapshotEventExecutionSnapshotMetadata extends \Google\Collection
 {
+  protected $collection_key = 'ancestorTaskNumbers';
+  /**
+   * @var string[]
+   */
+  public $ancestorIterationNumbers;
+  /**
+   * @var string[]
+   */
+  public $ancestorTaskNumbers;
   /**
    * @var int
    */
   public $eventAttemptNum;
   /**
+   * @var string
+   */
+  public $integrationName;
+  /**
    * @var int
    */
   public $taskAttemptNum;
+  /**
+   * @var string
+   */
+  public $taskLabel;
   /**
    * @var string
    */
@@ -36,6 +53,34 @@ class EnterpriseCrmEventbusProtoEventExecutionSnapshotEventExecutionSnapshotMeta
    */
   public $taskNumber;
 
+  /**
+   * @param string[]
+   */
+  public function setAncestorIterationNumbers($ancestorIterationNumbers)
+  {
+    $this->ancestorIterationNumbers = $ancestorIterationNumbers;
+  }
+  /**
+   * @return string[]
+   */
+  public function getAncestorIterationNumbers()
+  {
+    return $this->ancestorIterationNumbers;
+  }
+  /**
+   * @param string[]
+   */
+  public function setAncestorTaskNumbers($ancestorTaskNumbers)
+  {
+    $this->ancestorTaskNumbers = $ancestorTaskNumbers;
+  }
+  /**
+   * @return string[]
+   */
+  public function getAncestorTaskNumbers()
+  {
+    return $this->ancestorTaskNumbers;
+  }
   /**
    * @param int
    */
@@ -51,6 +96,20 @@ class EnterpriseCrmEventbusProtoEventExecutionSnapshotEventExecutionSnapshotMeta
     return $this->eventAttemptNum;
   }
   /**
+   * @param string
+   */
+  public function setIntegrationName($integrationName)
+  {
+    $this->integrationName = $integrationName;
+  }
+  /**
+   * @return string
+   */
+  public function getIntegrationName()
+  {
+    return $this->integrationName;
+  }
+  /**
    * @param int
    */
   public function setTaskAttemptNum($taskAttemptNum)
@@ -63,6 +122,20 @@ class EnterpriseCrmEventbusProtoEventExecutionSnapshotEventExecutionSnapshotMeta
   public function getTaskAttemptNum()
   {
     return $this->taskAttemptNum;
+  }
+  /**
+   * @param string
+   */
+  public function setTaskLabel($taskLabel)
+  {
+    $this->taskLabel = $taskLabel;
+  }
+  /**
+   * @return string
+   */
+  public function getTaskLabel()
+  {
+    return $this->taskLabel;
   }
   /**
    * @param string

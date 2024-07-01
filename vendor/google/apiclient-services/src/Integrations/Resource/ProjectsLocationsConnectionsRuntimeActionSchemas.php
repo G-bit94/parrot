@@ -24,7 +24,7 @@ use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaListRuntimeActionS
  * Typical usage is:
  *  <code>
  *   $integrationsService = new Google\Service\Integrations(...);
- *   $runtimeActionSchemas = $integrationsService->runtimeActionSchemas;
+ *   $runtimeActionSchemas = $integrationsService->projects_locations_connections_runtimeActionSchemas;
  *  </code>
  */
 class ProjectsLocationsConnectionsRuntimeActionSchemas extends \Google\Service\Resource
@@ -43,6 +43,7 @@ class ProjectsLocationsConnectionsRuntimeActionSchemas extends \Google\Service\R
    * @opt_param int pageSize Page size.
    * @opt_param string pageToken Page token.
    * @return GoogleCloudIntegrationsV1alphaListRuntimeActionSchemasResponse
+   * @throws \Google\Service\Exception
    */
   public function listProjectsLocationsConnectionsRuntimeActionSchemas($parent, $optParams = [])
   {

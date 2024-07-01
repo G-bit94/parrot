@@ -31,17 +31,27 @@ class GoogleCloudIntegrationsV1alphaTriggerConfig extends \Google\Collection
   /**
    * @var string
    */
+  public $errorCatcherId;
+  /**
+   * @var string
+   */
   public $label;
   /**
    * @var string
    */
   public $nextTasksExecutionPolicy;
+  protected $positionType = GoogleCloudIntegrationsV1alphaCoordinate::class;
+  protected $positionDataType = '';
   /**
    * @var string[]
    */
   public $properties;
   protected $startTasksType = GoogleCloudIntegrationsV1alphaNextTask::class;
   protected $startTasksDataType = 'array';
+  /**
+   * @var string
+   */
+  public $trigger;
   /**
    * @var string
    */
@@ -100,6 +110,20 @@ class GoogleCloudIntegrationsV1alphaTriggerConfig extends \Google\Collection
   /**
    * @param string
    */
+  public function setErrorCatcherId($errorCatcherId)
+  {
+    $this->errorCatcherId = $errorCatcherId;
+  }
+  /**
+   * @return string
+   */
+  public function getErrorCatcherId()
+  {
+    return $this->errorCatcherId;
+  }
+  /**
+   * @param string
+   */
   public function setLabel($label)
   {
     $this->label = $label;
@@ -124,6 +148,20 @@ class GoogleCloudIntegrationsV1alphaTriggerConfig extends \Google\Collection
   public function getNextTasksExecutionPolicy()
   {
     return $this->nextTasksExecutionPolicy;
+  }
+  /**
+   * @param GoogleCloudIntegrationsV1alphaCoordinate
+   */
+  public function setPosition(GoogleCloudIntegrationsV1alphaCoordinate $position)
+  {
+    $this->position = $position;
+  }
+  /**
+   * @return GoogleCloudIntegrationsV1alphaCoordinate
+   */
+  public function getPosition()
+  {
+    return $this->position;
   }
   /**
    * @param string[]
@@ -152,6 +190,20 @@ class GoogleCloudIntegrationsV1alphaTriggerConfig extends \Google\Collection
   public function getStartTasks()
   {
     return $this->startTasks;
+  }
+  /**
+   * @param string
+   */
+  public function setTrigger($trigger)
+  {
+    $this->trigger = $trigger;
+  }
+  /**
+   * @return string
+   */
+  public function getTrigger()
+  {
+    return $this->trigger;
   }
   /**
    * @param string

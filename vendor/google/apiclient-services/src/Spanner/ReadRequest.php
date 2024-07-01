@@ -25,6 +25,12 @@ class ReadRequest extends \Google\Collection
    */
   public $columns;
   /**
+   * @var bool
+   */
+  public $dataBoostEnabled;
+  protected $directedReadOptionsType = DirectedReadOptions::class;
+  protected $directedReadOptionsDataType = '';
+  /**
    * @var string
    */
   public $index;
@@ -34,6 +40,14 @@ class ReadRequest extends \Google\Collection
    * @var string
    */
   public $limit;
+  /**
+   * @var string
+   */
+  public $lockHint;
+  /**
+   * @var string
+   */
+  public $orderBy;
   /**
    * @var string
    */
@@ -64,6 +78,34 @@ class ReadRequest extends \Google\Collection
   public function getColumns()
   {
     return $this->columns;
+  }
+  /**
+   * @param bool
+   */
+  public function setDataBoostEnabled($dataBoostEnabled)
+  {
+    $this->dataBoostEnabled = $dataBoostEnabled;
+  }
+  /**
+   * @return bool
+   */
+  public function getDataBoostEnabled()
+  {
+    return $this->dataBoostEnabled;
+  }
+  /**
+   * @param DirectedReadOptions
+   */
+  public function setDirectedReadOptions(DirectedReadOptions $directedReadOptions)
+  {
+    $this->directedReadOptions = $directedReadOptions;
+  }
+  /**
+   * @return DirectedReadOptions
+   */
+  public function getDirectedReadOptions()
+  {
+    return $this->directedReadOptions;
   }
   /**
    * @param string
@@ -106,6 +148,34 @@ class ReadRequest extends \Google\Collection
   public function getLimit()
   {
     return $this->limit;
+  }
+  /**
+   * @param string
+   */
+  public function setLockHint($lockHint)
+  {
+    $this->lockHint = $lockHint;
+  }
+  /**
+   * @return string
+   */
+  public function getLockHint()
+  {
+    return $this->lockHint;
+  }
+  /**
+   * @param string
+   */
+  public function setOrderBy($orderBy)
+  {
+    $this->orderBy = $orderBy;
+  }
+  /**
+   * @return string
+   */
+  public function getOrderBy()
+  {
+    return $this->orderBy;
   }
   /**
    * @param string

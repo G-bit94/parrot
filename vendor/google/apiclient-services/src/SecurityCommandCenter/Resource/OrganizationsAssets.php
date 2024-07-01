@@ -29,7 +29,7 @@ use Google\Service\SecurityCommandCenter\SecurityMarks;
  * Typical usage is:
  *  <code>
  *   $securitycenterService = new Google\Service\SecurityCommandCenter(...);
- *   $assets = $securitycenterService->assets;
+ *   $assets = $securitycenterService->organizations_assets;
  *  </code>
  */
 class OrganizationsAssets extends \Google\Service\Resource
@@ -44,6 +44,7 @@ class OrganizationsAssets extends \Google\Service\Resource
    * @param GroupAssetsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GroupAssetsResponse
+   * @throws \Google\Service\Exception
    */
   public function group($parent, GroupAssetsRequest $postBody, $optParams = [])
   {
@@ -54,9 +55,11 @@ class OrganizationsAssets extends \Google\Service\Resource
   /**
    * Lists an organization's assets. (assets.listOrganizationsAssets)
    *
-   * @param string $parent Required. The name of the parent that the listed assets
-   * belong to. Its format is "organizations/[organization_id],
-   * "folders/[folder_id]", or "projects/[project_id]".
+   * @param string $parent Required. The name of the parent resource that contains
+   * the assets. The value that you can specify on parent depends on the method in
+   * which you specify parent. You can specify one of the following values:
+   * "organizations/[organization_id]", "folders/[folder_id]", or
+   * "projects/[project_id]".
    * @param array $optParams Optional parameters.
    *
    * @opt_param string compareDuration When compare_duration is set, the
@@ -138,6 +141,7 @@ class OrganizationsAssets extends \Google\Service\Resource
    * their values are those at that specific time. Absence of this field will
    * default to the API's version of NOW.
    * @return ListAssetsResponse
+   * @throws \Google\Service\Exception
    */
   public function listOrganizationsAssets($parent, $optParams = [])
   {
@@ -156,6 +160,7 @@ class OrganizationsAssets extends \Google\Service\Resource
    * @param RunAssetDiscoveryRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Operation
+   * @throws \Google\Service\Exception
    */
   public function runDiscovery($parent, RunAssetDiscoveryRequest $postBody, $optParams = [])
   {
@@ -183,6 +188,7 @@ class OrganizationsAssets extends \Google\Service\Resource
    * set to "marks", all marks will be replaced. Individual marks can be updated
    * using "marks.".
    * @return SecurityMarks
+   * @throws \Google\Service\Exception
    */
   public function updateSecurityMarks($name, SecurityMarks $postBody, $optParams = [])
   {
