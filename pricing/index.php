@@ -2,8 +2,8 @@
 
 include "../header.php";
 
-$plan_1 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 1")->fetch_assoc());
-$plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetch_assoc());
+$plan_1 = $mysqli->query("SELECT * FROM subscription_plans WHERE id = 1")->fetch_assoc();
+$plan_2 = $mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetch_assoc();
 
 ?>
 
@@ -56,7 +56,8 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
     <div class="col">
         <div class="col-md-11 mb-4 rounded-3 shadow-sm">
             <p class="bd-callout text-start">
-                <span class="fw-bold">We know using other AI tools costs you shedloads of money. <br><br>We're here to change that. Just select a plan and start using AI for your content needs affordably.</span>
+                <span class="fw-bold">We know using other AI tools costs you shedloads of money. <br><br>We're here to
+                    change that. Just select a plan and start using AI for your content needs affordably.</span>
             </p>
         </div>
     </div>
@@ -78,7 +79,8 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                 <strong class="card-title pricing-card-title d-flex justify-content-center">
                     <span>
                         <span class="d-flex justify-content-between">
-                            <p class="text-decoration-line-through mx-1">$<?php echo $plan_1['monthly_marked_up']; ?>/mo or $<?php echo $plan_1['yearly_marked_up']; ?>/yr</p>
+                            <p class="text-decoration-line-through mx-1">$<?php echo $plan_1['monthly_marked_up']; ?>/mo
+                                or $<?php echo $plan_1['yearly_marked_up']; ?>/yr</p>
                             <p class="badge bg-warning text-dark rounded-pill fs-6">
                                 Save
                                 <?php
@@ -87,12 +89,17 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                             </p>
                         </span>
                         <span class="fw-bolder fs-3">
-                            <span class="dollar-curr">$<?php echo $plan_1['monthly_price']; ?></span><small class="text-muted fw-light">/mo</small> or
-                            <span class="dollar-curr">$<?php echo $plan_1['yearly_price']; ?></span><small class="text-muted fw-light">/yr</small>
+                            <span class="dollar-curr">$<?php echo $plan_1['monthly_price']; ?></span><small
+                                class="text-muted fw-light">/mo</small> or
+                            <span class="dollar-curr">$<?php echo $plan_1['yearly_price']; ?></span><small
+                                class="text-muted fw-light">/yr</small>
                         </span>
                         <small class="text-muted local-curr-cmpnt" style="display: none;">
-                            <span class="local-curr" id="local-curr-<?php echo $plan_1['monthly_price']; ?>"></span><span class="text-muted fw-light">/mo</span> or
-                            <span class="local-curr" id="local-curr-<?php echo $plan_1['yearly_price']; ?>"></span><span class="text-muted fw-light">/yr</span>
+                            <span class="local-curr"
+                                id="local-curr-<?php echo $plan_1['monthly_price']; ?>"></span><span
+                                class="text-muted fw-light">/mo</span> or
+                            <span class="local-curr" id="local-curr-<?php echo $plan_1['yearly_price']; ?>"></span><span
+                                class="text-muted fw-light">/yr</span>
                         </small>
                     </span>
                 </strong>
@@ -117,7 +124,8 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                         <div class="d-flex gap-2 w-100 justify-content-start">
                             <div class="text-start">
                                 <strong>Up to 1000 characters of generated text in a single run</strong>
-                                <p class="mb-0 text-muted fs-6">Generate an entire <strong>article</strong> in a few clicks</p>
+                                <p class="mb-0 text-muted fs-6">Generate an entire <strong>article</strong> in a few
+                                    clicks</p>
                             </div>
                         </div>
                     </div>
@@ -153,7 +161,8 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                 <strong class="card-title pricing-card-title d-flex justify-content-center">
                     <span>
                         <span class="d-flex justify-content-between">
-                            <p class="text-decoration-line-through mx-1">$<?php echo $plan_2['monthly_marked_up']; ?>/mo or $<?php echo $plan_2['yearly_marked_up']; ?>/yr</p>
+                            <p class="text-decoration-line-through mx-1">$<?php echo $plan_2['monthly_marked_up']; ?>/mo
+                                or $<?php echo $plan_2['yearly_marked_up']; ?>/yr</p>
                             <p class="badge bg-warning text-dark rounded-pill fs-6">
                                 Save
                                 <?php
@@ -162,12 +171,17 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                             </p>
                         </span>
                         <span class="fw-bolder fs-3">
-                            <span class="dollar-curr">$<?php echo $plan_2['monthly_price']; ?></span><small class="text-muted fw-light">/mo</small> or
-                            <span class="dollar-curr">$<?php echo $plan_2['yearly_price']; ?></span><small class="text-muted fw-light">/yr</small>
+                            <span class="dollar-curr">$<?php echo $plan_2['monthly_price']; ?></span><small
+                                class="text-muted fw-light">/mo</small> or
+                            <span class="dollar-curr">$<?php echo $plan_2['yearly_price']; ?></span><small
+                                class="text-muted fw-light">/yr</small>
                         </span>
                         <small class="text-muted local-curr-cmpnt" style="display: none;">
-                            <span class="local-curr" id="local-curr-<?php echo $plan_2['monthly_price']; ?>"></span><span class="text-muted fw-light">/mo</span> or
-                            <span class="local-curr" id="local-curr-<?php echo $plan_2['yearly_price']; ?>"></span><span class="text-muted fw-light">/yr</span>
+                            <span class="local-curr"
+                                id="local-curr-<?php echo $plan_2['monthly_price']; ?>"></span><span
+                                class="text-muted fw-light">/mo</span> or
+                            <span class="local-curr" id="local-curr-<?php echo $plan_2['yearly_price']; ?>"></span><span
+                                class="text-muted fw-light">/yr</span>
                         </small>
                     </span>
                 </strong>
@@ -192,7 +206,8 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                         <div class="d-flex gap-2 w-100 justify-content-start">
                             <div class="text-start">
                                 <strong>Up to 2000 characters of generated text in a single run</strong>
-                                <p class="mb-0 text-muted fs-6">Generate an entire <strong>article</strong> in just a couple of clicks</p>
+                                <p class="mb-0 text-muted fs-6">Generate an entire <strong>article</strong> in just a
+                                    couple of clicks</p>
                             </div>
                         </div>
                     </div>
@@ -241,7 +256,8 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
 <!-- End contactus -->
 
 <!-- Subscribe modal -->
-<div class="modal modal-signin fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" id="subsciptionModal">
+<div class="modal modal-signin fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog"
+    id="subsciptionModal">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content rounded-5">
             <div class="row">
@@ -264,7 +280,9 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                             <li class="list-group-item d-flex justify-content-between py-3">
                                 <div class="text-dark">
                                     <h6 class="my-0">Offer</h6>
-                                    <small>You've saved <span class="badge fs-6 bg-warning text-dark rounded-pill">$<span id="offer"></span></span></small>
+                                    <small>You've saved <span
+                                            class="badge fs-6 bg-warning text-dark rounded-pill">$<span
+                                                id="offer"></span></span></small>
                                 </div>
                                 <span class="text-dark fw-bold" id="offerAmount"></span>
                             </li>
@@ -283,26 +301,35 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                             <div class="mb-0 fs-6 fw-bold mt-2">Select your preferred payment period below</div>
                             <div class="my-4 border rounded-3 p-2">
                                 <div class="form-check my-2">
-                                    <input id="yearly" name="period" type="radio" class="form-check-input period" value="yearly">
+                                    <input id="yearly" name="period" type="radio" class="form-check-input period"
+                                        value="yearly">
                                     <label class="form-check-label" for="yearly">Select yearly plan</label>
                                 </div>
                                 <div class="form-check my-2">
-                                    <input id="monthly" name="period" type="radio" class="form-check-input period" value="monthly">
+                                    <input id="monthly" name="period" type="radio" class="form-check-input period"
+                                        value="monthly">
                                     <label class="form-check-label" for="monthly">Select monthly plan</label>
                                 </div>
                             </div>
                         </div>
                         <!-- Payment methods -->
                         <div class="tab">
-                            <div class="mb-0 fs-6 fw-bold mt-2">Select the most convenient payment method for you below</div>
+                            <div class="mb-0 fs-6 fw-bold mt-2">Select the most convenient payment method for you below
+                            </div>
                             <div class="my-4 border rounded-3 p-2">
                                 <div class="form-check my-2">
-                                    <input id="paypal" name="paymentMethod" type="radio" class="form-check-input method" value="PayPal">
-                                    <label class="form-check-label" for="paypal" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-html="true" data-bs-content="Click here and then click on the <strong>Pay with PayPal</strong> button in the next step to pay with PayPal">PayPal</label>
+                                    <input id="paypal" name="paymentMethod" type="radio" class="form-check-input method"
+                                        value="PayPal">
+                                    <label class="form-check-label" for="paypal" data-bs-toggle="popover"
+                                        data-bs-trigger="hover" data-bs-placement="top" data-bs-html="true"
+                                        data-bs-content="Click here and then click on the <strong>Pay with PayPal</strong> button in the next step to pay with PayPal">PayPal</label>
                                 </div>
                                 <div class="form-check my-2">
-                                    <input id="card" name="paymentMethod" type="radio" class="form-check-input method" value="Card">
-                                    <label class="form-check-label" for="card" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="bottom" data-bs-html="true" data-bs-content="Click here and then click on the <strong>Debit or Credit Card</strong> button in the next step to pay using your card">Card</label>
+                                    <input id="card" name="paymentMethod" type="radio" class="form-check-input method"
+                                        value="Card">
+                                    <label class="form-check-label" for="card" data-bs-toggle="popover"
+                                        data-bs-trigger="hover" data-bs-placement="bottom" data-bs-html="true"
+                                        data-bs-content="Click here and then click on the <strong>Debit or Credit Card</strong> button in the next step to pay using your card">Card</label>
                                 </div>
                             </div>
                         </div>
@@ -311,13 +338,16 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                             <!-- Paypal checkout -->
                             <div class="col-md-8" id="paypal_cmpnt">
                                 <div class="border-top py-2">
-                                    <small class="text-muted">For faster checkout, please sign-in into your <a href="https://www.paypal.com/signin" target="_blank">PayPal account</a> first and then come back here.</small>
+                                    <small class="text-muted">For faster checkout, please sign-in into your <a
+                                            href="https://www.paypal.com/signin" target="_blank">PayPal account</a>
+                                        first and then come back here.</small>
                                 </div>
                             </div>
                         </div>
                         <div class="tab">
                             <div class="col-md">
-                                <p class="lead shadow-sm p-5">You're now all set to make the most of ParrotAI. Create, inspire, share with friends and most importantly, have fun!
+                                <p class="lead shadow-sm p-5">You're now all set to make the most of ParrotAI. Create,
+                                    inspire, share with friends and most importantly, have fun!
                                 </p>
                             </div>
                             <a class="btn btn-primary" href="<?php echo $base_url; ?>/dashboard">Lets go!</a>
@@ -325,11 +355,14 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                         <div class="mt-4 pt-2" style="overflow:auto;">
                             <div class="mt-4 pt-3 border-top">
                                 <div class="m-2" style="float:left;">
-                                    <button type="button" data-bs-dismiss="modal" id="pay-later" class="btn btn-sm btn-warning text-dark">Pay later</button>
+                                    <button type="button" data-bs-dismiss="modal" id="pay-later"
+                                        class="btn btn-sm btn-warning text-dark">Pay later</button>
                                 </div>
                                 <div class="m-2" id="nav-buttons" style="float:right;">
-                                    <button type="button" class="btn btn-outline-primary" id="prevBtn" onclick="nextPrev(-1)"><i class="bi bi-chevron-left fw-bold"></i> Back</button>
-                                    <button type="button" class="btn btn-primary text-white" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                                    <button type="button" class="btn btn-outline-primary" id="prevBtn"
+                                        onclick="nextPrev(-1)"><i class="bi bi-chevron-left fw-bold"></i> Back</button>
+                                    <button type="button" class="btn btn-primary text-white" id="nextBtn"
+                                        onclick="nextPrev(1)">Next</button>
                                 </div>
                             </div>
                         </div>
@@ -357,7 +390,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
     var btns = document.querySelectorAll(".sub-btn");
     var geoData = {};
     Array.prototype.slice.call(btns)
-        .forEach(function(button) {
+        .forEach(function (button) {
             var btn_id = button.id;
             var btn_code = btn_id.substr(btn_id.length - 1, btn_id.length);
             var code = +btn_code;
@@ -372,19 +405,19 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
     // convert $$ to local currency   
 
     fetch(geoLocAPI)
-        .then(function(response) {
+        .then(function (response) {
             return response.json();
         })
-        .then(function(geodata) {
+        .then(function (geodata) {
             currencyCode = geodata.currency.code;
             geoData.currencySymbol = geodata.currency.symbol
             return currencyCode;
-        }).then(function(currencyCode) {
+        }).then(function (currencyCode) {
             const resultTo = currencyCode;
             var dollarCurrs = document.querySelectorAll(".dollar-curr");
 
             Array.prototype.slice.call(dollarCurrs)
-                .forEach(function(dollarCurr) {
+                .forEach(function (dollarCurr) {
                     var str = dollarCurr.innerText;
                     var amt = str.substr(1, str.lenth);
                     var amount = +amt;
@@ -407,7 +440,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
 
                         var cmpnts = document.querySelectorAll(".local-curr-cmpnt");
                         Array.prototype.slice.call(cmpnts)
-                            .forEach(function(cmpnt) {
+                            .forEach(function (cmpnt) {
                                 cmpnt.style.display = "block";
                             });
                     }
@@ -525,7 +558,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
             // showTab(currentTab);
             var planNames = document.querySelectorAll(".plan-name");
             Array.prototype.slice.call(planNames)
-                .forEach(function(element) {
+                .forEach(function (element) {
                     element.innerText = " " + plan + " ";
                 });
 
@@ -550,7 +583,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
     // period
     var pinputs = document.querySelectorAll(".period");
     Array.prototype.slice.call(pinputs)
-        .forEach(function(input) {
+        .forEach(function (input) {
             // if (input.checked) {
             input.onclick = () => {
                 btn.disabled = false;
@@ -561,7 +594,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
 
                 var planPeriods = document.querySelectorAll(".plan-period");
                 Array.prototype.slice.call(planPeriods)
-                    .forEach(function(element) {
+                    .forEach(function (element) {
                         element.innerText = duration;
                     });
 
@@ -572,7 +605,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
 
                 var planPrices = document.querySelectorAll(".plan-price");
                 Array.prototype.slice.call(planPrices)
-                    .forEach(function(element) {
+                    .forEach(function (element) {
                         element.innerText = " $" + planPrice;
                     });
 
@@ -599,7 +632,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
     var minputs = document.querySelectorAll(".method");
 
     Array.prototype.slice.call(minputs)
-        .forEach(function(input) {
+        .forEach(function (input) {
             input.onclick = () => {
 
 
@@ -633,7 +666,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
 
 
                         // Usage -- callback is inlined here, but could be a named function
-                        loadAsync('https://www.paypal.com/sdk/js?client-id=ATuV90R7q8x324-DDeuvdt9BCXBDxMCUR7V2zS5U_sK1NvhPEZ1Ik1oicO2LlrcDzlyAC8cXb0JS7x_i&vault=true&intent=subscription', function() {
+                        loadAsync('https://www.paypal.com/sdk/js?client-id=ATuV90R7q8x324-DDeuvdt9BCXBDxMCUR7V2zS5U_sK1NvhPEZ1Ik1oicO2LlrcDzlyAC8cXb0JS7x_i&vault=true&intent=subscription', function () {
                             paypal_sdk.Buttons({
 
                                 // style buttons
@@ -645,7 +678,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                                 },
 
                                 // Set up the transaction
-                                createSubscription: function(data, actions) {
+                                createSubscription: function (data, actions) {
                                     return actions.subscription.create({
                                         /* Creates the subscription */
                                         plan_id: userSelection.plan_id
@@ -653,7 +686,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                                 },
 
                                 // Finalize the transaction
-                                onApprove: function(data, actions) {
+                                onApprove: function (data, actions) {
 
                                     userSelection.payment_ref = data.subscriptionID;
 
@@ -673,7 +706,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                                                 // }), 3600;
                                             } else {
                                                 showToastMessage("Thanks! Verifying transaction...", "primary");
-                                                setTimeout(function() {
+                                                setTimeout(function () {
                                                     $("#gen-spinner").hide();
                                                     Id("nextBtn").disabled = false;
                                                     Id("prevBtn").disabled = true;
@@ -685,7 +718,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                                         },
                                         error: () => {
                                             showToastMessage("Almost there! Finalizing...", "primary");
-                                            setTimeout(function() {
+                                            setTimeout(function () {
                                                 $("#gen-spinner").hide();
                                                 Id("nextBtn").disabled = false;
                                                 Id("prevBtn").disabled = true;
@@ -697,7 +730,7 @@ $plan_2 = ($mysqli->query("SELECT * FROM subscription_plans WHERE id = 2")->fetc
                                     });
                                 },
 
-                                onError: function(err) {
+                                onError: function (err) {
                                     showToastMessage("Oops! That didn't work. Please try again", "primary")
                                 }
                             }).render('#paypal-button-container-' + userSelection.plan_id); // Renders the PayPal button

@@ -11,7 +11,7 @@ if ($signinStatus == 1) {
     //     echo '<script type="text/javascript">window.location.href = base_url + "/pricing";</script>';
     // }
 } else {
-    echo '<script type="text/javascript">window.location.href = "' . $base_url . '"</script>';
+    echo "<script type=\"text/javascript\">window.location.href = \"$base_url\"</script>";
     exit;
 }
 
@@ -192,21 +192,24 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                     <div class="mb-3"></div>
                     <?php
                     foreach ($result as $row) {
-                    ?>
+                        ?>
                         <div class="position-relative">
-                            <input class="form-check-input position-absolute top-50 end-0 me-3 content-selection" type="radio" name="contentTypeListGroup" value="<?php echo $row['type']; ?>" id="list-group-<?php echo $row['type']; ?>">
+                            <input class="form-check-input position-absolute top-50 end-0 me-3 content-selection"
+                                type="radio" name="contentTypeListGroup" value="<?php echo $row['type']; ?>"
+                                id="list-group-<?php echo $row['type']; ?>">
                             <label class="list-group-item pe-1" for="list-group-<?php echo $row['type']; ?>">
                                 <?php echo $row["icon"]; ?>
                                 <small><?php echo $row["full_name"]; ?></small>
                             </label>
                         </div>
-                    <?php
+                        <?php
                     }
                     ?>
                 </div>
             </div>
 
-            <div id="content-tour-second" class="col-md-3 border-start border-end border-bottom py-3 px-4 overflow-auto" style="height: 650px;">
+            <div id="content-tour-second" class="col-md-3 border-start border-end border-bottom py-3 px-4 overflow-auto"
+                style="height: 650px;">
                 <!-- Reusable container -->
                 <div id="reusable-container" class="mt-4"></div>
                 <!-- Options -->
@@ -220,26 +223,40 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                         <small class="form-label">Tone</small>
                         <div class="row">
                             <div class="col-md-6 dropdown">
-                                <span class="btn btn-white border-secondary btn-sm mt-1 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <span class="btn btn-white border-secondary btn-sm mt-1 dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown">
                                     Select tone
                                 </span>
-                                <ul class="dropdown-menu pt-0 mx-0 rounded-3 p-2 shadow overflow-auto" style="width: 200px; height: 250px; cursor: pointer;">
-                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Formal</li>
-                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Informal</li>
-                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Humorous</li>
-                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Joyful</li>
-                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Optimistic</li>
-                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Resigned</li>
-                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Serious</li>
-                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Curious</li>
-                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Worried</li>
-                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Sombre</li>
-                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Horror</li>
+                                <ul class="dropdown-menu pt-0 mx-0 rounded-3 p-2 shadow overflow-auto"
+                                    style="width: 200px; height: 250px; cursor: pointer;">
+                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Formal
+                                    </li>
+                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Informal
+                                    </li>
+                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Humorous
+                                    </li>
+                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Joyful
+                                    </li>
+                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">
+                                        Optimistic</li>
+                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Resigned
+                                    </li>
+                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Serious
+                                    </li>
+                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Curious
+                                    </li>
+                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Worried
+                                    </li>
+                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Sombre
+                                    </li>
+                                    <li class="list-group-item list-group-item-action border-0 py-1 text-tone">Horror
+                                    </li>
                                 </ul>
                             </div>
 
                             <span class="col-md-6 row btn btn-sm btn-light rounded-pill" id="text-tone-disp-wrapper">
-                                <input class="col-8 border-0 bg-light content-type-input" id="text-tone-disp" readonly />
+                                <input class="col-8 border-0 bg-light content-type-input" id="text-tone-disp"
+                                    readonly />
                                 <span id="text-tone-disp-cancel" class="col-2">&times;</span>
                             </span>
                         </div>
@@ -249,10 +266,13 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                     <div class="form-group mb-3">
                         <label for="creativity">
                             <small>Creativity&nbsp;
-                                <i tabindex="0" class="bi bi-question-circle" role="button" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Try higher values for more creative applications, and lower values for prompts with a well-defined factual response. We recommend the default value (0.5)."></i>
+                                <i tabindex="0" class="bi bi-question-circle" role="button" data-bs-toggle="popover"
+                                    data-bs-trigger="hover"
+                                    data-bs-content="Try higher values for more creative applications, and lower values for prompts with a well-defined factual response. We recommend the default value (0.5)."></i>
                             </small>
                         </label>
-                        <input type="range" class="form-range context-params" min="0" max="1" step="0.05" id="creativity" en_text" type="button" oninput="getSliderValue('creativity')">
+                        <input type="range" class="form-range context-params" min="0" max="1" step="0.05"
+                            id="creativity" en_text" type="button" oninput="getSliderValue('creativity')">
                         <small class="fw-bold" id="creativity_show"></small>
                     </div>
 
@@ -260,13 +280,17 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                     <div class="form-group mb-3">
                         <label for="word_count">
                             <small>Word count&nbsp;
-                                <i tabindex="0" class="bi bi-question-circle" role="button" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Approximate maximum number of words in generated response."></i>
+                                <i tabindex="0" class="bi bi-question-circle" role="button" data-bs-toggle="popover"
+                                    data-bs-trigger="hover"
+                                    data-bs-content="Approximate maximum number of words in generated response."></i>
                             </small>
                         </label>
                         <?php if ($active_sub == 1) { ?>
-                            <input type="range" class="form-range context-params" max="1000" step="5" id="word_count" oninput="getSliderValue('word_count')">
+                            <input type="range" class="form-range context-params" max="1000" step="5" id="word_count"
+                                oninput="getSliderValue('word_count')">
                         <?php } else { ?>
-                            <input type="range" class="form-range context-params" max="1600" step="5" id="word_count" oninput="getSliderValue('word_count')">
+                            <input type="range" class="form-range context-params" max="1600" step="5" id="word_count"
+                                oninput="getSliderValue('word_count')">
                         <?php } ?>
                         <small class="fw-bold" id="word_count_show"></small>
                     </div>
@@ -274,10 +298,13 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                     <!-- Include prompt in response -->
                     <div class="form-group mb-3">
                         <div class="form-check form-switch">
-                            <input class="form-check-input content-type-input" type="checkbox" role="switch" id="rem_input" checked>
+                            <input class="form-check-input content-type-input" type="checkbox" role="switch"
+                                id="rem_input" checked>
                             <label class="form-check-label d-flex" for="rem_input">
                                 <small>Remove prompt from response&nbsp;
-                                    <i tabindex="0" class="bi bi-question-circle" role="button" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Choose whether to include prompt in response or not."></i>
+                                    <i tabindex="0" class="bi bi-question-circle" role="button" data-bs-toggle="popover"
+                                        data-bs-trigger="hover"
+                                        data-bs-content="Choose whether to include prompt in response or not."></i>
                                 </small>
                             </label>
                         </div>
@@ -286,10 +313,13 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                     <!-- Highlight output -->
                     <div class="form-group mb-3">
                         <div class="form-check form-switch">
-                            <input class="form-check-input content-type-input" type="checkbox" role="switch" id="highlight" checked>
+                            <input class="form-check-input content-type-input" type="checkbox" role="switch"
+                                id="highlight" checked>
                             <label class="form-check-label d-flex" for="highlight">
                                 <small>Highlight output&nbsp;
-                                    <i tabindex="0" class="bi bi-question-circle" role="button" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Choose whether to highlight output or not."></i>
+                                    <i tabindex="0" class="bi bi-question-circle" role="button" data-bs-toggle="popover"
+                                        data-bs-trigger="hover"
+                                        data-bs-content="Choose whether to highlight output or not."></i>
                                 </small>
                             </label>
                         </div>
@@ -315,54 +345,75 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                 <div class="mt-2">
                     <div id="canvas-header">
                         <div class="p-1 d-flex justify-content-between align-items-center border-bottom">
-                            <h2 id="title" class="lead fs-5 fw-bold" data-bs-toggle="tooltip" data-bs-placement="top" title="Paint a picture with words. Craft your masterpiece to perfection.">Canvas</h2>
+                            <h2 id="title" class="lead fs-5 fw-bold" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Paint a picture with words. Craft your masterpiece to perfection.">Canvas</h2>
                             <div class="dropdown">
-                                <span class="btn btn-white border-secondary btn-sm mx-2 dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="btn btn-white border-secondary btn-sm mx-2 dropdown-toggle" type="button"
+                                    id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                     Sample prompts
                                 </span>
-                                <div class="dropdown-menu pt-0 mx-0 rounded-3 p-2 shadow overflow-hidden" aria-labelledby="dropdownMenu2" style="width: 380px;">
+                                <div class="dropdown-menu pt-0 mx-0 rounded-3 p-2 shadow overflow-hidden"
+                                    aria-labelledby="dropdownMenu2" style="width: 380px;">
                                     <ul class="list-unstyled mb-0">
-                                        <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1 truncated" type="button" onclick="completeUserPrompt('sample', 'auto_complete', 'news');">
+                                        <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1 truncated"
+                                            type="button"
+                                            onclick="completeUserPrompt('sample', 'auto_complete', 'news');">
                                             <div class="d-flex gap-2 w-100 justify-content-between">
                                                 <div>
                                                     <strong>News article</strong><br>
-                                                    <small class="mb-0" id="news_context">In a recent press release, the company, through its spokesperson, has said that it will no longer</small>
+                                                    <small class="mb-0" id="news_context">In a recent press release, the
+                                                        company, through its spokesperson, has said that it will no
+                                                        longer</small>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1 truncated" type="button" onclick="completeUserPrompt('sample', 'auto_complete', 'article');">
+                                        <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1 truncated"
+                                            type="button"
+                                            onclick="completeUserPrompt('sample', 'auto_complete', 'article');">
                                             <div class="d-flex gap-2 w-100 justify-content-between">
                                                 <div>
                                                     <strong>Regular blog article</strong><br>
-                                                    <small class="mb-0" id="article_context">Working from home is great because</small>
+                                                    <small class="mb-0" id="article_context">Working from home is great
+                                                        because</small>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1 truncated" type="button" onclick="completeUserPrompt('sample', 'auto_complete', 'essay');">
+                                        <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1 truncated"
+                                            type="button"
+                                            onclick="completeUserPrompt('sample', 'auto_complete', 'essay');">
                                             <div class="d-flex gap-2 w-100 justify-content-between">
                                                 <div>
                                                     <strong>Essay</strong><br>
-                                                    <small class="mb-0" id="essay_context">Gun control has been a controversial issue for years</small>
+                                                    <small class="mb-0" id="essay_context">Gun control has been a
+                                                        controversial issue for years</small>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1 truncated" type="button" onclick="completeUserPrompt('sample', 'auto_complete', 'copy');">
+                                        <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1 truncated"
+                                            type="button"
+                                            onclick="completeUserPrompt('sample', 'auto_complete', 'copy');">
                                             <div class="d-flex gap-2 w-100 justify-content-between">
                                                 <div>
                                                     <strong>Marketing copy</strong><br>
-                                                    <small class="mb-0" id="copy_context">Are you still struggling with content creation and writing?</small>
+                                                    <small class="mb-0" id="copy_context">Are you still struggling with
+                                                        content creation and writing?</small>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1 truncated" type="button" onclick="completeUserPrompt('sample', 'auto_complete', 'story');">
+                                        <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1 truncated"
+                                            type="button"
+                                            onclick="completeUserPrompt('sample', 'auto_complete', 'story');">
                                             <div class="d-flex gap-2 w-100 justify-content-between">
                                                 <div>
                                                     <strong>Tell a story</strong><br>
-                                                    <small class="mb-0" id="story_context">He had just started watching a movie when</small>
+                                                    <small class="mb-0" id="story_context">He had just started watching
+                                                        a movie when</small>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1 truncated" type="button" onclick="completeUserPrompt('sample', 'auto_complete', 'code');">
+                                        <div class="list-group-item list-group-item-action border-0 d-flex gap-3 py-1 truncated"
+                                            type="button"
+                                            onclick="completeUserPrompt('sample', 'auto_complete', 'code');">
                                             <div class="d-flex gap-2 w-100 justify-content-between">
                                                 <div>
                                                     <strong>Code</strong> <sup class="text-muted border">Beta</sup><br>
@@ -379,16 +430,25 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                             <div class="d-flex justify-content-between align-items-center">
                                 <?php if ($active_sub == 2) { ?>
                                     <span id="speech-to-text-wrapper" class="mx-2">
-                                        <i id="speech-to-text" type="button" class="bi bi-mic fs-5" onclick="handleSpeechRecognitionModal()" title="Speech input. Make sure to enable web speech recognition on your browser."></i>
+                                        <i id="speech-to-text" type="button" class="bi bi-mic fs-5"
+                                            onclick="handleSpeechRecognitionModal()"
+                                            title="Speech input. Make sure to enable web speech recognition on your browser."></i>
                                     </span>
                                     <span id="text-to-speech-wrapper" class="mx-2">
-                                        <i id="text-to-speech" type="button" class="bi bi-volume-down fs-4" onclick="textToSpeech('speak')" data-bs-toggle="tooltip" title="Read text out loud."></i>
+                                        <i id="text-to-speech" type="button" class="bi bi-volume-down fs-4"
+                                            onclick="textToSpeech('speak')" data-bs-toggle="tooltip"
+                                            title="Read text out loud."></i>
                                     </span>
                                 <?php } ?>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
-                                <i class="bi bi-suit-heart-fill mx-2 fs-5 text-danger opacity-75" data-bs-toggle="tooltip" data-bs-placement="top" title="Save template" id="save" type="button"></i>
-                                <i class="bi bi-list-stars mx-2 fs-4" onclick="fetchSavedTemplates(current_page, 'list')" type="button" title="View saved templates" data-bs-toggle="offcanvas" data-bs-target="#savedTemplatesCmpnt"></i>
+                                <i class="bi bi-suit-heart-fill mx-2 fs-5 text-danger opacity-75"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Save template" id="save"
+                                    type="button"></i>
+                                <i class="bi bi-list-stars mx-2 fs-4"
+                                    onclick="fetchSavedTemplates(current_page, 'list')" type="button"
+                                    title="View saved templates" data-bs-toggle="offcanvas"
+                                    data-bs-target="#savedTemplatesCmpnt"></i>
                             </div>
                         </div>
                         <div class="my-2">
@@ -525,17 +585,25 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                             <div class="d-flex justify-content-between shadow-sm border-bottom rounded-top-3 border">
                                 <div class="editButtons">
                                     <span title="STYLES">
-                                        <button class="toolbar-edit btn" data-edit="bold"><i class="bi bi-type-bold"></i></button>
-                                        <button class="toolbar-edit btn" data-edit="italic"><i class="bi bi-type-italic"></i></button>
-                                        <button class="toolbar-edit btn" data-edit="underline"><i class="bi bi-type-underline"></i></button>
-                                        <button class="toolbar-edit btn" data-edit="strikeThrough"><i class="bi bi-type-strikethrough"></i></button>
+                                        <button class="toolbar-edit btn" data-edit="bold"><i
+                                                class="bi bi-type-bold"></i></button>
+                                        <button class="toolbar-edit btn" data-edit="italic"><i
+                                                class="bi bi-type-italic"></i></button>
+                                        <button class="toolbar-edit btn" data-edit="underline"><i
+                                                class="bi bi-type-underline"></i></button>
+                                        <button class="toolbar-edit btn" data-edit="strikeThrough"><i
+                                                class="bi bi-type-strikethrough"></i></button>
                                     </span>
 
                                     <span title="TEXT FORMAT">
-                                        <button class="toolbar-edit btn" data-edit="formatBlock:p"><i class="bi bi-blockquote-left"></i></button>
-                                        <button class="toolbar-edit btn" data-edit="formatBlock:H1"><i class="bi bi-type-h1"></i></button>
-                                        <button class="toolbar-edit btn" data-edit="formatBlock:H2"><i class="bi bi-type-h2"></i></button>
-                                        <button class="toolbar-edit btn" data-edit="formatBlock:H3"><i class="bi bi-type-h3"></i></button>
+                                        <button class="toolbar-edit btn" data-edit="formatBlock:p"><i
+                                                class="bi bi-blockquote-left"></i></button>
+                                        <button class="toolbar-edit btn" data-edit="formatBlock:H1"><i
+                                                class="bi bi-type-h1"></i></button>
+                                        <button class="toolbar-edit btn" data-edit="formatBlock:H2"><i
+                                                class="bi bi-type-h2"></i></button>
+                                        <button class="toolbar-edit btn" data-edit="formatBlock:H3"><i
+                                                class="bi bi-type-h3"></i></button>
                                     </span>
 
                                     <span title="FONT SIZE">
@@ -545,23 +613,31 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                                     </span>
 
                                     <span title="LISTS">
-                                        <button class="toolbar-edit btn" data-edit="insertUnorderedList"><i class="bi bi-list-ul"></i></button>
-                                        <button class="toolbar-edit btn" data-edit="insertOrderedList"><i class="bi bi-list-ol"></i></button>
+                                        <button class="toolbar-edit btn" data-edit="insertUnorderedList"><i
+                                                class="bi bi-list-ul"></i></button>
+                                        <button class="toolbar-edit btn" data-edit="insertOrderedList"><i
+                                                class="bi bi-list-ol"></i></button>
                                     </span>
 
                                     <span title="ALIGNMENT">
-                                        <button class="toolbar-edit btn" data-edit="justifyLeft"><i class="bi bi-justify-left"></i></button>
-                                        <button class="toolbar-edit btn" data-edit="justifyCenter"><i class="bi bi-justify"></i></button>
-                                        <button class="toolbar-edit btn" data-edit="justifyRight"><i class="bi bi-justify-right"></i></button>
+                                        <button class="toolbar-edit btn" data-edit="justifyLeft"><i
+                                                class="bi bi-justify-left"></i></button>
+                                        <button class="toolbar-edit btn" data-edit="justifyCenter"><i
+                                                class="bi bi-justify"></i></button>
+                                        <button class="toolbar-edit btn" data-edit="justifyRight"><i
+                                                class="bi bi-justify-right"></i></button>
                                     </span>
 
                                     <span title="CLEAR FORMATTING">
-                                        <button class="toolbar-edit btn" data-edit="removeFormat"><i class="bi bi-x"></i></button>
+                                        <button class="toolbar-edit btn" data-edit="removeFormat"><i
+                                                class="bi bi-x"></i></button>
                                     </span>
 
                                     <span title="CONTROLS">
-                                        <button class="toolbar-edit btn" id="undo" data-edit="undo" title="UNDO"><i class="bi bi-arrow-counterclockwise"></i></button>
-                                        <button class="toolbar-edit btn" id="redo" data-edit="redo" title="REDO"><i class="bi bi-arrow-clockwise"></i></button>
+                                        <button class="toolbar-edit btn" id="undo" data-edit="undo" title="UNDO"><i
+                                                class="bi bi-arrow-counterclockwise"></i></button>
+                                        <button class="toolbar-edit btn" id="redo" data-edit="redo" title="REDO"><i
+                                                class="bi bi-arrow-clockwise"></i></button>
                                     </span>
 
                                     <!-- <span title="UNDO/REDO">
@@ -572,8 +648,10 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
 
                                 <div class="d-flex justify-content-between mx-1">
                                     <span title="Post to WordPress">
-                                        <button class="btn btn-sm fw-bold" onclick="popWpModal('gen_text', <?php echo $active_sub; ?>)">
-                                            <i class="bi bi-wordpress text-primary fs-5"></i> <sup class="text-muted border">Beta</sup>
+                                        <button class="btn btn-sm fw-bold"
+                                            onclick="popWpModal('gen_text', <?php echo $active_sub; ?>)">
+                                            <i class="bi bi-wordpress text-primary fs-5"></i> <sup
+                                                class="text-muted border">Beta</sup>
                                         </button>
                                     </span>
                                     <span title="Share">
@@ -587,27 +665,35 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                     </div>
 
                     <div id="outputarea-wrapper">
-                        <div id="interim" class="bg-info rounded mx-1 px-2 d-flex justify-content-center align-items-center"></div> <!-- Interim speech holder -->
+                        <div id="interim"
+                            class="bg-info rounded mx-1 px-2 d-flex justify-content-center align-items-center"></div>
+                        <!-- Interim speech holder -->
                         <div class="bg-white rounded" id="outputarea" contenteditable></div>
-                        <ul id="floating-toolbar" class="dropdown-menu rounded-3 p-2 px-2 shadow" style="display: none;">
-                            <li class="list-group-item toolbar-item text-start border-0" onclick="completeUserPrompt('toolbar', 'auto_complete', '')">
+                        <ul id="floating-toolbar" class="dropdown-menu rounded-3 p-2 px-2 shadow"
+                            style="display: none;">
+                            <li class="list-group-item toolbar-item text-start border-0"
+                                onclick="completeUserPrompt('toolbar', 'auto_complete', '')">
                                 <i class="bi bi-robot"></i>
                                 <small> Continue...</small>
                             </li>
-                            <li class="list-group-item toolbar-item text-start border-0" onclick="completeUserPrompt('toolbar', 'paraphrase', '')">
+                            <li class="list-group-item toolbar-item text-start border-0"
+                                onclick="completeUserPrompt('toolbar', 'paraphrase', '')">
                                 <i class="bi bi-pencil-square"></i>
                                 <small> Paraphrase</small>
                             </li>
-                            <li class="list-group-item toolbar-item text-start border-0" onclick="completeUserPrompt('toolbar', 'execute', '')">
+                            <li class="list-group-item toolbar-item text-start border-0"
+                                onclick="completeUserPrompt('toolbar', 'execute', '')">
                                 <i class="bi bi-terminal"></i>
                                 <small> Run as command</small>
                             </li>
                             <hr class="w-100 my-1">
-                            <li class="list-group-item toolbar-item text-start border-0" onclick="completeUserPrompt('toolbar', 'expand', '')">
+                            <li class="list-group-item toolbar-item text-start border-0"
+                                onclick="completeUserPrompt('toolbar', 'expand', '')">
                                 <i class="bi bi-chevron-expand fs-5"></i>
                                 <small> Expand</small>
                             </li>
-                            <li class="list-group-item toolbar-item text-start border-0" onclick="completeUserPrompt('toolbar', 'expand', '')">
+                            <li class="list-group-item toolbar-item text-start border-0"
+                                onclick="completeUserPrompt('toolbar', 'expand', '')">
                                 <i class="bi bi-pen"></i>
                                 <small> Edit Grammar</small>
                             </li>
@@ -639,16 +725,22 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
                                         echo $spinner;
                                         ?>
                                     </div>
-                                    <button class="btn btn-sm btn-primary rounded-4 fw-bold shadow-sm" onclick="completeUserPrompt('canvas', 'auto_complete', '')" type="button">
+                                    <button class="btn btn-sm btn-primary rounded-4 fw-bold shadow-sm"
+                                        onclick="completeUserPrompt('canvas', 'auto_complete', '')" type="button">
                                         <span id="gen-text"><i class="bi bi-play fs-5 py-1 px-2"></i></span>
                                     </button>
                                 </div>
                             </div>
                             <div class="col-md-8 d-flex justify-content-end align-items-center">
-                                <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls" onclick='completeUserPrompt("canvas", "retry");'><i class="bi bi-arrow-repeat"></i> Try again</button>
-                                <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls" onclick='editCanvas("prompt")'>Remove prompt</button>
-                                <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls" onclick='editCanvas("gen_text")'>Remove generated text</button>
-                                <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls" onclick='editCanvas("clear")'>Clear</button>
+                                <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls"
+                                    onclick='completeUserPrompt("canvas", "retry");'><i class="bi bi-arrow-repeat"></i>
+                                    Try again</button>
+                                <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls"
+                                    onclick='editCanvas("prompt")'>Remove prompt</button>
+                                <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls"
+                                    onclick='editCanvas("gen_text")'>Remove generated text</button>
+                                <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls"
+                                    onclick='editCanvas("clear")'>Clear</button>
                                 <!-- <button type="button" class="btn btn-sm btn-warning rounded-3 btn-controls" onclick='editCanvas("restore");'>Restore</button> -->
                             </div>
                         </div>
@@ -667,12 +759,16 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
 
         <!-- Offcanvas -->
 
-        <div id="savedTemplatesCmpnt" class="offcanvas offcanvas-end rounded-start ms-0" data-bs-scroll="true" tabindex="-1">
+        <div id="savedTemplatesCmpnt" class="offcanvas offcanvas-end rounded-start ms-0" data-bs-scroll="true"
+            tabindex="-1">
             <div class="rounded-start border-bottom shadow py-2 px-2 shadow bg-primary text-white">
                 <h6 class="fw-bold mb-1 offcanvas-title">Recent templates</h6>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="col-5 d-flex justify-content-between">
-                        <input type="search" oninput="fetchSavedTemplates(current_page, 'search')" placeholder="Search..." class="form-control form-control-sm border-top-0 border-start-0 border-end-0 rounded-0 col-6 bg-transparent text-light dash-search" id="temp_search_term" autocomplete="off" maxlength="50">
+                        <input type="search" oninput="fetchSavedTemplates(current_page, 'search')"
+                            placeholder="Search..."
+                            class="form-control form-control-sm border-top-0 border-start-0 border-end-0 rounded-0 col-6 bg-transparent text-light dash-search"
+                            id="temp_search_term" autocomplete="off" maxlength="50">
                         <i class="bi bi-search mt-2" onclick="fetchSavedTemplates(current_page, 'search')"></i>
                     </div>
                     <small class="btn btn-sm btn-light border" onclick="location.href=base_url + '/account#templates'">
@@ -1968,14 +2064,14 @@ $result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
         }
     }
 
-    $('#outputarea').bind('blur keyup keydown paste input', function(e) {
+    $('#outputarea').bind('blur keyup keydown paste input', function (e) {
         save_history();
         localStorage.dash_canvas_content = $('#outputarea').html();
     });
-    $('#undo').click(function(e) {
+    $('#undo').click(function (e) {
         history_undo();
     });
-    $('#redo').click(function(e) {
+    $('#redo').click(function (e) {
         history_redo();
     });
 
