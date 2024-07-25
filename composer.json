@@ -3,5 +3,8 @@
         "hieu-le/wordpress-xmlrpc-client": "~2.0",
         "phpmailer/phpmailer": "^6.6",
         "google/apiclient": "^2.13"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.11"
     }
 }

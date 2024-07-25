@@ -8,7 +8,8 @@ include "session.php";
 
 include 'roles.php';
 
-$access = new AccessLevel();
+$user_id = $_SESSION['user']['id'];
+$username = $_SESSION['user']['username'];
 
 if ($user_id !== "" && $user_id !== null) {
     $signinStatus = 1;
@@ -307,16 +308,16 @@ $spinner = '<div class="spinner">
         const site_name = <?php echo json_encode($site_name); ?>;
 
         // CSRF token
-        const csrf_token = <?php echo json_encode($_SESSION['csrf_token']); ?>;
+        const csrf_token = <?php echo json_encode($_SESSION['user']['csrf_token']); ?>;
 
         // user
         const user = <?php
-                        if ($user_id !== "" && $user_id !== null) {
-                            echo json_encode(openssl_encrypt($user_id, "AES-128-ECB", "ThisIsJustAStringOfGibberishToEncryptTheUserId"));
-                        } else {
-                            echo "null";
-                        }
-                        ?>
+        if ($user_id !== "" && $user_id !== null) {
+            echo json_encode(openssl_encrypt($user_id, "AES-128-ECB", "ThisIsJustAStringOfGibberishToEncryptTheUserId"));
+        } else {
+            echo "null";
+        }
+        ?>
 
         const username = <?php echo json_encode($username); ?>
 
@@ -376,7 +377,7 @@ $spinner = '<div class="spinner">
                     var a = arr[i].split('=');
                     // set parameter name and value (use 'true' if empty)
                     var paramName = a[0];
-                    var paramValue = typeof(a[1]) === 'undefined' ? true : a[1];
+                    var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
                     // (optional) keep case consistent
                     paramName = paramName.toLowerCase();
                     if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
@@ -446,13 +447,16 @@ $spinner = '<div class="spinner">
         <!-- Fixed navbar -->
         <nav id="navbar" class="navbar navbar-expand-md fixed-top navbar-dark bg-primary shadow">
             <div class="container-fluid">
-                <a class="navbar-brand plain-link fw-bold mx-4 rounded-3 fs-6 d-flex justify-content-between" href="<?php echo $base_url; ?>">
+                <a class="navbar-brand plain-link fw-bold mx-4 rounded-3 fs-6 d-flex justify-content-between"
+                    href="<?php echo $base_url; ?>">
                     <span class="bg-white rounded-start p-1 d-flex justify-content-end">
-                        <img src="<?php echo $base_url; ?>/assets/img/logo-transparent.png" alt="" width="26" height="27" class="rounded-circle" />
+                        <img src="<?php echo $base_url; ?>/assets/img/logo-transparent.png" alt="" width="26"
+                            height="27" class="rounded-circle" />
                     </span>
                     <span class="bg-custom-dark rounded-end text-white px-2 pt-1"><?php echo $site_name; ?></span>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -461,30 +465,37 @@ $spinner = '<div class="spinner">
                         </li>
                     </ul>
                     <?php if ($signinStatus == 1) { ?>
-                        <a href="<?php echo $base_url; ?>/dashboard" onclick="handleStartBtn()" class="nav-link fw-bold m-1 mx-3 text-white empty-link">
+                        <a href="<?php echo $base_url; ?>/dashboard" onclick="handleStartBtn()"
+                            class="nav-link fw-bold m-1 mx-3 text-white empty-link">
                             Dashboard
                         </a>
                     <?php } ?>
 
-                    <a href="<?php echo $base_url; ?>/dashboard" class="btn bg-custom-dark text-light px-3 mx-2 mb-1 mb-lg-0 empty-link" onclick="popSignupModal()" id="start_btn" style="display: none;">
+                    <a href="<?php echo $base_url; ?>/dashboard"
+                        class="btn bg-custom-dark text-light px-3 mx-2 mb-1 mb-lg-0 empty-link"
+                        onclick="popSignupModal()" id="start_btn" style="display: none;">
                         <span class="d-flex align-items-center">
                             <strong class="fw-bold"><i class="bi bi-stars text-warning"></i>Get started</strong>
                         </span>
                     </a>
 
-                    <a class="nav-link mx-4 fw-bold text-white" href="<?php echo $base_url; ?>/pricing" id="pricing_btn" style="display: none;">Pricing</a>
+                    <a class="nav-link mx-4 fw-bold text-white" href="<?php echo $base_url; ?>/pricing" id="pricing_btn"
+                        style="display: none;">Pricing</a>
                     <?php if ($v_status == 1 && $active_sub != 2) { ?>
-                        <a class="nav-link mx-4 fw-bold text-white" href="<?php echo $base_url; ?>/pricing" id="upgrade_btn" style="display: none;">Upgrade</a>
+                        <a class="nav-link mx-4 fw-bold text-white" href="<?php echo $base_url; ?>/pricing" id="upgrade_btn"
+                            style="display: none;">Upgrade</a>
                     <?php } ?>
 
                     <a class="nav-link fw-bold text-white" href="<?php echo $base_url; ?>/blog">Blog</a>
 
                     <div class="dropdown" id="profile_cmpnt" style="display: none;">
-                        <button class="btn btn-outline-light btn-sm rounded-pill mx-3 mt-1 dropdown-toggle fw-bold" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-outline-light btn-sm rounded-pill mx-3 mt-1 dropdown-toggle fw-bold"
+                            type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle"></i>
-                            <?php echo $row_user["username"]; ?>
+                            <?php echo $username; ?>
                         </button>
-                        <ul class="dropdown-menu pt-0 mx-0 rounded-3 shadow overflow-hidden" aria-labelledby="dropdownMenuButton2">
+                        <ul class="dropdown-menu pt-0 mx-0 rounded-3 shadow overflow-hidden"
+                            aria-labelledby="dropdownMenuButton2">
                             <li>
                                 <a href="<?php echo $base_url; ?>/account" class="btn btn-sm m-1 fw-bold">
                                     <i class="bi bi-person-circle"></i> Account
@@ -502,7 +513,9 @@ $spinner = '<div class="spinner">
 
     <!-- Google signin -->
     <!-- One Tap -->
-    <div id="g_id_onload" data-client_id="202076057759-s1a7sbv9ss2uoru45b983tlnabn4kleb.apps.googleusercontent.com" data-context="signin" data-login_uri="<?php echo $base_url; ?>/google_auth/" data-itp_support="true" data-skip_prompt_cookie="one_tap_skip">
+    <div id="g_id_onload" data-client_id="202076057759-s1a7sbv9ss2uoru45b983tlnabn4kleb.apps.googleusercontent.com"
+        data-context="signin" data-login_uri="<?php echo $base_url; ?>/google_auth/" data-itp_support="true"
+        data-skip_prompt_cookie="one_tap_skip">
     </div>
 
     <!-- Begin page content -->

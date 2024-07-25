@@ -13,8 +13,8 @@ ob_end_flush();
 header("Content-Type: text/event-stream");
 header("Cache-Control: no-cache");
 
-// create variables from array elements
-extract($_SESSION);
+// Extract $_SESSION into a variable
+$originalSession = $_SESSION;
 
 function rm_array_items($index)
 {
@@ -54,7 +54,7 @@ $rm_array = array('loggedin', 'id', 'username', 'email', 'csrf_token', 'command'
 
 switch ($command) {
     case ('auto_complete'):
-        $_SESSION['prompt'] = "Keeping the tone " .  $_SESSION['tone'] . " and the length at " .  $length . " words MINIMUM: " . $_SESSION['prompt'];
+        $_SESSION['prompt'] = "Keeping the tone " . $_SESSION['tone'] . " and the length at " . $length . " words MINIMUM: " . $_SESSION['prompt'];
         break;
     case ('paraphrase'):
         $_SESSION["prompt"] = "I need an SEO and copywriting expert to demonstrate how GPT-3 can be used to 
@@ -67,7 +67,7 @@ switch ($command) {
         content without losing meaning.
         Ok, here you go:
         Content to paraphrase: “" . $_SESSION['prompt'] . "”                                    
-        Now rewrite the content as accurately as possible and keep the tone " .  $_SESSION['tone'] . ":";
+        Now rewrite the content as accurately as possible and keep the tone " . $_SESSION['tone'] . ":";
         array_push($rm_array, 'article_body_title', 'article_body_keywords');
         break;
     case ('article_outline'):
@@ -76,7 +76,7 @@ switch ($command) {
         switch ($step) {
             case 1:
                 $_SESSION["prompt"] = "I need an SEO and copywriting expert to demonstrate how GPT-3 can be used to write 
-        an interesting and informative article outline about " .  $_SESSION['article_outline_title'] . ".
+        an interesting and informative article outline about " . $_SESSION['article_outline_title'] . ".
         The name of the expert is Kelvin G. Cross, CEO of SineCortex.
         What information do you need from me to generate an article outline Kelvin?
         For me to generate an article outline, you will need to provide:
@@ -88,11 +88,11 @@ switch ($command) {
         Topic: “" . $_SESSION['article_outline_title'] . "”
         Length: 100 words MAXIMUM
         Keywords to include in relevant places: “" . $_SESSION["article_outline_keywords"] . "”
-        Now create a superb 7 paragraph article outline and keep the tone " .  $_SESSION['tone'] . ":";
+        Now create a superb 7 paragraph article outline and keep the tone " . $_SESSION['tone'] . ":";
                 break;
             case 2:
                 $_SESSION["prompt"] = "I need an SEO and copywriting expert to demonstrate how GPT-3 can be used to write 
-        an interesting and informative article about " .  $_SESSION['article_outline_title'] . ".
+        an interesting and informative article about " . $_SESSION['article_outline_title'] . ".
         The name of the expert is Kelvin G. Cross, CEO of SineCortex.
         What information do you need from me to generate an article Kelvin?
         For me to generate an article you will need to provide:
@@ -115,7 +115,7 @@ switch ($command) {
         Use interjections to express a sudden burst of emotion or feeling. Some of these examples include: Uh-Oh!, Yikes!, Gee!, Phew!, Heaven Forbid! And more!
         Make mistakes with run-on sentences and improper punctuation or grammar.
         Use transitional phrasing to move from one thought to another more succinctly.        
-        Keep the tone " .  $_SESSION['tone'] . ". Include an 
+        Keep the tone " . $_SESSION['tone'] . ". Include an 
         appropriate title, headings from the outline provided and formatting where applicable. Do not mention Kelvin or SineCortex in your response:";
                 break;
         }
@@ -123,7 +123,7 @@ switch ($command) {
         break;
     case ('article_body'):
         $_SESSION["prompt"] = "I need an SEO and copywriting expert to demonstrate how GPT-3 can be used to write 
-        an interesting and informative article about " .  $_SESSION['article_body_title'] . ".
+        an interesting and informative article about " . $_SESSION['article_body_title'] . ".
         The name of the expert is Kelvin G. Cross, CEO of SineCortex.
         What information do you need from me to generate an article Kelvin?
         For me to generate an article you will need to provide:
@@ -146,12 +146,12 @@ switch ($command) {
         Use interjections to express a sudden burst of emotion or feeling. Some of these examples include: Uh-Oh!, Yikes!, Gee!, Phew!, Heaven Forbid! And more!
         Make mistakes with run-on sentences and improper punctuation or grammar.
         Use transitional phrasing to move from one thought to another more succinctly. 
-        Keep the tone " .  $_SESSION['tone'] . ". Do not mention Kelvin or SineCortex in your response:";
+        Keep the tone " . $_SESSION['tone'] . ". Do not mention Kelvin or SineCortex in your response:";
         array_push($rm_array, 'article_body_title', 'article_body_keywords');
         break;
     case ('product_description'):
         $_SESSION["prompt"] = "I need an SEO and copywriting expert to demonstrate how GPT-3 can be used to write 
-        an interesting and informative product description about " .  $_SESSION['product_name'] . ".
+        an interesting and informative product description about " . $_SESSION['product_name'] . ".
         The name of the expert is Kelvin G. Cross, CEO of SineCortex.
         What information do you need from me to generate a product description Kelvin?
         For me to generate the description, you will need to provide:
@@ -178,12 +178,12 @@ switch ($command) {
         Use interjections to express a sudden burst of emotion or feeling. Some of these examples include: Uh-Oh!, Yikes!, Gee!, Phew!, Heaven Forbid! And more!
         Make mistakes with run-on sentences and improper punctuation or grammar.
         Use transitional phrasing to move from one thought to another more succinctly.
-        Keep the tone " .  $_SESSION['tone'] . ". Do not mention Kelvin or SineCortex in your response:";
+        Keep the tone " . $_SESSION['tone'] . ". Do not mention Kelvin or SineCortex in your response:";
         array_push($rm_array, 'product_name', 'brand_name', 'product_category', 'product_features');
         break;
     case ('youtube_caption'):
         $_SESSION["prompt"] = "I need an SEO and copywriting expert to demonstrate how GPT-3 can be used to write 
-        an interesting and informative YouTube caption about " .  $_SESSION['yt_caption_video_title'] . ".
+        an interesting and informative YouTube caption about " . $_SESSION['yt_caption_video_title'] . ".
         The name of the expert is Kelvin G. Cross, CEO of SineCortex.
         What information do you need from me to generate a YouTube caption Kelvin?
         For me to generate the caption, you will need to provide:
@@ -212,12 +212,12 @@ switch ($command) {
         Use interjections to express a sudden burst of emotion or feeling. Some of these examples include: Uh-Oh!, Yikes!, Gee!, Phew!, Heaven Forbid! And more!
         Make mistakes with run-on sentences and improper punctuation or grammar.
         Use transitional phrasing to move from one thought to another more succinctly.
-        Keep the tone " .  $_SESSION['tone'] . ". Do not mention Kelvin or SineCortex in your response:";
+        Keep the tone " . $_SESSION['tone'] . ". Do not mention Kelvin or SineCortex in your response:";
         array_push($rm_array, 'yt_caption_video_title', 'yt_caption_video_keywords', 'yt_caption_video_category', 'yt_caption_target_audience', 'yt_caption_video_description');
         break;
     case ('youtube_description'):
         $_SESSION["prompt"] = "I need an SEO and copywriting expert to demonstrate how GPT-3 can be used to write 
-        an interesting and informative YouTube video description about " .  $_SESSION['yt_description_video_title'] . ".
+        an interesting and informative YouTube video description about " . $_SESSION['yt_description_video_title'] . ".
         The name of the expert is Kelvin G. Cross, CEO of SineCortex.
         What information do you need from me to generate a description Kelvin?
         For me to generate the description, you will need to provide:
@@ -246,7 +246,7 @@ switch ($command) {
         Use interjections to express a sudden burst of emotion or feeling. Some of these examples include: Uh-Oh!, Yikes!, Gee!, Phew!, Heaven Forbid! And more!
         Make mistakes with run-on sentences and improper punctuation or grammar.
         Use transitional phrasing to move from one thought to another more succinctly.
-        Keep the tone " .  $_SESSION['tone'] . ". Do not mention Kelvin or SineCortex in your response:";
+        Keep the tone " . $_SESSION['tone'] . ". Do not mention Kelvin or SineCortex in your response:";
         array_push($rm_array, 'yt_description_video_title', 'yt_description_video_keywords', 'yt_description_category', 'yt_description_target_audience', 'yt_description_video_desc');
         break;
     case ('email_subject'):
@@ -271,7 +271,7 @@ switch ($command) {
         Length of email subject: " . $length . " words MAXIMUM                    
         Now create an appropriate and befitting email subject for the email. 
         Write in a human-like style, simple language and avoid repetitive and unnatural phrasing.
-        Keep the tone " .  $_SESSION['tone'] . ". Do not mention Kelvin or SineCortex in your response:";
+        Keep the tone " . $_SESSION['tone'] . ". Do not mention Kelvin or SineCortex in your response:";
         array_push($rm_array, 'email_subject_keywords', 'email_subject_audience', 'email_subject_intent', 'email_subject_context', 'email_subject_about');
         break;
     case ('email_body'):
@@ -302,7 +302,7 @@ switch ($command) {
         Length of email body: " . $length . " words MINIMUM                    
         Now create an appropriate and befitting email body. 
         Write in a human-like style, simple language and avoid repetitive and unnatural phrasing.
-        Keep the tone " .  $_SESSION['tone'] . ". Do not mention Kelvin or SineCortex in your response:";
+        Keep the tone " . $_SESSION['tone'] . ". Do not mention Kelvin or SineCortex in your response:";
         array_push($rm_array, 'email_body_from', 'email_body_to', 'email_body_subject', 'email_body_keywords', 'email_body_audience', 'email_body_intent', 'email_body_context', 'email_body_about');
         break;
     case ('ad_copy'):
@@ -327,17 +327,17 @@ switch ($command) {
         Length of ad copy: " . $length . " words MAXIMUM                    
         Now create an appropriate and befitting ad. 
         Write creatively and in a human-like style and avoid repetitive and unnatural phrasing.
-        Keep the tone " .  $_SESSION['tone'] . ". Do not mention Kelvin or SineCortex in your response:";
+        Keep the tone " . $_SESSION['tone'] . ". Do not mention Kelvin or SineCortex in your response:";
         array_push($rm_array, 'ad_product_name', 'ad_description', 'ad_target_audience', 'ad_context', 'ad_keywords');
         break;
     case ('execute'):
         $instruction = "Treat the following as an instruction and execute it as it says
         as accurately as possible";
-        $_SESSION['prompt'] = $instruction . $_SESSION['prompt'] . ". Keep the tone " .  $_SESSION['tone'];
+        $_SESSION['prompt'] = $instruction . $_SESSION['prompt'] . ". Keep the tone " . $_SESSION['tone'];
         break;
-        // default:
-        //     $_SESSION['template_name'] = 'auto_complete';
-        //     $prompt['original_sentence'] = $_SESSION['prompt'];
+    // default:
+    //     $_SESSION['template_name'] = 'auto_complete';
+    //     $prompt['original_sentence'] = $_SESSION['prompt'];
 }
 
 // $_SESSION['prompt'] = $_SESSION['prompt'] . "(Format the headers you generate as H2 or H3 headers where appropriate in markdown formatting)\n\n";
@@ -355,10 +355,14 @@ $data_string = json_encode($_SESSION);
 for ($i = 0; $i < 1; $i++) {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-        "Content-Type: application/json",
-        "Authorization: Bearer " . $key
-    ));
+    curl_setopt(
+        $curl,
+        CURLOPT_HTTPHEADER,
+        array(
+            "Content-Type: application/json",
+            "Authorization: Bearer " . $key
+        )
+    );
     curl_setopt($curl, CURLOPT_TIMEOUT, 30); //Timeout in seconds        
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_POST, 1);
@@ -373,7 +377,8 @@ for ($i = 0; $i < 1; $i++) {
     $curl_response = curl_exec($curl);
     $err = curl_error($curl);
 
-    if (connection_aborted()) break;
+    if (connection_aborted())
+        break;
     curl_close($curl);
 
     // Check for cURL error
@@ -383,14 +388,5 @@ for ($i = 0; $i < 1; $i++) {
     echo $curl_response;
 }
 
-$sess_data = array(
-    'loggedin' => $loggedin,
-    'csrf_token' => $csrf_token,
-    'id' => $id,
-    'username' => $username,
-    'email' => $email
-);
-
-foreach ($sess_data as $key => $value) {
-    $_SESSION[$key] = $value;
-}
+// Restore $_SESSION to its original state
+$_SESSION = $originalSession;

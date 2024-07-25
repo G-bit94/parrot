@@ -38,7 +38,7 @@ if (isset($_GET['code'])) {
     $firstName = $userInfo->getGivenName();
     $lastName = $userInfo->getFamilyName();
 
-    $_SESSION["email"] = $email;
+    $_SESSION['user']["email"] = $email;
 
     $data_string_signin = (object) [
         'useremail' => $email,

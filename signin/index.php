@@ -45,12 +45,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     // Password is correct, so start a new session
                                     include "../session.php";
                                     // Store data in session variables
-                                    $_SESSION["loggedin"] = true;
-                                    $_SESSION["id"] = $id; //user ID
-                                    $_SESSION["username"] = $username;
-                                    $_SESSION["email"] = $email;
-                                    $_SESSION['csrf_token'] = session_id();
 
+                                    $_SESSION['user'] = [
+                                        "loggedin" => true,
+                                        "id" => $id, //user ID
+                                        "username" => $username,
+                                        "email" => $email,
+                                        'session_id' => session_id(),
+                                        'csrf_token' => bin2hex(random_bytes(24))
+                                    ];
                                     $queryStatus = "SIGNIN_SUCCESS";
                                 } else {
                                     // Display an error message if password is not valid                                
@@ -72,7 +75,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Close connection
             $mysqli->close();
-        } else $queryStatus = "EMAIL_BLANK";
+        } else
+            $queryStatus = "EMAIL_BLANK";
     }
     echo $queryStatus;
 }
