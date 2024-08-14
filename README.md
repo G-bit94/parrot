@@ -2,7 +2,7 @@
 
 ParrotAI is a text generation tool that seeks to help SEO writers craft content better, faster and most importantly, affordably.
 
-Currently the application uses commercial APIs by GooseAI and OpenAI. It was inspired by EleutherAI's 6b.eleuther.ai. (This publicly exposed and unauthenticated endpoint no longer exists.
+Currently the application uses commercial APIs by GooseAI and OpenAI. It was inspired by EleutherAI's 6b.eleuther.ai. (This publicly exposed and unauthenticated endpoint no longer exists).
 
 The application is written in PHP, it uses MySQL (or MariaDB) for data storage.
 
