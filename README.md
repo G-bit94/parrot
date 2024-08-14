@@ -6,6 +6,6 @@ Currently the application uses commercial APIs by GooseAI and OpenAI. It was ins
 
 The application is written in PHP, it uses MySQL (or MariaDB) for data storage.
 
-#Installation
+# Installation
 Set base_url, site_name in header.php
 Set DB configs in config.php
