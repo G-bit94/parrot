@@ -3,4 +3,4 @@ canva_landing_page.htm
 node_modules/
 /vendor/
 SELECT Orders.OrderID, Customers.sql
-parrotv2.zip
+.zip
