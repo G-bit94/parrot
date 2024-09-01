@@ -1,6 +1,6 @@
 <?php
 
-// error_reporting(0);
+error_reporting(0);
 
 include "config.php";
 
@@ -11,7 +11,7 @@ include 'roles.php';
 $user_id = $_SESSION['user']['id'];
 $username = $_SESSION['user']['username'];
 
-if ($user_id !== "" && $user_id !== null) {
+if ($user_id !== null) {
     $signinStatus = 1;
 }
 
@@ -338,7 +338,7 @@ $spinner = '<div class="spinner">
         const active_sub = <?php echo json_encode($active_sub); ?>;
 
         // geolocation
-        const geoLocAPI = "https://api.ipregistry.co/?key=glm9znqelitu1301";
+        // const geoLocAPI = "https://api.ipregistry.co/?key=glm9znqelitu1301";
         // Serialize navigator object
         const navigator_obj = window.navigator;
 
@@ -347,7 +347,7 @@ $spinner = '<div class="spinner">
             _navigator[i] = navigator_obj[i];
         }
 
-        // const geoLocAPI = base_url + "/apis/geolocation/?nav_obj=" + encodeURIComponent(JSON.stringify(_navigator));
+        const geoLocAPI = base_url + "/apis/geolocation/?nav_obj=" + encodeURIComponent(JSON.stringify(_navigator));
 
         // show prices in local currency
         const currXChangeAPI = "https://api.exchangerate-api.com/v4/latest/USD";

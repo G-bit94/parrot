@@ -1,7 +1,8 @@
 <?php
-// error_reporting(0);
 
-$user_email = $_SESSION["email"] ?? '';
+error_reporting(0);
+
+$user_email = $_SESSION['user']['email'] ?? '';
 
 class User
 {
@@ -24,6 +25,7 @@ class User
     $this->id = $user['id'];
     $this->email = $user['email'];
     $this->username = $user['username'];
+    $this->l_name = $user['l_name'];
     $this->verified = (bool) $user['verified'];
     $this->admin = (bool) $user['admin'];
     $this->superAdmin = (bool) $user['super_adm'];
@@ -91,15 +93,11 @@ class AccessLevel
 
 if ($user_email) {
   $user = new User($user_email, $mysqli);
+
   $subscription = new Subscription($user->id, $mysqli);
   $access = new AccessLevel($user);
 
-  // Store user and access level information in session
-  $_SESSION['user'] = [
-    'verified' => $user->verified,
-    'admin' => $user->admin,
-    'superAdmin' => $user->superAdmin
-  ];
+  // Store access level information in session 
   $_SESSION['access_level'] = [
     'verified' => $access->isVerified(),
     'admin' => $access->isAdmin(),

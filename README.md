@@ -1,16 +1,11 @@
 # ParrotAI
 
-ParrotAI is a text generation platfrom that seeks to help everyone write better, faster and most importantly, affordably.
+ParrotAI is a text generation tool that seeks to help SEO writers craft content better, faster and most importantly, affordably.
 
-The application is written in PHP, it uses MySQL (or MariaDB) as data storage back-end and has a simple but intuitive user interface.
+Currently the application uses commercial APIs by GooseAI and OpenAI. It was inspired by EleutherAI's 6b.eleuther.ai (March 2022). (This publicly exposed and unauthenticated endpoint no longer exists).
 
-Currently the application uses commercial APIs by GooseAI and OpenAI. It was inspired by EleutherAI's 6b.eleuther.ai where the developer
-first made calls to the publicly exposed and unauthenticated endpoint.
+The application is written in PHP, it uses MySQL (or MariaDB) for data storage.
 
-At the moment, users can generate and paraphrase text among a myriad other use cases such as creating articles in just a few clicks.
-
-The developer is working to add more features such as support for writing product descriptions, emails, blog titles etc, as seen in more mainstream applications.
-
-#Installation
-Set base_url, site_name in header.php
-Set DB configs in config.php
+# Installation
+Set base_url, site_name in header.php.
+Set DB configs in config.php.

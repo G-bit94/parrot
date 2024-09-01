@@ -53,10 +53,10 @@ if ($signinStatus == 1) {
                                                 </div>
                                                 <div class="d-flex justify-content-between">
                                                     <div class="mt-3">
-                                                        <span class="fw-bold"><?php echo $row_user["username"]; ?></span>
+                                                        <span class="fw-bold"><?php echo $username; ?></span>
                                                     </div>
                                                     <div class="mt-3 ms-1">
-                                                        <span class="fw-bold"><?php echo $row_user["l_name"]; ?></span>
+                                                        <span class="fw-bold"><?php echo $_SESSION['user']['l_name'] ?></span>
                                                     </div>
                                                 </div>
                                                 <button class="mt-3 mb-2 btn btn-sm rounded-3 btn-primary bg-gradient" id="edit-userdetails-btn">
@@ -65,11 +65,11 @@ if ($signinStatus == 1) {
                                             </div>
 
                                             <div class="mt-4 d-flex justify-content-center">
-                                                <span class="fw-bold"><?php echo $row_user["email"]; ?></span>
+                                                <span class="fw-bold"><?php echo $_SESSION['user']["email"]; ?></span>
                                             </div>
 
                                             <div class="mt-4 d-flex justify-content-center">
-                                                <span>Joined: <?php echo date('d M Y', strtotime($row_user["created_at"])); ?></span>
+                                                <span>Joined: <?php echo date('d M Y', strtotime($_SESSION['user']["created_at"])); ?></span>
                                             </div>
                                         </div>
                                     </div>
@@ -78,17 +78,17 @@ if ($signinStatus == 1) {
                                         <div class="card border mb-4 rounded-4 shadow-sm">
                                             <form class="row px-2 py-3 rounded-4 needs-validation" action="<?php echo $base_url; ?>/account/user/" method="POST" id="editUserDetailsForm" novalidate>
                                                 <div class="form-floating col-sm-6 mb-3">
-                                                    <input type="text" class="form-control form-control-sm edit-user-form-inputs bg-white rounded-4 border-top-0 border-start-0 border-end-0" value="<?php echo $row_user["username"]; ?>" name="edit_username" id="edit_username" placeholder="First name" autocomplete="off" maxlength="50" required readonly>
+                                                    <input type="text" class="form-control form-control-sm edit-user-form-inputs bg-white rounded-4 border-top-0 border-start-0 border-end-0" value="<?php echo $_SESSION['user']["username"]; ?>" name="edit_username" id="edit_username" placeholder="First name" autocomplete="off" maxlength="50" required readonly>
                                                     <label class="text-muted" for="edit_username">First name</label>
                                                     <span id="edit_username_err" class="invalid-tooltip"></span>
                                                 </div>
                                                 <div class="form-floating col-sm-6 mb-3">
-                                                    <input type="text" class="form-control form-control-sm edit-user-form-inputs bg-white rounded-4 border-top-0 border-start-0 border-end-0" value="<?php echo $row_user["l_name"]; ?>" name="edit_lname" id="edit_lname" placeholder="Last name" autocomplete="off" maxlength="50" required readonly>
+                                                    <input type="text" class="form-control form-control-sm edit-user-form-inputs bg-white rounded-4 border-top-0 border-start-0 border-end-0" value="<?php echo $_SESSION['user']["l_name"]; ?>" name="edit_lname" id="edit_lname" placeholder="Last name" autocomplete="off" maxlength="50" required readonly>
                                                     <label class="text-muted" for="edit_lname">Last name</label>
                                                     <span id="edit_lname_err" class="invalid-tooltip"></span>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input type="email" class="form-control form-control-sm edit-user-form-inputs bg-white rounded-4 border-top-0 border-start-0 border-end-0" value="<?php echo $row_user["email"]; ?>" name="edit_user_email" id="edit_user_email" placeholder="name@example.com" autocomplete="off" maxlength="50" required readonly>
+                                                    <input type="email" class="form-control form-control-sm edit-user-form-inputs bg-white rounded-4 border-top-0 border-start-0 border-end-0" value="<?php echo $_SESSION['user']["email"]; ?>" name="edit_user_email" id="edit_user_email" placeholder="name@example.com" autocomplete="off" maxlength="50" required readonly>
                                                     <label class="text-muted" for="edit_user_email">Email address</label>
                                                     <span id="edit_user_email_err" class="invalid-tooltip"></span>
                                                 </div>
@@ -245,25 +245,25 @@ if ($signinStatus == 1) {
                                 <div class="mt-4 text-center">
                                     <p class="lead">Don't keep us to yourself</p>
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode($site_url); ?>&quote=Hey,%20<?php echo urlencode("\r\n It's " . $row_user['username'] . " here. \r\n I'm using the superb " . $site_name . " for text generation nowadays. \r\n You should totally check it out here: "); ?><?php echo urlencode($site_url); ?>" class="btn btn-light mx-1">
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode($site_url); ?>&quote=Hey,%20<?php echo urlencode("\r\n It's " . $_SESSION['user']['username'] . " here. \r\n I'm using the superb " . $site_name . " for text generation nowadays. \r\n You should totally check it out here: "); ?><?php echo urlencode($site_url); ?>" class="btn btn-light mx-1">
                                             <i class="bi bi-facebook fs-5"></i>
                                         </a>
-                                        <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode($site_url); ?>&text=Hey,%20<?php echo urlencode("\r\n It's " . $row_user['username'] . " here. \r\n I'm using the superb " . $site_name . " for text generation nowadays. \r\n You should totally check it out here: "); ?><?php echo urlencode($site_url); ?>" class="btn btn-light mx-1">
+                                        <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode($site_url); ?>&text=Hey,%20<?php echo urlencode("\r\n It's " . $_SESSION['user']['username'] . " here. \r\n I'm using the superb " . $site_name . " for text generation nowadays. \r\n You should totally check it out here: "); ?><?php echo urlencode($site_url); ?>" class="btn btn-light mx-1">
                                             <i class="bi bi-twitter fs-5"></i>
                                         </a>
-                                        <a href="https://www.linkedin.com/shareArticle?url=<?php echo urlencode($site_url); ?>&summary=Hey,%20<?php echo urlencode("\r\n It's " . $row_user['username'] . " here. \r\n I'm using the superb " . $site_name . " for text generation nowadays. \r\n You should totally check it out here: "); ?><?php echo urlencode($site_url); ?>" class="btn btn-light mx-1">
+                                        <a href="https://www.linkedin.com/shareArticle?url=<?php echo urlencode($site_url); ?>&summary=Hey,%20<?php echo urlencode("\r\n It's " . $_SESSION['user']['username'] . " here. \r\n I'm using the superb " . $site_name . " for text generation nowadays. \r\n You should totally check it out here: "); ?><?php echo urlencode($site_url); ?>" class="btn btn-light mx-1">
                                             <i class="bi bi-linkedin fs-5"></i>
                                         </a>
-                                        <a href="whatsapp://send?text=Hey,%20<?php echo urlencode("\r\n It's " . $row_user['username'] . " here. \r\n I'm using the superb " . $site_name . " for text generation nowadays. \r\n You should totally check it out here: " . $site_url); ?>" class="btn btn-light mx-1">
+                                        <a href="whatsapp://send?text=Hey,%20<?php echo urlencode("\r\n It's " . $_SESSION['user']['username'] . " here. \r\n I'm using the superb " . $site_name . " for text generation nowadays. \r\n You should totally check it out here: " . $site_url); ?>" class="btn btn-light mx-1">
                                             <i class="bi bi-whatsapp fs-5"></i>
                                         </a>
-                                        <a href="https://www.reddit.com/submit?url=<?php echo urlencode($site_url); ?>&title=Hey,%20<?php echo urlencode("\r\n It's " . $row_user['username'] . " here. \r\n I'm using the superb " . $site_name . " for text generation nowadays. \r\n You should totally check it out here: "); ?>" class="btn btn-light mx-1">
+                                        <a href="https://www.reddit.com/submit?url=<?php echo urlencode($site_url); ?>&title=Hey,%20<?php echo urlencode("\r\n It's " . $_SESSION['user']['username'] . " here. \r\n I'm using the superb " . $site_name . " for text generation nowadays. \r\n You should totally check it out here: "); ?>" class="btn btn-light mx-1">
                                             <i class="bi bi-reddit fs-5"></i>
                                         </a>
-                                        <a href="https://www.instagram.com/sharer/sharer.php?u=<?php echo urlencode($site_url); ?>&text=Hey,%20<?php echo urlencode("\r\n It's " . $row_user['username'] . " here. \r\n I'm using the superb " . $site_name . " for text generation nowadays. \r\n You should totally check it out here: "); ?><?php echo urlencode($site_url); ?>" class="btn btn-light mx-1">
+                                        <a href="https://www.instagram.com/sharer/sharer.php?u=<?php echo urlencode($site_url); ?>&text=Hey,%20<?php echo urlencode("\r\n It's " . $_SESSION['user']['username'] . " here. \r\n I'm using the superb " . $site_name . " for text generation nowadays. \r\n You should totally check it out here: "); ?><?php echo urlencode($site_url); ?>" class="btn btn-light mx-1">
                                             <i class="bi bi-instagram fs-5"></i>
                                         </a>
-                                        <a href="mailto:?subject=Have you heard about <?php echo $site_name; ?>&body=Hey, %0D%0A It's <?php echo $row_user['username']; ?> here.%0D%0AI'm using the superb <?php echo $site_name; ?> for text generation nowadays.%0D%0AYou should totally check it out here: <?php echo $site_url; ?>" class="btn btn-light mx-1">
+                                        <a href="mailto:?subject=Have you heard about <?php echo $site_name; ?>&body=Hey, %0D%0A It's <?php echo $_SESSION['user']['username']; ?> here.%0D%0AI'm using the superb <?php echo $site_name; ?> for text generation nowadays.%0D%0AYou should totally check it out here: <?php echo $site_url; ?>" class="btn btn-light mx-1">
                                             <i class="bi bi-envelope fs-5"></i>
                                         </a>
                                     </div>

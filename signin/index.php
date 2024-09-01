@@ -5,7 +5,7 @@ error_reporting(0);
 include_once '../config.php';
 
 // Define variables and initialize with empty values
-$email = $password = $queryStatus = "";
+$email = $password = $status = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                             // Google Auth
                             if ($_POST["auth"] == "google" && $_POST["password"] == "") {
-                                $queryStatus = "SIGNIN_SUCCESS";
+                                $status = "SIGNIN_SUCCESS";
                             } elseif ($_POST["auth"] == "email_pass") {
                                 // Verify password
                                 if (password_verify($password, $hashed_password)) {
@@ -54,19 +54,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         'session_id' => session_id(),
                                         'csrf_token' => bin2hex(random_bytes(24))
                                     ];
-                                    $queryStatus = "SIGNIN_SUCCESS";
+                                    $status = "SIGNIN_SUCCESS";
                                 } else {
                                     // Display an error message if password is not valid                                
-                                    $queryStatus = "INVALID_PASSWORD";
+                                    $status = "INVALID_PASSWORD";
                                 }
                             }
                         }
                     } else {
                         // Display an error message if email doesn't exist                        
-                        $queryStatus = "EMAIL_INEXISTENT";
+                        $status = "EMAIL_INEXISTENT";
                     }
                 } else {
-                    $queryStatus = "SIGNIN_FAILED: " . $mysqli->error;
+                    $status = "SIGNIN_FAILED: " . $mysqli->error;
                 }
 
                 // Close statement
@@ -76,7 +76,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Close connection
             $mysqli->close();
         } else
-            $queryStatus = "EMAIL_BLANK";
-    }
-    echo $queryStatus;
+            $status = "EMAIL_BLANK";
+    } else
+        $status = "Malformed request to signin";    
 }
+
+echo $status;

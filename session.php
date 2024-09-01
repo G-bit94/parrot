@@ -26,9 +26,9 @@ $new_url = preg_replace('/&?pageno=[^&]*/', '', $currenturl);
 
 $site_name = "ContentFlux";
 
-$site_url = $protocol . "://" . $domain;
-
 $base_url = "/parrot";
+
+$site_url = $protocol . "://" . $domain . $base_url;
 
 $today = date("Y-m-d");
 
@@ -39,10 +39,13 @@ $signinStatus = 0;
 // Define a custom error handler function
 function customErrorHandler($errno, $errstr, $errfile, $errline)
 {
+
+    global $base_url;
+
     // Only log serious errors
     if ($errno & error_reporting()) {
         // Log the error message to a file
-        $log_file = $_SERVER['DOCUMENT_ROOT'] . "/parrot/.custom_error_log";
+        $log_file = $_SERVER['DOCUMENT_ROOT'] . $base_url . "/.custom_error_log";
         $time = gmdate("Y-m-d H:i:s", time() + 10800);
         error_log("[$time] [$errno] $errstr in $errfile on line $errline\n", 3, $log_file);
     }
