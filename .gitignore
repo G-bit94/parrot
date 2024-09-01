@@ -4,3 +4,4 @@ node_modules/
 /vendor/
 SELECT Orders.OrderID, Customers.sql
 /*.zip
+contentflux.zip
