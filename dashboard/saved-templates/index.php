@@ -1,6 +1,6 @@
 <?php
 
-error_reporting(0);
+// error_reporting(0);
 
 include "../../config.php";
 
@@ -139,7 +139,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // List
                 if ($intent == 'list') {
                     $limit = 20;
-                    $user_id = openssl_decrypt($_POST['user'] ?? '', "AES-128-ECB", "ThisIsJustAStringOfGibberishToEncryptTheUserId");
 
                     $stmt = $mysqli->prepare("SELECT content_types.full_name, saved_templates.* FROM saved_templates 
                     LEFT OUTER JOIN content_types ON saved_templates.category = content_types.id WHERE saved_templates.user = ? ORDER BY id DESC LIMIT $limit");
@@ -150,7 +149,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Search
                 if ($intent == 'search') {
+
                     $search_term = $mysqli->real_escape_string($_POST['search_term']) ?? '';
+
                     // Check if the user is logged in, if not then redirect him to login page
                     if (empty($user_id)) {
                         echo "<div class='text-center'><p>You are currently logged out. </p> <br>" . "<button class='btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#signinModal'>Signin here</button></div>";
@@ -161,11 +162,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $order = " ORDER BY unique_id ";
                     $sort = " DESC ";
 
-                    $where = "WHERE CONCAT (saved_templates.text, 
-                                                content_types.full_name,
-                                                saved_templates.date, 
-                                                saved_templates.time)
-                                                LIKE CONCAT('%',?,'%') AND saved_templates.user = '$user_id'";
+                    $where = "WHERE CONCAT(
+                                            saved_templates.text COLLATE utf8mb4_general_ci, 
+                                            content_types.full_name COLLATE utf8mb4_general_ci, 
+                                            saved_templates.date COLLATE utf8mb4_general_ci, 
+                                            saved_templates.time COLLATE utf8mb4_general_ci
+                                            ) LIKE CONCAT('%',?,'%') COLLATE utf8mb4_general_ci AND saved_templates.user = '$user_id'";
 
                     // count all results to limit accordingly
                     $sql_count = "SELECT content_types.full_name, saved_templates.* FROM saved_templates
@@ -187,6 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $stmt->execute();
                     $result = $stmt->get_result();
                     $rs = $result;
+
                 }
 
                 if ($rs->num_rows !== 0) {
@@ -240,11 +243,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $order = " ORDER BY unique_id ";
                     $sort = " DESC ";
 
-                    $where = "WHERE CONCAT (saved_templates.text, 
-                                                content_types.full_name,
-                                                saved_templates.date, 
-                                                saved_templates.time)
-                                                LIKE CONCAT('%',?,'%') AND saved_templates.user = '$user_id'";
+                    $where = "WHERE CONCAT(
+                                            saved_templates.text COLLATE utf8mb4_general_ci, 
+                                            content_types.full_name COLLATE utf8mb4_general_ci, 
+                                            saved_templates.date COLLATE utf8mb4_general_ci, 
+                                            saved_templates.time COLLATE utf8mb4_general_ci
+                                            ) LIKE CONCAT('%',?,'%') COLLATE utf8mb4_general_ci AND saved_templates.user = '$user_id'";
 
                     if (isset($_POST["type"])) {
                         $type = $_POST["type"];
