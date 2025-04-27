@@ -16,7 +16,7 @@ if ($signinStatus == 1) {
 }
 
 // Content types list
-$result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC");
+$result = $mysqli->query("SELECT * FROM content_types ORDER BY rank ASC"); //Escape `rank` as it's a reserved keyword in MySQL
 
 ?>
 

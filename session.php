@@ -16,9 +16,9 @@ $sign_in_btn = '<div class="p-3 m-1 shadow-sm rounded-3">
 
 //Get current URL and parameters for correct pagination
 $protocol = $_SERVER['SERVER_PROTOCOL'];
-$domain     = $_SERVER['HTTP_HOST'];
-$script   = $_SERVER['SCRIPT_NAME'];
-$parameters   = $_SERVER['QUERY_STRING'];
+$domain = $_SERVER['HTTP_HOST'];
+$script = $_SERVER['SCRIPT_NAME'];
+$parameters = $_SERVER['QUERY_STRING'];
 $protocol = strpos(strtolower($_SERVER['SERVER_PROTOCOL']), 'https')
     === FALSE ? 'http' : 'https';
 $currenturl = $protocol . '://' . $domain . $script . '?' . $parameters;
@@ -26,7 +26,7 @@ $new_url = preg_replace('/&?pageno=[^&]*/', '', $currenturl);
 
 $site_name = "ContentFlux";
 
-$base_url = "/parrot";
+$base_url = "/contentflux";
 
 $site_url = $protocol . "://" . $domain . $base_url;
 
